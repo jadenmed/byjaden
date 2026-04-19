@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bymedina — Design That Converts</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            bricolage: ['"Bricolage Grotesque"', 'sans-serif'],
+            instrument: ['"Instrument Serif"', 'serif'],
+          },
+          colors: {
+            paper: '#f0ebe1',
+            ink: '#0d0d0d',
+            ash: '#1a1a1a',
+            smog: '#2e2e2e',
+            mist: '#6b6b6b',
+            cream: '#e8e0d0',
+            sage: '#4a5c44',
+          },
+          letterSpacing: {
+            tighter2: '-0.04em',
+            tightest: '-0.06em',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── Base ─── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #0d0d0d;
+      color: #f0ebe1;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Paper texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('background.png');
+      background-size: cover;
+      background-repeat: repeat;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: overlay;
+    }
+
+    /* Grain noise layer */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: -200%;
+      width: 400%;
+      height: 400%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 0;
+      animation: grain 0.5s steps(1) infinite;
+    }
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      10%       { transform: translate(-2%, -3%); }
+      20%       { transform: translate(3%, 2%); }
+      30%       { transform: translate(-1%, 4%); }
+      40%       { transform: translate(4%, -1%); }
+      50%       { transform: translate(-3%, 3%); }
+      60%       { transform: translate(2%, -4%); }
+      70%       { transform: translate(-4%, 2%); }
+      80%       { transform: translate(3%, -2%); }
+      90%       { transform: translate(-2%, 4%); }
+    }
+
+    /* ─── Typography helpers ─── */
+    .serif-italic {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+    }
+
+    /* ─── Marquee ─── */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── Card hover ─── */
+    .work-card {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .work-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+
+    /* ─── Nav underline ─── */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: #f0ebe1;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── Hero image halftone filter ─── */
+    .hero-img {
+      filter: grayscale(100%) contrast(1.25);
+      mix-blend-mode: luminosity;
+    }
+    .hero-img-wrap {
+      background: #0d0d0d;
+    }
+
+    /* ─── Cursor dot ─── */
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: #f0ebe1;
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(240,235,225,0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* ─── Scroll fade-up ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── Service item ─── */
+    .service-item {
+      border-top: 1px solid rgba(240,235,225,0.12);
+      transition: border-color 0.3s ease;
+    }
+    .service-item:hover {
+      border-color: rgba(240,235,225,0.4);
+    }
+
+    /* ─── Tag pill ─── */
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240,235,225,0.2);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ─── Image placeholder card backgrounds ─── */
+    .card-bg-1 { background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%); }
+    .card-bg-2 { background: linear-gradient(135deg, #2a2520 0%, #0d0b09 100%); }
+    .card-bg-3 { background: linear-gradient(135deg, #141a14 0%, #0a0d0a 100%); }
+    .card-bg-4 { background: linear-gradient(135deg, #1c1a1a 0%, #0f0f0f 100%); }
+    .card-bg-5 { background: linear-gradient(135deg, #1a1a20 0%, #0a0a0f 100%); }
+    .card-bg-6 { background: linear-gradient(135deg, #201a1a 0%, #0f0a0a 100%); }
+
+    /* ─── Number counter style ─── */
+    .stat-num {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    /* ─── Divider line ─── */
+    .divider { border-color: rgba(240,235,225,0.1); }
+  </style>
+</head>
+
+<body class="relative z-10">
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ══════════════════════════════════════
+       NAV
+  ══════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 flex items-center justify-between"
+       style="background: linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, transparent 100%); backdrop-filter: blur(0px);">
+
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-7 h-7 border border-paper/30 flex items-center justify-center rounded-sm
+                  group-hover:border-paper/70 transition-colors duration-300">
+        <span class="font-bricolage font-bold text-xs text-paper">J</span>
+      </div>
+      <span class="font-bricolage font-semibold text-sm tracking-wide text-paper/90">bymedina</span>
+    </a>
+
+    <!-- Nav Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#work"     class="nav-link font-bricolage text-sm text-paper/60 hover:text-paper transition-colors duration-200">Work</a>
+      <a href="#services" class="nav-link font-bricolage text-sm text-paper/60 hover:text-paper transition-colors duration-200">Services</a>
+      <a href="#about"    class="nav-link font-bricolage text-sm text-paper/60 hover:text-paper transition-colors duration-200">About</a>
+      <a href="#contact"  class="font-bricolage text-sm text-ink bg-paper px-5 py-2 rounded-sm
+                                  hover:bg-cream transition-colors duration-200 font-medium">
+        Let's Talk
+      </a>
+    </div>
+
+    <!-- Mobile menu trigger -->
+    <button class="md:hidden flex flex-col gap-1.5 p-1" id="menuBtn" aria-label="Menu">
+      <span class="block w-5 h-px bg-paper/80"></span>
+      <span class="block w-5 h-px bg-paper/80"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 bg-ink/95 flex flex-col items-center justify-center gap-10 hidden">
+    <button id="closeMenu" class="absolute top-6 right-6 text-paper/60 hover:text-paper text-2xl">✕</button>
+    <a href="#work"     onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">Work</a>
+    <a href="#services" onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">Services</a>
+    <a href="#about"    onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">About</a>
+    <a href="#contact"  onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">Contact</a>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="relative min-h-screen flex flex-col overflow-hidden pt-20">
+
+    <!-- Main hero content -->
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-0">
+
+      <!-- Left: Text -->
+      <div class="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-0 z-10 order-2 lg:order-1">
+
+        <div class="mb-8 reveal">
+          <span class="tag text-paper/50">Ocean Development · Design Studio</span>
+        </div>
+
+        <h1 class="font-bricolage font-bold leading-none tracking-tighter2 mb-6 reveal"
+            style="font-size: clamp(3.2rem, 7vw, 6.5rem); letter-spacing: -0.04em;">
+          Your website<br/>
+          is costing<br/>
+          <span class="serif-italic text-paper/60" style="font-size: 0.92em;">you clients.</span>
+        </h1>
+
+        <p class="font-bricolage text-paper/50 text-lg leading-relaxed mb-10 max-w-md reveal"
+           style="transition-delay: 0.1s;">
+          We build brands and websites that convert strangers into buyers —
+          before they ever reach out.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 reveal" style="transition-delay: 0.2s;">
+          <a href="#work" class="font-bricolage font-semibold text-sm bg-paper text-ink px-7 py-3.5 rounded-sm
+                                  hover:bg-cream transition-colors duration-200">
+            View Work
+          </a>
+          <a href="#contact" class="font-bricolage text-sm text-paper/70 hover:text-paper transition-colors duration-200
+                                     flex items-center gap-2">
+            <span>Start a Project</span>
+            <span class="text-paper/30">→</span>
+          </a>
+        </div>
+
+        <!-- Scroll hint -->
+        <div class="mt-16 flex items-center gap-3 reveal" style="transition-delay: 0.35s;">
+          <div class="w-8 h-px bg-paper/20"></div>
+          <span class="font-bricolage text-xs text-paper/30 tracking-widest uppercase">Scroll</span>
+        </div>
+      </div>
+
+      <!-- Right: Image -->
+      <div class="relative order-1 lg:order-2 hero-img-wrap min-h-[55vw] lg:min-h-0">
+        <img
+          src="jaden.png"
+          alt="Jaden Medina — bymedina"
+          class="hero-img absolute inset-0 w-full h-full object-cover object-top"
+          style="object-position: center 15%;"
+        />
+        <!-- Gradient overlays -->
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #0d0d0d 0%, transparent 30%);"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(to top, #0d0d0d 0%, transparent 25%);"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-32" style="background: linear-gradient(to top, #0d0d0d, transparent);"></div>
+
+        <!-- Floating label -->
+        <div class="absolute top-8 right-8 text-right">
+          <p class="font-bricolage text-xs text-paper/30 uppercase tracking-widest">Founder</p>
+          <p class="font-bricolage font-semibold text-paper/70 text-sm mt-0.5">Jaden Medina</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="relative z-10 border-t divider px-6 md:px-12 py-6 grid grid-cols-3 gap-0">
+      <div class="text-center py-2 border-r divider">
+        <p class="font-bricolage font-bold text-2xl md:text-3xl text-paper">50+</p>
+        <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider mt-1">Projects Shipped</p>
+      </div>
+      <div class="text-center py-2 border-r divider">
+        <p class="font-bricolage font-bold text-2xl md:text-3xl text-paper">3×</p>
+        <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider mt-1">Avg. Conversion Lift</p>
+      </div>
+      <div class="text-center py-2">
+        <p class="font-bricolage font-bold text-2xl md:text-3xl text-paper">∞</p>
+        <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider mt-1">Ideas Per Day</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       MARQUEE
+  ══════════════════════════════════════ -->
+  <div class="relative z-10 overflow-hidden border-y divider py-4 bg-paper/[0.03]">
+    <div class="marquee-track font-bricolage text-xs uppercase tracking-widest text-paper/30 select-none">
+      <!-- Duplicate for seamless loop -->
+      <template id="marqueeItems">
+        <span class="mx-8">Brand Identity</span>
+        <span class="mx-3 text-paper/15">✦</span>
+        <span class="mx-8">Web Design</span>
+        <span class="mx-3 text-paper/15">✦</span>
+        <span class="mx-8">Visual Strategy</span>
+        <span class="mx-3 text-paper/15">✦</span>
+        <span class="mx-8">Digital Presence</span>
+        <span class="mx-3 text-paper/15">✦</span>
+        <span class="mx-8">Conversion Design</span>
+        <span class="mx-3 text-paper/15">✦</span>
+        <span class="mx-8">Content Systems</span>
+        <span class="mx-3 text-paper/15">✦</span>
+        <span class="mx-8">Ocean Development</span>
+        <span class="mx-3 text-paper/15">✦</span>
+      </template>
+      <span id="marqueeInner"></span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       WORK
+  ══════════════════════════════════════ -->
+  <section id="work" class="relative z-10 px-6 md:px-12 py-24">
+
+    <!-- Section header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+      <div>
+        <span class="tag text-paper/40 mb-4 inline-block">Selected Work</span>
+        <h2 class="font-bricolage font-bold leading-none"
+            style="font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
+          Design that<br/>
+          <span class="serif-italic text-paper/50">actually works.</span>
+        </h2>
+      </div>
+      <a href="#contact" class="font-bricolage text-sm text-paper/50 hover:text-paper transition-colors self-start md:self-auto flex items-center gap-2">
+        Work with us <span>→</span>
+      </a>
+    </div>
+
+    <!-- Work grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      <!-- Card 1 — Large -->
+      <div class="work-card md:col-span-2 lg:col-span-2 card-bg-1 rounded-sm p-8 min-h-[340px]
+                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal">
+        <div class="absolute inset-0 opacity-20"
+             style="background: radial-gradient(ellipse at 80% 20%, rgba(240,235,225,0.08) 0%, transparent 60%);"></div>
+        <div>
+          <span class="tag text-paper/40 mb-6 inline-block">Brand Identity</span>
+          <h3 class="font-bricolage font-bold text-3xl md:text-4xl leading-tight tracking-tighter2 text-paper mb-3">
+            The 5 layers behind<br/>every brand that<br/>
+            <span class="serif-italic text-paper/50">prints money.</span>
+          </h3>
+        </div>
+        <div class="flex items-end justify-between">
+          <div>
+            <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider">Client</p>
+            <p class="font-bricolage text-sm text-paper/70 mt-0.5">Luxury Retail Brand</p>
+          </div>
+          <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
+                      hover:border-paper/60 transition-colors cursor-pointer group">
+            <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="work-card card-bg-3 rounded-sm p-7 min-h-[340px]
+                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
+           style="transition-delay: 0.05s;">
+        <div>
+          <span class="tag text-paper/40 mb-6 inline-block">Web Design</span>
+          <h3 class="font-bricolage font-bold text-2xl leading-tight tracking-tighter2 text-paper mb-3">
+            Ready to stop<br/>losing clients<br/>
+            <span class="serif-italic text-paper/50">to your own website?</span>
+          </h3>
+        </div>
+        <div class="flex items-end justify-between">
+          <div>
+            <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider">Client</p>
+            <p class="font-bricolage text-sm text-paper/70 mt-0.5">SaaS Platform</p>
+          </div>
+          <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
+                      hover:border-paper/60 transition-colors cursor-pointer group">
+            <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="work-card card-bg-2 rounded-sm p-7 min-h-[300px]
+                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
+           style="transition-delay: 0.1s;">
+        <div>
+          <span class="tag text-paper/40 mb-6 inline-block">Visual Identity</span>
+          <h3 class="font-bricolage font-bold text-2xl leading-tight tracking-tighter2 text-paper mb-3">
+            A logo is not<br/>
+            <span class="serif-italic text-paper/50">a brand.</span>
+          </h3>
+          <p class="font-bricolage text-sm text-paper/40 leading-relaxed max-w-[200px]">
+            Complete identity systems that go beyond the mark.
+          </p>
+        </div>
+        <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
+                    hover:border-paper/60 transition-colors cursor-pointer group self-end">
+          <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="work-card card-bg-4 rounded-sm p-7 min-h-[300px]
+                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
+           style="transition-delay: 0.15s;">
+        <div>
+          <span class="tag text-paper/40 mb-6 inline-block">Strategy</span>
+          <h3 class="font-bricolage font-bold text-2xl leading-tight tracking-tighter2 text-paper mb-3">
+            The $500 site<br/>costs you<br/>
+            <span class="serif-italic text-paper/50">$50,000.</span>
+          </h3>
+          <p class="font-bricolage text-sm text-paper/40 leading-relaxed max-w-[200px]">
+            Why cheap design signals cheap business.
+          </p>
+        </div>
+        <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
+                    hover:border-paper/60 transition-colors cursor-pointer group self-end">
+          <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+        </div>
+      </div>
+
+      <!-- Card 5 — Large -->
+      <div class="work-card lg:col-span-2 card-bg-5 rounded-sm p-8 min-h-[300px]
+                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
+           style="transition-delay: 0.2s;">
+        <div class="absolute inset-0 opacity-30"
+             style="background: radial-gradient(ellipse at 10% 80%, rgba(74,92,68,0.15) 0%, transparent 50%);"></div>
+        <div>
+          <span class="tag text-paper/40 mb-6 inline-block">Content System</span>
+          <h3 class="font-bricolage font-bold text-3xl md:text-4xl leading-tight tracking-tighter2 text-paper mb-3">
+            Start with positioning.<br/>
+            <span class="serif-italic text-paper/50">Then build the visual identity that earns trust.</span>
+          </h3>
+        </div>
+        <div class="flex items-end justify-between">
+          <p class="font-bricolage text-xs text-paper/30 max-w-xs leading-relaxed">
+            A complete system — from narrative to brand to website to content.
+          </p>
+          <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
+                      hover:border-paper/60 transition-colors cursor-pointer group flex-shrink-0">
+            <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════ -->
+  <section id="about" class="relative z-10 px-6 md:px-12 py-24 border-t divider">
+    <div class="max-w-5xl">
+
+      <span class="tag text-paper/40 mb-8 inline-block reveal">About bymedina</span>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+        <div class="lg:col-span-3 reveal">
+          <p class="font-bricolage font-medium leading-snug text-paper"
+             style="font-size: clamp(1.5rem, 3vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.25;">
+            Most businesses have a traffic problem.<br/>
+            <span class="serif-italic text-paper/50">They don't — they have a trust problem.</span>
+          </p>
+        </div>
+        <div class="lg:col-span-2 flex flex-col justify-center reveal" style="transition-delay: 0.1s;">
+          <p class="font-bricolage text-paper/50 text-base leading-relaxed mb-6">
+            bymedina is a design studio built for founders who understand that
+            design isn't decoration — it's infrastructure. We build the visual
+            systems that make people stop, trust, and buy.
+          </p>
+          <p class="font-bricolage text-paper/50 text-base leading-relaxed">
+            Founded by Jaden Medina, CEO of Ocean Development. We've helped
+            brands across industries go from invisible to inevitable.
+          </p>
+        </div>
+      </div>
+
+      <!-- Horizontal rule -->
+      <hr class="divider mt-16 mb-12" />
+
+      <!-- Values row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 reveal" style="transition-delay: 0.15s;">
+        <div>
+          <p class="font-bricolage font-bold text-xl text-paper mb-3">01. Strategy First</p>
+          <p class="font-bricolage text-sm text-paper/40 leading-relaxed">
+            Every pixel has a purpose. We start with positioning before we ever open a design tool.
+          </p>
+        </div>
+        <div>
+          <p class="font-bricolage font-bold text-xl text-paper mb-3">02. Identity Over Aesthetics</p>
+          <p class="font-bricolage text-sm text-paper/40 leading-relaxed">
+            Beauty is easy. Recognition is hard. We build brands people remember without seeing the logo.
+          </p>
+        </div>
+        <div>
+          <p class="font-bricolage font-bold text-xl text-paper mb-3">03. Conversion is the Goal</p>
+          <p class="font-bricolage text-sm text-paper/40 leading-relaxed">
+            A website that looks good but doesn't convert is an expensive brochure. We fix that.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       SERVICES
+  ══════════════════════════════════════ -->
+  <section id="services" class="relative z-10 px-6 md:px-12 py-24 border-t divider">
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+      <div>
+        <span class="tag text-paper/40 mb-4 inline-block">What We Build</span>
+        <h2 class="font-bricolage font-bold leading-none"
+            style="font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
+          The full stack<br/>
+          <span class="serif-italic text-paper/50">of brand.</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="divide-y" style="border-color: rgba(240,235,225,0.1);">
+
+      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default">
+        <div class="flex items-start gap-6">
+          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">01</span>
+          <div>
+            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Brand Identity</h3>
+            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
+              Logo systems, color language, typography, voice — the full identity built to last a decade.
+            </p>
+          </div>
+        </div>
+        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">From $2,500</span>
+      </div>
+
+      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default" style="transition-delay: 0.05s;">
+        <div class="flex items-start gap-6">
+          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">02</span>
+          <div>
+            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Website Design & Build</h3>
+            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
+              Custom, conversion-optimized websites that don't just look good — they work hard.
+            </p>
+          </div>
+        </div>
+        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">From $4,000</span>
+      </div>
+
+      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default" style="transition-delay: 0.1s;">
+        <div class="flex items-start gap-6">
+          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">03</span>
+          <div>
+            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Content Systems</h3>
+            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
+              Editorial frameworks, post templates, and visual systems for consistent content output.
+            </p>
+          </div>
+        </div>
+        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">From $1,500</span>
+      </div>
+
+      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default" style="transition-delay: 0.15s;">
+        <div class="flex items-start gap-6">
+          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">04</span>
+          <div>
+            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Full Brand Sprint</h3>
+            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
+              Strategy → Identity → Website → Content. Everything, built together, in weeks not months.
+            </p>
+          </div>
+        </div>
+        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">Custom</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       QUOTE BREAK
+  ══════════════════════════════════════ -->
+  <section class="relative z-10 px-6 md:px-12 py-20 border-t divider overflow-hidden">
+    <div class="max-w-5xl mx-auto text-center reveal">
+      <p class="font-bricolage font-bold text-paper leading-tight"
+         style="font-size: clamp(2rem, 4.5vw, 4rem); letter-spacing: -0.03em;">
+        "If your website looks like<br/>
+        <span class="serif-italic text-paper/40">AI made it, it's already hurting you."</span>
+      </p>
+      <p class="font-bricolage text-paper/30 text-sm mt-6">— Jaden Medina, bymedina</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════ -->
+  <section id="contact" class="relative z-10 px-6 md:px-12 py-24 border-t divider">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+
+      <!-- Left -->
+      <div class="reveal">
+        <span class="tag text-paper/40 mb-8 inline-block">Start a Project</span>
+        <h2 class="font-bricolage font-bold leading-none mb-8"
+            style="font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
+          Ready to build<br/>something that<br/>
+          <span class="serif-italic text-paper/50">actually works?</span>
+        </h2>
+        <p class="font-bricolage text-paper/40 text-base leading-relaxed mb-10 max-w-md">
+          We take on a limited number of projects each month to ensure
+          every client gets our full attention. Spots fill fast.
+        </p>
+
+        <div class="space-y-4">
+          <a href="mailto:pajamadevelopment@gmail.com"
+             class="flex items-center gap-3 text-paper/60 hover:text-paper transition-colors group">
+            <span class="w-8 h-8 border border-paper/20 rounded-sm flex items-center justify-center
+                         group-hover:border-paper/50 transition-colors text-xs">✉</span>
+            <span class="font-bricolage text-sm">pajamadevelopment@gmail.com</span>
+          </a>
+          <a href="https://instagram.com/bymedina" target="_blank"
+             class="flex items-center gap-3 text-paper/60 hover:text-paper transition-colors group">
+            <span class="w-8 h-8 border border-paper/20 rounded-sm flex items-center justify-center
+                         group-hover:border-paper/50 transition-colors text-xs">◎</span>
+            <span class="font-bricolage text-sm">@bymedina</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="reveal" style="transition-delay: 0.1s;">
+        <form class="space-y-5" onsubmit="handleSubmit(event)">
+          <div>
+            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">Name</label>
+            <input type="text" placeholder="Your name"
+                   class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
+                          font-bricolage text-sm text-paper placeholder:text-paper/25
+                          focus:outline-none focus:border-paper/40 transition-colors" />
+          </div>
+          <div>
+            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">Email</label>
+            <input type="email" placeholder="hello@yourbrand.com"
+                   class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
+                          font-bricolage text-sm text-paper placeholder:text-paper/25
+                          focus:outline-none focus:border-paper/40 transition-colors" />
+          </div>
+          <div>
+            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">What do you need?</label>
+            <select class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
+                           font-bricolage text-sm text-paper/70
+                           focus:outline-none focus:border-paper/40 transition-colors appearance-none">
+              <option value="" disabled selected class="bg-ink">Select a service</option>
+              <option value="brand" class="bg-ink">Brand Identity</option>
+              <option value="web" class="bg-ink">Website Design & Build</option>
+              <option value="content" class="bg-ink">Content System</option>
+              <option value="full" class="bg-ink">Full Brand Sprint</option>
+              <option value="other" class="bg-ink">Something else</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">Tell me about your project</label>
+            <textarea rows="4" placeholder="What are you building? What's broken? What do you want to achieve?"
+                      class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
+                             font-bricolage text-sm text-paper placeholder:text-paper/25
+                             focus:outline-none focus:border-paper/40 transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit"
+                  class="w-full font-bricolage font-semibold text-sm bg-paper text-ink py-4 rounded-sm
+                         hover:bg-cream transition-colors duration-200">
+            Send Message
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="relative z-10 border-t divider px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-6 h-6 border border-paper/20 flex items-center justify-center rounded-sm">
+        <span class="font-bricolage font-bold text-[10px] text-paper/60">J</span>
+      </div>
+      <span class="font-bricolage text-xs text-paper/30">bymedina © 2026 — Ocean Development</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="https://instagram.com/bymedina" target="_blank"
+         class="font-bricolage text-xs text-paper/30 hover:text-paper/70 transition-colors">Instagram</a>
+      <a href="mailto:pajamadevelopment@gmail.com"
+         class="font-bricolage text-xs text-paper/30 hover:text-paper/70 transition-colors">Email</a>
+      <span class="font-bricolage text-xs text-paper/20 serif-italic">Design is not decoration.</span>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════ -->
+  <script>
+    // ── Marquee render ──
+    const tmpl = document.getElementById('marqueeItems');
+    const inner = document.getElementById('marqueeInner');
+    const html = tmpl.innerHTML.repeat(6);
+    inner.innerHTML = html;
+
+    // ── Custom cursor ──
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top  = mouseY + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Nav background on scroll ──
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.background = 'rgba(13,13,13,0.92)';
+        nav.style.backdropFilter = 'blur(12px)';
+        nav.style.borderBottom = '1px solid rgba(240,235,225,0.06)';
+      } else {
+        nav.style.background = 'linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, transparent 100%)';
+        nav.style.backdropFilter = 'blur(0px)';
+        nav.style.borderBottom = 'none';
+      }
+    });
+
+    // ── Mobile menu ──
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('hidden');
+    });
+    document.getElementById('closeMenu').addEventListener('click', closeMobileMenu);
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    }
+
+    // ── Form submit ──
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Message Sent ✓';
+      btn.classList.replace('bg-paper', 'bg-paper/60');
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
