@@ -1,847 +1,1724 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>bymedina — Design That Converts</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jaden Medina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF9;
+    --text: #111111;
+    --muted: #8A8A88;
+    --line: #E7E6E3;
+    --pill-bg: #111111;
+    --pill-text: #FAFAF9;
+  }
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  html {
+    scroll-behavior: smooth;
+  }
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            bricolage: ['"Bricolage Grotesque"', 'sans-serif'],
-            instrument: ['"Instrument Serif"', 'serif'],
-          },
-          colors: {
-            paper: '#f0ebe1',
-            ink: '#0d0d0d',
-            ash: '#1a1a1a',
-            smog: '#2e2e2e',
-            mist: '#6b6b6b',
-            cream: '#e8e0d0',
-            sage: '#4a5c44',
-          },
-          letterSpacing: {
-            tighter2: '-0.04em',
-            tightest: '-0.06em',
-          }
-        }
-      }
-    }
-  </script>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-  <style>
-    /* ─── Base ─── */
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+  /* Scroll reveal */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-    body {
-      background-color: #0d0d0d;
-      color: #f0ebe1;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      overflow-x: hidden;
-    }
+  [data-reveal].in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    /* Paper texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url('background.png');
-      background-size: cover;
-      background-repeat: repeat;
-      opacity: 0.06;
-      pointer-events: none;
-      z-index: 0;
-      mix-blend-mode: overlay;
-    }
+  .hero [data-reveal]:nth-child(1) { transition-delay: 0s; }
+  .hero [data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+  .hero [data-reveal]:nth-child(3) { transition-delay: 0.16s; }
 
-    /* Grain noise layer */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: -200%;
-      width: 400%;
-      height: 400%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.028;
-      pointer-events: none;
-      z-index: 0;
-      animation: grain 0.5s steps(1) infinite;
-    }
-
-    @keyframes grain {
-      0%, 100% { transform: translate(0, 0); }
-      10%       { transform: translate(-2%, -3%); }
-      20%       { transform: translate(3%, 2%); }
-      30%       { transform: translate(-1%, 4%); }
-      40%       { transform: translate(4%, -1%); }
-      50%       { transform: translate(-3%, 3%); }
-      60%       { transform: translate(2%, -4%); }
-      70%       { transform: translate(-4%, 2%); }
-      80%       { transform: translate(3%, -2%); }
-      90%       { transform: translate(-2%, 4%); }
-    }
-
-    /* ─── Typography helpers ─── */
-    .serif-italic {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-    }
-
-    /* ─── Marquee ─── */
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: marquee 22s linear infinite;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* ─── Card hover ─── */
-    .work-card {
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .work-card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-    }
-
-    /* ─── Nav underline ─── */
-    .nav-link {
-      position: relative;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 1px;
-      background: #f0ebe1;
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after { width: 100%; }
-
-    /* ─── Hero image halftone filter ─── */
-    .hero-img {
-      filter: grayscale(100%) contrast(1.25);
-      mix-blend-mode: luminosity;
-    }
-    .hero-img-wrap {
-      background: #0d0d0d;
-    }
-
-    /* ─── Cursor dot ─── */
-    .cursor-dot {
-      width: 8px; height: 8px;
-      background: #f0ebe1;
-      border-radius: 50%;
-      position: fixed;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
-    }
-    .cursor-ring {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(240,235,225,0.5);
-      border-radius: 50%;
-      position: fixed;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-    }
-
-    /* ─── Scroll fade-up ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
       opacity: 1;
       transform: none;
+      transition: none;
     }
+    html { scroll-behavior: auto; }
+  }
 
-    /* ─── Service item ─── */
-    .service-item {
-      border-top: 1px solid rgba(240,235,225,0.12);
-      transition: border-color 0.3s ease;
+  .wrap {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 75px;
+    box-sizing: border-box;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 75px;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(250, 250, 249, 0);
+    backdrop-filter: blur(0px);
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  nav.scrolled {
+    background: rgba(250, 250, 249, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo {
+    height: 24px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background: var(--text);
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-cta {
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border: none;
+    border-radius: 7px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .nav-cta:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .nav-cta:active {
+    transform: translateY(0);
+  }
+
+  /* Mobile menu toggle */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 73px;
+    background: var(--bg);
+    z-index: 99;
+    flex-direction: column;
+    padding: 32px 24px;
+    gap: 24px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-menu a {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .mobile-menu .nav-cta {
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  /* HERO */
+  .hero {
+    padding-top: 56px;
+    padding-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    right: -150px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(96,165,250,0.10) 0%, rgba(96,165,250,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero .wrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: 64px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+  }
+
+  /* MEDIA */
+  .media {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1290 / 355;
+  }
+
+  .media img.bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .media-logo {
+    position: absolute;
+    height: 32px;
+    width: auto;
+    z-index: 2;
+  }
+
+  .media-logo.top-left { top: 28px; left: 28px; }
+  .media-logo.top-right { top: 28px; right: 28px; height: 42px; }
+  .media-logo.bottom-left { bottom: 28px; left: 28px; height: 36px; }
+  .media-logo.bottom-right { bottom: 28px; right: 28px; height: 30px; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .wrap { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-right .nav-cta { display: none; }
+    .menu-toggle { display: flex; }
+    .mobile-menu { display: flex; }
+    .hero { padding-top: 40px; }
+    .headline { font-size: 40px; }
+    .media { aspect-ratio: 4 / 5; margin-top: 28px; margin-bottom: 56px; }
+    .media-logo { height: 20px; }
+    .media-logo.top-left { top: 16px; left: 16px; }
+    .media-logo.top-right { top: 16px; right: 16px; height: 26px; }
+    .media-logo.bottom-left { bottom: 16px; left: 16px; height: 22px; }
+    .media-logo.bottom-right { bottom: 16px; right: 16px; height: 18px; }
+  }
+
+  /* ABOUT */
+  .about {
+    padding-bottom: 0;
+    padding-top: 60px;
+  }
+
+  .about-heading {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+
+  .fill-text {
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .fill-text .word {
+    color: var(--line);
+    transition: color 0.15s ease;
+  }
+
+  .fill-text .word.active {
+    color: var(--text);
+  }
+
+  .about-cta {
+    margin-top: 8px;
+    margin-bottom: 24px;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border: none;
+    border-radius: 7px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .about-cta:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .about-cta {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  @media (max-width: 900px) {
+    .about-heading { font-size: 32px; }
+    .fill-text { font-size: 17px; }
+  }
+
+  /* PROJECTS - sticky stack */
+  .projects {
+    position: relative;
+  }
+
+  .project-card {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-card-inner {
+    width: 100%;
+    max-width: 100%;
+    height: 576px;
+    background: #0D0D0D;
+    border-radius: 7px;
+    padding: 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+  }
+
+  .project-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .project-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .project-media {
+    width: 100%;
+    aspect-ratio: 1200 / 472;
+    border-radius: 7px;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .project-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card-inner:hover .project-media img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 900px) {
+    .project-card-inner {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: 70vh;
+      padding: 20px;
     }
-    .service-item:hover {
-      border-color: rgba(240,235,225,0.4);
+    .project-title { font-size: 24px; }
+    .project-media { aspect-ratio: 4 / 3; }
+  }
+
+  /* TIMELINE */
+  .timeline {
+    padding: 120px 0;
+    text-align: center;
+  }
+
+  .timeline-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .timeline-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: left;
+  }
+
+  .timeline-card {
+    background: #EDEDED;
+    border-radius: 4px;
+    padding: 24px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    cursor: default;
+  }
+
+  .timeline-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(59,130,246,0.18) 0%, transparent 100%);
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: -1;
+  }
+
+  .timeline-card:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .timeline-day {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .timeline-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .timeline-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .timeline { padding: 80px 0; }
+    .timeline-heading { font-size: 36px; }
+    .timeline-grid { grid-template-columns: 1fr; }
+  }
+
+  /* PRICING */
+  .pricing {
+    padding: 0 0 120px;
+    text-align: center;
+  }
+
+  .pricing-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .pricing-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  .pricing-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .pricing-toggle {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .toggle-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .toggle-btn.active.medina {
+    background: #111111;
+    color: #FAFAF9;
+  }
+
+  .toggle-btn.active.oceandev {
+    background-image: url('/assets/gradient.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    border: none;
+  }
+
+  .pricing-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .pricing-card-stack {
+    position: relative;
+  }
+
+  .pricing-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: left;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .pricing-card.fade-hidden {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .pricing-amount {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .pricing-terms {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .pricing-for {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .pricing-items {
+    margin-bottom: 28px;
+  }
+
+  .pricing-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pricing-item:last-child {
+    border-bottom: none;
+  }
+
+  .pricing-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--text);
+  }
+
+  .pricing-item-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .pricing-item-title {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .pricing-item-desc {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .pricing-cta {
+    display: block;
+    width: 100%;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border: none;
+    border-radius: 7px;
+    padding: 18px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 18px 36px -16px rgba(59,130,246,0.45);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .pricing-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 900px) {
+    .pricing-heading { font-size: 32px; }
+    .pricing-toggle-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pricing-card { padding: 24px; }
+    .pricing-amount { font-size: 32px; }
+    .pricing-item-text { display: block; }
+    .pricing-item-desc { display: block; margin-top: 2px; }
+  }
+
+  /* WHY MEDINA */
+  .why-medina {
+    padding: 0 0 120px;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .why-image-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1106 / 1006;
+  }
+
+  .why-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .why-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .why-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+
+  .why-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 20px;
+    max-width: 460px;
+  }
+
+  .why-text:last-of-type {
+    margin-bottom: 32px;
+  }
+
+  .why-cta {
+    display: inline-block;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border: none;
+    border-radius: 7px;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .why-cta:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 900px) {
+    .why-medina { padding-bottom: 80px; }
+    .why-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
+    .why-heading { font-size: 32px; }
+    .why-text { max-width: 100%; }
+    .why-image-wrap { order: -1; }
+  }
 
-    /* ─── Tag pill ─── */
-    .tag {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid rgba(240,235,225,0.2);
-      padding: 3px 10px;
-      border-radius: 100px;
+  /* FAQ */
+  .faq {
+    padding: 0 0 120px;
+  }
+
+  .faq-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .faq-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 480px;
+  }
+
+  .faq-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 24px 0;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    transition: opacity 0.2s ease;
+  }
+
+  .faq-question:hover {
+    opacity: 0.6;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    background: var(--text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .faq-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    transform: translateY(-50%);
+  }
+
+  .faq-icon::after {
+    top: 0;
+    left: 50%;
+    width: 1.5px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+
+  .faq-item.open .faq-icon::after {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-answer-inner {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--muted);
+    padding-bottom: 24px;
+    max-width: 640px;
+  }
+
+  @media (max-width: 900px) {
+    .faq { padding-bottom: 80px; }
+    .faq-heading { font-size: 32px; }
+  }
+
+  /* CONTACT */
+  .book-call {
+    padding: 0 0 120px;
+  }
+
+  .book-call-box {
+    background: #0D0D0D;
+    border-radius: 12px;
+    padding: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: center;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .book-call-box::before {
+    content: "";
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(96,165,250,0.18) 0%, rgba(96,165,250,0) 70%);
+    pointer-events: none;
+  }
+
+  .book-call-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 18px;
+  }
+
+  .book-call-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .book-call-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 420px;
+  }
+
+  .book-call-form {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .book-call-form input,
+  .book-call-form select,
+  .book-call-form textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 7px;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .book-call-form input::placeholder,
+  .book-call-form textarea::placeholder {
+    color: rgba(255,255,255,0.35);
+  }
+
+  .book-call-form input:focus,
+  .book-call-form select:focus,
+  .book-call-form textarea:focus {
+    border-color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.09);
+  }
+
+  .book-call-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='white'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .book-call-form select option {
+    background: #0D0D0D;
+    color: #fff;
+  }
+
+  .book-call-form textarea {
+    resize: vertical;
+    min-height: 90px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .book-call-submit {
+    margin-top: 4px;
+    background: #fff;
+    color: #111111;
+    border: none;
+    border-radius: 7px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .book-call-submit:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 900px) {
+    .book-call { padding-bottom: 80px; }
+    .book-call-box {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+      gap: 32px;
     }
+    .book-call-heading { font-size: 32px; }
+    .form-row { grid-template-columns: 1fr; gap: 14px; }
+  }
 
-    /* ─── Image placeholder card backgrounds ─── */
-    .card-bg-1 { background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%); }
-    .card-bg-2 { background: linear-gradient(135deg, #2a2520 0%, #0d0b09 100%); }
-    .card-bg-3 { background: linear-gradient(135deg, #141a14 0%, #0a0d0a 100%); }
-    .card-bg-4 { background: linear-gradient(135deg, #1c1a1a 0%, #0f0f0f 100%); }
-    .card-bg-5 { background: linear-gradient(135deg, #1a1a20 0%, #0a0a0f 100%); }
-    .card-bg-6 { background: linear-gradient(135deg, #201a1a 0%, #0f0a0a 100%); }
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 64px 0 40px;
+  }
 
-    /* ─── Number counter style ─── */
-    .stat-num {
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
-    }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
 
-    /* ─── Divider line ─── */
-    .divider { border-color: rgba(240,235,225,0.1); }
-  </style>
+  .footer-brand {
+    max-width: 320px;
+  }
+
+  .footer-logo {
+    height: 24px;
+    width: auto;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .footer-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .footer-columns {
+    display: flex;
+    gap: 64px;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-col-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .footer-col a {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    opacity: 0.55;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    color: var(--text);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .footer-socials a svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .footer-socials a:hover {
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border-color: var(--pill-bg);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 900px) {
+    footer { padding: 48px 0 32px; }
+    .footer-top { flex-direction: column; gap: 32px; }
+    .footer-columns { gap: 40px; flex-wrap: wrap; }
+  }
+</style>
 </head>
+<body>
 
-<body class="relative z-10">
+<nav>
+  <a href="#" aria-label="Home"><img class="logo" src="/assets/logo.png" alt="Jaden Medina logo" /></a>
 
-  <!-- Custom cursor -->
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
-  <!-- ══════════════════════════════════════
-       NAV
-  ══════════════════════════════════════ -->
-  <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 flex items-center justify-between"
-       style="background: linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, transparent 100%); backdrop-filter: blur(0px);">
-
-    <!-- Logo -->
-    <a href="#" class="flex items-center gap-3 group">
-      <div class="w-7 h-7 border border-paper/30 flex items-center justify-center rounded-sm
-                  group-hover:border-paper/70 transition-colors duration-300">
-        <span class="font-bricolage font-bold text-xs text-paper">J</span>
-      </div>
-      <span class="font-bricolage font-semibold text-sm tracking-wide text-paper/90">bymedina</span>
-    </a>
-
-    <!-- Nav Links -->
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#work"     class="nav-link font-bricolage text-sm text-paper/60 hover:text-paper transition-colors duration-200">Work</a>
-      <a href="#services" class="nav-link font-bricolage text-sm text-paper/60 hover:text-paper transition-colors duration-200">Services</a>
-      <a href="#about"    class="nav-link font-bricolage text-sm text-paper/60 hover:text-paper transition-colors duration-200">About</a>
-      <a href="#contact"  class="font-bricolage text-sm text-ink bg-paper px-5 py-2 rounded-sm
-                                  hover:bg-cream transition-colors duration-200 font-medium">
-        Let's Talk
-      </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </div>
 
-    <!-- Mobile menu trigger -->
-    <button class="md:hidden flex flex-col gap-1.5 p-1" id="menuBtn" aria-label="Menu">
-      <span class="block w-5 h-px bg-paper/80"></span>
-      <span class="block w-5 h-px bg-paper/80"></span>
-    </button>
-  </nav>
-
-  <!-- Mobile menu -->
-  <div id="mobileMenu" class="fixed inset-0 z-40 bg-ink/95 flex flex-col items-center justify-center gap-10 hidden">
-    <button id="closeMenu" class="absolute top-6 right-6 text-paper/60 hover:text-paper text-2xl">✕</button>
-    <a href="#work"     onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">Work</a>
-    <a href="#services" onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">Services</a>
-    <a href="#about"    onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">About</a>
-    <a href="#contact"  onclick="closeMobileMenu()" class="font-bricolage font-bold text-4xl text-paper hover:text-paper/60 transition-colors">Contact</a>
+    <button class="nav-cta" onclick="window.location.href='#contact'">Let's Talk</button>
   </div>
 
+  <button class="menu-toggle" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
 
-  <!-- ══════════════════════════════════════
-       HERO
-  ══════════════════════════════════════ -->
-  <section class="relative min-h-screen flex flex-col overflow-hidden pt-20">
+<div class="mobile-menu">
+  <a href="#about">About</a>
+  <a href="#work">Work</a>
+  <a href="#process">Process</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+  <button class="nav-cta" onclick="window.location.href='#contact'">Let's Talk</button>
+</div>
 
-    <!-- Main hero content -->
-    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-0">
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>This site has been redesigned 6 times.</p>
+    <h1 class="headline" data-reveal>
+      Jaden Medina<br>
+      Designing Success Stories.
+    </h1>
 
-      <!-- Left: Text -->
-      <div class="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-0 z-10 order-2 lg:order-1">
-
-        <div class="mb-8 reveal">
-          <span class="tag text-paper/50">Ocean Development · Design Studio</span>
-        </div>
-
-        <h1 class="font-bricolage font-bold leading-none tracking-tighter2 mb-6 reveal"
-            style="font-size: clamp(3.2rem, 7vw, 6.5rem); letter-spacing: -0.04em;">
-          Your website<br/>
-          is costing<br/>
-          <span class="serif-italic text-paper/60" style="font-size: 0.92em;">you clients.</span>
-        </h1>
-
-        <p class="font-bricolage text-paper/50 text-lg leading-relaxed mb-10 max-w-md reveal"
-           style="transition-delay: 0.1s;">
-          We build brands and websites that convert strangers into buyers —
-          before they ever reach out.
-        </p>
-
-        <div class="flex flex-wrap items-center gap-4 reveal" style="transition-delay: 0.2s;">
-          <a href="#work" class="font-bricolage font-semibold text-sm bg-paper text-ink px-7 py-3.5 rounded-sm
-                                  hover:bg-cream transition-colors duration-200">
-            View Work
-          </a>
-          <a href="#contact" class="font-bricolage text-sm text-paper/70 hover:text-paper transition-colors duration-200
-                                     flex items-center gap-2">
-            <span>Start a Project</span>
-            <span class="text-paper/30">→</span>
-          </a>
-        </div>
-
-        <!-- Scroll hint -->
-        <div class="mt-16 flex items-center gap-3 reveal" style="transition-delay: 0.35s;">
-          <div class="w-8 h-px bg-paper/20"></div>
-          <span class="font-bricolage text-xs text-paper/30 tracking-widest uppercase">Scroll</span>
-        </div>
-      </div>
-
-      <!-- Right: Image -->
-      <div class="relative order-1 lg:order-2 hero-img-wrap min-h-[55vw] lg:min-h-0">
-        <img
-          src="jaden.png"
-          alt="Jaden Medina — bymedina"
-          class="hero-img absolute inset-0 w-full h-full object-cover object-top"
-          style="object-position: center 15%;"
-        />
-        <!-- Gradient overlays -->
-        <div class="absolute inset-0" style="background: linear-gradient(to right, #0d0d0d 0%, transparent 30%);"></div>
-        <div class="absolute inset-0" style="background: linear-gradient(to top, #0d0d0d 0%, transparent 25%);"></div>
-        <div class="absolute bottom-0 left-0 right-0 h-32" style="background: linear-gradient(to top, #0d0d0d, transparent);"></div>
-
-        <!-- Floating label -->
-        <div class="absolute top-8 right-8 text-right">
-          <p class="font-bricolage text-xs text-paper/30 uppercase tracking-widest">Founder</p>
-          <p class="font-bricolage font-semibold text-paper/70 text-sm mt-0.5">Jaden Medina</p>
-        </div>
-      </div>
+    <div class="media" data-reveal>
+      <img class="bg" src="/assets/switzerland.png" alt="A man wearing a backpack and purple beanie walking through green Swiss countryside" />
+      <img class="media-logo top-left" src="/assets/oceandev.png" alt="Oceandev" />
+      <img class="media-logo top-right" src="/assets/investor.png" alt="Investor Lending Solutions" />
+      <img class="media-logo bottom-left" src="/assets/ascendbiolabs.png" alt="AscendBioLabs" />
+      <img class="media-logo bottom-right" src="/assets/helix.png" alt="Helix" />
     </div>
+  </div>
+</header>
 
-    <!-- Stats bar -->
-    <div class="relative z-10 border-t divider px-6 md:px-12 py-6 grid grid-cols-3 gap-0">
-      <div class="text-center py-2 border-r divider">
-        <p class="font-bricolage font-bold text-2xl md:text-3xl text-paper">50+</p>
-        <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider mt-1">Projects Shipped</p>
-      </div>
-      <div class="text-center py-2 border-r divider">
-        <p class="font-bricolage font-bold text-2xl md:text-3xl text-paper">3×</p>
-        <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider mt-1">Avg. Conversion Lift</p>
-      </div>
-      <div class="text-center py-2">
-        <p class="font-bricolage font-bold text-2xl md:text-3xl text-paper">∞</p>
-        <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider mt-1">Ideas Per Day</p>
-      </div>
-    </div>
-  </section>
+<section class="about" id="about">
+  <div class="wrap">
+    <h2 class="about-heading" data-reveal>Hey, I'm Jaden 👋</h2>
 
+    <p class="fill-text" data-fill>I have come to realize that tall demands can only be fulfilled by capable people. Too often we sit with ideas instead of asking what we can actually make of them. Expectations keep rising, and I've made it my responsibility to meet them.</p>
 
-  <!-- ══════════════════════════════════════
-       MARQUEE
-  ══════════════════════════════════════ -->
-  <div class="relative z-10 overflow-hidden border-y divider py-4 bg-paper/[0.03]">
-    <div class="marquee-track font-bricolage text-xs uppercase tracking-widest text-paper/30 select-none">
-      <!-- Duplicate for seamless loop -->
-      <template id="marqueeItems">
-        <span class="mx-8">Brand Identity</span>
-        <span class="mx-3 text-paper/15">✦</span>
-        <span class="mx-8">Web Design</span>
-        <span class="mx-3 text-paper/15">✦</span>
-        <span class="mx-8">Visual Strategy</span>
-        <span class="mx-3 text-paper/15">✦</span>
-        <span class="mx-8">Digital Presence</span>
-        <span class="mx-3 text-paper/15">✦</span>
-        <span class="mx-8">Conversion Design</span>
-        <span class="mx-3 text-paper/15">✦</span>
-        <span class="mx-8">Content Systems</span>
-        <span class="mx-3 text-paper/15">✦</span>
-        <span class="mx-8">Ocean Development</span>
-        <span class="mx-3 text-paper/15">✦</span>
-      </template>
-      <span id="marqueeInner"></span>
+    <p class="fill-text" data-fill>18, designer and developer, Miami. Running Ocean Development, building websites for brands that refuse to settle for ordinary.</p>
+
+    <button class="about-cta" data-reveal onclick="window.location.href='#contact'">Let's Build Something</button>
+  </div>
+</section>
+
+<section class="projects" id="work">
+  <div class="project-card">
+    <div class="wrap">
+      <div class="project-card-inner" onclick="window.open('https://oceandev.net','_blank')" style="cursor:pointer;">
+        <h3 class="project-title">Ocean Development</h3>
+        <p class="project-subtitle">My website design agency. Ran by myself, Micah &amp; Raytumb.</p>
+        <div class="project-media">
+          <img src="/assets/ocean-development.png" alt="Ocean Development project preview" />
+        </div>
+      </div>
     </div>
   </div>
 
+  <div class="project-card">
+    <div class="wrap">
+      <div class="project-card-inner" onclick="window.open('https://getcampusbite.com','_blank')" style="cursor:pointer;">
+        <h3 class="project-title">CampusBite</h3>
+        <p class="project-subtitle">AI meal planning built around your real dining hall menus. Know exactly what to eat, every day.</p>
+        <div class="project-media">
+          <img src="/assets/campusbite.png" alt="CampusBite project preview" />
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- ══════════════════════════════════════
-       WORK
-  ══════════════════════════════════════ -->
-  <section id="work" class="relative z-10 px-6 md:px-12 py-24">
+  <div class="project-card">
+    <div class="wrap">
+      <div class="project-card-inner" onclick="window.open('https://oceandev.net/projects','_blank')" style="cursor:pointer;">
+        <h3 class="project-title">MLS Global</h3>
+        <p class="project-subtitle">A worldwide real estate network offering seamless property discovery across diverse markets.</p>
+        <div class="project-media">
+          <img src="/assets/mls-global.png" alt="MLS Global project preview" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Section header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+<section class="timeline" id="process">
+  <div class="wrap">
+    <h2 class="timeline-heading" data-reveal>One week, one website.</h2>
+    <p class="timeline-subtitle" data-reveal>From idea to live site, start to finish.</p>
+
+    <div class="timeline-grid" data-reveal>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <span class="timeline-day">Day 1</span>
+          <span class="timeline-tag">Discovery</span>
+        </div>
+        <p class="timeline-desc">Goals, audience, and content audit. Map out structure and pages.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <span class="timeline-day">Day 2</span>
+          <span class="timeline-tag">Wireframes</span>
+        </div>
+        <p class="timeline-desc">Layout and structure for every page. No design yet, just flow.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <span class="timeline-day">Day 3</span>
+          <span class="timeline-tag">Design Direction</span>
+        </div>
+        <p class="timeline-desc">Visual concepts, typography, color, and one direction locked.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <span class="timeline-day">Day 4</span>
+          <span class="timeline-tag">Design &amp; Build</span>
+        </div>
+        <p class="timeline-desc">Full design across all pages. Desktop and mobile.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <span class="timeline-day">Day 05 &amp; 06</span>
+          <span class="timeline-tag">Development</span>
+        </div>
+        <p class="timeline-desc">Build it live. Animations, interactions, responsive polish.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <span class="timeline-day">Day 7</span>
+          <span class="timeline-tag">Launch</span>
+        </div>
+        <p class="timeline-desc">QA, performance check, and ship. Live site, ready to go.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <h2 class="pricing-heading" data-reveal>What's Included</h2>
+    <p class="pricing-subtitle" data-reveal>Everything you need to go live, no add-ons, no surprises.</p>
+
+    <div class="pricing-toggle-row" data-reveal>
+      <div class="pricing-toggle">
+        <button class="toggle-btn active medina" data-plan="medina">Work With Medina</button>
+        <button class="toggle-btn oceandev" data-plan="oceandev">Work With Oceandev</button>
+      </div>
+      <span class="pricing-label" data-label>Medina</span>
+    </div>
+
+    <div class="pricing-card-stack" data-reveal>
+    <!-- MEDINA CARD -->
+    <div class="pricing-card" data-plan="medina">
+      <div class="pricing-amount">$10,000</div>
+      <p class="pricing-terms">7 days &middot; 50% to start, 50% on delivery</p>
+      <p class="pricing-for">For founders launching, repositioning, or ready to look serious.</p>
+
+      <div class="pricing-items">
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,218.34,160.6,149.27a86.5,86.5,0,1,0-11.34,11.34l69.07,69.07a8,8,0,0,0,11.33-11.34ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">Full Discovery &amp; Strategy</span> <span class="pricing-item-desc">Audience and competitor research, content plan.</span></p>
+        </div>
+
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,28A100,100,0,0,0,28,128c0,33.84,15.32,69.66,42,98.25A99.71,99.71,0,0,0,128,228a12,12,0,0,0,0-24,76,76,0,0,1-1.61-152c1.49,0,3,.05,4.45.13A100.32,100.32,0,0,0,228,128a8,8,0,0,1-8,8,12,12,0,0,0,0,24,32,32,0,0,0,32-32A100.11,100.11,0,0,0,128,28Zm32,116a12,12,0,1,1,12-12A12,12,0,0,1,160,144Zm-64,0a12,12,0,1,1,12-12A12,12,0,0,1,96,144Zm8-44a12,12,0,1,1,12-12A12,12,0,0,1,104,100Zm48,0a12,12,0,1,1,12-12A12,12,0,0,1,152,100Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">Custom Design</span> <span class="pricing-item-desc">Every page, desktop and mobile, built from scratch.</span></p>
+        </div>
+
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,1,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">Full Development</span> <span class="pricing-item-desc">Live build with working animations and interactions.</span></p>
+        </div>
+
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5.09-9.13L62.71,131.55l84-90.06L136.16,93.85a8,8,0,0,0,5.09,9.13l51.94,19.47Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">SEO &amp; Performance</span> <span class="pricing-item-desc">Fast load times, clean code, on-page SEO.</span></p>
+        </div>
+
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V88H40V56ZM40,200V104H216v96Zm32-64a8,8,0,0,1,8-8h96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,136Zm0,32a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H80A8,8,0,0,1,72,168Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">Domain &amp; Hosting</span> <span class="pricing-item-desc">Connected, configured, and ready to go.</span></p>
+        </div>
+
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M223.45,40.06a8,8,0,0,0-7.51-7.51c-58.8-3.44-105.43,11.6-138.67,44.65A157.44,157.44,0,0,0,48,121.69c-15.42.6-30.66,6.71-44.32,18.18a8,8,0,0,0-1,11.6l28.79,33,0,0L48,201l16.45,16.46,0,0,33,28.79a8,8,0,0,0,11.6-1c11.47-13.66,17.58-28.9,18.18-44.32a157.44,157.44,0,0,0,44.49-29.27C204.85,145.49,219.89,98.86,223.45,40.06ZM62.51,90.13c25-25.21,57.55-38.78,96.66-40.46-1.94,42-15.59,73.83-40.69,98.93l-.18.18-29.5-29.5C88.83,118.24,89.16,116.91,89.16,115.5Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">Launch &amp; QA</span> <span class="pricing-item-desc">Final testing, bug fixes, and deployment.</span></p>
+        </div>
+
+        <div class="pricing-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></svg>
+          <p class="pricing-item-text"><span class="pricing-item-title">30-Day Support</span> <span class="pricing-item-desc">Fixes and tweaks after launch, included.</span></p>
+        </div>
+      </div>
+
+      <button class="pricing-cta" onclick="window.location.href='#contact'">Book a call</button>
+    </div>
+
+    <!-- OCEANDEV CARD -->
+    <div class="pricing-card fade-hidden" data-plan="oceandev">
+      <div class="pricing-amount">$1,300 Starting</div>
+      <p class="pricing-terms">2-4 weeks &middot; 50% to start, 50% on delivery</p>
+      <p class="pricing-for">For businesses ready to scale with a full team behind the build.</p>
+
+      <button class="pricing-cta" onclick="window.open('https://oceandev.net','_blank')">Visit Ocean Development</button>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-medina">
+  <div class="wrap">
+    <div class="why-grid">
+      <div data-reveal>
+        <p class="why-eyebrow">Why Medina</p>
+        <h2 class="why-heading">A different kind of project.</h2>
+
+        <p class="why-text">This is where I work on projects outside of Ocean Development, things I take on solo, on my own time.</p>
+
+        <p class="why-text">You're working directly with me, start to finish. No handoffs, no account managers, just one person building exactly what you need.</p>
+
+        <p class="why-text">It's a smaller scope than what Ocean Development takes on, but the same standard. Fast, focused, and built from scratch.</p>
+
+        <p class="why-text">If you want a small site, a landing page, or something quick without the full agency process, this is the lane for that.</p>
+
+        <a href="#contact" class="why-cta">Let's Talk</a>
+      </div>
+
+      <div class="why-image-wrap" data-reveal>
+        <img src="/assets/jaden-halftone.png" alt="Halftone portrait of Jaden" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="book-call" id="contact">
+  <div class="wrap">
+    <div class="book-call-box" data-reveal>
       <div>
-        <span class="tag text-paper/40 mb-4 inline-block">Selected Work</span>
-        <h2 class="font-bricolage font-bold leading-none"
-            style="font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
-          Design that<br/>
-          <span class="serif-italic text-paper/50">actually works.</span>
-        </h2>
+        <p class="book-call-eyebrow">Get In Touch</p>
+        <h2 class="book-call-heading">Let's build something.</h2>
+        <p class="book-call-text">Tell me a bit about your project and I'll get back to you within a day or two to set up a call.</p>
       </div>
-      <a href="#contact" class="font-bricolage text-sm text-paper/50 hover:text-paper transition-colors self-start md:self-auto flex items-center gap-2">
-        Work with us <span>→</span>
-      </a>
+
+      <form class="book-call-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+
+        <input type="text" name="company" placeholder="Company / Brand (optional)" />
+
+        <select name="budget" required>
+          <option value="" disabled selected>Project budget</option>
+          <option value="10k-15k">$10,000 &ndash; $15,000</option>
+          <option value="15k-25k">$15,000 &ndash; $25,000</option>
+          <option value="25k-plus">$25,000+</option>
+        </select>
+
+        <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+
+        <button type="submit" class="book-call-submit">Send &amp; Book a Call</button>
+      </form>
     </div>
+  </div>
+</section>
 
-    <!-- Work grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2 class="faq-heading" data-reveal>Questions, answered.</h2>
+    <p class="faq-subtitle" data-reveal>Everything you might be wondering before we start.</p>
 
-      <!-- Card 1 — Large -->
-      <div class="work-card md:col-span-2 lg:col-span-2 card-bg-1 rounded-sm p-8 min-h-[340px]
-                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal">
-        <div class="absolute inset-0 opacity-20"
-             style="background: radial-gradient(ellipse at 80% 20%, rgba(240,235,225,0.08) 0%, transparent 60%);"></div>
-        <div>
-          <span class="tag text-paper/40 mb-6 inline-block">Brand Identity</span>
-          <h3 class="font-bricolage font-bold text-3xl md:text-4xl leading-tight tracking-tighter2 text-paper mb-3">
-            The 5 layers behind<br/>every brand that<br/>
-            <span class="serif-italic text-paper/50">prints money.</span>
-          </h3>
-        </div>
-        <div class="flex items-end justify-between">
-          <div>
-            <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider">Client</p>
-            <p class="font-bricolage text-sm text-paper/70 mt-0.5">Luxury Retail Brand</p>
-          </div>
-          <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
-                      hover:border-paper/60 transition-colors cursor-pointer group">
-            <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
-          </div>
+    <div class="faq-list" data-reveal>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What if I need changes after launch?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Every project includes a support window after launch for fixes and small tweaks. Bigger changes or new features can be scoped separately afterward.</div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="work-card card-bg-3 rounded-sm p-7 min-h-[340px]
-                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
-           style="transition-delay: 0.05s;">
-        <div>
-          <span class="tag text-paper/40 mb-6 inline-block">Web Design</span>
-          <h3 class="font-bricolage font-bold text-2xl leading-tight tracking-tighter2 text-paper mb-3">
-            Ready to stop<br/>losing clients<br/>
-            <span class="serif-italic text-paper/50">to your own website?</span>
-          </h3>
-        </div>
-        <div class="flex items-end justify-between">
-          <div>
-            <p class="font-bricolage text-xs text-paper/40 uppercase tracking-wider">Client</p>
-            <p class="font-bricolage text-sm text-paper/70 mt-0.5">SaaS Platform</p>
-          </div>
-          <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
-                      hover:border-paper/60 transition-colors cursor-pointer group">
-            <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>How many revisions do I get?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You'll see the design before development starts, so we can align on direction early. From there, revisions are handled collaboratively as the build comes together.</div>
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="work-card card-bg-2 rounded-sm p-7 min-h-[300px]
-                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
-           style="transition-delay: 0.1s;">
-        <div>
-          <span class="tag text-paper/40 mb-6 inline-block">Visual Identity</span>
-          <h3 class="font-bricolage font-bold text-2xl leading-tight tracking-tighter2 text-paper mb-3">
-            A logo is not<br/>
-            <span class="serif-italic text-paper/50">a brand.</span>
-          </h3>
-          <p class="font-bricolage text-sm text-paper/40 leading-relaxed max-w-[200px]">
-            Complete identity systems that go beyond the mark.
-          </p>
-        </div>
-        <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
-                    hover:border-paper/60 transition-colors cursor-pointer group self-end">
-          <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Do you write the content and copy?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">I can write or refine copy as part of the build, or work with whatever you already have. Either way, the goal is content that fits the design and converts.</div>
         </div>
       </div>
 
-      <!-- Card 4 -->
-      <div class="work-card card-bg-4 rounded-sm p-7 min-h-[300px]
-                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
-           style="transition-delay: 0.15s;">
-        <div>
-          <span class="tag text-paper/40 mb-6 inline-block">Strategy</span>
-          <h3 class="font-bricolage font-bold text-2xl leading-tight tracking-tighter2 text-paper mb-3">
-            The $500 site<br/>costs you<br/>
-            <span class="serif-italic text-paper/50">$50,000.</span>
-          </h3>
-          <p class="font-bricolage text-sm text-paper/40 leading-relaxed max-w-[200px]">
-            Why cheap design signals cheap business.
-          </p>
-        </div>
-        <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
-                    hover:border-paper/60 transition-colors cursor-pointer group self-end">
-          <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What do you need from me to get started?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">A quick call to talk through your goals, audience, and any brand assets you already have. From there, I handle the rest, and check in at key points along the way.</div>
         </div>
       </div>
 
-      <!-- Card 5 — Large -->
-      <div class="work-card lg:col-span-2 card-bg-5 rounded-sm p-8 min-h-[300px]
-                  flex flex-col justify-between border border-paper/[0.06] relative overflow-hidden reveal"
-           style="transition-delay: 0.2s;">
-        <div class="absolute inset-0 opacity-30"
-             style="background: radial-gradient(ellipse at 10% 80%, rgba(74,92,68,0.15) 0%, transparent 50%);"></div>
-        <div>
-          <span class="tag text-paper/40 mb-6 inline-block">Content System</span>
-          <h3 class="font-bricolage font-bold text-3xl md:text-4xl leading-tight tracking-tighter2 text-paper mb-3">
-            Start with positioning.<br/>
-            <span class="serif-italic text-paper/50">Then build the visual identity that earns trust.</span>
-          </h3>
-        </div>
-        <div class="flex items-end justify-between">
-          <p class="font-bricolage text-xs text-paper/30 max-w-xs leading-relaxed">
-            A complete system — from narrative to brand to website to content.
-          </p>
-          <div class="w-10 h-10 border border-paper/20 rounded-sm flex items-center justify-center
-                      hover:border-paper/60 transition-colors cursor-pointer group flex-shrink-0">
-            <span class="text-paper/40 group-hover:text-paper transition-colors text-sm">↗</span>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Can you work with my existing site or platform?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">In most cases, yes. If a rebuild makes more sense for what you're trying to achieve, I'll let you know early so there are no surprises.</div>
         </div>
       </div>
 
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       ABOUT
-  ══════════════════════════════════════ -->
-  <section id="about" class="relative z-10 px-6 md:px-12 py-24 border-t divider">
-    <div class="max-w-5xl">
-
-      <span class="tag text-paper/40 mb-8 inline-block reveal">About bymedina</span>
-
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-        <div class="lg:col-span-3 reveal">
-          <p class="font-bricolage font-medium leading-snug text-paper"
-             style="font-size: clamp(1.5rem, 3vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.25;">
-            Most businesses have a traffic problem.<br/>
-            <span class="serif-italic text-paper/50">They don't — they have a trust problem.</span>
-          </p>
-        </div>
-        <div class="lg:col-span-2 flex flex-col justify-center reveal" style="transition-delay: 0.1s;">
-          <p class="font-bricolage text-paper/50 text-base leading-relaxed mb-6">
-            bymedina is a design studio built for founders who understand that
-            design isn't decoration — it's infrastructure. We build the visual
-            systems that make people stop, trust, and buy.
-          </p>
-          <p class="font-bricolage text-paper/50 text-base leading-relaxed">
-            Founded by Jaden Medina, CEO of Ocean Development. We've helped
-            brands across industries go from invisible to inevitable.
-          </p>
-        </div>
-      </div>
-
-      <!-- Horizontal rule -->
-      <hr class="divider mt-16 mb-12" />
-
-      <!-- Values row -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 reveal" style="transition-delay: 0.15s;">
-        <div>
-          <p class="font-bricolage font-bold text-xl text-paper mb-3">01. Strategy First</p>
-          <p class="font-bricolage text-sm text-paper/40 leading-relaxed">
-            Every pixel has a purpose. We start with positioning before we ever open a design tool.
-          </p>
-        </div>
-        <div>
-          <p class="font-bricolage font-bold text-xl text-paper mb-3">02. Identity Over Aesthetics</p>
-          <p class="font-bricolage text-sm text-paper/40 leading-relaxed">
-            Beauty is easy. Recognition is hard. We build brands people remember without seeing the logo.
-          </p>
-        </div>
-        <div>
-          <p class="font-bricolage font-bold text-xl text-paper mb-3">03. Conversion is the Goal</p>
-          <p class="font-bricolage text-sm text-paper/40 leading-relaxed">
-            A website that looks good but doesn't convert is an expensive brochure. We fix that.
-          </p>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What if I'm not ready to launch in a week?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">That's fine. The timeline is built around focus, not pressure. We can adjust the pace to fit your schedule without losing momentum.</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-
-  <!-- ══════════════════════════════════════
-       SERVICES
-  ══════════════════════════════════════ -->
-  <section id="services" class="relative z-10 px-6 md:px-12 py-24 border-t divider">
-
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
-      <div>
-        <span class="tag text-paper/40 mb-4 inline-block">What We Build</span>
-        <h2 class="font-bricolage font-bold leading-none"
-            style="font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
-          The full stack<br/>
-          <span class="serif-italic text-paper/50">of brand.</span>
-        </h2>
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-logo" src="/assets/logo.png" alt="Jaden Medina logo" />
+        <p class="footer-tagline">Designing and building websites for brands that refuse to settle for ordinary.</p>
       </div>
-    </div>
 
-    <div class="divide-y" style="border-color: rgba(240,235,225,0.1);">
+      <div class="footer-columns">
+        <div class="footer-col">
+          <span class="footer-col-title">Site</span>
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
 
-      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default">
-        <div class="flex items-start gap-6">
-          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">01</span>
-          <div>
-            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Brand Identity</h3>
-            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
-              Logo systems, color language, typography, voice — the full identity built to last a decade.
-            </p>
+        <div class="footer-col">
+          <span class="footer-col-title">Connect</span>
+          <a href="https://oceandev.net" target="_blank" rel="noopener">Ocean Development</a>
+          <div class="footer-socials">
+            <a href="mailto:jaden@oceandev.net" aria-label="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,16-80,65.69L56,64Zm-160,8.41,80,65.7L208,72.41V192H40Z"/></svg>
+            </a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/></svg>
+            </a>
+            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></svg>
+            </a>
           </div>
         </div>
-        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">From $2,500</span>
       </div>
-
-      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default" style="transition-delay: 0.05s;">
-        <div class="flex items-start gap-6">
-          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">02</span>
-          <div>
-            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Website Design & Build</h3>
-            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
-              Custom, conversion-optimized websites that don't just look good — they work hard.
-            </p>
-          </div>
-        </div>
-        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">From $4,000</span>
-      </div>
-
-      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default" style="transition-delay: 0.1s;">
-        <div class="flex items-start gap-6">
-          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">03</span>
-          <div>
-            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Content Systems</h3>
-            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
-              Editorial frameworks, post templates, and visual systems for consistent content output.
-            </p>
-          </div>
-        </div>
-        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">From $1,500</span>
-      </div>
-
-      <div class="service-item py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 reveal group cursor-default" style="transition-delay: 0.15s;">
-        <div class="flex items-start gap-6">
-          <span class="font-bricolage text-xs text-paper/25 mt-1 tabular-nums">04</span>
-          <div>
-            <h3 class="font-bricolage font-bold text-2xl text-paper group-hover:text-paper/80 transition-colors">Full Brand Sprint</h3>
-            <p class="font-bricolage text-sm text-paper/40 mt-1 max-w-md">
-              Strategy → Identity → Website → Content. Everything, built together, in weeks not months.
-            </p>
-          </div>
-        </div>
-        <span class="tag text-paper/30 self-start md:self-auto flex-shrink-0">Custom</span>
-      </div>
-
     </div>
-  </section>
 
-
-  <!-- ══════════════════════════════════════
-       QUOTE BREAK
-  ══════════════════════════════════════ -->
-  <section class="relative z-10 px-6 md:px-12 py-20 border-t divider overflow-hidden">
-    <div class="max-w-5xl mx-auto text-center reveal">
-      <p class="font-bricolage font-bold text-paper leading-tight"
-         style="font-size: clamp(2rem, 4.5vw, 4rem); letter-spacing: -0.03em;">
-        "If your website looks like<br/>
-        <span class="serif-italic text-paper/40">AI made it, it's already hurting you."</span>
-      </p>
-      <p class="font-bricolage text-paper/30 text-sm mt-6">— Jaden Medina, bymedina</p>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jaden Medina. All rights reserved.</span>
     </div>
-  </section>
+  </div>
+</footer>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Nav scroll state
+    const nav = document.querySelector('nav');
+    function updateNav() {
+      if (window.scrollY > 8) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    document.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
 
-  <!-- ══════════════════════════════════════
-       CONTACT
-  ══════════════════════════════════════ -->
-  <section id="contact" class="relative z-10 px-6 md:px-12 py-24 border-t divider">
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-
-      <!-- Left -->
-      <div class="reveal">
-        <span class="tag text-paper/40 mb-8 inline-block">Start a Project</span>
-        <h2 class="font-bricolage font-bold leading-none mb-8"
-            style="font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
-          Ready to build<br/>something that<br/>
-          <span class="serif-italic text-paper/50">actually works?</span>
-        </h2>
-        <p class="font-bricolage text-paper/40 text-base leading-relaxed mb-10 max-w-md">
-          We take on a limited number of projects each month to ensure
-          every client gets our full attention. Spots fill fast.
-        </p>
-
-        <div class="space-y-4">
-          <a href="mailto:pajamadevelopment@gmail.com"
-             class="flex items-center gap-3 text-paper/60 hover:text-paper transition-colors group">
-            <span class="w-8 h-8 border border-paper/20 rounded-sm flex items-center justify-center
-                         group-hover:border-paper/50 transition-colors text-xs">✉</span>
-            <span class="font-bricolage text-sm">pajamadevelopment@gmail.com</span>
-          </a>
-          <a href="https://instagram.com/bymedina" target="_blank"
-             class="flex items-center gap-3 text-paper/60 hover:text-paper transition-colors group">
-            <span class="w-8 h-8 border border-paper/20 rounded-sm flex items-center justify-center
-                         group-hover:border-paper/50 transition-colors text-xs">◎</span>
-            <span class="font-bricolage text-sm">@bymedina</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Right: Form -->
-      <div class="reveal" style="transition-delay: 0.1s;">
-        <form class="space-y-5" onsubmit="handleSubmit(event)">
-          <div>
-            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">Name</label>
-            <input type="text" placeholder="Your name"
-                   class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
-                          font-bricolage text-sm text-paper placeholder:text-paper/25
-                          focus:outline-none focus:border-paper/40 transition-colors" />
-          </div>
-          <div>
-            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">Email</label>
-            <input type="email" placeholder="hello@yourbrand.com"
-                   class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
-                          font-bricolage text-sm text-paper placeholder:text-paper/25
-                          focus:outline-none focus:border-paper/40 transition-colors" />
-          </div>
-          <div>
-            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">What do you need?</label>
-            <select class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
-                           font-bricolage text-sm text-paper/70
-                           focus:outline-none focus:border-paper/40 transition-colors appearance-none">
-              <option value="" disabled selected class="bg-ink">Select a service</option>
-              <option value="brand" class="bg-ink">Brand Identity</option>
-              <option value="web" class="bg-ink">Website Design & Build</option>
-              <option value="content" class="bg-ink">Content System</option>
-              <option value="full" class="bg-ink">Full Brand Sprint</option>
-              <option value="other" class="bg-ink">Something else</option>
-            </select>
-          </div>
-          <div>
-            <label class="font-bricolage text-xs text-paper/40 uppercase tracking-wider block mb-2">Tell me about your project</label>
-            <textarea rows="4" placeholder="What are you building? What's broken? What do you want to achieve?"
-                      class="w-full bg-paper/[0.04] border border-paper/[0.12] rounded-sm px-4 py-3.5
-                             font-bricolage text-sm text-paper placeholder:text-paper/25
-                             focus:outline-none focus:border-paper/40 transition-colors resize-none"></textarea>
-          </div>
-          <button type="submit"
-                  class="w-full font-bricolage font-semibold text-sm bg-paper text-ink py-4 rounded-sm
-                         hover:bg-cream transition-colors duration-200">
-            Send Message
-          </button>
-        </form>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <footer class="relative z-10 border-t divider px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <div class="w-6 h-6 border border-paper/20 flex items-center justify-center rounded-sm">
-        <span class="font-bricolage font-bold text-[10px] text-paper/60">J</span>
-      </div>
-      <span class="font-bricolage text-xs text-paper/30">bymedina © 2026 — Ocean Development</span>
-    </div>
-    <div class="flex items-center gap-6">
-      <a href="https://instagram.com/bymedina" target="_blank"
-         class="font-bricolage text-xs text-paper/30 hover:text-paper/70 transition-colors">Instagram</a>
-      <a href="mailto:pajamadevelopment@gmail.com"
-         class="font-bricolage text-xs text-paper/30 hover:text-paper/70 transition-colors">Email</a>
-      <span class="font-bricolage text-xs text-paper/20 serif-italic">Design is not decoration.</span>
-    </div>
-  </footer>
-
-
-  <!-- ══════════════════════════════════════
-       SCRIPTS
-  ══════════════════════════════════════ -->
-  <script>
-    // ── Marquee render ──
-    const tmpl = document.getElementById('marqueeItems');
-    const inner = document.getElementById('marqueeInner');
-    const html = tmpl.innerHTML.repeat(6);
-    inner.innerHTML = html;
-
-    // ── Custom cursor ──
-    const dot  = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      dot.style.left = mouseX + 'px';
-      dot.style.top  = mouseY + 'px';
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
     });
 
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      ring.style.left = ringX + 'px';
-      ring.style.top  = ringY + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
 
-    // ── Scroll reveal ──
-    const reveals = document.querySelectorAll('.reveal');
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('[data-reveal]');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => observer.observe(el));
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-    // ── Nav background on scroll ──
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) {
-        nav.style.background = 'rgba(13,13,13,0.92)';
-        nav.style.backdropFilter = 'blur(12px)';
-        nav.style.borderBottom = '1px solid rgba(240,235,225,0.06)';
-      } else {
-        nav.style.background = 'linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, transparent 100%)';
-        nav.style.backdropFilter = 'blur(0px)';
-        nav.style.borderBottom = 'none';
-      }
+    revealEls.forEach(el => observer.observe(el));
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    const cards = document.querySelectorAll('.pricing-card');
+    const label = document.querySelector('[data-label]');
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const plan = btn.dataset.plan;
+        if (btn.classList.contains('active')) return;
+
+        toggleBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        label.textContent = plan === 'medina' ? 'Medina' : 'Ocean Development';
+
+        const current = document.querySelector('.pricing-card:not(.fade-hidden)');
+        const next = document.querySelector(`.pricing-card[data-plan="${plan}"]`);
+
+        if (current === next) return;
+
+        // fade out current
+        current.classList.add('fade-hidden');
+
+        // after fade-out completes, swap and fade in next
+        setTimeout(() => {
+          next.classList.remove('fade-hidden');
+        }, 350);
+      });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Wrap each word in a span for the scroll-fill effect
+    document.querySelectorAll('[data-fill]').forEach(el => {
+      const words = el.textContent.trim().split(/\s+/);
+      el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
     });
 
-    // ── Mobile menu ──
-    document.getElementById('menuBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.remove('hidden');
-    });
-    document.getElementById('closeMenu').addEventListener('click', closeMobileMenu);
-    function closeMobileMenu() {
-      document.getElementById('mobileMenu').classList.add('hidden');
+    const allWords = Array.from(document.querySelectorAll('.fill-text .word'));
+
+    function updateFill() {
+      const triggerLine = window.innerHeight * 0.75;
+
+      allWords.forEach(word => {
+        const rect = word.getBoundingClientRect();
+        if (rect.top < triggerLine) {
+          word.classList.add('active');
+        } else {
+          word.classList.remove('active');
+        }
+      });
     }
 
-    // ── Form submit ──
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = 'Message Sent ✓';
-      btn.classList.replace('bg-paper', 'bg-paper/60');
-      btn.disabled = true;
-    }
-  </script>
+    document.addEventListener('scroll', updateFill, { passive: true });
+    window.addEventListener('resize', updateFill);
+    updateFill();
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+
+      question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        // close all
+        document.querySelectorAll('.faq-item.open').forEach(open => {
+          open.classList.remove('open');
+          open.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
