@@ -6,7 +6,7 @@
 <title>Jaden Medina | Designing Success Stories</title>
 <meta name="description" content="18, designer and developer, Miami. Running Ocean Development, building websites for brands that refuse to settle for ordinary." />
 
-<link rel="icon" type="image/png" href="/assets/jadenmedinalogo.svg" />
+<link rel="icon" type="image/png" href="/assets/logo.png" />
 <link rel="apple-touch-icon" href="/assets/logo.png" />
 
 <meta property="og:title" content="Jaden Medina | Designing Success Stories" />
@@ -744,89 +744,98 @@
   /* ============================================================
      PRICING
   ============================================================ */
-  .pricing { padding: 0 0 120px; text-align: center; }
+  .pricing { padding: 0 0 120px; }
 
-  .pricing-heading { font-size: 40px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
-  .pricing-subtitle { font-size: 18px; font-weight: 400; color: var(--muted); margin-bottom: 48px; }
-
-  .pricing-toggle-row {
+  .pricing-top-row {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    text-align: left;
-    margin-bottom: 16px;
+    margin-bottom: 48px;
+    gap: 32px;
   }
 
-  .pricing-toggle {
-    display: inline-flex;
-    border: 1px solid var(--line);
-    border-radius: 7px;
-    padding: 4px;
-    gap: 4px;
+  .pricing-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
   }
 
-  .toggle-btn {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 18px;
-    cursor: pointer;
-    background: transparent;
-    color: var(--text);
-    transition: background 0.2s ease, color 0.2s ease;
+  .pricing-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    max-width: 280px;
+    line-height: 1.6;
+    text-align: right;
+    padding-bottom: 6px;
   }
-
-  .toggle-btn.active.medina { background: #111111; color: #FAFAF9; }
-
-  .toggle-btn.active.oceandev {
-    background-image: url('/assets/gradient.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #ffffff;
-    border: none;
-  }
-
-  .pricing-label { font-size: 18px; font-weight: 400; color: var(--text); }
-
-  .pricing-card-stack { position: relative; }
 
   .pricing-card {
     border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 32px;
-    text-align: left;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    border-radius: 16px;
+    padding: 40px;
   }
 
-  .pricing-card.fade-hidden {
-    opacity: 0;
-    transform: translateY(8px);
-    pointer-events: none;
-    position: absolute;
-    top: 0; left: 0; right: 0;
+  .pricing-amount {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1;
   }
 
-  .pricing-amount { font-size: 40px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
-  .pricing-terms { font-size: 16px; font-weight: 400; color: var(--muted); margin-bottom: 12px; }
+  .pricing-terms { font-size: 16px; font-weight: 400; color: var(--muted); margin-bottom: 6px; }
   .pricing-for { font-size: 16px; font-weight: 400; color: var(--muted); margin-bottom: 28px; }
-  .pricing-items { margin-bottom: 28px; }
+
+  .pricing-cta {
+    display: block;
+    width: 100%;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border: none;
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    margin-bottom: 8px;
+  }
+
+  .pricing-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .pricing-items { margin-top: 28px; }
 
   .pricing-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
     padding: 16px 0;
     border-bottom: 1px solid var(--line);
   }
 
-  .pricing-item:last-child { border-bottom: none; }
-  .pricing-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--text); }
-  .pricing-item-text { font-size: 16px; line-height: 1.5; }
-  .pricing-item-title { font-weight: 500; color: var(--text); }
-  .pricing-item-desc { font-weight: 400; color: var(--muted); }
+  .pricing-item:first-child { border-top: 1px solid var(--line); }
+
+  .pricing-item-check {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pricing-item-check svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text);
+  }
+
+  .pricing-item-title { font-size: 15px; font-weight: 500; color: var(--text); display: block; }
+  .pricing-item-desc { font-size: 14px; font-weight: 400; color: var(--muted); display: block; margin-top: 2px; }
 
   .pricing-cta {
     display: block;
@@ -1144,10 +1153,13 @@
     .timeline-subtitle { text-align: left; max-width: 100%; }
     .timeline-grid { grid-template-columns: 1fr; }
 
-    .pricing-heading { font-size: 32px; }
-    .pricing-toggle-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .pricing-card { padding: 24px; }
-    .pricing-amount { font-size: 32px; }
+    .pricing { padding-bottom: 80px; }
+    .pricing-top-row { flex-direction: column; align-items: flex-start; margin-bottom: 32px; gap: 12px; }
+    .pricing-heading { font-size: 36px; }
+    .pricing-subtitle { text-align: left; max-width: 100%; }
+    .pricing-card { grid-template-columns: 1fr; padding: 28px 24px; gap: 0; }
+    .pricing-items { margin-top: 32px; }
+    .pricing-amount { font-size: 40px; }
 
     .why-medina { padding-bottom: 80px; }
     .why-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -1330,14 +1342,14 @@
 <section class="timeline" id="process">
   <div class="wrap">
     <div class="timeline-top-row" data-reveal>
-      <h2 class="timeline-heading">One week,<br>one website.</h2>
-      <p class="timeline-subtitle">From first conversation to live site, every step has a purpose.</p>
+      <h2 class="timeline-heading">Built by a team.<br>Delivered on time.</h2>
+      <p class="timeline-subtitle">How Ocean Development takes a project from brief to live site.</p>
     </div>
 
     <div class="timeline-grid" data-reveal>
       <div class="timeline-card">
         <div class="timeline-top">
-          <span class="timeline-day">Day 1</span>
+          <span class="timeline-day">Week 1</span>
           <span class="timeline-tag">Discovery</span>
         </div>
         <p class="timeline-desc">Goals, audience, and content audit. Map out structure and pages.</p>
@@ -1345,7 +1357,7 @@
 
       <div class="timeline-card">
         <div class="timeline-top">
-          <span class="timeline-day">Day 2</span>
+          <span class="timeline-day">Week 1</span>
           <span class="timeline-tag">Wireframes</span>
         </div>
         <p class="timeline-desc">Layout and structure for every page. No design yet, just flow.</p>
@@ -1353,7 +1365,7 @@
 
       <div class="timeline-card">
         <div class="timeline-top">
-          <span class="timeline-day">Day 3</span>
+          <span class="timeline-day">Week 2</span>
           <span class="timeline-tag">Design Direction</span>
         </div>
         <p class="timeline-desc">Visual concepts, typography, color, and one direction locked.</p>
@@ -1361,7 +1373,7 @@
 
       <div class="timeline-card">
         <div class="timeline-top">
-          <span class="timeline-day">Day 4</span>
+          <span class="timeline-day">Week 2</span>
           <span class="timeline-tag">Design &amp; Build</span>
         </div>
         <p class="timeline-desc">Full design across all pages. Desktop and mobile.</p>
@@ -1369,7 +1381,7 @@
 
       <div class="timeline-card">
         <div class="timeline-top">
-          <span class="timeline-day">Days 5 &amp; 6</span>
+          <span class="timeline-day">Week 3</span>
           <span class="timeline-tag">Development</span>
         </div>
         <p class="timeline-desc">Build it live. Animations, interactions, responsive polish.</p>
@@ -1377,7 +1389,7 @@
 
       <div class="timeline-card">
         <div class="timeline-top">
-          <span class="timeline-day">Day 7</span>
+          <span class="timeline-day">Week 4</span>
           <span class="timeline-tag">Launch</span>
         </div>
         <p class="timeline-desc">QA, performance check, and ship. Live site, ready to go.</p>
@@ -1389,62 +1401,46 @@
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="wrap">
-    <h2 class="pricing-heading" data-reveal>What's Included</h2>
-    <p class="pricing-subtitle" data-reveal>Everything you need to go live, no add-ons, no surprises.</p>
-
-    <div class="pricing-toggle-row" data-reveal>
-      <div class="pricing-toggle">
-        <button class="toggle-btn active medina" data-plan="medina">Work With Medina</button>
-        <button class="toggle-btn oceandev" data-plan="oceandev">Work With Oceandev</button>
-      </div>
-      <span class="pricing-label" data-label>Medina</span>
+    <div class="pricing-top-row" data-reveal>
+      <h2 class="pricing-heading">What's included.</h2>
+      <p class="pricing-subtitle">No add-ons, no surprises. Everything to go live.</p>
     </div>
 
-    <div class="pricing-card-stack" data-reveal>
-      <div class="pricing-card" data-plan="medina">
-        <div class="pricing-amount">$10,000</div>
-        <p class="pricing-terms">7 days &middot; 50% to start, 50% on delivery</p>
-        <p class="pricing-for">For founders launching, repositioning, or ready to look serious.</p>
+    <div class="pricing-card" data-reveal>
+      <div class="pricing-amount">$5,000+</div>
+      <p class="pricing-terms">2 to 4 weeks &middot; 50% to start, 50% on delivery</p>
+      <p class="pricing-for">For brands ready to invest in a site that actually converts.</p>
+      <a href="https://oceandev.net" target="_blank" rel="noopener" class="pricing-cta">Work With Ocean Development</a>
 
-        <div class="pricing-items">
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,218.34,160.6,149.27a86.5,86.5,0,1,0-11.34,11.34l69.07,69.07a8,8,0,0,0,11.33-11.34ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">Full Discovery &amp; Strategy</span> <span class="pricing-item-desc">Audience and competitor research, content plan.</span></p>
-          </div>
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,28A100,100,0,0,0,28,128c0,33.84,15.32,69.66,42,98.25A99.71,99.71,0,0,0,128,228a12,12,0,0,0,0-24,76,76,0,0,1-1.61-152c1.49,0,3,.05,4.45.13A100.32,100.32,0,0,0,228,128a8,8,0,0,1-8,8,12,12,0,0,0,0,24,32,32,0,0,0,32-32A100.11,100.11,0,0,0,128,28Zm32,116a12,12,0,1,1,12-12A12,12,0,0,1,160,144Zm-64,0a12,12,0,1,1,12-12A12,12,0,0,1,96,144Zm8-44a12,12,0,1,1,12-12A12,12,0,0,1,104,100Zm48,0a12,12,0,1,1,12-12A12,12,0,0,1,152,100Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">Custom Design</span> <span class="pricing-item-desc">Every page, desktop and mobile, built from scratch.</span></p>
-          </div>
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,1,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">Full Development</span> <span class="pricing-item-desc">Live build with working animations and interactions.</span></p>
-          </div>
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5.09-9.13L62.71,131.55l84-90.06L136.16,93.85a8,8,0,0,0,5.09,9.13l51.94,19.47Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">SEO &amp; Performance</span> <span class="pricing-item-desc">Fast load times, clean code, on-page SEO.</span></p>
-          </div>
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V88H40V56ZM40,200V104H216v96Zm32-64a8,8,0,0,1,8-8h96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,136Zm0,32a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H80A8,8,0,0,1,72,168Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">Domain &amp; Hosting</span> <span class="pricing-item-desc">Connected, configured, and ready to go.</span></p>
-          </div>
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M223.45,40.06a8,8,0,0,0-7.51-7.51c-58.8-3.44-105.43,11.6-138.67,44.65A157.44,157.44,0,0,0,48,121.69c-15.42.6-30.66,6.71-44.32,18.18a8,8,0,0,0-1,11.6l28.79,33,0,0L48,201l16.45,16.46,0,0,33,28.79a8,8,0,0,0,11.6-1c11.47-13.66,17.58-28.9,18.18-44.32a157.44,157.44,0,0,0,44.49-29.27C204.85,145.49,219.89,98.86,223.45,40.06ZM62.51,90.13c25-25.21,57.55-38.78,96.66-40.46-1.94,42-15.59,73.83-40.69,98.93l-.18.18-29.5-29.5C88.83,118.24,89.16,116.91,89.16,115.5Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">Launch &amp; QA</span> <span class="pricing-item-desc">Final testing, bug fixes, and deployment.</span></p>
-          </div>
-          <div class="pricing-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></svg>
-            <p class="pricing-item-text"><span class="pricing-item-title">30-Day Support</span> <span class="pricing-item-desc">Fixes and tweaks after launch, included.</span></p>
-          </div>
+      <div class="pricing-items">
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,218.34,160.6,149.27a86.5,86.5,0,1,0-11.34,11.34l69.07,69.07a8,8,0,0,0,11.33-11.34ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></div>
+          <div><span class="pricing-item-title">Full Discovery &amp; Strategy</span><span class="pricing-item-desc">Audience and competitor research, content plan.</span></div>
         </div>
-
-        <button class="pricing-cta" onclick="window.location.href='#contact'">Book a call</button>
-      </div>
-
-      <div class="pricing-card fade-hidden" data-plan="oceandev">
-        <div class="pricing-amount">$1,300 Starting</div>
-        <p class="pricing-terms">2-4 weeks &middot; 50% to start, 50% on delivery</p>
-        <p class="pricing-for">For businesses ready to scale with a full team behind the build.</p>
-        <button class="pricing-cta" onclick="window.open('https://oceandev.net','_blank')">Visit Ocean Development</button>
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,28A100,100,0,0,0,28,128c0,33.84,15.32,69.66,42,98.25A99.71,99.71,0,0,0,128,228a12,12,0,0,0,0-24,76,76,0,0,1-1.61-152c1.49,0,3,.05,4.45.13A100.32,100.32,0,0,0,228,128a8,8,0,0,1-8,8,12,12,0,0,0,0,24,32,32,0,0,0,32-32A100.11,100.11,0,0,0,128,28Zm32,116a12,12,0,1,1,12-12A12,12,0,0,1,160,144Zm-64,0a12,12,0,1,1,12-12A12,12,0,0,1,96,144Zm8-44a12,12,0,1,1,12-12A12,12,0,0,1,104,100Zm48,0a12,12,0,1,1,12-12A12,12,0,0,1,152,100Z"/></svg></div>
+          <div><span class="pricing-item-title">Custom Design</span><span class="pricing-item-desc">Every page, desktop and mobile, built from scratch.</span></div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,1,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/></svg></div>
+          <div><span class="pricing-item-title">Full Development</span><span class="pricing-item-desc">Live build with working animations and interactions.</span></div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5.09-9.13L62.71,131.55l84-90.06L136.16,93.85a8,8,0,0,0,5.09,9.13l51.94,19.47Z"/></svg></div>
+          <div><span class="pricing-item-title">SEO &amp; Performance</span><span class="pricing-item-desc">Fast load times, clean code, on-page SEO.</span></div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V88H40V56ZM40,200V104H216v96Zm32-64a8,8,0,0,1,8-8h96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,136Zm0,32a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H80A8,8,0,0,1,72,168Z"/></svg></div>
+          <div><span class="pricing-item-title">Domain &amp; Hosting</span><span class="pricing-item-desc">Connected, configured, and ready to go.</span></div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M223.45,40.06a8,8,0,0,0-7.51-7.51c-58.8-3.44-105.43,11.6-138.67,44.65A157.44,157.44,0,0,0,48,121.69c-15.42.6-30.66,6.71-44.32,18.18a8,8,0,0,0-1,11.6l28.79,33,0,0L48,201l16.45,16.46,0,0,33,28.79a8,8,0,0,0,11.6-1c11.47-13.66,17.58-28.9,18.18-44.32a157.44,157.44,0,0,0,44.49-29.27C204.85,145.49,219.89,98.86,223.45,40.06ZM62.51,90.13c25-25.21,57.55-38.78,96.66-40.46-1.94,42-15.59,73.83-40.69,98.93l-.18.18-29.5-29.5C88.83,118.24,89.16,116.91,89.16,115.5Z"/></svg></div>
+          <div><span class="pricing-item-title">Launch &amp; QA</span><span class="pricing-item-desc">Final testing, bug fixes, and deployment.</span></div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></svg></div>
+          <div><span class="pricing-item-title">30-Day Support</span><span class="pricing-item-desc">Fixes and tweaks after launch, included.</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1455,14 +1451,18 @@
   <div class="wrap">
     <div class="why-grid">
       <div data-reveal>
-        <p class="why-eyebrow">Why Medina</p>
-        <h2 class="why-heading">A different kind of project.</h2>
-        <p class="why-text">This is where I work on projects outside of Ocean Development, things I take on solo, on my own time.</p>
-        <p class="why-text">You're working directly with me, start to finish. No handoffs, no account managers, just one person building exactly what you need.</p>
-        <p class="why-text">It's a smaller scope than what Ocean Development takes on, but the same standard. Fast, focused, and built from scratch.</p>
-        <p class="why-text">If you want a small site, a landing page, or something quick without the full agency process, this is the lane for that.</p>
-        <a href="#contact" class="why-cta">Let's Talk</a>
+        <p class="why-eyebrow">Why Jaden</p>
+        <h2 class="why-heading">The person behind the agency.</h2>
+
+        <p class="why-text">I started Ocean Development at 16. Not because I had it all figured out, but because I believed good design could change what a business becomes. That belief hasn't changed.</p>
+
+        <p class="why-text">Most agencies put a salesperson between you and the work. At Ocean Development, you deal with me directly. I care about every project like it's my own brand on the line, because in a way it is.</p>
+
+        <p class="why-text">We build in Figma, Framer, Shopify, and WordPress. We move fast, we communicate clearly, and we don't ship anything we wouldn't be proud to put our name on.</p>
+
+        <a href="#contact" class="why-cta">Start a Project</a>
       </div>
+
       <div class="why-image-wrap" data-reveal>
         <img src="/assets/jaden-halftone.png" alt="Halftone portrait of Jaden" />
       </div>
@@ -1634,29 +1634,6 @@
     window.addEventListener('scroll', updateFill, { passive: true });
     window.addEventListener('resize', updateFill);
     updateFill();
-
-    // Pricing toggle
-    const toggleBtns = document.querySelectorAll('.toggle-btn');
-    const cards = document.querySelectorAll('.pricing-card');
-    const label = document.querySelector('[data-label]');
-
-    toggleBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const plan = btn.dataset.plan;
-        if (btn.classList.contains('active')) return;
-
-        toggleBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        label.textContent = plan === 'medina' ? 'Medina' : 'Ocean Development';
-
-        const current = document.querySelector('.pricing-card:not(.fade-hidden)');
-        const next = document.querySelector(`.pricing-card[data-plan="${plan}"]`);
-
-        if (current === next) return;
-        current.classList.add('fade-hidden');
-        setTimeout(() => next.classList.remove('fade-hidden'), 350);
-      });
-    });
 
     // FAQ accordion
     document.querySelectorAll('.faq-item').forEach(item => {
