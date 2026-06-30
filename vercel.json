@@ -2,8 +2,8 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/digest.html",
-      "has": [{ "type": "host", "value": "digest.byjaden.com" }]
+      "has": [{ "type": "host", "value": "digest.byjaden.com" }],
+      "destination": "/digest.html"
     }
   ]
 }
