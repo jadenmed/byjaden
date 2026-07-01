@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Time — Jaden Medina</title>
+<link rel="icon" type="image/svg+xml" href="/assets/jadenmedinalogo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nav-h: 64px;
+    --text: #111111;
+    --muted: #8A8A88;
+    --line: #E7E6E3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #003095;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* HERO GRADIENT — same as index.html */
+  .bg-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg,
+      #003095 0%,
+      #003095 20%,
+      #0050F8 52%,
+      #5FBDF7 82%,
+      #d0eeff 100%
+    );
+  }
+
+  /* CSS starfield */
+  .bg-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 10% 8%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 23% 5%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 35% 14%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 3%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 11%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 6%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 9%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 4%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 13%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 22%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 26%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 32%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 70% 24%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 18%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 91% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 8%  40%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 44%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 33% 36%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 42%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 63% 38%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 45%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 87% 35%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 96% 48%, rgba(255,255,255,0.2) 0%, transparent 100%);
+  }
+
+  /* everything above the gradient */
+  .nav-wrapper,
+  main { position: relative; z-index: 1; }
+
+  /* NAV */
+  .nav-wrapper {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .nav-wrapper.scrolled {
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-h);
+    padding: 0 75px;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .logo {
+    height: 24px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+  }
+
+  .nav-wrapper.scrolled .logo { filter: brightness(0); }
+
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-back:hover { color: #fff; }
+  .nav-wrapper.scrolled .nav-back { color: var(--muted); }
+  .nav-wrapper.scrolled .nav-back:hover { color: var(--text); }
+  .nav-back svg { width: 14px; height: 14px; }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    padding-top: var(--nav-h);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 75px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 100px 0 72px;
+  }
+
+  .page-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+
+  .page-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 80px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #fff;
+  }
+
+  /* CLOCK GRID */
+  .clocks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding-bottom: 80px;
+  }
+
+  .clock-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 20px;
+    padding: 36px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .clock-card:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.24);
+  }
+
+  .clock-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .clock-city {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .clock-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-dot.day { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,0.6); }
+  .status-dot.night { background: #818cf8; box-shadow: 0 0 6px rgba(129,140,248,0.6); }
+
+  .clock-time {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .clock-ampm {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .clock-date {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.4;
+  }
+
+  .clock-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 4px 0;
+  }
+
+  .clock-offset {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.02em;
+  }
+
+  /* FOOTER */
+  .page-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 24px 0;
+    margin-top: auto;
+  }
+
+  .page-footer .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-tick {
+    font-size: 13px;
+    color: rgba(255,255,255,0.25);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 1100px) {
+    .clocks { grid-template-columns: repeat(2, 1fr); }
+    .clock-time { font-size: 48px; }
+    .page-heading { font-size: 56px; }
+  }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 24px; }
+    .wrap { padding: 0 24px; }
+    .clocks { grid-template-columns: 1fr; }
+    .clock-time { font-size: 52px; }
+    .page-heading { font-size: 40px; }
+    .page-header { padding: 64px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+
+<div class="nav-wrapper" id="nav-wrapper">
+  <nav>
+    <a href="/index.html" aria-label="Home"><img class="logo" src="/assets/byjaden.svg" alt="byJaden logo" /></a>
+    <a href="/index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+      Back
+    </a>
+  </nav>
+</div>
+
+<main>
+  <div class="page-header">
+    <div class="wrap">
+      <p class="page-eyebrow">World Clock</p>
+      <h1 class="page-heading">What time is it?</h1>
+    </div>
+  </div>
+
+  <div class="clocks wrap">
+    <div class="clock-card">
+      <div class="clock-top">
+        <span class="clock-city">Miami, FL</span>
+        <span class="clock-status" id="status-miami"></span>
+      </div>
+      <div class="clock-time" id="time-miami"></div>
+      <span class="clock-date" id="date-miami"></span>
+      <div class="clock-divider"></div>
+      <span class="clock-offset" id="offset-miami"></span>
+    </div>
+
+    <div class="clock-card">
+      <div class="clock-top">
+        <span class="clock-city">Toronto, ON</span>
+        <span class="clock-status" id="status-toronto"></span>
+      </div>
+      <div class="clock-time" id="time-toronto"></div>
+      <span class="clock-date" id="date-toronto"></span>
+      <div class="clock-divider"></div>
+      <span class="clock-offset" id="offset-toronto"></span>
+    </div>
+
+    <div class="clock-card">
+      <div class="clock-top">
+        <span class="clock-city">Zurich, CH</span>
+        <span class="clock-status" id="status-zurich"></span>
+      </div>
+      <div class="clock-time" id="time-zurich"></div>
+      <span class="clock-date" id="date-zurich"></span>
+      <div class="clock-divider"></div>
+      <span class="clock-offset" id="offset-zurich"></span>
+    </div>
+
+    <div class="clock-card">
+      <div class="clock-top">
+        <span class="clock-city">Jakarta, ID</span>
+        <span class="clock-status" id="status-jakarta"></span>
+      </div>
+      <div class="clock-time" id="time-jakarta"></div>
+      <span class="clock-date" id="date-jakarta"></span>
+      <div class="clock-divider"></div>
+      <span class="clock-offset" id="offset-jakarta"></span>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="wrap">
+      <span class="footer-note">Updates every second</span>
+      <span class="footer-tick" id="tick"></span>
+    </div>
+  </div>
+</main>
+
+<script>
+  const zones = [
+    { id: 'miami',   tz: 'America/New_York',  label: 'ET'  },
+    { id: 'toronto', tz: 'America/Toronto',    label: 'ET'  },
+    { id: 'zurich',  tz: 'Europe/Zurich',      label: 'CET' },
+    { id: 'jakarta', tz: 'Asia/Jakarta',       label: 'WIB' },
+  ];
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function getOffset(tz) {
+    const now = new Date();
+    const here = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+    const utc  = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
+    const diff = (here - utc) / 3600000;
+    const sign = diff >= 0 ? '+' : '-';
+    const abs  = Math.abs(diff);
+    const hrs  = Math.floor(abs);
+    const mins = Math.round((abs - hrs) * 60);
+    return `UTC${sign}${hrs}${mins ? ':' + pad(mins) : ''}`;
+  }
+
+  function isDaytime(hour) { return hour >= 6 && hour < 20; }
+
+  function tick() {
+    const now = new Date();
+
+    zones.forEach(({ id, tz, label }) => {
+      const local = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+      const h24   = local.getHours();
+      const h12   = h24 % 12 || 12;
+      const min   = pad(local.getMinutes());
+      const sec   = pad(local.getSeconds());
+      const ampm  = h24 < 12 ? 'AM' : 'PM';
+      const day   = local.toLocaleDateString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric', timeZone: tz
+      });
+      const daytime = isDaytime(h24);
+
+      document.getElementById(`time-${id}`).innerHTML =
+        `${h12}:${min}<span class="clock-ampm">${ampm}</span>`;
+
+      document.getElementById(`date-${id}`).textContent = day;
+
+      document.getElementById(`status-${id}`).innerHTML =
+        `<span class="status-dot ${daytime ? 'day' : 'night'}"></span>${daytime ? 'Day' : 'Night'}`;
+
+      document.getElementById(`offset-${id}`).textContent =
+        `${getOffset(tz)} · ${label}`;
+    });
+
+    const h = pad(now.getUTCHours());
+    const m = pad(now.getUTCMinutes());
+    const s = pad(now.getUTCSeconds());
+    document.getElementById('tick').textContent = `UTC ${h}:${m}:${s}`;
+  }
+
+  // Nav scroll state
+  const nav = document.getElementById('nav-wrapper');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
