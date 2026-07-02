@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client Portal | Ocean Development</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --deep1: #003095;
+    --deep2: #0050F8;
+    --deep3: #5FBDF7;
+    --line: rgba(255,255,255,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(180deg, var(--deep1) 0%, var(--deep1) 28%, var(--deep2) 55%, var(--deep3) 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 23% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 35% 22%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 18%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 9%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 6%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 42%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 38%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 70% 32%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 91% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 8% 52%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 58%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 33% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 63% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 87% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 96% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 68%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 72%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 62%, rgba(255,255,255,0.2) 0%, transparent 100%);
+  }
+
+  /* ============================================================
+     LOGO
+  ============================================================ */
+  .site-logo {
+    position: fixed;
+    top: 32px;
+    left: 40px;
+    z-index: 2;
+  }
+
+  .site-logo img {
+    height: 24px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  .back-link {
+    position: fixed;
+    top: 32px;
+    right: 40px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+  /* ============================================================
+     CENTER STAGE
+  ============================================================ */
+  .stage {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 24px 60px;
+  }
+
+  .glass-card {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    padding: 40px 36px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .form-eyebrow {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .form-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  /* tab switcher */
+  .tabs {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 26px;
+  }
+
+  .tab-indicator {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: #fff;
+    border-radius: 7px;
+    transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .tabs.signup .tab-indicator { transform: translateX(100%); }
+
+  .tab-btn {
+    position: relative;
+    z-index: 1;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .tab-btn.active { color: #111; }
+
+  /* forms */
+  .panel-form { display: flex; flex-direction: column; gap: 14px; }
+  .panel-form.hidden { display: none; }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 6px;
+  }
+
+  .field input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 9px;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .field input::placeholder { color: rgba(255,255,255,0.35); }
+
+  .field input:focus {
+    border-color: rgba(255,255,255,0.4);
+    background: rgba(255, 255, 255, 0.13);
+  }
+
+  .name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .form-error {
+    display: none;
+    font-size: 13px;
+    color: #ff8a8a;
+    margin-top: -4px;
+  }
+
+  .form-error.visible { display: block; }
+
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .field-row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -2px;
+  }
+
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .remember input { accent-color: #fff; }
+
+  .forgot-link {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .forgot-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+  .submit-btn {
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 9px;
+    padding: 13px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+  }
+
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .google-btn:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.13); }
+  .google-btn svg { width: 16px; height: 16px; }
+
+  .switch-line {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 26px;
+  }
+
+  .switch-line button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+
+  .switch-line button:hover { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 460px) {
+    .site-logo { top: 22px; left: 24px; font-size: 19px; }
+    .glass-card { padding: 32px 24px; }
+    .stage { padding: 90px 16px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="https://byjaden.com" class="site-logo" aria-label="Home"><img src="/assets/byjaden.svg" alt="byJaden logo" /></a>
+<a href="https://byjaden.com" class="back-link">&larr; Back to byjaden</a>
+
+<div class="stage">
+  <div class="glass-card">
+
+    <p class="form-eyebrow" id="form-eyebrow">Welcome back</p>
+    <h2 class="form-heading" id="form-heading">Log in to your portal</h2>
+
+    <div class="tabs" id="tabs">
+      <div class="tab-indicator"></div>
+      <button class="tab-btn active" id="tab-login">Log In</button>
+      <button class="tab-btn" id="tab-signup">Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form class="panel-form" id="login-form">
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="you@company.com" required />
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter your password" required />
+      </div>
+      <div class="field-row-between">
+        <label class="remember">
+          <input type="checkbox" />
+          Remember me
+        </label>
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+      <p class="form-error" id="login-error"></p>
+      <button type="submit" class="submit-btn" id="login-submit">Log In</button>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form class="panel-form hidden" id="signup-form">
+      <div class="name-row">
+        <div class="field">
+          <label for="signup-first">First name</label>
+          <input type="text" id="signup-first" placeholder="Jane" required />
+        </div>
+        <div class="field">
+          <label for="signup-last">Last name</label>
+          <input type="text" id="signup-last" placeholder="Doe" required />
+        </div>
+      </div>
+      <div class="field">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" placeholder="you@company.com" required />
+      </div>
+      <div class="field">
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" placeholder="Create a password" required minlength="8" />
+      </div>
+      <p class="form-error" id="signup-error"></p>
+      <button type="submit" class="submit-btn" id="signup-submit">Create Account</button>
+    </form>
+
+    <div class="divider">or continue with</div>
+
+    <button class="google-btn" type="button">
+      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.4 0 5.7 1.5 7 2.7l5.1-5C33 3.9 29 2 24 2 14.8 2 7.1 7.7 3.9 15.6l6 4.6C11.5 14.1 17.2 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-2.8-.4-4H24v7.6h12.7c-.3 2.1-1.6 5.2-4.6 7.3l5.9 4.6c3.5-3.2 5.5-8 5.5-15.5z"/><path fill="#FBBC05" d="M9.9 20.2c-.6 1.7-.9 3.5-.9 5.3s.3 3.6.9 5.3l-6-4.6C3.3 24.4 3 23.2 3 22s.3-2.4.9-3.4z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-1.9 14.5-5.3l-5.9-4.6c-2 1.4-4.7 2.4-8.6 2.4-6.8 0-12.5-4.6-14.6-10.8l-6 4.6C7.1 40.3 14.8 46 24 46z"/></svg>
+      Google
+    </button>
+
+    <p class="switch-line" id="switch-line">
+      Don't have an account? <button type="button" id="switch-btn">Create one</button>
+    </p>
+
+  </div>
+</div>
+
+<script>
+  const tabs = document.getElementById('tabs');
+  const tabLogin = document.getElementById('tab-login');
+  const tabSignup = document.getElementById('tab-signup');
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+  const formHeading = document.getElementById('form-heading');
+  const formEyebrow = document.getElementById('form-eyebrow');
+  const switchLine = document.getElementById('switch-line');
+
+  function showLogin() {
+    tabs.classList.remove('signup');
+    tabLogin.classList.add('active');
+    tabSignup.classList.remove('active');
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+    formEyebrow.textContent = 'Welcome back';
+    formHeading.textContent = 'Log in to your portal';
+    switchLine.innerHTML = "Don't have an account? <button type=\"button\" id=\"switch-btn\">Create one</button>";
+    document.getElementById('switch-btn').addEventListener('click', showSignup);
+  }
+
+  function showSignup() {
+    tabs.classList.add('signup');
+    tabSignup.classList.add('active');
+    tabLogin.classList.remove('active');
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+    formEyebrow.textContent = 'Get started';
+    formHeading.textContent = 'Create your account';
+    switchLine.innerHTML = "Already have an account? <button type=\"button\" id=\"switch-btn\">Log in</button>";
+    document.getElementById('switch-btn').addEventListener('click', showLogin);
+  }
+
+  tabLogin.addEventListener('click', showLogin);
+  tabSignup.addEventListener('click', showSignup);
+  document.getElementById('switch-btn').addEventListener('click', showSignup);
+
+  async function submitForm({ url, body, errorEl, submitBtn }) {
+    errorEl.classList.remove('visible');
+    errorEl.textContent = '';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorEl.textContent = data.error || 'Something went wrong. Please try again.';
+        errorEl.classList.add('visible');
+        submitBtn.disabled = false;
+        return;
+      }
+
+      window.location.href = 'dashboard.html';
+    } catch {
+      errorEl.textContent = 'Network error. Please try again.';
+      errorEl.classList.add('visible');
+      submitBtn.disabled = false;
+    }
+  }
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitForm({
+      url: '/api/auth/login',
+      body: {
+        email: document.getElementById('login-email').value,
+        password: document.getElementById('login-password').value,
+      },
+      errorEl: document.getElementById('login-error'),
+      submitBtn: document.getElementById('login-submit'),
+    });
+  });
+
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitForm({
+      url: '/api/auth/signup',
+      body: {
+        firstName: document.getElementById('signup-first').value,
+        lastName: document.getElementById('signup-last').value,
+        email: document.getElementById('signup-email').value,
+        password: document.getElementById('signup-password').value,
+      },
+      errorEl: document.getElementById('signup-error'),
+      submitBtn: document.getElementById('signup-submit'),
+    });
+  });
+</script>
+
+</body>
+</html>

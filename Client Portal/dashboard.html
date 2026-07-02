@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client Portal | Ocean Development</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --deep1: #003095;
+    --deep2: #0050F8;
+    --deep3: #5FBDF7;
+    --line: rgba(255,255,255,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(180deg, var(--deep1) 0%, var(--deep1) 28%, var(--deep2) 55%, var(--deep3) 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 23% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 35% 22%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 18%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 9%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 6%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 42%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 38%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 70% 32%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 91% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 8% 52%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 58%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 33% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 63% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 87% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 96% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 68%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 72%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 62%, rgba(255,255,255,0.2) 0%, transparent 100%);
+  }
+
+  .site-logo {
+    position: fixed;
+    top: 32px;
+    left: 40px;
+    z-index: 2;
+  }
+
+  .site-logo img {
+    height: 24px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  .back-link {
+    position: fixed;
+    top: 32px;
+    right: 40px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+  .stage {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 24px 60px;
+  }
+
+  .glass-card {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    padding: 40px 36px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .form-eyebrow {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+
+  .form-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .welcome-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
+  }
+
+  .submit-btn {
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 9px;
+    padding: 13px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  @media (max-width: 460px) {
+    .site-logo { top: 22px; left: 24px; }
+    .back-link { top: 22px; right: 24px; }
+    .glass-card { padding: 32px 24px; }
+    .stage { padding: 90px 16px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="https://byjaden.com" class="site-logo" aria-label="Home"><img src="/assets/byjaden.svg" alt="byJaden logo" /></a>
+<button class="back-link" id="logout-btn">Log out</button>
+
+<div class="stage">
+  <div class="glass-card">
+    <p class="form-eyebrow">Client Portal</p>
+    <h2 class="form-heading" id="welcome-heading">Welcome</h2>
+    <p class="welcome-text" id="welcome-text">Loading your account&hellip;</p>
+    <button class="submit-btn" id="logout-btn-2">Log out</button>
+  </div>
+</div>
+
+<script>
+  async function loadUser() {
+    try {
+      const res = await fetch('/api/auth/me');
+      if (!res.ok) {
+        window.location.href = 'login.html';
+        return;
+      }
+      const { user } = await res.json();
+      document.getElementById('welcome-heading').textContent = `Welcome, ${user.firstName}`;
+      document.getElementById('welcome-text').textContent = user.email;
+    } catch {
+      window.location.href = 'login.html';
+    }
+  }
+
+  async function logout() {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = 'login.html';
+  }
+
+  document.getElementById('logout-btn').addEventListener('click', logout);
+  document.getElementById('logout-btn-2').addEventListener('click', logout);
+
+  loadUser();
+</script>
+
+</body>
+</html>
