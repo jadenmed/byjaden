@@ -58,6 +58,7 @@
   .nav-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     background: none;
     border: none;
@@ -74,6 +75,17 @@
 
   .nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
   .nav-item.active { background: var(--accent-soft); color: var(--accent); }
+
+  .nav-count {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.08);
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  .nav-item.active .nav-count { color: var(--accent); background: rgba(74,139,250,0.18); }
 
   .sidebar-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
 
@@ -217,45 +229,6 @@
   .form-success { display: none; font-size: 12px; color: #8affb0; margin-top: 4px; }
   .form-success.visible { display: block; }
 
-  .projects-list { display: flex; flex-direction: column; gap: 6px; }
-
-  .projects-table-head {
-    display: grid;
-    grid-template-columns: 2fr 1.6fr 1fr 1.4fr 90px;
-    gap: 12px;
-    padding: 0 16px 8px;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-faint);
-  }
-
-  @media (max-width: 700px) {
-    .projects-table-head { display: none; }
-  }
-
-  .project-row {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .project-row-main {
-    display: grid;
-    grid-template-columns: 2fr 1.6fr 1fr 1.4fr 90px;
-    gap: 12px;
-    align-items: center;
-    padding: 13px 16px;
-  }
-
-  @media (max-width: 700px) {
-    .project-row-main { grid-template-columns: 1fr; gap: 6px; }
-  }
-
-  .cell-name { font-size: 14px; font-weight: 500; color: var(--text); }
-  .cell-client { font-size: 12px; color: var(--text-dim); }
-
   .badge {
     display: inline-block;
     width: fit-content;
@@ -272,29 +245,139 @@
   .badge.status-completed { color: #8affb0; background: rgba(138,255,176,0.12); }
   .badge.status-onhold { color: #ff8a8a; background: rgba(255,138,138,0.12); }
 
-  .row-toggle {
-    justify-self: end;
+  .kanban-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    align-items: start;
+  }
+
+  .kanban-column {
     background: var(--panel-alt);
     border: 1px solid var(--line);
-    color: var(--text);
-    border-radius: 6px;
-    padding: 6px 12px;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .kanban-column-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px 8px;
     font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+
+  .kanban-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); flex: 0 0 auto; }
+  .kanban-dot.status-inprogress { background: #7fb2ff; }
+  .kanban-dot.status-review { background: #ffd68a; }
+  .kanban-dot.status-completed { background: #8affb0; }
+  .kanban-dot.status-onhold { background: #ff8a8a; }
+
+  .kanban-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-faint);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .kanban-empty { padding: 4px 6px; }
+
+  .kanban-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
+    transition: border-color 0.15s ease;
   }
 
-  .row-toggle:hover { background: rgba(255,255,255,0.08); }
+  .kanban-card:hover { border-color: rgba(255,255,255,0.25); }
 
-  @media (max-width: 700px) {
-    .row-toggle { justify-self: start; margin-top: 6px; }
+  .kanban-card-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+
+  .kanban-card-client { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+
+  .client-avatar {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
   }
 
-  .project-row-detail {
-    padding: 4px 16px 18px;
-    border-top: 1px solid var(--line);
-    margin-top: 4px;
+  .kanban-progress-track {
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+    margin-bottom: 8px;
   }
+
+  .kanban-progress-fill { height: 100%; background: var(--accent); border-radius: 999px; }
+
+  .kanban-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .kanban-progress-pct { font-size: 11px; color: var(--text-faint); }
+
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 440px;
+    max-width: 92vw;
+    background: var(--panel);
+    border-left: 1px solid var(--line);
+    z-index: 51;
+    padding: 24px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+  }
+
+  .drawer.open { transform: translateX(0); }
+
+  .drawer-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .drawer-header .card-heading { margin-bottom: 0; }
+
+  .drawer-close {
+    background: var(--panel-alt);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .drawer-close:hover { color: var(--text); background: rgba(255,255,255,0.08); }
 
   .project-name-input {
     font-size: 14px;
@@ -387,6 +470,14 @@
 
   .search-field { margin-bottom: 0; }
 
+  .search-field input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='7' cy='7' r='5' fill='none' stroke='%23ffffff' stroke-opacity='0.4' stroke-width='1.4'/%3E%3Cline x1='11' y1='11' x2='15' y2='15' stroke='%23ffffff' stroke-opacity='0.4' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+    background-size: 14px;
+    padding-left: 34px;
+  }
+
   .empty-state { font-size: 13px; color: var(--text-faint); }
 
   .todo-form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
@@ -435,7 +526,7 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    background: var(--panel);
+    background: var(--panel-alt);
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 10px 14px;
@@ -490,6 +581,7 @@
     .sidebar-nav { flex-direction: row; }
     .sidebar-footer { margin-top: 0; margin-left: auto; padding-top: 0; border-top: none; }
     .app-main { padding: 24px 20px 40px; }
+    .kanban-board { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -502,8 +594,8 @@
       <span>byJaden</span>
     </a>
     <nav class="sidebar-nav" id="sidebar-nav">
-      <button type="button" class="nav-item active" data-section="projects">Projects</button>
-      <button type="button" class="nav-item" data-section="todos">To-dos</button>
+      <button type="button" class="nav-item active" data-section="projects">Projects <span class="nav-count" id="nav-count-projects">0</span></button>
+      <button type="button" class="nav-item" data-section="todos">To-dos <span class="nav-count" id="nav-count-todos">0</span></button>
       <button type="button" class="nav-item" data-section="activity">Activity</button>
     </nav>
     <div class="sidebar-footer">
@@ -549,10 +641,7 @@
         </form>
       </div>
 
-      <div class="projects-table-head">
-        <span>Project</span><span>Client</span><span>Status</span><span>Phase</span><span></span>
-      </div>
-      <div class="projects-list" id="admin-projects-list">
+      <div class="kanban-board" id="kanban-board">
         <p class="empty-state">Loading&hellip;</p>
       </div>
     </section>
@@ -594,11 +683,20 @@
   </main>
 </div>
 
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<aside class="drawer" id="project-drawer">
+  <div class="drawer-header">
+    <p class="card-heading" id="drawer-title">Project</p>
+    <button type="button" class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
+  </div>
+  <div id="drawer-body"></div>
+</aside>
+
 <script>
   let clients = [];
   let projects = [];
   let todos = [];
-  const expandedIds = new Set();
+  let currentDrawerProjectId = null;
 
   const PHASES = [
     { value: 25, label: 'Discovery & Wireframe' },
@@ -606,6 +704,8 @@
     { value: 75, label: 'Development' },
     { value: 100, label: 'Complete' },
   ];
+
+  const STATUS_COLUMNS = ['In Progress', 'Review', 'Completed', 'On Hold'];
 
   function phaseForProgress(progress) {
     return PHASES.find((phase) => phase.value >= (progress || 0)) || PHASES[PHASES.length - 1];
@@ -672,10 +772,10 @@
   }
 
   async function loadProjects() {
-    const list = document.getElementById('admin-projects-list');
+    const board = document.getElementById('kanban-board');
     const res = await fetch('/api/admin/projects');
     if (!res.ok) {
-      list.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>';
+      board.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>';
       return;
     }
     const data = await res.json();
@@ -683,6 +783,10 @@
     renderStats();
     renderProjects();
     populateTodoProjectSelect();
+    if (currentDrawerProjectId != null) {
+      const p = projects.find((x) => x.id === currentDrawerProjectId);
+      if (p) renderDrawerBody(p); else closeDrawer();
+    }
     await loadActivity();
   }
 
@@ -712,10 +816,33 @@
         <div class="stat-label">${s.label}</div>
       </div>
     `).join('');
+
+    document.getElementById('nav-count-projects').textContent = total;
+  }
+
+  function clientInitials(client) {
+    return `${(client.firstName || '')[0] || ''}${(client.lastName || '')[0] || ''}`.toUpperCase();
+  }
+
+  function renderKanbanCard(p) {
+    return `
+      <div class="kanban-card" data-project-id="${p.id}">
+        <div class="kanban-card-name">${escapeHtml(p.name)}</div>
+        <div class="kanban-card-client">
+          <span class="client-avatar">${clientInitials(p.client)}</span>
+          ${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)}
+        </div>
+        <div class="kanban-progress-track"><div class="kanban-progress-fill" style="width: ${p.progress || 0}%;"></div></div>
+        <div class="kanban-card-footer">
+          <span class="badge">${phaseForProgress(p.progress).label}</span>
+          <span class="kanban-progress-pct">${p.progress || 0}%</span>
+        </div>
+      </div>
+    `;
   }
 
   function renderProjects() {
-    const list = document.getElementById('admin-projects-list');
+    const board = document.getElementById('kanban-board');
     const query = (document.getElementById('project-search').value || '').trim().toLowerCase();
     const filtered = query
       ? projects.filter((p) => {
@@ -724,218 +851,244 @@
         })
       : projects;
 
-    if (filtered.length === 0) {
-      list.innerHTML = `<p class="empty-state">${projects.length === 0 ? 'No projects yet.' : 'No projects match your search.'}</p>`;
+    if (projects.length === 0) {
+      board.innerHTML = '<p class="empty-state">No projects yet.</p>';
       return;
     }
 
-    list.innerHTML = filtered.map((p) => `
-      <div class="project-row" data-project-id="${p.id}">
-        <div class="project-row-main">
-          <span class="cell-name">${escapeHtml(p.name)}</span>
-          <span class="cell-client">${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)}</span>
-          <span class="badge ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
-          <span class="badge">${phaseForProgress(p.progress).label}</span>
-          <button type="button" class="row-toggle">${expandedIds.has(p.id) ? 'Close' : 'Manage'}</button>
+    const columns = [...STATUS_COLUMNS];
+    const otherStatuses = [...new Set(filtered.map((p) => p.status).filter((s) => !STATUS_COLUMNS.includes(s)))];
+    columns.push(...otherStatuses);
+
+    board.innerHTML = columns.map((status) => {
+      const colProjects = filtered.filter((p) => p.status === status);
+      return `
+        <div class="kanban-column">
+          <div class="kanban-column-head">
+            <span class="kanban-dot ${statusClass(status)}"></span>
+            <span>${escapeHtml(status)}</span>
+            <span class="kanban-count">${colProjects.length}</span>
+          </div>
+          ${colProjects.length === 0
+            ? '<p class="empty-state kanban-empty">No projects.</p>'
+            : colProjects.map((p) => renderKanbanCard(p)).join('')}
         </div>
-        <div class="project-row-detail" style="display: ${expandedIds.has(p.id) ? 'block' : 'none'};">
-          <div class="field">
-            <label>Project name</label>
-            <input type="text" class="project-name-input" value="${escapeHtml(p.name)}" />
-          </div>
-          <div class="status-row">
-            <select class="status-select">
-              ${['In Progress', 'Review', 'Completed', 'On Hold'].map((s) =>
-                `<option value="${s}" ${s === p.status ? 'selected' : ''}>${s}</option>`
-              ).join('')}
-            </select>
-            <select class="phase-select" title="Phase">
-              ${PHASES.map((phase) =>
-                `<option value="${phase.value}" ${phase.value === phaseForProgress(p.progress).value ? 'selected' : ''}>${phase.label}</option>`
-              ).join('')}
-            </select>
-          </div>
-          <div class="project-actions">
-            <button type="button" class="status-save-btn save-project-btn">Save changes</button>
-            <button type="button" class="icon-btn danger delete-project-btn">Delete project</button>
-          </div>
-          <div class="updates-list">
-            ${p.updates.length === 0
-              ? '<p class="empty-state">No updates yet.</p>'
-              : p.updates.map((u) => `
-                  <div class="update-item" data-update-id="${u.id}">
-                    <div class="update-view">
-                      <strong>${escapeHtml(u.title)}</strong>
-                      ${u.body ? ` &mdash; ${escapeHtml(u.body)}` : ''}
-                      <div class="update-date">${new Date(u.createdAt).toLocaleDateString()}</div>
-                      <div class="update-actions">
-                        <button type="button" class="edit-update-btn">Edit</button>
-                        <button type="button" class="delete-update-btn danger">Delete</button>
-                      </div>
-                    </div>
-                    <div class="update-edit" style="display: none;">
-                      <input type="text" class="edit-update-title" value="${escapeHtml(u.title)}" />
-                      <input type="text" class="edit-update-body" value="${escapeHtml(u.body || '')}" placeholder="Details (optional)" />
-                      <div class="update-edit-actions">
-                        <button type="button" class="status-save-btn save-update-btn">Save</button>
-                        <button type="button" class="icon-btn cancel-update-btn">Cancel</button>
-                      </div>
-                    </div>
+      `;
+    }).join('');
+
+    board.querySelectorAll('.kanban-card').forEach((card) => {
+      const projectId = Number(card.dataset.projectId);
+      card.addEventListener('click', () => openProjectDrawer(projectId));
+    });
+  }
+
+  function openProjectDrawer(projectId) {
+    const p = projects.find((x) => x.id === projectId);
+    if (!p) return;
+    currentDrawerProjectId = projectId;
+    renderDrawerBody(p);
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('project-drawer').classList.add('open');
+  }
+
+  function closeDrawer() {
+    currentDrawerProjectId = null;
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.getElementById('project-drawer').classList.remove('open');
+  }
+
+  document.getElementById('drawer-overlay').addEventListener('click', closeDrawer);
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+
+  function renderDrawerBody(p) {
+    document.getElementById('drawer-title').textContent = p.name;
+    const body = document.getElementById('drawer-body');
+    const projectId = p.id;
+
+    body.innerHTML = `
+      <div class="field">
+        <label>Project name</label>
+        <input type="text" class="project-name-input" value="${escapeHtml(p.name)}" />
+      </div>
+      <div class="status-row">
+        <select class="status-select">
+          ${['In Progress', 'Review', 'Completed', 'On Hold'].map((s) =>
+            `<option value="${s}" ${s === p.status ? 'selected' : ''}>${s}</option>`
+          ).join('')}
+        </select>
+        <select class="phase-select" title="Phase">
+          ${PHASES.map((phase) =>
+            `<option value="${phase.value}" ${phase.value === phaseForProgress(p.progress).value ? 'selected' : ''}>${phase.label}</option>`
+          ).join('')}
+        </select>
+      </div>
+      <div class="project-actions">
+        <button type="button" class="status-save-btn save-project-btn">Save changes</button>
+        <button type="button" class="icon-btn danger delete-project-btn">Delete project</button>
+      </div>
+      <div class="updates-list">
+        ${p.updates.length === 0
+          ? '<p class="empty-state">No updates yet.</p>'
+          : p.updates.map((u) => `
+              <div class="update-item" data-update-id="${u.id}">
+                <div class="update-view">
+                  <strong>${escapeHtml(u.title)}</strong>
+                  ${u.body ? ` &mdash; ${escapeHtml(u.body)}` : ''}
+                  <div class="update-date">${new Date(u.createdAt).toLocaleDateString()}</div>
+                  <div class="update-actions">
+                    <button type="button" class="edit-update-btn">Edit</button>
+                    <button type="button" class="delete-update-btn danger">Delete</button>
                   </div>
-                `).join('')}
-          </div>
-          <div class="update-form">
-            <div class="update-form-row">
-              <input type="text" class="update-title-input" placeholder="Update title" />
-            </div>
-            <div class="update-form-row">
-              <input type="text" class="update-body-input" placeholder="Details (optional)" />
-              <button type="button" class="submit-btn post-update-btn">Post update</button>
-            </div>
-          </div>
-          <div class="files-section">
-            <p class="files-heading">Files</p>
-            <div class="files-list">
-              ${(p.attachments || []).length === 0
-                ? '<p class="empty-state">No files yet.</p>'
-                : p.attachments.map((a) => `
-                    <div class="file-row" data-attachment-id="${a.id}">
-                      <a href="${a.url}" target="_blank" rel="noopener">${escapeHtml(a.filename)}</a>
-                      <button type="button" class="file-delete-btn">Delete</button>
-                    </div>
-                  `).join('')}
-            </div>
-            <input type="file" class="file-upload-input" style="display: none;" />
-            <button type="button" class="status-save-btn upload-file-btn">Upload file</button>
-          </div>
+                </div>
+                <div class="update-edit" style="display: none;">
+                  <input type="text" class="edit-update-title" value="${escapeHtml(u.title)}" />
+                  <input type="text" class="edit-update-body" value="${escapeHtml(u.body || '')}" placeholder="Details (optional)" />
+                  <div class="update-edit-actions">
+                    <button type="button" class="status-save-btn save-update-btn">Save</button>
+                    <button type="button" class="icon-btn cancel-update-btn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+      </div>
+      <div class="update-form">
+        <div class="update-form-row">
+          <input type="text" class="update-title-input" placeholder="Update title" />
+        </div>
+        <div class="update-form-row">
+          <input type="text" class="update-body-input" placeholder="Details (optional)" />
+          <button type="button" class="submit-btn post-update-btn">Post update</button>
         </div>
       </div>
-    `).join('');
+      <div class="files-section">
+        <p class="files-heading">Files</p>
+        <div class="files-list">
+          ${(p.attachments || []).length === 0
+            ? '<p class="empty-state">No files yet.</p>'
+            : p.attachments.map((a) => `
+                <div class="file-row" data-attachment-id="${a.id}">
+                  <a href="${a.url}" target="_blank" rel="noopener">${escapeHtml(a.filename)}</a>
+                  <button type="button" class="file-delete-btn">Delete</button>
+                </div>
+              `).join('')}
+        </div>
+        <input type="file" class="file-upload-input" style="display: none;" />
+        <button type="button" class="status-save-btn upload-file-btn">Upload file</button>
+      </div>
+    `;
 
-    list.querySelectorAll('.project-row').forEach((card) => {
-      const projectId = Number(card.dataset.projectId);
-      const toggleBtn = card.querySelector('.row-toggle');
-      const detailEl = card.querySelector('.project-row-detail');
-
-      toggleBtn.addEventListener('click', () => {
-        const isOpen = detailEl.style.display !== 'none';
-        detailEl.style.display = isOpen ? 'none' : 'block';
-        toggleBtn.textContent = isOpen ? 'Manage' : 'Close';
-        if (isOpen) expandedIds.delete(projectId); else expandedIds.add(projectId);
+    body.querySelector('.save-project-btn').addEventListener('click', async () => {
+      const name = body.querySelector('.project-name-input').value;
+      const status = body.querySelector('.status-select').value;
+      const progress = body.querySelector('.phase-select').value;
+      await fetch('/api/admin/projects', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projectId, name, status, progress }),
       });
+      await loadProjects();
+    });
 
-      card.querySelector('.save-project-btn').addEventListener('click', async () => {
-        const name = card.querySelector('.project-name-input').value;
-        const status = card.querySelector('.status-select').value;
-        const progress = card.querySelector('.phase-select').value;
-        await fetch('/api/admin/projects', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ projectId, name, status, progress }),
-        });
+    body.querySelector('.delete-project-btn').addEventListener('click', async () => {
+      if (!confirm('Delete this project and all its updates?')) return;
+      await fetch('/api/admin/projects', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projectId }),
+      });
+      closeDrawer();
+      await loadProjects();
+    });
+
+    body.querySelector('.post-update-btn').addEventListener('click', async () => {
+      const titleInput = body.querySelector('.update-title-input');
+      const bodyInput = body.querySelector('.update-body-input');
+      const title = titleInput.value.trim();
+      if (!title) return;
+      const res = await fetch('/api/admin/updates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projectId, title, body: bodyInput.value.trim() }),
+      });
+      if (res.ok) {
         await loadProjects();
+      }
+    });
+
+    body.querySelectorAll('.update-item').forEach((item) => {
+      const updateId = Number(item.dataset.updateId);
+      const viewEl = item.querySelector('.update-view');
+      const editEl = item.querySelector('.update-edit');
+
+      item.querySelector('.edit-update-btn').addEventListener('click', () => {
+        viewEl.style.display = 'none';
+        editEl.style.display = 'flex';
       });
 
-      card.querySelector('.delete-project-btn').addEventListener('click', async () => {
-        if (!confirm('Delete this project and all its updates?')) return;
-        await fetch('/api/admin/projects', {
+      item.querySelector('.cancel-update-btn').addEventListener('click', () => {
+        editEl.style.display = 'none';
+        viewEl.style.display = 'block';
+      });
+
+      item.querySelector('.delete-update-btn').addEventListener('click', async () => {
+        if (!confirm('Delete this update?')) return;
+        await fetch('/api/admin/updates', {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ projectId }),
+          body: JSON.stringify({ updateId }),
         });
         await loadProjects();
       });
 
-      card.querySelector('.post-update-btn').addEventListener('click', async () => {
-        const titleInput = card.querySelector('.update-title-input');
-        const bodyInput = card.querySelector('.update-body-input');
-        const title = titleInput.value.trim();
+      item.querySelector('.save-update-btn').addEventListener('click', async () => {
+        const title = item.querySelector('.edit-update-title').value.trim();
+        const updateBody = item.querySelector('.edit-update-body').value.trim();
         if (!title) return;
-        const res = await fetch('/api/admin/updates', {
-          method: 'POST',
+        await fetch('/api/admin/updates', {
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ projectId, title, body: bodyInput.value.trim() }),
+          body: JSON.stringify({ updateId, title, body: updateBody }),
         });
-        if (res.ok) {
-          await loadProjects();
-        }
-      });
-
-      card.querySelectorAll('.update-item').forEach((item) => {
-        const updateId = Number(item.dataset.updateId);
-        const viewEl = item.querySelector('.update-view');
-        const editEl = item.querySelector('.update-edit');
-
-        item.querySelector('.edit-update-btn').addEventListener('click', () => {
-          viewEl.style.display = 'none';
-          editEl.style.display = 'flex';
-        });
-
-        item.querySelector('.cancel-update-btn').addEventListener('click', () => {
-          editEl.style.display = 'none';
-          viewEl.style.display = 'block';
-        });
-
-        item.querySelector('.delete-update-btn').addEventListener('click', async () => {
-          if (!confirm('Delete this update?')) return;
-          await fetch('/api/admin/updates', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ updateId }),
-          });
-          await loadProjects();
-        });
-
-        item.querySelector('.save-update-btn').addEventListener('click', async () => {
-          const title = item.querySelector('.edit-update-title').value.trim();
-          const body = item.querySelector('.edit-update-body').value.trim();
-          if (!title) return;
-          await fetch('/api/admin/updates', {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ updateId, title, body }),
-          });
-          await loadProjects();
-        });
-      });
-
-      const fileInput = card.querySelector('.file-upload-input');
-      card.querySelector('.upload-file-btn').addEventListener('click', () => fileInput.click());
-
-      fileInput.addEventListener('change', async () => {
-        const file = fileInput.files[0];
-        if (!file) return;
-        if (file.size > 4 * 1024 * 1024) {
-          alert('File must be under 4MB.');
-          fileInput.value = '';
-          return;
-        }
-        const fileBase64 = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result.split(',')[1]);
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
-        await fetch('/api/admin/attachments', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ projectId, filename: file.name, fileBase64 }),
-        });
-        fileInput.value = '';
         await loadProjects();
       });
+    });
 
-      card.querySelectorAll('.file-row').forEach((row) => {
-        const attachmentId = Number(row.dataset.attachmentId);
-        row.querySelector('.file-delete-btn').addEventListener('click', async () => {
-          if (!confirm('Delete this file?')) return;
-          await fetch('/api/admin/attachments', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ attachmentId }),
-          });
-          await loadProjects();
+    const fileInput = body.querySelector('.file-upload-input');
+    body.querySelector('.upload-file-btn').addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      if (file.size > 4 * 1024 * 1024) {
+        alert('File must be under 4MB.');
+        fileInput.value = '';
+        return;
+      }
+      const fileBase64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+      await fetch('/api/admin/attachments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projectId, filename: file.name, fileBase64 }),
+      });
+      fileInput.value = '';
+      await loadProjects();
+    });
+
+    body.querySelectorAll('.file-row').forEach((row) => {
+      const attachmentId = Number(row.dataset.attachmentId);
+      row.querySelector('.file-delete-btn').addEventListener('click', async () => {
+        if (!confirm('Delete this file?')) return;
+        await fetch('/api/admin/attachments', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ attachmentId }),
         });
+        await loadProjects();
       });
     });
   }
@@ -955,6 +1108,8 @@
 
   function renderTodos() {
     const list = document.getElementById('todo-list');
+    document.getElementById('nav-count-todos').textContent = todos.filter((t) => !t.done).length;
+
     if (todos.length === 0) {
       list.innerHTML = '<p class="empty-state">No to-dos yet.</p>';
       return;
