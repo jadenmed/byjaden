@@ -92,10 +92,16 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 110px 24px 60px;
+    padding: 110px 40px 60px;
   }
 
-  .content { width: 100%; max-width: 760px; display: flex; flex-direction: column; gap: 24px; }
+  .content { width: 100%; max-width: 1240px; display: flex; flex-direction: column; gap: 24px; }
+
+  .admin-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start; }
+
+  @media (max-width: 860px) {
+    .admin-grid { grid-template-columns: 1fr; }
+  }
 
   .form-eyebrow { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.02em; margin-bottom: 8px; }
 
@@ -108,13 +114,13 @@
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(4, 12, 32, 0.45);
     border: 1px solid var(--line);
     border-radius: 20px;
     padding: 32px 32px;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .card-heading {
@@ -136,21 +142,25 @@
 
   .field input, .field select, .field textarea {
     width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 9px;
     padding: 12px 14px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: #fff;
     outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.34);
   }
 
   .field select option { color: #111; }
 
   .field textarea { resize: vertical; min-height: 60px; }
-
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
   .submit-btn {
     background: #fff;
@@ -173,10 +183,14 @@
   .form-success { display: none; font-size: 13px; color: #8affb0; margin-top: 4px; }
   .form-success.visible { display: block; }
 
-  .projects-list { display: flex; flex-direction: column; gap: 16px; }
+  .projects-list { display: flex; flex-direction: column; gap: 14px; }
 
-  .project-card { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 4px; }
-  .project-card:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .project-card {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
 
   .project-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
@@ -199,8 +213,8 @@
 
   .status-row select, .status-row input {
     width: auto;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 9px;
     padding: 8px 10px;
     font-size: 12px;
@@ -209,11 +223,13 @@
     outline: none;
   }
 
-  .status-row .progress-field { width: 64px; }
+  .status-row select option { color: #111; }
+
+  .status-row .phase-select { min-width: 172px; }
 
   .status-save-btn, .icon-btn {
-    background: rgba(255,255,255,0.12);
-    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     color: #fff;
     border-radius: 7px;
     padding: 7px 12px;
@@ -222,12 +238,10 @@
     font-family: 'Inter', sans-serif;
   }
 
-  .status-save-btn:hover, .icon-btn:hover { background: rgba(255,255,255,0.2); }
+  .status-save-btn:hover, .icon-btn:hover { background: rgba(255,255,255,0.18); }
 
   .icon-btn.danger { color: #ff8a8a; }
   .icon-btn.danger:hover { background: rgba(255,138,138,0.15); }
-
-  .progress-field { max-width: 140px; }
 
   .project-actions { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
 
@@ -248,14 +262,20 @@
   .update-form-row input { flex: 1; }
 
   .update-form-row input, .update-edit input, .search-field input {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 9px;
     padding: 10px 12px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     color: #fff;
     outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .update-form-row input:focus, .update-edit input:focus, .search-field input:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.34);
   }
 
   .search-field { margin-bottom: 16px; }
@@ -267,7 +287,6 @@
     .back-link { top: 22px; right: 24px; }
     .stage { padding: 90px 16px 40px; }
     .glass-card { padding: 24px 20px; }
-    .row-2 { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -283,10 +302,10 @@
       <h2 class="form-heading">Admin</h2>
     </div>
 
-    <div class="glass-card">
-      <p class="card-heading">New project</p>
-      <form id="new-project-form">
-        <div class="row-2">
+    <div class="admin-grid">
+      <div class="glass-card">
+        <p class="card-heading">New project</p>
+        <form id="new-project-form">
           <div class="field">
             <label for="project-client">Client</label>
             <select id="project-client" required></select>
@@ -295,23 +314,23 @@
             <label for="project-name">Project name</label>
             <input type="text" id="project-name" placeholder="Website redesign" required />
           </div>
-        </div>
-        <div class="field">
-          <label for="project-status">Status</label>
-          <input type="text" id="project-status" placeholder="In Progress" />
-        </div>
-        <p class="form-error" id="new-project-error"></p>
-        <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
-      </form>
-    </div>
-
-    <div class="glass-card">
-      <p class="card-heading">Projects</p>
-      <div class="field search-field">
-        <input type="text" id="project-search" placeholder="Search by client or project name" />
+          <div class="field">
+            <label for="project-status">Status</label>
+            <input type="text" id="project-status" placeholder="In Progress" />
+          </div>
+          <p class="form-error" id="new-project-error"></p>
+          <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
+        </form>
       </div>
-      <div class="projects-list" id="admin-projects-list">
-        <p class="empty-state">Loading&hellip;</p>
+
+      <div class="glass-card">
+        <p class="card-heading">Projects</p>
+        <div class="field search-field">
+          <input type="text" id="project-search" placeholder="Search by client or project name" />
+        </div>
+        <div class="projects-list" id="admin-projects-list">
+          <p class="empty-state">Loading&hellip;</p>
+        </div>
       </div>
     </div>
   </div>
@@ -320,6 +339,17 @@
 <script>
   let clients = [];
   let projects = [];
+
+  const PHASES = [
+    { value: 25, label: 'Discovery & Wireframe' },
+    { value: 50, label: 'Design' },
+    { value: 75, label: 'Development' },
+    { value: 100, label: 'Complete' },
+  ];
+
+  function phaseForProgress(progress) {
+    return PHASES.find((phase) => phase.value >= (progress || 0)) || PHASES[PHASES.length - 1];
+  }
 
   function escapeHtml(str) {
     const div = document.createElement('div');
@@ -397,7 +427,11 @@
                 `<option value="${s}" ${s === p.status ? 'selected' : ''}>${s}</option>`
               ).join('')}
             </select>
-            <input type="number" class="progress-input progress-field" min="0" max="100" value="${p.progress ?? 0}" title="Progress %" />
+            <select class="phase-select" title="Phase">
+              ${PHASES.map((phase) =>
+                `<option value="${phase.value}" ${phase.value === phaseForProgress(p.progress).value ? 'selected' : ''}>${phase.label}</option>`
+              ).join('')}
+            </select>
           </div>
         </div>
         <div class="project-actions">
@@ -447,7 +481,7 @@
       card.querySelector('.save-project-btn').addEventListener('click', async () => {
         const name = card.querySelector('.project-name-input').value;
         const status = card.querySelector('.status-select').value;
-        const progress = card.querySelector('.progress-input').value;
+        const progress = card.querySelector('.phase-select').value;
         await fetch('/api/admin/projects', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
