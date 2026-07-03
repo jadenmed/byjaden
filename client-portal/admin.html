@@ -11,10 +11,15 @@
 
 <style>
   :root {
-    --deep1: #003095;
-    --deep2: #0050F8;
-    --deep3: #5FBDF7;
-    --line: rgba(255,255,255,0.14);
+    --bg: #0a0c12;
+    --panel: #12151d;
+    --panel-alt: #171a23;
+    --line: rgba(255,255,255,0.09);
+    --text: #f5f6f8;
+    --text-dim: rgba(255,255,255,0.55);
+    --text-faint: rgba(255,255,255,0.35);
+    --accent: #4a8bfa;
+    --accent-soft: rgba(74,139,250,0.14);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,208 +28,206 @@
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background: linear-gradient(180deg, var(--deep1) 0%, var(--deep1) 28%, var(--deep2) 55%, var(--deep3) 100%);
-    position: relative;
-    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
   }
 
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background-image:
-      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
-      radial-gradient(1px 1px at 23% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 35% 22%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 47% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 58% 18%, rgba(255,255,255,0.7) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 67% 9%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 88% 6%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 93% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 5% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 15% 42%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 28% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 42% 38%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 55% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 70% 32%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 82% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 91% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 8% 52%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 20% 58%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 33% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 50% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 63% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 75% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 87% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 96% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 3% 68%, rgba(255,255,255,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 18% 72%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 38% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 80% 62%, rgba(255,255,255,0.2) 0%, transparent 100%);
+  a { color: inherit; }
+
+  .app-shell { display: flex; min-height: 100vh; }
+
+  .app-sidebar {
+    width: 220px;
+    flex: 0 0 220px;
+    background: var(--panel);
+    border-right: 1px solid var(--line);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
   }
 
-  .site-logo { position: fixed; top: 32px; left: 40px; z-index: 2; }
-  .site-logo img { height: 24px; width: auto; display: block; filter: brightness(0) invert(1); }
+  .sidebar-brand { display: flex; align-items: center; gap: 8px; padding: 0 8px 24px; }
+  .sidebar-brand img { height: 18px; width: auto; filter: brightness(0) invert(1); }
+  .sidebar-brand span { font-size: 13px; font-weight: 600; color: var(--text); }
 
-  .back-link {
-    position: fixed;
-    top: 32px;
-    right: 40px;
-    z-index: 2;
+  .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 500;
-    color: rgba(255,255,255,0.8);
+    text-align: left;
+    padding: 9px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+  .nav-item.active { background: var(--accent-soft); color: var(--accent); }
+
+  .sidebar-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+
+  .back-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
     text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 2px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    padding: 8px;
+    display: block;
   }
 
-  .back-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+  .back-link:hover { color: var(--text); }
 
-  .stage {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 110px 40px 60px;
+  .app-main { flex: 1; min-width: 0; padding: 32px 40px 60px; }
+
+  .app-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+
+  .app-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text);
   }
 
-  .content { width: 100%; max-width: 1240px; display: flex; flex-direction: column; gap: 24px; }
+  .app-header .form-eyebrow { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
 
-  .admin-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start; }
-
-  .admin-sidebar { display: flex; flex-direction: column; gap: 24px; }
-
-  @media (max-width: 860px) {
-    .admin-grid { grid-template-columns: 1fr; }
-  }
-
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 28px; }
 
   @media (max-width: 700px) {
     .stats-row { grid-template-columns: repeat(2, 1fr); }
   }
 
   .stat-card {
-    background: rgba(0, 0, 0, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 14px 18px;
-  }
-
-  .stat-value { font-family: 'Instrument Serif', serif; font-size: 28px; color: #fff; line-height: 1; }
-  .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 6px; }
-
-  .form-eyebrow { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.02em; margin-bottom: 8px; }
-
-  .form-heading {
-    font-family: 'Instrument Serif', serif;
-    font-size: 30px;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-
-  .glass-card {
-    background: rgba(4, 12, 32, 0.45);
+    background: var(--panel);
     border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 32px 32px;
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 12px 16px;
   }
+
+  .stat-value { font-family: 'Instrument Serif', serif; font-size: 24px; color: var(--text); line-height: 1; }
+  .stat-label { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 5px; }
+
+  .app-section { display: none; }
+  .app-section.active { display: block; }
+
+  .section-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .section-toolbar .search-field { flex: 1; margin-bottom: 0; }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+
+  .panel + .panel { margin-top: 12px; }
+
+  #new-project-panel { margin-bottom: 16px; }
 
   .card-heading {
     font-family: 'Instrument Serif', serif;
-    font-size: 20px;
-    color: #fff;
-    margin-bottom: 16px;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 14px;
   }
 
-  .field { margin-bottom: 14px; }
+  .field { margin-bottom: 12px; }
 
   .field label {
     display: block;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    color: rgba(255,255,255,0.85);
+    color: var(--text-dim);
     margin-bottom: 6px;
   }
 
   .field input, .field select, .field textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9px;
-    padding: 12px 14px;
+    background: #0d0f16;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #fff;
+    font-size: 13px;
+    color: var(--text);
     outline: none;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: border-color 0.15s ease;
   }
 
   .field select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 14px center;
-    background-size: 12px;
-    padding-right: 34px;
+    background-position: right 12px center;
+    background-size: 11px;
+    padding-right: 32px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .field input:focus, .field select:focus, .field textarea:focus {
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(0, 0, 0, 0.34);
-  }
-
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
   .field select option { color: #111; }
-
   .field textarea { resize: vertical; min-height: 60px; }
 
   .submit-btn {
-    background: #fff;
-    color: #111;
+    background: var(--accent);
+    color: #fff;
     border: none;
-    border-radius: 9px;
-    padding: 11px 18px;
+    border-radius: 6px;
+    padding: 9px 16px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.15s ease;
   }
 
   .submit-btn:hover { opacity: 0.88; }
   .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .form-error { display: none; font-size: 13px; color: #ff8a8a; margin-top: 4px; }
+  .btn-ghost {
+    background: var(--panel-alt);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 9px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn-ghost:hover { background: rgba(255,255,255,0.06); }
+
+  .form-error { display: none; font-size: 12px; color: #ff8a8a; margin-top: 4px; }
   .form-error.visible { display: block; }
-  .form-success { display: none; font-size: 13px; color: #8affb0; margin-top: 4px; }
+  .form-success { display: none; font-size: 12px; color: #8affb0; margin-top: 4px; }
   .form-success.visible { display: block; }
 
-  .projects-list { display: flex; flex-direction: column; gap: 8px; }
+  .projects-list { display: flex; flex-direction: column; gap: 6px; }
 
   .projects-table-head {
     display: grid;
     grid-template-columns: 2fr 1.6fr 1fr 1.4fr 90px;
     gap: 12px;
-    padding: 0 22px 10px;
-    font-size: 11px;
+    padding: 0 16px 8px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(255,255,255,0.4);
+    color: var(--text-faint);
   }
 
   @media (max-width: 700px) {
@@ -232,9 +235,9 @@
   }
 
   .project-row {
-    background: rgba(0, 0, 0, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
     overflow: hidden;
   }
 
@@ -243,74 +246,78 @@
     grid-template-columns: 2fr 1.6fr 1fr 1.4fr 90px;
     gap: 12px;
     align-items: center;
-    padding: 16px 22px;
+    padding: 13px 16px;
   }
 
   @media (max-width: 700px) {
     .project-row-main { grid-template-columns: 1fr; gap: 6px; }
   }
 
-  .cell-name { font-family: 'Instrument Serif', serif; font-size: 17px; color: #fff; }
-  .cell-client { font-size: 12px; color: rgba(255,255,255,0.55); }
+  .cell-name { font-size: 14px; font-weight: 500; color: var(--text); }
+  .cell-client { font-size: 12px; color: var(--text-dim); }
 
   .badge {
     display: inline-block;
     width: fit-content;
     font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.14);
-    color: #fff;
-    background: rgba(255,255,255,0.08);
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 5px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.06);
   }
+
+  .badge.status-inprogress { color: #7fb2ff; background: rgba(74,139,250,0.14); }
+  .badge.status-review { color: #ffd68a; background: rgba(255,214,138,0.12); }
+  .badge.status-completed { color: #8affb0; background: rgba(138,255,176,0.12); }
+  .badge.status-onhold { color: #ff8a8a; background: rgba(255,138,138,0.12); }
 
   .row-toggle {
     justify-self: end;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: #fff;
-    border-radius: 7px;
-    padding: 7px 14px;
+    background: var(--panel-alt);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 6px 12px;
     font-size: 12px;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
   }
 
-  .row-toggle:hover { background: rgba(255,255,255,0.18); }
+  .row-toggle:hover { background: rgba(255,255,255,0.08); }
 
   @media (max-width: 700px) {
     .row-toggle { justify-self: start; margin-top: 6px; }
   }
 
   .project-row-detail {
-    padding: 4px 22px 22px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4px 16px 18px;
+    border-top: 1px solid var(--line);
     margin-top: 4px;
   }
 
   .project-name-input {
-    font-family: 'Instrument Serif', serif;
-    font-size: 16px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9px;
-    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--text);
+    background: #0d0f16;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 9px 12px;
     outline: none;
     width: 100%;
   }
-  .project-name-input:focus { border-color: rgba(255, 255, 255, 0.4); }
+  .project-name-input:focus { border-color: var(--accent); }
 
-  .status-row { display: flex; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .status-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
 
   .status-row select, .status-row input {
     width: auto;
-    background: rgba(0, 0, 0, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9px;
-    padding: 8px 10px;
+    background: #0d0f16;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 7px 10px;
     font-size: 12px;
-    color: #fff;
+    color: var(--text);
     font-family: 'Inter', sans-serif;
     outline: none;
   }
@@ -318,7 +325,7 @@
   .status-row select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 11px;
@@ -331,61 +338,58 @@
   .status-row .phase-select { min-width: 190px; }
 
   .status-save-btn, .icon-btn {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: #fff;
-    border-radius: 7px;
-    padding: 7px 12px;
+    background: var(--panel-alt);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 6px 11px;
     font-size: 12px;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
   }
 
-  .status-save-btn:hover, .icon-btn:hover { background: rgba(255,255,255,0.18); }
+  .status-save-btn:hover, .icon-btn:hover { background: rgba(255,255,255,0.08); }
 
   .icon-btn.danger { color: #ff8a8a; }
-  .icon-btn.danger:hover { background: rgba(255,138,138,0.15); }
+  .icon-btn.danger:hover { background: rgba(255,138,138,0.12); }
 
-  .project-actions { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .project-actions { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 
   .updates-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-  .update-item { font-size: 13px; color: rgba(255,255,255,0.7); border-top: 1px solid var(--line); padding-top: 8px; }
-  .update-item strong { color: #fff; }
-  .update-date { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .update-item { font-size: 13px; color: var(--text-dim); border-top: 1px solid var(--line); padding-top: 8px; }
+  .update-item strong { color: var(--text); }
+  .update-date { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
   .update-actions { display: flex; gap: 8px; margin-top: 6px; }
-  .update-actions button { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; }
-  .update-actions button:hover { color: #fff; }
+  .update-actions button { background: none; border: none; color: var(--text-dim); font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; }
+  .update-actions button:hover { color: var(--text); }
   .update-actions button.danger { color: #ff8a8a; }
   .update-edit { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
   .update-edit input { width: 100%; }
   .update-edit-actions { display: flex; gap: 8px; }
 
-  .update-form { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .update-form { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
   .update-form-row { display: flex; gap: 8px; }
   .update-form-row input { flex: 1; }
 
   .update-form-row input, .update-edit input, .search-field input {
-    background: rgba(0, 0, 0, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9px;
-    padding: 10px 12px;
+    background: #0d0f16;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 9px 12px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
-    color: #fff;
+    color: var(--text);
     outline: none;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: border-color 0.15s ease;
   }
 
-  .update-form-row input:focus, .update-edit input:focus, .search-field input:focus {
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(0, 0, 0, 0.34);
-  }
+  .update-form-row input:focus, .update-edit input:focus, .search-field input:focus { border-color: var(--accent); }
 
-  .search-field { margin-bottom: 16px; }
+  .search-field { margin-bottom: 0; }
 
-  .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); }
+  .empty-state { font-size: 13px; color: var(--text-faint); }
 
-  .todo-form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .todo-form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
   .todo-form-row input[type="text"] { flex: 1 1 100%; }
   .todo-form-row input[type="date"] { flex: 1; min-width: 120px; }
   .todo-form-row select { flex: 1; min-width: 100px; }
@@ -393,20 +397,20 @@
   .todo-form-row .submit-btn { flex: 0 0 auto; }
 
   .todo-form-row input, .todo-form-row select {
-    background: rgba(0, 0, 0, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9px;
-    padding: 10px 12px;
+    background: #0d0f16;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 9px 12px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
-    color: #fff;
+    color: var(--text);
     outline: none;
   }
 
   .todo-form-row select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 11px;
@@ -420,146 +424,174 @@
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    color: rgba(255,255,255,0.75);
+    color: var(--text-dim);
     flex: 1 1 auto;
   }
-  .todo-visible-check input[type="checkbox"] { width: 14px; height: 14px; accent-color: #fff; cursor: pointer; }
+  .todo-visible-check input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; }
 
-  .todo-list { display: flex; flex-direction: column; gap: 8px; }
+  .todo-list { display: flex; flex-direction: column; gap: 6px; }
 
   .todo-item {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    background: rgba(0, 0, 0, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
     padding: 10px 14px;
   }
 
-  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #fff; cursor: pointer; margin-top: 2px; }
+  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; margin-top: 2px; }
 
   .todo-body { flex: 1; min-width: 0; }
   .todo-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .todo-title { font-size: 13px; color: #fff; }
-  .todo-item.done .todo-title { color: rgba(255,255,255,0.4); text-decoration: line-through; }
+  .todo-title { font-size: 13px; color: var(--text); }
+  .todo-item.done .todo-title { color: var(--text-faint); text-decoration: line-through; }
 
   .todo-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-  .todo-meta-item { font-size: 10px; color: rgba(255,255,255,0.45); }
+  .todo-meta-item { font-size: 10px; color: var(--text-faint); }
   .todo-meta-item.overdue { color: #ff8a8a; font-weight: 600; }
 
   .todo-priority { font-size: 10px; padding: 3px 8px; }
-  .todo-priority.High { border-color: rgba(255,138,138,0.4); color: #ff8a8a; background: rgba(255,138,138,0.1); }
-  .todo-priority.Medium { border-color: rgba(255,214,138,0.4); color: #ffd68a; background: rgba(255,214,138,0.1); }
-  .todo-priority.Low { border-color: rgba(138,255,176,0.4); color: #8affb0; background: rgba(138,255,176,0.1); }
+  .todo-priority.High { color: #ff8a8a; background: rgba(255,138,138,0.12); }
+  .todo-priority.Medium { color: #ffd68a; background: rgba(255,214,138,0.12); }
+  .todo-priority.Low { color: #8affb0; background: rgba(138,255,176,0.12); }
 
-  .todo-delete-btn { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; flex: 0 0 auto; }
+  .todo-delete-btn { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; flex: 0 0 auto; }
   .todo-delete-btn:hover { color: #ff8a8a; }
 
-  .activity-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; }
-  .activity-item { font-size: 12px; color: rgba(255,255,255,0.65); border-top: 1px solid var(--line); padding-top: 8px; }
-  .activity-item:first-child { border-top: none; padding-top: 0; }
-  .activity-date { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .activity-list { display: flex; flex-direction: column; gap: 10px; }
+  .activity-item { font-size: 12px; color: var(--text-dim); border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .activity-date { font-size: 10px; color: var(--text-faint); margin-top: 2px; }
 
-  .files-section { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
-  .files-heading { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 8px; }
+  .files-section { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .files-heading { font-size: 12px; font-weight: 500; color: var(--text-dim); margin-bottom: 8px; }
   .files-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
   .file-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
-  .file-row a { color: #fff; text-decoration: none; border-bottom: 1px solid var(--line); }
-  .file-row a:hover { border-color: rgba(255,255,255,0.5); }
-  .file-delete-btn { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; }
+  .file-row a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .file-row a:hover { border-color: var(--text-dim); }
+  .file-delete-btn { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; }
   .file-delete-btn:hover { color: #ff8a8a; }
 
-  @media (max-width: 460px) {
-    .site-logo { top: 22px; left: 24px; }
-    .back-link { top: 22px; right: 24px; }
-    .stage { padding: 90px 16px 40px; }
-    .glass-card { padding: 24px 20px; }
+  @media (max-width: 860px) {
+    .app-shell { flex-direction: column; }
+    .app-sidebar {
+      width: 100%;
+      flex: none;
+      position: static;
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+      padding: 12px 16px;
+      overflow-x: auto;
+    }
+    .sidebar-brand { padding: 0 12px 0 0; }
+    .sidebar-nav { flex-direction: row; }
+    .sidebar-footer { margin-top: 0; margin-left: auto; padding-top: 0; border-top: none; }
+    .app-main { padding: 24px 20px 40px; }
   }
 </style>
 </head>
 <body>
 
-<a href="https://byjaden.com" class="site-logo" aria-label="Home"><img src="/assets/byjaden.svg" alt="byJaden logo" /></a>
-<a href="dashboard.html" class="back-link">&larr; Back to dashboard</a>
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <a href="https://byjaden.com" class="sidebar-brand" aria-label="Home">
+      <img src="/assets/byjaden.svg" alt="byJaden logo" />
+      <span>byJaden</span>
+    </a>
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <button type="button" class="nav-item active" data-section="projects">Projects</button>
+      <button type="button" class="nav-item" data-section="todos">To-dos</button>
+      <button type="button" class="nav-item" data-section="activity">Activity</button>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="dashboard.html" class="back-link">&larr; Back to dashboard</a>
+    </div>
+  </aside>
 
-<div class="stage">
-  <div class="content">
-    <div>
-      <p class="form-eyebrow">Client Portal</p>
-      <h2 class="form-heading">Admin</h2>
+  <main class="app-main">
+    <div class="app-header">
+      <div>
+        <p class="form-eyebrow">Client Portal</p>
+        <h1>Admin</h1>
+      </div>
     </div>
 
     <div class="stats-row" id="stats-row"></div>
 
-    <div class="admin-grid">
-      <div class="admin-sidebar">
-        <div class="glass-card">
-          <p class="card-heading">New project</p>
-          <form id="new-project-form">
-            <div class="field">
-              <label for="project-client">Client</label>
-              <select id="project-client" required></select>
-            </div>
-            <div class="field">
-              <label for="project-name">Project name</label>
-              <input type="text" id="project-name" placeholder="Website redesign" required />
-            </div>
-            <div class="field">
-              <label for="project-status">Status</label>
-              <input type="text" id="project-status" placeholder="In Progress" />
-            </div>
-            <p class="form-error" id="new-project-error"></p>
-            <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
-          </form>
-        </div>
-
-        <div class="glass-card">
-          <p class="card-heading">To-dos</p>
-          <form id="new-todo-form" class="todo-form-row">
-            <input type="text" id="todo-title" placeholder="What needs doing?" required />
-            <select id="todo-priority">
-              <option value="High">High</option>
-              <option value="Medium" selected>Medium</option>
-              <option value="Low">Low</option>
-            </select>
-            <input type="date" id="todo-due-date" />
-            <select id="todo-project">
-              <option value="">No project</option>
-            </select>
-            <label class="todo-visible-check">
-              <input type="checkbox" id="todo-visible" />
-              <span>Visible to client</span>
-            </label>
-            <button type="submit" class="submit-btn">Add</button>
-          </form>
-          <div class="todo-list" id="todo-list">
-            <p class="empty-state">Loading&hellip;</p>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <p class="card-heading">Recent Activity</p>
-          <div class="activity-list" id="activity-list">
-            <p class="empty-state">Loading&hellip;</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card">
-        <p class="card-heading">Projects</p>
+    <section class="app-section active" id="section-projects">
+      <div class="section-toolbar">
         <div class="field search-field">
           <input type="text" id="project-search" placeholder="Search by client or project name" />
         </div>
-        <div class="projects-table-head">
-          <span>Project</span><span>Client</span><span>Status</span><span>Phase</span><span></span>
-        </div>
-        <div class="projects-list" id="admin-projects-list">
+        <button type="button" class="btn-ghost" id="new-project-toggle">+ New project</button>
+      </div>
+
+      <div class="panel" id="new-project-panel" style="display: none;">
+        <p class="card-heading">New project</p>
+        <form id="new-project-form">
+          <div class="field">
+            <label for="project-client">Client</label>
+            <select id="project-client" required></select>
+          </div>
+          <div class="field">
+            <label for="project-name">Project name</label>
+            <input type="text" id="project-name" placeholder="Website redesign" required />
+          </div>
+          <div class="field">
+            <label for="project-status">Status</label>
+            <input type="text" id="project-status" placeholder="In Progress" />
+          </div>
+          <p class="form-error" id="new-project-error"></p>
+          <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
+        </form>
+      </div>
+
+      <div class="projects-table-head">
+        <span>Project</span><span>Client</span><span>Status</span><span>Phase</span><span></span>
+      </div>
+      <div class="projects-list" id="admin-projects-list">
+        <p class="empty-state">Loading&hellip;</p>
+      </div>
+    </section>
+
+    <section class="app-section" id="section-todos">
+      <div class="panel">
+        <p class="card-heading">To-dos</p>
+        <form id="new-todo-form" class="todo-form-row">
+          <input type="text" id="todo-title" placeholder="What needs doing?" required />
+          <select id="todo-priority">
+            <option value="High">High</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <input type="date" id="todo-due-date" />
+          <select id="todo-project">
+            <option value="">No project</option>
+          </select>
+          <label class="todo-visible-check">
+            <input type="checkbox" id="todo-visible" />
+            <span>Visible to client</span>
+          </label>
+          <button type="submit" class="submit-btn">Add</button>
+        </form>
+        <div class="todo-list" id="todo-list">
           <p class="empty-state">Loading&hellip;</p>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    <section class="app-section" id="section-activity">
+      <div class="panel">
+        <p class="card-heading">Recent Activity</p>
+        <div class="activity-list" id="activity-list">
+          <p class="empty-state">Loading&hellip;</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
 
 <script>
@@ -579,11 +611,35 @@
     return PHASES.find((phase) => phase.value >= (progress || 0)) || PHASES[PHASES.length - 1];
   }
 
+  function statusClass(status) {
+    const map = {
+      'In Progress': 'status-inprogress',
+      'Review': 'status-review',
+      'Completed': 'status-completed',
+      'On Hold': 'status-onhold',
+    };
+    return map[status] || '';
+  }
+
   function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str == null ? '' : str;
     return div.innerHTML;
   }
+
+  document.getElementById('sidebar-nav').addEventListener('click', (e) => {
+    const btn = e.target.closest('.nav-item');
+    if (!btn) return;
+    document.querySelectorAll('.nav-item').forEach((el) => el.classList.remove('active'));
+    document.querySelectorAll('.app-section').forEach((el) => el.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(`section-${btn.dataset.section}`).classList.add('active');
+  });
+
+  document.getElementById('new-project-toggle').addEventListener('click', () => {
+    const panel = document.getElementById('new-project-panel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  });
 
   async function requireAdmin() {
     try {
@@ -678,7 +734,7 @@
         <div class="project-row-main">
           <span class="cell-name">${escapeHtml(p.name)}</span>
           <span class="cell-client">${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)}</span>
-          <span class="badge">${escapeHtml(p.status)}</span>
+          <span class="badge ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
           <span class="badge">${phaseForProgress(p.progress).label}</span>
           <button type="button" class="row-toggle">${expandedIds.has(p.id) ? 'Close' : 'Manage'}</button>
         </div>
@@ -1025,6 +1081,7 @@
       }
       document.getElementById('project-name').value = '';
       document.getElementById('project-status').value = '';
+      document.getElementById('new-project-panel').style.display = 'none';
       await loadProjects();
     } catch {
       errorEl.textContent = 'Network error. Please try again.';
