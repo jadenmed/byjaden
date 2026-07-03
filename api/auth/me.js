@@ -1,5 +1,5 @@
 const { getSql } = require('../../lib/db');
-const { getSessionFromRequest } = require('../../lib/auth');
+const { getSessionFromRequest, isAdminEmail } = require('../../lib/auth');
 
 module.exports = async (req, res) => {
   if (req.method !== 'GET') {
@@ -22,6 +22,12 @@ module.exports = async (req, res) => {
   }
 
   res.status(200).json({
-    user: { id: user.id, firstName: user.first_name, lastName: user.last_name, email: user.email },
+    user: {
+      id: user.id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email,
+      isAdmin: isAdminEmail(user.email),
+    },
   });
 };

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin | Client Portal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --deep1: #003095;
+    --deep2: #0050F8;
+    --deep3: #5FBDF7;
+    --line: rgba(255,255,255,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(180deg, var(--deep1) 0%, var(--deep1) 28%, var(--deep2) 55%, var(--deep3) 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 23% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 35% 22%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 18%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 67% 9%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 6%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 42%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 38%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 70% 32%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 91% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 8% 52%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 58%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 33% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 63% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 87% 48%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 96% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 68%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 72%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 62%, rgba(255,255,255,0.2) 0%, transparent 100%);
+  }
+
+  .site-logo { position: fixed; top: 32px; left: 40px; z-index: 2; }
+  .site-logo img { height: 24px; width: auto; display: block; filter: brightness(0) invert(1); }
+
+  .back-link {
+    position: fixed;
+    top: 32px;
+    right: 40px;
+    z-index: 2;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+  .stage {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 110px 24px 60px;
+  }
+
+  .content { width: 100%; max-width: 760px; display: flex; flex-direction: column; gap: 24px; }
+
+  .form-eyebrow { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.02em; margin-bottom: 8px; }
+
+  .form-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 32px 32px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .card-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .field { margin-bottom: 14px; }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 6px;
+  }
+
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    outline: none;
+  }
+
+  .field select option { color: #111; }
+
+  .field textarea { resize: vertical; min-height: 60px; }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .submit-btn {
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .submit-btn:hover { opacity: 0.88; }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .form-error { display: none; font-size: 13px; color: #ff8a8a; margin-top: 4px; }
+  .form-error.visible { display: block; }
+  .form-success { display: none; font-size: 13px; color: #8affb0; margin-top: 4px; }
+  .form-success.visible { display: block; }
+
+  .projects-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .project-card { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 4px; }
+  .project-card:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .project-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .project-name { font-family: 'Instrument Serif', serif; font-size: 18px; color: #fff; }
+
+  .project-client { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  .status-row { display: flex; align-items: center; gap: 8px; }
+
+  .status-row select { width: auto; padding: 8px 10px; font-size: 12px; }
+
+  .status-save-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid var(--line);
+    color: #fff;
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .status-save-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .updates-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .update-item { font-size: 13px; color: rgba(255,255,255,0.7); }
+  .update-item strong { color: #fff; }
+  .update-date { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  .update-form { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .update-form-row { display: flex; gap: 8px; }
+  .update-form-row input { flex: 1; }
+
+  .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 460px) {
+    .site-logo { top: 22px; left: 24px; }
+    .back-link { top: 22px; right: 24px; }
+    .stage { padding: 90px 16px 40px; }
+    .glass-card { padding: 24px 20px; }
+    .row-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a href="https://byjaden.com" class="site-logo" aria-label="Home"><img src="/assets/byjaden.svg" alt="byJaden logo" /></a>
+<a href="dashboard.html" class="back-link">&larr; Back to dashboard</a>
+
+<div class="stage">
+  <div class="content">
+    <div>
+      <p class="form-eyebrow">Client Portal</p>
+      <h2 class="form-heading">Admin</h2>
+    </div>
+
+    <div class="glass-card">
+      <p class="card-heading">New project</p>
+      <form id="new-project-form">
+        <div class="row-2">
+          <div class="field">
+            <label for="project-client">Client</label>
+            <select id="project-client" required></select>
+          </div>
+          <div class="field">
+            <label for="project-name">Project name</label>
+            <input type="text" id="project-name" placeholder="Website redesign" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="project-status">Status</label>
+          <input type="text" id="project-status" placeholder="In Progress" />
+        </div>
+        <p class="form-error" id="new-project-error"></p>
+        <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
+      </form>
+    </div>
+
+    <div class="glass-card">
+      <p class="card-heading">Projects</p>
+      <div class="projects-list" id="admin-projects-list">
+        <p class="empty-state">Loading&hellip;</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let clients = [];
+  let projects = [];
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : str;
+    return div.innerHTML;
+  }
+
+  async function requireAdmin() {
+    try {
+      const res = await fetch('/api/auth/me');
+      if (!res.ok) {
+        window.location.href = 'login.html';
+        return false;
+      }
+      const { user } = await res.json();
+      if (!user.isAdmin) {
+        window.location.href = 'dashboard.html';
+        return false;
+      }
+      return true;
+    } catch {
+      window.location.href = 'login.html';
+      return false;
+    }
+  }
+
+  async function loadClients() {
+    const res = await fetch('/api/admin/clients');
+    if (!res.ok) return;
+    const data = await res.json();
+    clients = data.clients;
+    const select = document.getElementById('project-client');
+    select.innerHTML = clients
+      .map((c) => `<option value="${c.id}">${escapeHtml(c.firstName)} ${escapeHtml(c.lastName)} (${escapeHtml(c.email)})</option>`)
+      .join('');
+  }
+
+  async function loadProjects() {
+    const list = document.getElementById('admin-projects-list');
+    const res = await fetch('/api/admin/projects');
+    if (!res.ok) {
+      list.innerHTML = '<p class="empty-state">Couldn\'t load projects.</p>';
+      return;
+    }
+    const data = await res.json();
+    projects = data.projects;
+    renderProjects();
+  }
+
+  function renderProjects() {
+    const list = document.getElementById('admin-projects-list');
+    if (projects.length === 0) {
+      list.innerHTML = '<p class="empty-state">No projects yet.</p>';
+      return;
+    }
+    list.innerHTML = projects.map((p) => `
+      <div class="project-card" data-project-id="${p.id}">
+        <div class="project-head">
+          <div>
+            <div class="project-name">${escapeHtml(p.name)}</div>
+            <div class="project-client">${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)} &middot; ${escapeHtml(p.client.email)}</div>
+          </div>
+          <div class="status-row">
+            <select class="status-select">
+              ${['In Progress', 'Review', 'Completed', 'On Hold'].map((s) =>
+                `<option value="${s}" ${s === p.status ? 'selected' : ''}>${s}</option>`
+              ).join('')}
+            </select>
+            <button type="button" class="status-save-btn">Save</button>
+          </div>
+        </div>
+        <div class="update-form">
+          <div class="update-form-row">
+            <input type="text" class="update-title-input" placeholder="Update title" />
+          </div>
+          <div class="update-form-row">
+            <input type="text" class="update-body-input" placeholder="Details (optional)" />
+            <button type="button" class="submit-btn post-update-btn">Post update</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.project-card').forEach((card) => {
+      const projectId = Number(card.dataset.projectId);
+
+      card.querySelector('.status-save-btn').addEventListener('click', async () => {
+        const status = card.querySelector('.status-select').value;
+        await fetch('/api/admin/projects', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ projectId, status }),
+        });
+      });
+
+      card.querySelector('.post-update-btn').addEventListener('click', async () => {
+        const titleInput = card.querySelector('.update-title-input');
+        const bodyInput = card.querySelector('.update-body-input');
+        const title = titleInput.value.trim();
+        if (!title) return;
+        const res = await fetch('/api/admin/updates', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ projectId, title, body: bodyInput.value.trim() }),
+        });
+        if (res.ok) {
+          titleInput.value = '';
+          bodyInput.value = '';
+        }
+      });
+    });
+  }
+
+  document.getElementById('new-project-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById('new-project-error');
+    const submitBtn = document.getElementById('new-project-submit');
+    errorEl.classList.remove('visible');
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/admin/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clientId: Number(document.getElementById('project-client').value),
+          name: document.getElementById('project-name').value,
+          status: document.getElementById('project-status').value,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        errorEl.textContent = data.error || 'Something went wrong.';
+        errorEl.classList.add('visible');
+        return;
+      }
+      document.getElementById('project-name').value = '';
+      document.getElementById('project-status').value = '';
+      await loadProjects();
+    } catch {
+      errorEl.textContent = 'Network error. Please try again.';
+      errorEl.classList.add('visible');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  (async () => {
+    if (!(await requireAdmin())) return;
+    await loadClients();
+    await loadProjects();
+  })();
+</script>
+
+</body>
+</html>
