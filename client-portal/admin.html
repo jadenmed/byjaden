@@ -383,6 +383,58 @@
 
   .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); }
 
+  .todo-form-row { display: flex; gap: 8px; margin-bottom: 16px; }
+  .todo-form-row input { flex: 1; }
+  .todo-form-row select { width: auto; min-width: 110px; }
+
+  .todo-form-row input, .todo-form-row select {
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9px;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    outline: none;
+  }
+
+  .todo-form-row select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 11px;
+    padding-right: 28px;
+  }
+
+  .todo-form-row select option { color: #111; }
+
+  .todo-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+
+  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #fff; cursor: pointer; }
+
+  .todo-title { flex: 1; font-size: 13px; color: #fff; }
+  .todo-item.done .todo-title { color: rgba(255,255,255,0.4); text-decoration: line-through; }
+
+  .todo-priority { font-size: 10px; padding: 3px 8px; }
+  .todo-priority.High { border-color: rgba(255,138,138,0.4); color: #ff8a8a; background: rgba(255,138,138,0.1); }
+  .todo-priority.Medium { border-color: rgba(255,214,138,0.4); color: #ffd68a; background: rgba(255,214,138,0.1); }
+  .todo-priority.Low { border-color: rgba(138,255,176,0.4); color: #8affb0; background: rgba(138,255,176,0.1); }
+
+  .todo-delete-btn { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; }
+  .todo-delete-btn:hover { color: #ff8a8a; }
+
   @media (max-width: 460px) {
     .site-logo { top: 22px; left: 24px; }
     .back-link { top: 22px; right: 24px; }
@@ -439,12 +491,29 @@
         </div>
       </div>
     </div>
+
+    <div class="glass-card">
+      <p class="card-heading">To-dos</p>
+      <form id="new-todo-form" class="todo-form-row">
+        <input type="text" id="todo-title" placeholder="What needs doing?" required />
+        <select id="todo-priority">
+          <option value="High">High</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <button type="submit" class="submit-btn">Add</button>
+      </form>
+      <div class="todo-list" id="todo-list">
+        <p class="empty-state">Loading&hellip;</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
   let clients = [];
   let projects = [];
+  let todos = [];
   const expandedIds = new Set();
 
   const PHASES = [
@@ -699,6 +768,74 @@
     });
   }
 
+  async function loadTodos() {
+    const list = document.getElementById('todo-list');
+    const res = await fetch('/api/admin/todos');
+    if (!res.ok) {
+      list.innerHTML = '<p class="empty-state">Couldn\'t load to-dos.</p>';
+      return;
+    }
+    const data = await res.json();
+    todos = data.todos;
+    renderTodos();
+  }
+
+  function renderTodos() {
+    const list = document.getElementById('todo-list');
+    if (todos.length === 0) {
+      list.innerHTML = '<p class="empty-state">No to-dos yet.</p>';
+      return;
+    }
+
+    list.innerHTML = todos.map((t) => `
+      <div class="todo-item ${t.done ? 'done' : ''}" data-todo-id="${t.id}">
+        <input type="checkbox" class="todo-done-checkbox" ${t.done ? 'checked' : ''} />
+        <span class="badge todo-priority ${t.priority}">${t.priority}</span>
+        <span class="todo-title">${escapeHtml(t.title)}</span>
+        <button type="button" class="todo-delete-btn">Delete</button>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.todo-item').forEach((item) => {
+      const todoId = Number(item.dataset.todoId);
+
+      item.querySelector('.todo-done-checkbox').addEventListener('change', async (e) => {
+        await fetch('/api/admin/todos', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ todoId, done: e.target.checked }),
+        });
+        await loadTodos();
+      });
+
+      item.querySelector('.todo-delete-btn').addEventListener('click', async () => {
+        await fetch('/api/admin/todos', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ todoId }),
+        });
+        await loadTodos();
+      });
+    });
+  }
+
+  document.getElementById('new-todo-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const titleInput = document.getElementById('todo-title');
+    const priority = document.getElementById('todo-priority').value;
+    const title = titleInput.value.trim();
+    if (!title) return;
+    const res = await fetch('/api/admin/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, priority }),
+    });
+    if (res.ok) {
+      titleInput.value = '';
+      await loadTodos();
+    }
+  });
+
   document.getElementById('project-search').addEventListener('input', renderProjects);
 
   document.getElementById('new-project-form').addEventListener('submit', async (e) => {
@@ -739,6 +876,7 @@
     if (!(await requireAdmin())) return;
     await loadClients();
     await loadProjects();
+    await loadTodos();
   })();
 </script>
 
