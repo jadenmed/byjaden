@@ -26,8 +26,29 @@ CREATE TABLE IF NOT EXISTS project_updates (
 
 CREATE TABLE IF NOT EXISTS todos (
   id SERIAL PRIMARY KEY,
+  project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   priority TEXT NOT NULL DEFAULT 'Medium' CHECK (priority IN ('Low', 'Medium', 'High')),
+  due_date DATE,
+  visible_to_client BOOLEAN NOT NULL DEFAULT false,
   done BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS activity_log (
+  id SERIAL PRIMARY KEY,
+  entity_type TEXT NOT NULL,
+  entity_id INTEGER NOT NULL,
+  action TEXT NOT NULL,
+  detail TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS attachments (
+  id SERIAL PRIMARY KEY,
+  project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  filename TEXT NOT NULL,
+  url TEXT NOT NULL,
+  size_bytes INTEGER,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );

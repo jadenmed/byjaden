@@ -250,6 +250,17 @@
 
   .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 8px; }
 
+  .todos-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .todo-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.75); }
+  .todo-row.done { color: rgba(255,255,255,0.4); text-decoration: line-through; }
+  .todo-check { width: 14px; height: 14px; border-radius: 4px; border: 1px solid var(--line); flex: 0 0 auto; }
+  .todo-row.done .todo-check { background: rgba(255,255,255,0.5); border-color: transparent; }
+  .todo-due { font-size: 11px; color: rgba(255,255,255,0.4); margin-left: auto; }
+
+  .files-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .file-link { font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; border-bottom: 1px solid var(--line); width: fit-content; }
+  .file-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
   @media (max-width: 460px) {
     .site-logo { top: 22px; left: 24px; }
     .back-link { top: 22px; right: 24px; }
@@ -344,6 +355,24 @@
                   </div>
                 `).join('')}
           </div>
+          ${p.todos && p.todos.length > 0 ? `
+            <div class="todos-list">
+              ${p.todos.map((t) => `
+                <div class="todo-row ${t.done ? 'done' : ''}">
+                  <span class="todo-check"></span>
+                  <span>${escapeHtml(t.title)}</span>
+                  ${t.dueDate ? `<span class="todo-due">${new Date(t.dueDate).toLocaleDateString()}</span>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          ${p.attachments && p.attachments.length > 0 ? `
+            <div class="files-list">
+              ${p.attachments.map((a) => `
+                <a class="file-link" href="${a.url}" target="_blank" rel="noopener">${escapeHtml(a.filename)}</a>
+              `).join('')}
+            </div>
+          ` : ''}
         </div>
       `).join('');
     } catch {

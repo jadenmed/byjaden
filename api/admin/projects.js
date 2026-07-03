@@ -1,5 +1,6 @@
 const { getSql } = require('../../lib/db');
 const { getSessionFromRequest, isAdminEmail } = require('../../lib/auth');
+const { logActivity } = require('../../lib/activity');
 
 module.exports = async (req, res) => {
   const session = getSessionFromRequest(req);
@@ -26,6 +27,13 @@ module.exports = async (req, res) => {
           ORDER BY created_at DESC
         `
       : [];
+    const attachments = projectIds.length
+      ? await sql`
+          SELECT id, project_id, filename, url, size_bytes, created_at FROM attachments
+          WHERE project_id = ANY(${projectIds})
+          ORDER BY created_at DESC
+        `
+      : [];
     res.status(200).json({
       projects: projects.map((p) => ({
         id: p.id,
@@ -37,6 +45,9 @@ module.exports = async (req, res) => {
         updates: updates
           .filter((u) => u.project_id === p.id)
           .map((u) => ({ id: u.id, title: u.title, body: u.body, createdAt: u.created_at })),
+        attachments: attachments
+          .filter((a) => a.project_id === p.id)
+          .map((a) => ({ id: a.id, filename: a.filename, url: a.url, sizeBytes: a.size_bytes, createdAt: a.created_at })),
       })),
     });
     return;
@@ -53,6 +64,7 @@ module.exports = async (req, res) => {
       VALUES (${clientId}, ${name.trim()}, ${status && status.trim() ? status.trim() : 'In Progress'})
       RETURNING id, name, status, progress, created_at
     `;
+    await logActivity(sql, 'project', project.id, 'created', `Project "${project.name}" created`);
     res.status(201).json({
       project: { id: project.id, name: project.name, status: project.status, progress: project.progress, createdAt: project.created_at },
     });
@@ -82,6 +94,13 @@ module.exports = async (req, res) => {
       WHERE id = ${projectId}
       RETURNING id, name, status, progress, created_at
     `;
+    const changes = [];
+    if (nextName !== existing.name) changes.push(`renamed to "${nextName}"`);
+    if (nextStatus !== existing.status) changes.push(`status set to ${nextStatus}`);
+    if (nextProgress !== existing.progress) changes.push(`progress set to ${nextProgress}%`);
+    if (changes.length) {
+      await logActivity(sql, 'project', project.id, 'updated', `${project.name}: ${changes.join(', ')}`);
+    }
     res.status(200).json({
       project: { id: project.id, name: project.name, status: project.status, progress: project.progress, createdAt: project.created_at },
     });
@@ -94,11 +113,12 @@ module.exports = async (req, res) => {
       res.status(400).json({ error: 'projectId is required' });
       return;
     }
-    const [deleted] = await sql`DELETE FROM projects WHERE id = ${projectId} RETURNING id`;
+    const [deleted] = await sql`DELETE FROM projects WHERE id = ${projectId} RETURNING id, name`;
     if (!deleted) {
       res.status(404).json({ error: 'Project not found' });
       return;
     }
+    await logActivity(sql, 'project', deleted.id, 'deleted', `Project "${deleted.name}" deleted`);
     res.status(200).json({ ok: true });
     return;
   }

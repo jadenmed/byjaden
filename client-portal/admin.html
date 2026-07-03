@@ -386,8 +386,10 @@
   .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); }
 
   .todo-form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .todo-form-row input { flex: 1 1 100%; }
-  .todo-form-row select { flex: 1; }
+  .todo-form-row input[type="text"] { flex: 1 1 100%; }
+  .todo-form-row input[type="date"] { flex: 1; min-width: 120px; }
+  .todo-form-row select { flex: 1; min-width: 100px; }
+  .todo-form-row select#todo-project { flex: 1 1 100%; }
   .todo-form-row .submit-btn { flex: 0 0 auto; }
 
   .todo-form-row input, .todo-form-row select {
@@ -413,11 +415,21 @@
 
   .todo-form-row select option { color: #111; }
 
+  .todo-visible-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    flex: 1 1 auto;
+  }
+  .todo-visible-check input[type="checkbox"] { width: 14px; height: 14px; accent-color: #fff; cursor: pointer; }
+
   .todo-list { display: flex; flex-direction: column; gap: 8px; }
 
   .todo-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     background: rgba(0, 0, 0, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -425,18 +437,38 @@
     padding: 10px 14px;
   }
 
-  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #fff; cursor: pointer; }
+  .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #fff; cursor: pointer; margin-top: 2px; }
 
-  .todo-title { flex: 1; font-size: 13px; color: #fff; }
+  .todo-body { flex: 1; min-width: 0; }
+  .todo-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .todo-title { font-size: 13px; color: #fff; }
   .todo-item.done .todo-title { color: rgba(255,255,255,0.4); text-decoration: line-through; }
+
+  .todo-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .todo-meta-item { font-size: 10px; color: rgba(255,255,255,0.45); }
+  .todo-meta-item.overdue { color: #ff8a8a; font-weight: 600; }
 
   .todo-priority { font-size: 10px; padding: 3px 8px; }
   .todo-priority.High { border-color: rgba(255,138,138,0.4); color: #ff8a8a; background: rgba(255,138,138,0.1); }
   .todo-priority.Medium { border-color: rgba(255,214,138,0.4); color: #ffd68a; background: rgba(255,214,138,0.1); }
   .todo-priority.Low { border-color: rgba(138,255,176,0.4); color: #8affb0; background: rgba(138,255,176,0.1); }
 
-  .todo-delete-btn { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; }
+  .todo-delete-btn { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; flex: 0 0 auto; }
   .todo-delete-btn:hover { color: #ff8a8a; }
+
+  .activity-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; }
+  .activity-item { font-size: 12px; color: rgba(255,255,255,0.65); border-top: 1px solid var(--line); padding-top: 8px; }
+  .activity-item:first-child { border-top: none; padding-top: 0; }
+  .activity-date { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+  .files-section { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .files-heading { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 8px; }
+  .files-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .file-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
+  .file-row a { color: #fff; text-decoration: none; border-bottom: 1px solid var(--line); }
+  .file-row a:hover { border-color: rgba(255,255,255,0.5); }
+  .file-delete-btn { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 11px; text-decoration: underline; padding: 0; }
+  .file-delete-btn:hover { color: #ff8a8a; }
 
   @media (max-width: 460px) {
     .site-logo { top: 22px; left: 24px; }
@@ -491,9 +523,24 @@
               <option value="Medium" selected>Medium</option>
               <option value="Low">Low</option>
             </select>
+            <input type="date" id="todo-due-date" />
+            <select id="todo-project">
+              <option value="">No project</option>
+            </select>
+            <label class="todo-visible-check">
+              <input type="checkbox" id="todo-visible" />
+              <span>Visible to client</span>
+            </label>
             <button type="submit" class="submit-btn">Add</button>
           </form>
           <div class="todo-list" id="todo-list">
+            <p class="empty-state">Loading&hellip;</p>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <p class="card-heading">Recent Activity</p>
+          <div class="activity-list" id="activity-list">
             <p class="empty-state">Loading&hellip;</p>
           </div>
         </div>
@@ -579,6 +626,16 @@
     projects = data.projects;
     renderStats();
     renderProjects();
+    populateTodoProjectSelect();
+    await loadActivity();
+  }
+
+  function populateTodoProjectSelect() {
+    const select = document.getElementById('todo-project');
+    const current = select.value;
+    select.innerHTML = '<option value="">No project</option>' +
+      projects.map((p) => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+    select.value = current;
   }
 
   function renderStats() {
@@ -680,6 +737,21 @@
               <button type="button" class="submit-btn post-update-btn">Post update</button>
             </div>
           </div>
+          <div class="files-section">
+            <p class="files-heading">Files</p>
+            <div class="files-list">
+              ${(p.attachments || []).length === 0
+                ? '<p class="empty-state">No files yet.</p>'
+                : p.attachments.map((a) => `
+                    <div class="file-row" data-attachment-id="${a.id}">
+                      <a href="${a.url}" target="_blank" rel="noopener">${escapeHtml(a.filename)}</a>
+                      <button type="button" class="file-delete-btn">Delete</button>
+                    </div>
+                  `).join('')}
+            </div>
+            <input type="file" class="file-upload-input" style="display: none;" />
+            <button type="button" class="status-save-btn upload-file-btn">Upload file</button>
+          </div>
         </div>
       </div>
     `).join('');
@@ -770,6 +842,45 @@
           await loadProjects();
         });
       });
+
+      const fileInput = card.querySelector('.file-upload-input');
+      card.querySelector('.upload-file-btn').addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        if (file.size > 4 * 1024 * 1024) {
+          alert('File must be under 4MB.');
+          fileInput.value = '';
+          return;
+        }
+        const fileBase64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+        await fetch('/api/admin/attachments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ projectId, filename: file.name, fileBase64 }),
+        });
+        fileInput.value = '';
+        await loadProjects();
+      });
+
+      card.querySelectorAll('.file-row').forEach((row) => {
+        const attachmentId = Number(row.dataset.attachmentId);
+        row.querySelector('.file-delete-btn').addEventListener('click', async () => {
+          if (!confirm('Delete this file?')) return;
+          await fetch('/api/admin/attachments', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ attachmentId }),
+          });
+          await loadProjects();
+        });
+      });
     });
   }
 
@@ -783,6 +894,7 @@
     const data = await res.json();
     todos = data.todos;
     renderTodos();
+    await loadActivity();
   }
 
   function renderTodos() {
@@ -792,14 +904,28 @@
       return;
     }
 
-    list.innerHTML = todos.map((t) => `
+    const today = new Date().toISOString().slice(0, 10);
+
+    list.innerHTML = todos.map((t) => {
+      const overdue = t.dueDate && t.dueDate < today && !t.done;
+      return `
       <div class="todo-item ${t.done ? 'done' : ''}" data-todo-id="${t.id}">
         <input type="checkbox" class="todo-done-checkbox" ${t.done ? 'checked' : ''} />
-        <span class="badge todo-priority ${t.priority}">${t.priority}</span>
-        <span class="todo-title">${escapeHtml(t.title)}</span>
+        <div class="todo-body">
+          <div class="todo-title-row">
+            <span class="todo-title">${escapeHtml(t.title)}</span>
+            <span class="badge todo-priority ${t.priority}">${t.priority}</span>
+          </div>
+          <div class="todo-meta">
+            ${t.projectName ? `<span class="todo-meta-item">${escapeHtml(t.projectName)}</span>` : ''}
+            ${t.dueDate ? `<span class="todo-meta-item ${overdue ? 'overdue' : ''}">${overdue ? 'Overdue: ' : 'Due '}${new Date(t.dueDate).toLocaleDateString()}</span>` : ''}
+            ${t.visibleToClient ? '<span class="todo-meta-item">Visible to client</span>' : ''}
+          </div>
+        </div>
         <button type="button" class="todo-delete-btn">Delete</button>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     list.querySelectorAll('.todo-item').forEach((item) => {
       const todoId = Number(item.dataset.todoId);
@@ -824,19 +950,50 @@
     });
   }
 
+  async function loadActivity() {
+    const list = document.getElementById('activity-list');
+    const res = await fetch('/api/admin/activity');
+    if (!res.ok) {
+      list.innerHTML = '<p class="empty-state">Couldn\'t load activity.</p>';
+      return;
+    }
+    const data = await res.json();
+    if (data.activity.length === 0) {
+      list.innerHTML = '<p class="empty-state">No activity yet.</p>';
+      return;
+    }
+    list.innerHTML = data.activity.map((a) => `
+      <div class="activity-item">
+        ${escapeHtml(a.detail || `${a.entityType} ${a.action}`)}
+        <div class="activity-date">${new Date(a.createdAt).toLocaleString()}</div>
+      </div>
+    `).join('');
+  }
+
   document.getElementById('new-todo-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const titleInput = document.getElementById('todo-title');
     const priority = document.getElementById('todo-priority').value;
+    const dueDate = document.getElementById('todo-due-date').value;
+    const projectId = document.getElementById('todo-project').value;
+    const visibleToClient = document.getElementById('todo-visible').checked;
     const title = titleInput.value.trim();
     if (!title) return;
     const res = await fetch('/api/admin/todos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, priority }),
+      body: JSON.stringify({
+        title,
+        priority,
+        dueDate: dueDate || null,
+        projectId: projectId ? Number(projectId) : null,
+        visibleToClient,
+      }),
     });
     if (res.ok) {
       titleInput.value = '';
+      document.getElementById('todo-due-date').value = '';
+      document.getElementById('todo-visible').checked = false;
       await loadTodos();
     }
   });

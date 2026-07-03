@@ -1,5 +1,6 @@
 const { getSql } = require('../../lib/db');
 const { getSessionFromRequest, isAdminEmail } = require('../../lib/auth');
+const { logActivity } = require('../../lib/activity');
 
 module.exports = async (req, res) => {
   const session = getSessionFromRequest(req);
@@ -21,6 +22,7 @@ module.exports = async (req, res) => {
       VALUES (${projectId}, ${title.trim()}, ${body && body.trim() ? body.trim() : null})
       RETURNING id, project_id, title, body, created_at
     `;
+    await logActivity(sql, 'update', update.id, 'created', `Update posted: "${update.title}"`);
     res.status(201).json({
       update: {
         id: update.id,
@@ -66,11 +68,12 @@ module.exports = async (req, res) => {
       res.status(400).json({ error: 'updateId is required' });
       return;
     }
-    const [deleted] = await sql`DELETE FROM project_updates WHERE id = ${updateId} RETURNING id`;
+    const [deleted] = await sql`DELETE FROM project_updates WHERE id = ${updateId} RETURNING id, title`;
     if (!deleted) {
       res.status(404).json({ error: 'Update not found' });
       return;
     }
+    await logActivity(sql, 'update', deleted.id, 'deleted', `Update deleted: "${deleted.title}"`);
     res.status(200).json({ ok: true });
     return;
   }

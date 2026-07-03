@@ -29,6 +29,20 @@ module.exports = async (req, res) => {
         ORDER BY created_at DESC
       `
     : [];
+  const todos = projectIds.length
+    ? await sql`
+        SELECT id, project_id, title, priority, due_date, done FROM todos
+        WHERE project_id = ANY(${projectIds}) AND visible_to_client = true
+        ORDER BY due_date NULLS LAST, created_at DESC
+      `
+    : [];
+  const attachments = projectIds.length
+    ? await sql`
+        SELECT id, project_id, filename, url, created_at FROM attachments
+        WHERE project_id = ANY(${projectIds})
+        ORDER BY created_at DESC
+      `
+    : [];
 
   res.status(200).json({
     projects: projects.map((p) => ({
@@ -40,6 +54,12 @@ module.exports = async (req, res) => {
       updates: updates
         .filter((u) => u.project_id === p.id)
         .map((u) => ({ id: u.id, title: u.title, body: u.body, createdAt: u.created_at })),
+      todos: todos
+        .filter((t) => t.project_id === p.id)
+        .map((t) => ({ id: t.id, title: t.title, priority: t.priority, dueDate: t.due_date, done: t.done })),
+      attachments: attachments
+        .filter((a) => a.project_id === p.id)
+        .map((a) => ({ id: a.id, filename: a.filename, url: a.url, createdAt: a.created_at })),
     })),
   });
 };
