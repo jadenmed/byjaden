@@ -180,15 +180,38 @@
 
   .project-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
-  .project-name { font-family: 'Instrument Serif', serif; font-size: 18px; color: #fff; }
+  .project-name-input {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: 0 0 2px;
+    outline: none;
+    width: 100%;
+  }
+  .project-name-input:focus { border-bottom-color: var(--line); }
 
   .project-client { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
   .status-row { display: flex; align-items: center; gap: 8px; }
 
-  .status-row select { width: auto; padding: 8px 10px; font-size: 12px; }
+  .status-row select, .status-row input {
+    width: auto;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+  }
 
-  .status-save-btn {
+  .status-row .progress-field { width: 64px; }
+
+  .status-save-btn, .icon-btn {
     background: rgba(255,255,255,0.12);
     border: 1px solid var(--line);
     color: #fff;
@@ -196,18 +219,46 @@
     padding: 7px 12px;
     font-size: 12px;
     cursor: pointer;
+    font-family: 'Inter', sans-serif;
   }
 
-  .status-save-btn:hover { background: rgba(255,255,255,0.2); }
+  .status-save-btn:hover, .icon-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .icon-btn.danger { color: #ff8a8a; }
+  .icon-btn.danger:hover { background: rgba(255,138,138,0.15); }
+
+  .progress-field { max-width: 140px; }
+
+  .project-actions { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
 
   .updates-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-  .update-item { font-size: 13px; color: rgba(255,255,255,0.7); }
+  .update-item { font-size: 13px; color: rgba(255,255,255,0.7); border-top: 1px solid var(--line); padding-top: 8px; }
   .update-item strong { color: #fff; }
-  .update-date { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .update-date { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .update-actions { display: flex; gap: 8px; margin-top: 6px; }
+  .update-actions button { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; }
+  .update-actions button:hover { color: #fff; }
+  .update-actions button.danger { color: #ff8a8a; }
+  .update-edit { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+  .update-edit input { width: 100%; }
+  .update-edit-actions { display: flex; gap: 8px; }
 
   .update-form { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
   .update-form-row { display: flex; gap: 8px; }
   .update-form-row input { flex: 1; }
+
+  .update-form-row input, .update-edit input, .search-field input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    outline: none;
+  }
+
+  .search-field { margin-bottom: 16px; }
 
   .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); }
 
@@ -256,6 +307,9 @@
 
     <div class="glass-card">
       <p class="card-heading">Projects</p>
+      <div class="field search-field">
+        <input type="text" id="project-search" placeholder="Search by client or project name" />
+      </div>
       <div class="projects-list" id="admin-projects-list">
         <p class="empty-state">Loading&hellip;</p>
       </div>
@@ -317,15 +371,24 @@
 
   function renderProjects() {
     const list = document.getElementById('admin-projects-list');
-    if (projects.length === 0) {
-      list.innerHTML = '<p class="empty-state">No projects yet.</p>';
+    const query = (document.getElementById('project-search').value || '').trim().toLowerCase();
+    const filtered = query
+      ? projects.filter((p) => {
+          const haystack = `${p.name} ${p.client.firstName} ${p.client.lastName} ${p.client.email}`.toLowerCase();
+          return haystack.includes(query);
+        })
+      : projects;
+
+    if (filtered.length === 0) {
+      list.innerHTML = `<p class="empty-state">${projects.length === 0 ? 'No projects yet.' : 'No projects match your search.'}</p>`;
       return;
     }
-    list.innerHTML = projects.map((p) => `
+
+    list.innerHTML = filtered.map((p) => `
       <div class="project-card" data-project-id="${p.id}">
         <div class="project-head">
           <div>
-            <div class="project-name">${escapeHtml(p.name)}</div>
+            <input type="text" class="project-name-input" value="${escapeHtml(p.name)}" />
             <div class="project-client">${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)} &middot; ${escapeHtml(p.client.email)}</div>
           </div>
           <div class="status-row">
@@ -334,8 +397,37 @@
                 `<option value="${s}" ${s === p.status ? 'selected' : ''}>${s}</option>`
               ).join('')}
             </select>
-            <button type="button" class="status-save-btn">Save</button>
+            <input type="number" class="progress-input progress-field" min="0" max="100" value="${p.progress ?? 0}" title="Progress %" />
           </div>
+        </div>
+        <div class="project-actions">
+          <button type="button" class="status-save-btn save-project-btn">Save changes</button>
+          <button type="button" class="icon-btn danger delete-project-btn">Delete project</button>
+        </div>
+        <div class="updates-list">
+          ${p.updates.length === 0
+            ? '<p class="empty-state">No updates yet.</p>'
+            : p.updates.map((u) => `
+                <div class="update-item" data-update-id="${u.id}">
+                  <div class="update-view">
+                    <strong>${escapeHtml(u.title)}</strong>
+                    ${u.body ? ` &mdash; ${escapeHtml(u.body)}` : ''}
+                    <div class="update-date">${new Date(u.createdAt).toLocaleDateString()}</div>
+                    <div class="update-actions">
+                      <button type="button" class="edit-update-btn">Edit</button>
+                      <button type="button" class="delete-update-btn danger">Delete</button>
+                    </div>
+                  </div>
+                  <div class="update-edit" style="display: none;">
+                    <input type="text" class="edit-update-title" value="${escapeHtml(u.title)}" />
+                    <input type="text" class="edit-update-body" value="${escapeHtml(u.body || '')}" placeholder="Details (optional)" />
+                    <div class="update-edit-actions">
+                      <button type="button" class="status-save-btn save-update-btn">Save</button>
+                      <button type="button" class="icon-btn cancel-update-btn">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
         </div>
         <div class="update-form">
           <div class="update-form-row">
@@ -352,13 +444,26 @@
     list.querySelectorAll('.project-card').forEach((card) => {
       const projectId = Number(card.dataset.projectId);
 
-      card.querySelector('.status-save-btn').addEventListener('click', async () => {
+      card.querySelector('.save-project-btn').addEventListener('click', async () => {
+        const name = card.querySelector('.project-name-input').value;
         const status = card.querySelector('.status-select').value;
+        const progress = card.querySelector('.progress-input').value;
         await fetch('/api/admin/projects', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ projectId, status }),
+          body: JSON.stringify({ projectId, name, status, progress }),
         });
+        await loadProjects();
+      });
+
+      card.querySelector('.delete-project-btn').addEventListener('click', async () => {
+        if (!confirm('Delete this project and all its updates?')) return;
+        await fetch('/api/admin/projects', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ projectId }),
+        });
+        await loadProjects();
       });
 
       card.querySelector('.post-update-btn').addEventListener('click', async () => {
@@ -372,12 +477,51 @@
           body: JSON.stringify({ projectId, title, body: bodyInput.value.trim() }),
         });
         if (res.ok) {
-          titleInput.value = '';
-          bodyInput.value = '';
+          await loadProjects();
         }
+      });
+
+      card.querySelectorAll('.update-item').forEach((item) => {
+        const updateId = Number(item.dataset.updateId);
+        const viewEl = item.querySelector('.update-view');
+        const editEl = item.querySelector('.update-edit');
+
+        item.querySelector('.edit-update-btn').addEventListener('click', () => {
+          viewEl.style.display = 'none';
+          editEl.style.display = 'flex';
+        });
+
+        item.querySelector('.cancel-update-btn').addEventListener('click', () => {
+          editEl.style.display = 'none';
+          viewEl.style.display = 'block';
+        });
+
+        item.querySelector('.delete-update-btn').addEventListener('click', async () => {
+          if (!confirm('Delete this update?')) return;
+          await fetch('/api/admin/updates', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ updateId }),
+          });
+          await loadProjects();
+        });
+
+        item.querySelector('.save-update-btn').addEventListener('click', async () => {
+          const title = item.querySelector('.edit-update-title').value.trim();
+          const body = item.querySelector('.edit-update-body').value.trim();
+          if (!title) return;
+          await fetch('/api/admin/updates', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ updateId, title, body }),
+          });
+          await loadProjects();
+        });
       });
     });
   }
+
+  document.getElementById('project-search').addEventListener('input', renderProjects);
 
   document.getElementById('new-project-form').addEventListener('submit', async (e) => {
     e.preventDefault();

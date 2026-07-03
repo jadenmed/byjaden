@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   const sql = getSql();
 
   const projects = await sql`
-    SELECT id, name, status, created_at FROM projects
+    SELECT id, name, status, progress, created_at FROM projects
     WHERE client_id = ${session.sub}
     ORDER BY created_at DESC
   `;
@@ -35,6 +35,7 @@ module.exports = async (req, res) => {
       id: p.id,
       name: p.name,
       status: p.status,
+      progress: p.progress,
       createdAt: p.created_at,
       updates: updates
         .filter((u) => u.project_id === p.id)

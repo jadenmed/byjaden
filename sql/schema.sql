@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS projects (
   client_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'In Progress',
+  progress INTEGER NOT NULL DEFAULT 0 CHECK (progress >= 0 AND progress <= 100),
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
