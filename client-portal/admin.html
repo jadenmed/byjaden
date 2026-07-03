@@ -367,6 +367,7 @@
   .client-card-projects { display: flex; flex-direction: column; gap: 6px; }
 
   .client-project-row {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -380,6 +381,12 @@
 
   .client-project-row:hover { border-color: rgba(255,255,255,0.25); }
   .client-project-row .kanban-progress-pct { flex: 0 0 auto; }
+
+  .client-project-status {
+    position: absolute;
+    top: -8px;
+    right: 10px;
+  }
 
   .drawer-overlay {
     position: fixed;
@@ -910,8 +917,8 @@
               ? '<p class="empty-state">No projects yet.</p>'
               : clientProjects.map((p) => `
                   <div class="client-project-row" data-project-id="${p.id}">
+                    <span class="badge client-project-status ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
                     <span>${escapeHtml(p.name)}</span>
-                    <span class="badge ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
                     <span class="kanban-progress-pct">${p.progress || 0}%</span>
                   </div>
                 `).join('')}
