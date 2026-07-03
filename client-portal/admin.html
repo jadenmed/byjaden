@@ -290,6 +290,8 @@
 
   .kanban-empty { padding: 4px 6px; }
 
+  .kanban-column.drag-over { border-color: var(--accent); background: rgba(74,139,250,0.06); }
+
   .kanban-card {
     background: var(--panel);
     border: 1px solid var(--line);
@@ -300,6 +302,20 @@
   }
 
   .kanban-card:hover { border-color: rgba(255,255,255,0.25); }
+  .kanban-card.dragging { opacity: 0.4; }
+
+  .kanban-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; margin-bottom: 6px; }
+  .kanban-card-top .kanban-card-name { margin-bottom: 0; }
+
+  .kanban-overdue-badge {
+    flex: 0 0 auto;
+    font-size: 10px;
+    font-weight: 600;
+    color: #ff8a8a;
+    background: rgba(255,138,138,0.14);
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
 
   .kanban-card-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
 
@@ -331,6 +347,39 @@
 
   .kanban-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .kanban-progress-pct { font-size: 11px; color: var(--text-faint); }
+
+  .clients-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .client-card {
+    background: var(--panel-alt);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .client-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+  .client-avatar.large { width: 32px; height: 32px; font-size: 12px; }
+
+  .client-card-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .client-card-email { font-size: 12px; color: var(--text-dim); }
+
+  .client-card-projects { display: flex; flex-direction: column; gap: 6px; }
+
+  .client-project-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .client-project-row:hover { border-color: rgba(255,255,255,0.25); }
+  .client-project-row .kanban-progress-pct { flex: 0 0 auto; }
 
   .drawer-overlay {
     position: fixed;
@@ -595,6 +644,7 @@
     </a>
     <nav class="sidebar-nav" id="sidebar-nav">
       <button type="button" class="nav-item active" data-section="projects">Projects <span class="nav-count" id="nav-count-projects">0</span></button>
+      <button type="button" class="nav-item" data-section="clients">Clients <span class="nav-count" id="nav-count-clients">0</span></button>
       <button type="button" class="nav-item" data-section="todos">To-dos <span class="nav-count" id="nav-count-todos">0</span></button>
       <button type="button" class="nav-item" data-section="activity">Activity</button>
     </nav>
@@ -643,6 +693,15 @@
 
       <div class="kanban-board" id="kanban-board">
         <p class="empty-state">Loading&hellip;</p>
+      </div>
+    </section>
+
+    <section class="app-section" id="section-clients">
+      <div class="panel">
+        <p class="card-heading">Clients</p>
+        <div class="clients-list" id="clients-list">
+          <p class="empty-state">Loading&hellip;</p>
+        </div>
       </div>
     </section>
 
@@ -769,6 +828,7 @@
     select.innerHTML = clients
       .map((c) => `<option value="${c.id}">${escapeHtml(c.firstName)} ${escapeHtml(c.lastName)} (${escapeHtml(c.email)})</option>`)
       .join('');
+    renderClients();
   }
 
   async function loadProjects() {
@@ -782,6 +842,7 @@
     projects = data.projects;
     renderStats();
     renderProjects();
+    renderClients();
     populateTodoProjectSelect();
     if (currentDrawerProjectId != null) {
       const p = projects.find((x) => x.id === currentDrawerProjectId);
@@ -824,10 +885,66 @@
     return `${(client.firstName || '')[0] || ''}${(client.lastName || '')[0] || ''}`.toUpperCase();
   }
 
+  function renderClients() {
+    const list = document.getElementById('clients-list');
+    document.getElementById('nav-count-clients').textContent = clients.length;
+
+    if (clients.length === 0) {
+      list.innerHTML = '<p class="empty-state">No clients yet.</p>';
+      return;
+    }
+
+    list.innerHTML = clients.map((c) => {
+      const clientProjects = projects.filter((p) => p.client.id === c.id);
+      return `
+        <div class="client-card">
+          <div class="client-card-head">
+            <span class="client-avatar large">${clientInitials(c)}</span>
+            <div>
+              <div class="client-card-name">${escapeHtml(c.firstName)} ${escapeHtml(c.lastName)}</div>
+              <div class="client-card-email">${escapeHtml(c.email)}</div>
+            </div>
+          </div>
+          <div class="client-card-projects">
+            ${clientProjects.length === 0
+              ? '<p class="empty-state">No projects yet.</p>'
+              : clientProjects.map((p) => `
+                  <div class="client-project-row" data-project-id="${p.id}">
+                    <span>${escapeHtml(p.name)}</span>
+                    <span class="badge ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
+                    <span class="kanban-progress-pct">${p.progress || 0}%</span>
+                  </div>
+                `).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    list.querySelectorAll('.client-project-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        const projectId = Number(row.dataset.projectId);
+        document.querySelectorAll('.nav-item').forEach((el) => el.classList.remove('active'));
+        document.querySelectorAll('.app-section').forEach((el) => el.classList.remove('active'));
+        document.querySelector('.nav-item[data-section="projects"]').classList.add('active');
+        document.getElementById('section-projects').classList.add('active');
+        openProjectDrawer(projectId);
+      });
+    });
+  }
+
+  function overdueTodoCount(projectId) {
+    const today = new Date().toISOString().slice(0, 10);
+    return todos.filter((t) => t.projectId === projectId && t.dueDate && t.dueDate < today && !t.done).length;
+  }
+
   function renderKanbanCard(p) {
+    const overdue = overdueTodoCount(p.id);
     return `
-      <div class="kanban-card" data-project-id="${p.id}">
-        <div class="kanban-card-name">${escapeHtml(p.name)}</div>
+      <div class="kanban-card" data-project-id="${p.id}" draggable="true">
+        <div class="kanban-card-top">
+          <div class="kanban-card-name">${escapeHtml(p.name)}</div>
+          ${overdue > 0 ? `<span class="kanban-overdue-badge">${overdue} overdue</span>` : ''}
+        </div>
         <div class="kanban-card-client">
           <span class="client-avatar">${clientInitials(p.client)}</span>
           ${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)}
@@ -863,7 +980,7 @@
     board.innerHTML = columns.map((status) => {
       const colProjects = filtered.filter((p) => p.status === status);
       return `
-        <div class="kanban-column">
+        <div class="kanban-column" data-status="${escapeHtml(status)}">
           <div class="kanban-column-head">
             <span class="kanban-dot ${statusClass(status)}"></span>
             <span>${escapeHtml(status)}</span>
@@ -876,9 +993,47 @@
       `;
     }).join('');
 
+    let draggedProjectId = null;
+
     board.querySelectorAll('.kanban-card').forEach((card) => {
       const projectId = Number(card.dataset.projectId);
       card.addEventListener('click', () => openProjectDrawer(projectId));
+
+      card.addEventListener('dragstart', () => {
+        draggedProjectId = projectId;
+        card.classList.add('dragging');
+      });
+
+      card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+        draggedProjectId = null;
+      });
+    });
+
+    board.querySelectorAll('.kanban-column').forEach((column) => {
+      column.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        column.classList.add('drag-over');
+      });
+
+      column.addEventListener('dragleave', () => {
+        column.classList.remove('drag-over');
+      });
+
+      column.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        column.classList.remove('drag-over');
+        const newStatus = column.dataset.status;
+        if (draggedProjectId == null) return;
+        const p = projects.find((x) => x.id === draggedProjectId);
+        if (!p || p.status === newStatus) return;
+        await fetch('/api/admin/projects', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ projectId: draggedProjectId, status: newStatus }),
+        });
+        await loadProjects();
+      });
     });
   }
 
@@ -1103,6 +1258,7 @@
     const data = await res.json();
     todos = data.todos;
     renderTodos();
+    renderProjects();
     await loadActivity();
   }
 
