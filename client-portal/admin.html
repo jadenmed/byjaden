@@ -99,6 +99,8 @@
 
   .admin-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start; }
 
+  .admin-sidebar { display: flex; flex-direction: column; gap: 24px; }
+
   @media (max-width: 860px) {
     .admin-grid { grid-template-columns: 1fr; }
   }
@@ -383,9 +385,10 @@
 
   .empty-state { font-size: 14px; color: rgba(255,255,255,0.5); }
 
-  .todo-form-row { display: flex; gap: 8px; margin-bottom: 16px; }
-  .todo-form-row input { flex: 1; }
-  .todo-form-row select { width: auto; min-width: 110px; }
+  .todo-form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .todo-form-row input { flex: 1 1 100%; }
+  .todo-form-row select { flex: 1; }
+  .todo-form-row .submit-btn { flex: 0 0 auto; }
 
   .todo-form-row input, .todo-form-row select {
     background: rgba(0, 0, 0, 0.24);
@@ -458,24 +461,42 @@
     <div class="stats-row" id="stats-row"></div>
 
     <div class="admin-grid">
-      <div class="glass-card">
-        <p class="card-heading">New project</p>
-        <form id="new-project-form">
-          <div class="field">
-            <label for="project-client">Client</label>
-            <select id="project-client" required></select>
+      <div class="admin-sidebar">
+        <div class="glass-card">
+          <p class="card-heading">New project</p>
+          <form id="new-project-form">
+            <div class="field">
+              <label for="project-client">Client</label>
+              <select id="project-client" required></select>
+            </div>
+            <div class="field">
+              <label for="project-name">Project name</label>
+              <input type="text" id="project-name" placeholder="Website redesign" required />
+            </div>
+            <div class="field">
+              <label for="project-status">Status</label>
+              <input type="text" id="project-status" placeholder="In Progress" />
+            </div>
+            <p class="form-error" id="new-project-error"></p>
+            <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
+          </form>
+        </div>
+
+        <div class="glass-card">
+          <p class="card-heading">To-dos</p>
+          <form id="new-todo-form" class="todo-form-row">
+            <input type="text" id="todo-title" placeholder="What needs doing?" required />
+            <select id="todo-priority">
+              <option value="High">High</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <button type="submit" class="submit-btn">Add</button>
+          </form>
+          <div class="todo-list" id="todo-list">
+            <p class="empty-state">Loading&hellip;</p>
           </div>
-          <div class="field">
-            <label for="project-name">Project name</label>
-            <input type="text" id="project-name" placeholder="Website redesign" required />
-          </div>
-          <div class="field">
-            <label for="project-status">Status</label>
-            <input type="text" id="project-status" placeholder="In Progress" />
-          </div>
-          <p class="form-error" id="new-project-error"></p>
-          <button type="submit" class="submit-btn" id="new-project-submit">Create project</button>
-        </form>
+        </div>
       </div>
 
       <div class="glass-card">
@@ -489,22 +510,6 @@
         <div class="projects-list" id="admin-projects-list">
           <p class="empty-state">Loading&hellip;</p>
         </div>
-      </div>
-    </div>
-
-    <div class="glass-card">
-      <p class="card-heading">To-dos</p>
-      <form id="new-todo-form" class="todo-form-row">
-        <input type="text" id="todo-title" placeholder="What needs doing?" required />
-        <select id="todo-priority">
-          <option value="High">High</option>
-          <option value="Medium" selected>Medium</option>
-          <option value="Low">Low</option>
-        </select>
-        <button type="submit" class="submit-btn">Add</button>
-      </form>
-      <div class="todo-list" id="todo-list">
-        <p class="empty-state">Loading&hellip;</p>
       </div>
     </div>
   </div>
