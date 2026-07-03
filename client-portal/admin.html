@@ -103,6 +103,22 @@
     .admin-grid { grid-template-columns: 1fr; }
   }
 
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  @media (max-width: 700px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-card {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+
+  .stat-value { font-family: 'Instrument Serif', serif; font-size: 28px; color: #fff; line-height: 1; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 6px; }
+
   .form-eyebrow { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.02em; margin-bottom: 8px; }
 
   .form-heading {
@@ -196,33 +212,94 @@
   .form-success { display: none; font-size: 13px; color: #8affb0; margin-top: 4px; }
   .form-success.visible { display: block; }
 
-  .projects-list { display: flex; flex-direction: column; gap: 14px; }
+  .projects-list { display: flex; flex-direction: column; gap: 8px; }
 
-  .project-card {
+  .projects-table-head {
+    display: grid;
+    grid-template-columns: 2fr 1.6fr 1fr 1.4fr 90px;
+    gap: 12px;
+    padding: 0 22px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.4);
+  }
+
+  @media (max-width: 700px) {
+    .projects-table-head { display: none; }
+  }
+
+  .project-row {
     background: rgba(0, 0, 0, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 14px;
-    padding: 20px 22px;
+    overflow: hidden;
   }
 
-  .project-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .project-row-main {
+    display: grid;
+    grid-template-columns: 2fr 1.6fr 1fr 1.4fr 90px;
+    gap: 12px;
+    align-items: center;
+    padding: 16px 22px;
+  }
+
+  @media (max-width: 700px) {
+    .project-row-main { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  .cell-name { font-family: 'Instrument Serif', serif; font-size: 17px; color: #fff; }
+  .cell-client { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+  .badge {
+    display: inline-block;
+    width: fit-content;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .row-toggle {
+    justify-self: end;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border-radius: 7px;
+    padding: 7px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .row-toggle:hover { background: rgba(255,255,255,0.18); }
+
+  @media (max-width: 700px) {
+    .row-toggle { justify-self: start; margin-top: 6px; }
+  }
+
+  .project-row-detail {
+    padding: 4px 22px 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 4px;
+  }
 
   .project-name-input {
     font-family: 'Instrument Serif', serif;
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid transparent;
-    padding: 0 0 2px;
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9px;
+    padding: 10px 12px;
     outline: none;
     width: 100%;
   }
-  .project-name-input:focus { border-bottom-color: var(--line); }
+  .project-name-input:focus { border-color: rgba(255, 255, 255, 0.4); }
 
-  .project-client { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-
-  .status-row { display: flex; align-items: center; gap: 8px; }
+  .status-row { display: flex; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
 
   .status-row select, .status-row input {
     width: auto;
@@ -326,6 +403,8 @@
       <h2 class="form-heading">Admin</h2>
     </div>
 
+    <div class="stats-row" id="stats-row"></div>
+
     <div class="admin-grid">
       <div class="glass-card">
         <p class="card-heading">New project</p>
@@ -352,6 +431,9 @@
         <div class="field search-field">
           <input type="text" id="project-search" placeholder="Search by client or project name" />
         </div>
+        <div class="projects-table-head">
+          <span>Project</span><span>Client</span><span>Status</span><span>Phase</span><span></span>
+        </div>
         <div class="projects-list" id="admin-projects-list">
           <p class="empty-state">Loading&hellip;</p>
         </div>
@@ -363,6 +445,7 @@
 <script>
   let clients = [];
   let projects = [];
+  const expandedIds = new Set();
 
   const PHASES = [
     { value: 25, label: 'Discovery & Wireframe' },
@@ -420,7 +503,28 @@
     }
     const data = await res.json();
     projects = data.projects;
+    renderStats();
     renderProjects();
+  }
+
+  function renderStats() {
+    const statsRow = document.getElementById('stats-row');
+    const total = projects.length;
+    const active = projects.filter((p) => p.status === 'In Progress').length;
+    const completed = projects.filter((p) => p.status === 'Completed').length;
+    const clientCount = new Set(projects.map((p) => p.client.id)).size;
+
+    statsRow.innerHTML = [
+      { value: total, label: 'Total Projects' },
+      { value: active, label: 'In Progress' },
+      { value: completed, label: 'Completed' },
+      { value: clientCount, label: 'Clients' },
+    ].map((s) => `
+      <div class="stat-card">
+        <div class="stat-value">${s.value}</div>
+        <div class="stat-label">${s.label}</div>
+      </div>
+    `).join('');
   }
 
   function renderProjects() {
@@ -439,11 +543,18 @@
     }
 
     list.innerHTML = filtered.map((p) => `
-      <div class="project-card" data-project-id="${p.id}">
-        <div class="project-head">
-          <div>
+      <div class="project-row" data-project-id="${p.id}">
+        <div class="project-row-main">
+          <span class="cell-name">${escapeHtml(p.name)}</span>
+          <span class="cell-client">${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)}</span>
+          <span class="badge">${escapeHtml(p.status)}</span>
+          <span class="badge">${phaseForProgress(p.progress).label}</span>
+          <button type="button" class="row-toggle">${expandedIds.has(p.id) ? 'Close' : 'Manage'}</button>
+        </div>
+        <div class="project-row-detail" style="display: ${expandedIds.has(p.id) ? 'block' : 'none'};">
+          <div class="field">
+            <label>Project name</label>
             <input type="text" class="project-name-input" value="${escapeHtml(p.name)}" />
-            <div class="project-client">${escapeHtml(p.client.firstName)} ${escapeHtml(p.client.lastName)} &middot; ${escapeHtml(p.client.email)}</div>
           </div>
           <div class="status-row">
             <select class="status-select">
@@ -457,50 +568,59 @@
               ).join('')}
             </select>
           </div>
-        </div>
-        <div class="project-actions">
-          <button type="button" class="status-save-btn save-project-btn">Save changes</button>
-          <button type="button" class="icon-btn danger delete-project-btn">Delete project</button>
-        </div>
-        <div class="updates-list">
-          ${p.updates.length === 0
-            ? '<p class="empty-state">No updates yet.</p>'
-            : p.updates.map((u) => `
-                <div class="update-item" data-update-id="${u.id}">
-                  <div class="update-view">
-                    <strong>${escapeHtml(u.title)}</strong>
-                    ${u.body ? ` &mdash; ${escapeHtml(u.body)}` : ''}
-                    <div class="update-date">${new Date(u.createdAt).toLocaleDateString()}</div>
-                    <div class="update-actions">
-                      <button type="button" class="edit-update-btn">Edit</button>
-                      <button type="button" class="delete-update-btn danger">Delete</button>
-                    </div>
-                  </div>
-                  <div class="update-edit" style="display: none;">
-                    <input type="text" class="edit-update-title" value="${escapeHtml(u.title)}" />
-                    <input type="text" class="edit-update-body" value="${escapeHtml(u.body || '')}" placeholder="Details (optional)" />
-                    <div class="update-edit-actions">
-                      <button type="button" class="status-save-btn save-update-btn">Save</button>
-                      <button type="button" class="icon-btn cancel-update-btn">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-              `).join('')}
-        </div>
-        <div class="update-form">
-          <div class="update-form-row">
-            <input type="text" class="update-title-input" placeholder="Update title" />
+          <div class="project-actions">
+            <button type="button" class="status-save-btn save-project-btn">Save changes</button>
+            <button type="button" class="icon-btn danger delete-project-btn">Delete project</button>
           </div>
-          <div class="update-form-row">
-            <input type="text" class="update-body-input" placeholder="Details (optional)" />
-            <button type="button" class="submit-btn post-update-btn">Post update</button>
+          <div class="updates-list">
+            ${p.updates.length === 0
+              ? '<p class="empty-state">No updates yet.</p>'
+              : p.updates.map((u) => `
+                  <div class="update-item" data-update-id="${u.id}">
+                    <div class="update-view">
+                      <strong>${escapeHtml(u.title)}</strong>
+                      ${u.body ? ` &mdash; ${escapeHtml(u.body)}` : ''}
+                      <div class="update-date">${new Date(u.createdAt).toLocaleDateString()}</div>
+                      <div class="update-actions">
+                        <button type="button" class="edit-update-btn">Edit</button>
+                        <button type="button" class="delete-update-btn danger">Delete</button>
+                      </div>
+                    </div>
+                    <div class="update-edit" style="display: none;">
+                      <input type="text" class="edit-update-title" value="${escapeHtml(u.title)}" />
+                      <input type="text" class="edit-update-body" value="${escapeHtml(u.body || '')}" placeholder="Details (optional)" />
+                      <div class="update-edit-actions">
+                        <button type="button" class="status-save-btn save-update-btn">Save</button>
+                        <button type="button" class="icon-btn cancel-update-btn">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+          </div>
+          <div class="update-form">
+            <div class="update-form-row">
+              <input type="text" class="update-title-input" placeholder="Update title" />
+            </div>
+            <div class="update-form-row">
+              <input type="text" class="update-body-input" placeholder="Details (optional)" />
+              <button type="button" class="submit-btn post-update-btn">Post update</button>
+            </div>
           </div>
         </div>
       </div>
     `).join('');
 
-    list.querySelectorAll('.project-card').forEach((card) => {
+    list.querySelectorAll('.project-row').forEach((card) => {
       const projectId = Number(card.dataset.projectId);
+      const toggleBtn = card.querySelector('.row-toggle');
+      const detailEl = card.querySelector('.project-row-detail');
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = detailEl.style.display !== 'none';
+        detailEl.style.display = isOpen ? 'none' : 'block';
+        toggleBtn.textContent = isOpen ? 'Manage' : 'Close';
+        if (isOpen) expandedIds.delete(projectId); else expandedIds.add(projectId);
+      });
 
       card.querySelector('.save-project-btn').addEventListener('click', async () => {
         const name = card.querySelector('.project-name-input').value;
