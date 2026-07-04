@@ -375,7 +375,6 @@
   .client-drawer-stat span { font-size: 11px; color: var(--text-dim); }
 
   .client-project-row {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -390,12 +389,7 @@
   .client-project-row:hover { border-color: rgba(255,255,255,0.25); }
   .client-project-row .kanban-progress-pct { flex: 0 0 auto; }
 
-  .client-project-status {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    margin-bottom: 6px;
-  }
+  .client-project-right { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
 
   .drawer-overlay {
     position: fixed;
@@ -927,9 +921,11 @@
               ? '<p class="empty-state">No projects yet.</p>'
               : clientProjects.map((p) => `
                   <div class="client-project-row" data-project-id="${p.id}">
-                    <span class="badge client-project-status ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
                     <span>${escapeHtml(p.name)}</span>
-                    <span class="kanban-progress-pct">${p.progress || 0}%</span>
+                    <span class="client-project-right">
+                      <span class="kanban-progress-pct">${p.progress || 0}%</span>
+                      <span class="badge ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
+                    </span>
                   </div>
                 `).join('')}
           </div>
@@ -999,9 +995,11 @@
           ? '<p class="empty-state">No projects yet.</p>'
           : clientProjects.map((p) => `
               <div class="client-project-row" data-project-id="${p.id}">
-                <span class="badge client-project-status ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
                 <span>${escapeHtml(p.name)}</span>
-                <span class="kanban-progress-pct">${p.progress || 0}%</span>
+                <span class="client-project-right">
+                  <span class="kanban-progress-pct">${p.progress || 0}%</span>
+                  <span class="badge ${statusClass(p.status)}">${escapeHtml(p.status)}</span>
+                </span>
               </div>
             `).join('')}
       </div>
