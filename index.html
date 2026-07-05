@@ -931,6 +931,76 @@
   .why-cta:hover { opacity: 0.85; transform: translateY(-1px); }
 
   /* ============================================================
+     BLOG
+  ============================================================ */
+  .blog { padding: 0 0 120px; }
+
+  .blog-top-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .blog-heading {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .blog-subtitle { font-size: 17px; font-weight: 400; color: var(--muted); max-width: 480px; }
+
+  .blog-view-all {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+  .blog-view-all:hover { opacity: 0.6; }
+  .blog-view-all svg { width: 14px; height: 14px; }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .blog-card {
+    display: block;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .blog-card:hover { border-color: #cfcecb; transform: translateY(-2px); }
+
+  .blog-card-meta {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .blog-card-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .blog-card-dek { font-size: 14px; line-height: 1.6; color: var(--muted); }
+
+  /* ============================================================
      FAQ
   ============================================================ */
   .faq { padding: 0 0 120px; }
@@ -1213,6 +1283,11 @@
     .why-heading { font-size: 32px; }
     .why-text { max-width: 100%; }
     .why-image-wrap { order: -1; }
+
+    .blog { padding-bottom: 80px; }
+    .blog-top-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .blog-heading { font-size: 32px; }
+    .blog-grid { grid-template-columns: 1fr; }
 
     .faq { padding-bottom: 80px; }
     .faq-heading { font-size: 32px; }
@@ -1568,6 +1643,42 @@
   </div>
 </section>
 
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="wrap">
+    <div class="blog-top-row" data-reveal>
+      <div>
+        <h2 class="blog-heading">From the blog.</h2>
+        <p class="blog-subtitle">Weekly notes on web design, brand strategy, and what's actually working.</p>
+      </div>
+      <a href="https://news.byjaden.com" class="blog-view-all">
+        View all articles
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="blog-grid" data-reveal>
+      <a href="https://news.byjaden.com/first-issue" class="blog-card">
+        <div class="blog-card-meta">The Brief &middot; Issue 01</div>
+        <h3 class="blog-card-title">What's actually working in web design right now.</h3>
+        <p class="blog-card-dek">A look at the trends, tools, and teardowns that are moving the needle for brands in 2026.</p>
+      </a>
+
+      <a href="https://news.byjaden.com/feature" class="blog-card">
+        <div class="blog-card-meta">Feature</div>
+        <h3 class="blog-card-title">Jaden Tyler Medina, on his own terms.</h3>
+        <p class="blog-card-dek">A profile on building a design career from the ground up, one client relationship at a time.</p>
+      </a>
+
+      <a href="https://news.byjaden.com/miami-business-websites" class="blog-card">
+        <div class="blog-card-meta">Ocean Development</div>
+        <h3 class="blog-card-title">Why Miami business owners need new websites.</h3>
+        <p class="blog-card-dek">The gap between what local businesses have online and what their customers expect.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div class="wrap">
@@ -1624,6 +1735,7 @@
           <a href="#work">Work</a>
           <a href="#process">Process</a>
           <a href="#pricing">Pricing</a>
+          <a href="#blog">Blog</a>
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </div>

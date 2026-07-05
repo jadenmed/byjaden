@@ -6,6 +6,11 @@
       "destination": "/digest.html"
     },
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "news.byjaden.com" }],
+      "destination": "/news/index.html"
+    },
+    {
       "source": "/:slug",
       "has": [{ "type": "host", "value": "news.byjaden.com" }],
       "destination": "/news/:slug.html"
