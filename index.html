@@ -465,18 +465,18 @@
   ============================================================ */
   [data-reveal] {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(32px) scale(0.97);
+    filter: blur(6px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
   }
 
-  [data-reveal].in-view { opacity: 1; transform: translateY(0); }
-
-  .hero [data-reveal]:nth-child(1) { transition-delay: 0s; }
-  .hero [data-reveal]:nth-child(2) { transition-delay: 0.08s; }
-  .hero [data-reveal]:nth-child(3) { transition-delay: 0.16s; }
+  [data-reveal].in-view { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    [data-reveal] { opacity: 1; transform: none; transition: none; }
+    [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
     html { scroll-behavior: auto; }
   }
 
@@ -1427,7 +1427,7 @@
   </div>
 
   <div class="wrap">
-    <div class="project-card">
+    <div class="project-card" data-reveal>
       <div class="project-card-inner" onclick="window.open('https://oceandev.net','_blank')">
         <div class="project-card-header">
           <div>
@@ -1445,7 +1445,7 @@
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-reveal>
       <div class="project-card-inner" onclick="window.open('https://getcampusbite.com','_blank')">
         <div class="project-card-header">
           <div>
@@ -1463,7 +1463,7 @@
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-reveal>
       <div class="project-card-inner" onclick="window.open('https://oceandev.net/projects','_blank')">
         <div class="project-card-header">
           <div>
@@ -1491,8 +1491,8 @@
       <p class="timeline-subtitle">How Ocean Development takes a project from brief to live site.</p>
     </div>
 
-    <div class="timeline-grid" data-reveal>
-      <div class="timeline-card">
+    <div class="timeline-grid">
+      <div class="timeline-card" data-reveal>
         <div class="timeline-top">
           <span class="timeline-day">Week 1</span>
           <span class="timeline-tag">Discovery</span>
@@ -1500,7 +1500,7 @@
         <p class="timeline-desc">Goals, audience, and content audit. Map out structure and pages.</p>
       </div>
 
-      <div class="timeline-card">
+      <div class="timeline-card" data-reveal>
         <div class="timeline-top">
           <span class="timeline-day">Week 1</span>
           <span class="timeline-tag">Wireframes</span>
@@ -1508,7 +1508,7 @@
         <p class="timeline-desc">Layout and structure for every page. No design yet, just flow.</p>
       </div>
 
-      <div class="timeline-card">
+      <div class="timeline-card" data-reveal>
         <div class="timeline-top">
           <span class="timeline-day">Week 2</span>
           <span class="timeline-tag">Design Direction</span>
@@ -1516,7 +1516,7 @@
         <p class="timeline-desc">Visual concepts, typography, color, and one direction locked.</p>
       </div>
 
-      <div class="timeline-card">
+      <div class="timeline-card" data-reveal>
         <div class="timeline-top">
           <span class="timeline-day">Week 2</span>
           <span class="timeline-tag">Design &amp; Build</span>
@@ -1524,7 +1524,7 @@
         <p class="timeline-desc">Full design across all pages. Desktop and mobile.</p>
       </div>
 
-      <div class="timeline-card">
+      <div class="timeline-card" data-reveal>
         <div class="timeline-top">
           <span class="timeline-day">Week 3</span>
           <span class="timeline-tag">Development</span>
@@ -1532,7 +1532,7 @@
         <p class="timeline-desc">Build it live. Animations, interactions, responsive polish.</p>
       </div>
 
-      <div class="timeline-card">
+      <div class="timeline-card" data-reveal>
         <div class="timeline-top">
           <span class="timeline-day">Week 4</span>
           <span class="timeline-tag">Launch</span>
@@ -1657,20 +1657,20 @@
       </a>
     </div>
 
-    <div class="blog-grid" data-reveal>
-      <a href="https://byjaden.com/news/first-issue" class="blog-card">
+    <div class="blog-grid">
+      <a href="https://byjaden.com/news/first-issue" class="blog-card" data-reveal>
         <div class="blog-card-meta">The Brief &middot; Issue 01</div>
         <h3 class="blog-card-title">What's actually working in web design right now.</h3>
         <p class="blog-card-dek">A look at the trends, tools, and teardowns that are moving the needle for brands in 2026.</p>
       </a>
 
-      <a href="https://byjaden.com/news/feature" class="blog-card">
+      <a href="https://byjaden.com/news/feature" class="blog-card" data-reveal>
         <div class="blog-card-meta">Feature</div>
         <h3 class="blog-card-title">Jaden Tyler Medina, on his own terms.</h3>
         <p class="blog-card-dek">A profile on building a design career from the ground up, one client relationship at a time.</p>
       </a>
 
-      <a href="https://byjaden.com/news/miami-business-websites" class="blog-card">
+      <a href="https://byjaden.com/news/miami-business-websites" class="blog-card" data-reveal>
         <div class="blog-card-meta">Ocean Development</div>
         <h3 class="blog-card-title">Why Miami business owners need new websites.</h3>
         <p class="blog-card-dek">The gap between what local businesses have online and what their customers expect.</p>
@@ -1684,28 +1684,28 @@
   <div class="wrap">
     <h2 class="faq-heading" data-reveal>Questions, answered.</h2>
     <p class="faq-subtitle" data-reveal>Everything you might be wondering before we start.</p>
-    <div class="faq-list" data-reveal>
-      <div class="faq-item">
+    <div class="faq-list">
+      <div class="faq-item" data-reveal>
         <button class="faq-question"><span>What if I need changes after launch?</span><span class="faq-icon"></span></button>
         <div class="faq-answer"><div class="faq-answer-inner">Every project includes a support window after launch for fixes and small tweaks. Bigger changes or new features can be scoped separately afterward.</div></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item" data-reveal>
         <button class="faq-question"><span>How many revisions do I get?</span><span class="faq-icon"></span></button>
         <div class="faq-answer"><div class="faq-answer-inner">You'll see the design before development starts, so we can align on direction early. From there, revisions are handled collaboratively as the build comes together.</div></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item" data-reveal>
         <button class="faq-question"><span>Do you write the content and copy?</span><span class="faq-icon"></span></button>
         <div class="faq-answer"><div class="faq-answer-inner">I can write or refine copy as part of the build, or work with whatever you already have. Either way, the goal is content that fits the design and converts.</div></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item" data-reveal>
         <button class="faq-question"><span>What do you need from me to get started?</span><span class="faq-icon"></span></button>
         <div class="faq-answer"><div class="faq-answer-inner">A quick call to talk through your goals, audience, and any brand assets you already have. From there, I handle the rest, and check in at key points along the way.</div></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item" data-reveal>
         <button class="faq-question"><span>Can you work with my existing site or platform?</span><span class="faq-icon"></span></button>
         <div class="faq-answer"><div class="faq-answer-inner">In most cases, yes. If a rebuild makes more sense for what you're trying to achieve, I'll let you know early so there are no surprises.</div></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item" data-reveal>
         <button class="faq-question"><span>What if I'm not ready to launch in a week?</span><span class="faq-icon"></span></button>
         <div class="faq-answer"><div class="faq-answer-inner">That's fine. The timeline is built around focus, not pressure. We can adjust the pace to fit your schedule without losing momentum.</div></div>
       </div>
@@ -1788,7 +1788,22 @@
     });
 
     // Scroll reveal
-    const revealEls = document.querySelectorAll('[data-reveal]');
+    const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+
+    // Auto-stagger elements that share the same parent, so grids/lists
+    // cascade in one item at a time instead of appearing as one block.
+    const staggerGroups = new Map();
+    revealEls.forEach(el => {
+      const parent = el.parentElement;
+      if (!staggerGroups.has(parent)) staggerGroups.set(parent, []);
+      staggerGroups.get(parent).push(el);
+    });
+    staggerGroups.forEach(group => {
+      group.forEach((el, i) => {
+        el.style.transitionDelay = `${Math.min(i * 0.09, 0.45)}s`;
+      });
+    });
+
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1796,7 +1811,7 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
     revealEls.forEach(el => revealObserver.observe(el));
 
