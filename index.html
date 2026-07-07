@@ -773,25 +773,13 @@
     user-select: none;
   }
 
-  .timeline-kicker {
-    display: block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 24px;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-  }
-
   .timeline-title {
     font-family: 'Inter', sans-serif;
     font-size: 22px;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--text);
+    margin-top: 24px;
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
@@ -808,17 +796,20 @@
   }
 
   .timeline-media {
-    margin: auto -32px 0;
-    border-top: 1px solid var(--line);
-    background: #F7F6F3;
-    aspect-ratio: 4 / 3;
+    margin: 24px -32px 0;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
   }
 
   .timeline-media img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: top right;
     display: block;
   }
 
@@ -1539,8 +1530,8 @@
 <section class="timeline" id="process">
   <div class="wrap">
     <div class="timeline-top-row" data-reveal>
-      <h2 class="timeline-heading">Built by a team.<br>Delivered on time.</h2>
-      <p class="timeline-subtitle">How Ocean Development takes a project from brief to live site.</p>
+      <h2 class="timeline-heading">Simple process.<br>Real results.</h2>
+      <p class="timeline-subtitle">Three steps from first call to live site.</p>
     </div>
 
     <div class="timeline-grid">
@@ -1549,10 +1540,9 @@
           <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6"/><path d="M20 20l-4.5-4.5"/></svg></div>
           <span class="timeline-number">01</span>
         </div>
-        <span class="timeline-kicker">Week 1</span>
-        <h3 class="timeline-title">Discovery</h3>
-        <p class="timeline-desc">Goals, audience, and content audit. Map out structure and pages.</p>
-        <div class="timeline-media"><img src="/assets/process-1.png" alt="Discovery process preview" /></div>
+        <h3 class="timeline-title">Discovery &amp; Strategy</h3>
+        <p class="timeline-desc">Want a Framer website that turns visitors into loyal customers? Explore my portfolio to see how I've transformed ideas into sleek, high-performing websites. From interactive landing pages to full-scale brand experiences, my designs are built to meet your business goals and stand out in today's digital world.</p>
+        <div class="timeline-media"><img src="/assets/process-discovery.png" alt="Discovery and strategy process preview" /></div>
       </div>
 
       <div class="timeline-card" data-reveal>
@@ -1560,54 +1550,19 @@
           <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg></div>
           <span class="timeline-number">02</span>
         </div>
-        <span class="timeline-kicker">Week 1</span>
-        <h3 class="timeline-title">Wireframes</h3>
-        <p class="timeline-desc">Layout and structure for every page. No design yet, just flow.</p>
-        <div class="timeline-media"><img src="/assets/process-2.png" alt="Wireframes process preview" /></div>
+        <h3 class="timeline-title">Design &amp; Build</h3>
+        <p class="timeline-desc">Once we align on the project scope and you approve the proposal, Jaden Medina will begin building your site in Framer. Throughout the process, you'll be able to leave feedback directly on the site using built-in commenting tools, keeping everything smooth, clear, and collaborative from start to launch.</p>
+        <div class="timeline-media"><img src="/assets/process-design.png" alt="Design and build process preview" /></div>
       </div>
 
       <div class="timeline-card" data-reveal>
         <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a9 9 0 1 0 9 9c0-1-.7-1.5-1.5-1.5H16a2.5 2.5 0 0 1 0-5h.5C17.9 5.6 15.2 3 12 3Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="14" cy="7.5" r="1"/></svg></div>
+          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5 21 7v10l-6-3.5"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div>
           <span class="timeline-number">03</span>
         </div>
-        <span class="timeline-kicker">Week 2</span>
-        <h3 class="timeline-title">Design Direction</h3>
-        <p class="timeline-desc">Visual concepts, typography, color, and one direction locked.</p>
-        <div class="timeline-media"><img src="/assets/process-3.png" alt="Design direction process preview" /></div>
-      </div>
-
-      <div class="timeline-card" data-reveal>
-        <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 13l9 5 9-5"/></svg></div>
-          <span class="timeline-number">04</span>
-        </div>
-        <span class="timeline-kicker">Week 2</span>
-        <h3 class="timeline-title">Design &amp; Build</h3>
-        <p class="timeline-desc">Full design across all pages. Desktop and mobile.</p>
-        <div class="timeline-media"><img src="/assets/process-4.png" alt="Design and build process preview" /></div>
-      </div>
-
-      <div class="timeline-card" data-reveal>
-        <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 7 4 12l5 5M15 7l5 5-5 5"/></svg></div>
-          <span class="timeline-number">05</span>
-        </div>
-        <span class="timeline-kicker">Week 3</span>
-        <h3 class="timeline-title">Development</h3>
-        <p class="timeline-desc">Build it live. Animations, interactions, responsive polish.</p>
-        <div class="timeline-media"><img src="/assets/process-5.png" alt="Development process preview" /></div>
-      </div>
-
-      <div class="timeline-card" data-reveal>
-        <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 5-5"/></svg></div>
-          <span class="timeline-number">06</span>
-        </div>
-        <span class="timeline-kicker">Week 4</span>
-        <h3 class="timeline-title">Launch</h3>
-        <p class="timeline-desc">QA, performance check, and ship. Live site, ready to go.</p>
-        <div class="timeline-media"><img src="/assets/process-6.png" alt="Launch process preview" /></div>
+        <h3 class="timeline-title">Handover &amp; Training</h3>
+        <p class="timeline-desc">Once you approve the final website, you'll receive personalized handover training via a recorded Loom video. Plus, enjoy 30 days of complimentary email support to ensure a smooth and confident transition.</p>
+        <div class="timeline-media"><img src="/assets/process-handover.png" alt="Handover and training process preview" /></div>
       </div>
     </div>
   </div>
