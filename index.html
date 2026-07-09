@@ -305,6 +305,13 @@
 
   .hero-left { color: #fff; min-width: 0; }
 
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
   .hero-pill {
     display: inline-flex;
     align-items: center;
@@ -317,8 +324,19 @@
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
     letter-spacing: 0.02em;
-    margin-bottom: 28px;
     backdrop-filter: blur(8px);
+  }
+
+  .hero-pill svg { flex-shrink: 0; }
+
+  .framer-badge {
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+  }
+
+  .glitch-text {
+    color: #fff;
   }
 
   .hero-pill-dot {
@@ -523,22 +541,65 @@
   .fill-text .word { color: var(--line); transition: color 0.15s ease; }
   .fill-text .word.active { color: var(--text); }
 
+  .about-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
   .about-cta {
-    margin-top: 16px;
     background: var(--pill-bg);
     color: var(--pill-text);
     border: none;
-    border-radius: 7px;
-    padding: 12px 24px;
+    border-radius: 10px;
+    padding: 14px 26px;
     font-size: 14px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
     cursor: pointer;
     display: inline-block;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .about-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+  .about-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .social-icons a svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .social-icons a:hover {
+    background: var(--pill-bg);
+    border-color: var(--pill-bg);
+    color: var(--pill-text);
+    transform: translateY(-2px);
+  }
 
   .about-image {
     border-radius: 12px;
@@ -549,47 +610,103 @@
     justify-self: end;
   }
 
-  .about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 75%; display: block; }
 
   /* ============================================================
-     PROJECTS — sticky stack
+     PROJECTS — grid
   ============================================================ */
   .projects {
     position: relative;
-    padding: 0 0 120px;
+    padding: 120px 0;
   }
 
   .projects-header {
-    text-align: center;
-    padding: 120px 0 64px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 56px;
+    flex-wrap: wrap;
+  }
+
+  .projects-header-text { max-width: 640px; }
+
+  .projects-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(17, 17, 17, 0.04);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+
+  .projects-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text);
+    flex-shrink: 0;
   }
 
   .projects-heading {
     font-family: 'Instrument Serif', serif;
-    font-size: 56px;
+    font-size: 52px;
     font-weight: 400;
     letter-spacing: -0.01em;
-    margin-bottom: 12px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+    color: var(--text);
   }
 
   .projects-subtitle {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--muted);
+    line-height: 1.65;
+    max-width: 520px;
   }
 
-  .project-card {
-    position: sticky;
-    top: var(--nav-h);
-    margin-bottom: 24px;
+  .projects-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border: none;
+    border-radius: 999px;
+    padding: 15px 26px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .projects-view-all:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 
   .project-card-inner {
     width: 100%;
+    height: 100%;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 28px 28px 0;
+    padding: 20px 20px 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -607,7 +724,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     flex-shrink: 0;
   }
 
@@ -615,32 +732,25 @@
     display: inline-block;
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: var(--muted);
-    margin-bottom: 8px;
+    background: rgba(17, 17, 17, 0.05);
+    border-radius: 999px;
+    padding: 5px 12px;
   }
 
   .project-title {
     font-family: 'Instrument Serif', serif;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 400;
     color: var(--text);
-    margin-bottom: 6px;
     letter-spacing: -0.01em;
-  }
-
-  .project-subtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--muted);
-    max-width: 480px;
-    line-height: 1.5;
+    margin-bottom: 16px;
   }
 
   .project-arrow {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     border: 1px solid var(--line);
     display: flex;
@@ -667,7 +777,7 @@
 
   .project-media {
     width: 100%;
-    height: 400px;
+    height: 260px;
     border-radius: 8px 8px 0 0;
     overflow: hidden;
     background: var(--line);
@@ -1300,11 +1410,12 @@
     .about-heading { font-size: 32px; }
     .about-image { aspect-ratio: 4 / 3; }
 
-    .project-card { position: relative; top: 0; margin-bottom: 16px; }
+    .project-grid { grid-template-columns: 1fr; }
     .project-card-inner { padding: 20px 20px 0; }
-    .projects-heading { font-size: 36px; }
-    .projects-header { padding: 80px 0 40px; }
-    .project-title { font-size: 22px; }
+    .projects-heading { font-size: 32px; }
+    .projects-header { padding-bottom: 40px; }
+    .projects-view-all { width: 100%; justify-content: center; }
+    .project-title { font-size: 20px; }
     .project-media { height: 220px; }
 
     .timeline { padding: 80px 0; }
@@ -1411,9 +1522,15 @@
     <div class="hero-inner">
       <div class="hero-grid">
         <div class="hero-left" data-reveal>
-          <div class="hero-pill">
-            <span class="hero-pill-dot"></span>
-            Available for work
+          <div class="hero-pills">
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              Available for work
+            </div>
+            <div class="hero-pill framer-badge">
+              <svg width="10" height="15" viewBox="0 0 192 288" fill="currentColor"><path d="M 96 192 L 96 288 L 0 192 L 0 96 L 96 96 L 0 0 L 192 0 L 192 96 L 96 96 L 192 192 Z"></path></svg>
+              <span class="glitch-text" data-text="Official Framer Expert">Official Framer Expert</span>
+            </div>
           </div>
           <h1 class="headline">Jaden Medina,<br>The website designer<br>behind winning brands.</h1>
           <p class="hero-subtext">Jaden Medina is one of Miami's top web designers with a portfolio of stunning, high-converting websites. Whether you're based in the US, UK, or anywhere in the world, Jaden is ready to elevate your brand with a sleek, modern site. Let's start building yours today.</p>
@@ -1448,13 +1565,23 @@
   <div class="wrap">
     <div class="about-grid">
       <div data-reveal>
-        <h2 class="about-heading">Hey, I'm Jaden. The go to website designer in Miami Florida</h2>
+        <h2 class="about-heading">Hey, I'm Jaden. The go-to website designer in Miami Florida</h2>
         <p class="fill-text" data-fill>I have come to realize that tall demands can only be fulfilled by capable people. Too often we sit with ideas instead of asking what we can actually make of them. Expectations keep rising, and I've made it my responsibility to meet them.</p>
         <p class="fill-text" data-fill>18, designer and developer, Miami. Running Ocean Development, building websites for brands that refuse to settle for ordinary.</p>
-        <button class="about-cta" onclick="window.location.href='#contact'">Let's Build Something</button>
+        <div class="about-actions">
+          <button class="about-cta" onclick="window.location.href='#contact'">Let's Build Something</button>
+          <div class="social-icons">
+            <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.986 8.74 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.014 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4 2.209 0 4 1.791 4 4 0 2.21-1.791 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.645-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/jaden-medina-bb9279311/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="about-image" data-reveal>
-        <img src="/assets/about.png" alt="Jaden Medina hiking in Switzerland" />
+        <img src="/assets/jadentravel.png" alt="Jaden Medina traveling" />
       </div>
     </div>
   </div>
@@ -1462,64 +1589,62 @@
 
 <!-- PROJECTS -->
 <section class="projects" id="work">
-  <div class="projects-header">
-    <div class="wrap">
-      <h2 class="projects-heading" data-reveal>Selected work.</h2>
-      <p class="projects-subtitle" data-reveal>A few things I've built recently.</p>
-    </div>
-  </div>
-
   <div class="wrap">
-    <div class="project-card" data-reveal>
-      <div class="project-card-inner" onclick="window.open('https://oceandev.net','_blank')">
-        <div class="project-card-header">
-          <div>
+    <div class="projects-header">
+      <div class="projects-header-text">
+        <div class="projects-badge" data-reveal>
+          <span class="projects-badge-dot"></span>
+          Jaden's Latest Work
+        </div>
+        <h2 class="projects-heading" data-reveal>Building Websites That Drive Results</h2>
+        <p class="projects-subtitle" data-reveal>Explore my portfolio to see how I've turned visions into vibrant realities. From sleek e-commerce sites to engaging portfolios, my designs are crafted to meet your business needs and stand out in the digital landscape.</p>
+      </div>
+      <button class="projects-view-all" data-reveal onclick="window.open('https://oceandev.net/project','_blank')">View all work</button>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card" data-reveal>
+        <div class="project-card-inner" onclick="window.open('https://oceandev.net','_blank')">
+          <div class="project-card-header">
             <span class="project-tag">Agency</span>
-            <h3 class="project-title">Ocean Development</h3>
-            <p class="project-subtitle">My website design agency. Ran by myself, Micah &amp; Raytumb.</p>
+            <div class="project-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </div>
           </div>
-          <div class="project-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <h3 class="project-title">Ocean Development</h3>
+          <div class="project-media">
+            <img src="/assets/ocean-development.png" alt="Ocean Development project preview" />
           </div>
-        </div>
-        <div class="project-media">
-          <img src="/assets/ocean-development.png" alt="Ocean Development project preview" />
         </div>
       </div>
-    </div>
 
-    <div class="project-card" data-reveal>
-      <div class="project-card-inner" onclick="window.open('https://getcampusbite.com','_blank')">
-        <div class="project-card-header">
-          <div>
+      <div class="project-card" data-reveal>
+        <div class="project-card-inner" onclick="window.open('https://getcampusbite.com','_blank')">
+          <div class="project-card-header">
             <span class="project-tag">Startup</span>
-            <h3 class="project-title">CampusBite</h3>
-            <p class="project-subtitle">AI meal planning built around your real dining hall menus. Know exactly what to eat, every day.</p>
+            <div class="project-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </div>
           </div>
-          <div class="project-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <h3 class="project-title">CampusBite</h3>
+          <div class="project-media">
+            <img src="/assets/campusbite.png" alt="CampusBite project preview" />
           </div>
-        </div>
-        <div class="project-media">
-          <img src="/assets/campusbite.png" alt="CampusBite project preview" />
         </div>
       </div>
-    </div>
 
-    <div class="project-card" data-reveal>
-      <div class="project-card-inner" onclick="window.open('https://oceandev.net/projects','_blank')">
-        <div class="project-card-header">
-          <div>
+      <div class="project-card" data-reveal>
+        <div class="project-card-inner" onclick="window.open('https://oceandev.net/project','_blank')">
+          <div class="project-card-header">
             <span class="project-tag">Client</span>
-            <h3 class="project-title">MLS Global</h3>
-            <p class="project-subtitle">A worldwide real estate network offering seamless property discovery across diverse markets.</p>
+            <div class="project-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </div>
           </div>
-          <div class="project-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <h3 class="project-title">MLS Global</h3>
+          <div class="project-media">
+            <img src="/assets/mls-global.png" alt="MLS Global project preview" />
           </div>
-        </div>
-        <div class="project-media">
-          <img src="/assets/mls-global.png" alt="MLS Global project preview" />
         </div>
       </div>
     </div>
@@ -1560,9 +1685,9 @@
           <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5 21 7v10l-6-3.5"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div>
           <span class="timeline-number">03</span>
         </div>
-        <h3 class="timeline-title">Handover &amp; Training</h3>
-        <p class="timeline-desc">Once you approve the final website, you'll receive personalized handover training via a recorded Loom video. Plus, enjoy 30 days of complimentary email support to ensure a smooth and confident transition.</p>
-        <div class="timeline-media"><img src="/assets/process-handover.png" alt="Handover and training process preview" /></div>
+        <h3 class="timeline-title">Launch &amp; Support</h3>
+        <p class="timeline-desc">Once your site is live, you're not on your own. You'll get a recorded Loom walkthrough covering everything you need to manage your site, plus 30 days of complimentary email support to handle any questions as you settle in.</p>
+        <div class="timeline-media"><img src="/assets/launch.png" alt="Launch and support process preview" /></div>
       </div>
     </div>
   </div>
