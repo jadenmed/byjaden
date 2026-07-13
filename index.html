@@ -30,8 +30,10 @@
     --text: #111111;
     --muted: #8A8A88;
     --line: #E7E6E3;
-    --pill-bg: #111111;
-    --pill-text: #FAFAF9;
+    --pill-bg: #0050F8;
+    --pill-text: #FFFFFF;
+    --accent: #0050F8;
+    --accent-dark: #0038B8;
     --nav-h: 64px;
   }
 
@@ -154,14 +156,14 @@
   }
 
   .nav-wrapper.scrolled .nav-cta {
-    background: #111;
+    background: var(--accent);
     color: #fff;
-    border-color: #111;
+    border-color: var(--accent);
   }
 
   .nav-wrapper.scrolled .nav-cta:hover {
-    background: #333;
-    border-color: #333;
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
   }
 
   /* hamburger toggle */
@@ -284,7 +286,7 @@
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 80px 0;
+    padding: 56px 0;
   }
 
   .hero-inner {
@@ -296,20 +298,19 @@
   }
 
   .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 64px;
-    align-items: center;
+    display: flex;
+    justify-content: center;
     width: 100%;
   }
 
-  .hero-left { color: #fff; min-width: 0; }
+  .hero-left { color: #fff; min-width: 0; max-width: 640px; text-align: center; margin: 0 auto; }
 
   .hero-pills {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 
   .hero-pill {
@@ -349,33 +350,42 @@
 
   .headline {
     font-family: 'Instrument Serif', serif;
-    font-size: 64px;
-    line-height: 1.08;
+    font-size: 52px;
+    line-height: 1.12;
     letter-spacing: -0.01em;
     font-weight: 400;
     color: #fff;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
+  .mobile-break { display: none; }
+
   .hero-subtext {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.65;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.60);
-    max-width: 520px;
-    margin-bottom: 36px;
+    max-width: 500px;
+    margin: 0 auto 24px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .hero-cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #fff;
+    background: #E7E7E5;
     color: #111;
     border: none;
     border-radius: 8px;
-    padding: 14px 28px;
-    font-size: 15px;
+    padding: 12px 22px;
+    font-size: 14px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
     cursor: pointer;
@@ -385,98 +395,21 @@
   }
 
   .hero-cta:hover {
-    background: #f0f0f0;
+    background: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
-  /* hero contact card */
-  .hero-form-card {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 20px;
-    padding: 36px;
-    backdrop-filter: blur(24px);
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    width: 100%;
-  }
-
-  .hero-form-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-
-  .hero-form-subtitle {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.45);
-    margin-bottom: 28px;
-  }
-
-  .hero-form { display: flex; flex-direction: column; gap: 12px; }
-
-  .hero-form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .hero-form input,
-  .hero-form select,
-  .hero-form textarea {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    padding: 13px 16px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #fff;
-    outline: none;
-    transition: border-color 0.25s ease, background 0.25s ease;
-  }
-
-  .hero-form input::placeholder,
-  .hero-form textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
-
-  .hero-form input:focus,
-  .hero-form select:focus,
-  .hero-form textarea:focus {
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.13);
-  }
-
-  .hero-form select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='rgba(255,255,255,0.45)'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    background-size: 14px;
-    background-color: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .hero-form select option { background: #003095; color: #fff; }
-  .hero-form textarea { resize: none; min-height: 90px; }
-
-  .hero-form-submit {
-    background: #fff;
+  .hero-cta-secondary {
+    background: #E7E7E5;
     color: #111;
     border: none;
-    border-radius: 10px;
-    padding: 15px 20px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    margin-top: 4px;
-    letter-spacing: 0.01em;
   }
 
-  .hero-form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+  .hero-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
 
   /* ============================================================
      SCROLL REVEAL
@@ -645,10 +578,10 @@
   }
 
   .projects-badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text);
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--accent);
     flex-shrink: 0;
   }
 
@@ -1052,7 +985,8 @@
   .why-image-wrap { border-radius: 12px; overflow: hidden; aspect-ratio: 1106 / 1006; }
   .why-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .why-eyebrow { font-size: 12px; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .why-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .why-eyebrow::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); margin-right: 8px; vertical-align: middle; }
 
   .why-heading {
     font-family: 'Instrument Serif', serif;
@@ -1241,7 +1175,8 @@
     pointer-events: none;
   }
 
-  .book-call-eyebrow { font-size: 12px; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); margin-bottom: 18px; }
+  .book-call-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .book-call-eyebrow::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); margin-right: 8px; vertical-align: middle; }
 
   .book-call-heading {
     font-family: 'Instrument Serif', serif;
@@ -1460,9 +1395,10 @@
     .mobile-menu { display: flex; }
 
     .hero { padding: 48px 0 64px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-    .headline { font-size: 40px; }
-    .hero-form-row { grid-template-columns: 1fr; }
+    .headline { font-size: 36px; }
+    .mobile-break { display: block; }
+    .hero-buttons { flex-direction: column; width: 100%; }
+    .hero-cta { width: 100%; justify-content: center; }
 
     .about { padding: 64px 0; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1574,7 +1510,7 @@
   <a href="#process">Process</a>
   <a href="#pricing">Pricing</a>
   <a href="#faq">FAQ</a>
-  <button class="nav-cta" style="background:#111;color:#fff;border-color:#111;" onclick="window.location.href='#contact'">Let's Talk</button>
+  <button class="nav-cta" style="background:#0050F8;color:#fff;border-color:#0050F8;" onclick="window.location.href='#contact'">Let's Talk</button>
 </div>
 
 <!-- HERO -->
@@ -1593,28 +1529,12 @@
               <span class="glitch-text" data-text="Official Framer Expert">Official Framer Expert</span>
             </div>
           </div>
-          <h1 class="headline">Jaden Medina,<br>The website designer<br>behind winning brands.</h1>
+          <h1 class="headline">Jaden Medina,<br class="mobile-break">the website designer<br>behind winning brands.</h1>
           <p class="hero-subtext">Jaden Medina is one of Miami's top web designers with a portfolio of stunning, high-converting websites. Whether you're based in the US, UK, or anywhere in the world, Jaden is ready to elevate your brand with a sleek, modern site. Let's start building yours today.</p>
-          <a href="#contact" class="hero-cta">Schedule A Call</a>
-        </div>
-
-        <div class="hero-form-card" data-reveal>
-          <p class="hero-form-title">Start a project</p>
-          <p class="hero-form-subtitle">Tell me about what you're building.</p>
-          <form class="hero-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <div class="hero-form-row">
-              <input type="text" name="name" placeholder="Full name" required />
-              <input type="email" name="email" placeholder="Email" required />
-            </div>
-            <select name="budget" required>
-              <option value="" disabled selected>Project budget</option>
-              <option value="10k-15k">$10,000 &ndash; $15,000</option>
-              <option value="15k-25k">$15,000 &ndash; $25,000</option>
-              <option value="25k-plus">$25,000+</option>
-            </select>
-            <textarea name="message" placeholder="Tell me about your project..." required></textarea>
-            <button type="submit" class="hero-form-submit">Send Message</button>
-          </form>
+          <div class="hero-buttons">
+            <a href="#contact" class="hero-cta">Schedule A Call</a>
+            <a href="#contact" class="hero-cta hero-cta-secondary">Contact Me</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1655,19 +1575,19 @@
       <div class="projects-header-text">
         <div class="projects-badge" data-reveal>
           <span class="projects-badge-dot"></span>
-          Jaden's Latest Work
+          Companies I Own
         </div>
-        <h2 class="projects-heading" data-reveal>Building Websites That Drive Results</h2>
-        <p class="projects-subtitle" data-reveal>Explore my portfolio to see how I've turned visions into vibrant realities. From sleek e-commerce sites to engaging portfolios, my designs are crafted to meet your business needs and stand out in the digital landscape.</p>
+        <h2 class="projects-heading" data-reveal>Brands I've Built & Own</h2>
+        <p class="projects-subtitle" data-reveal>Beyond client work, I've founded and built these companies from the ground up. Each one reflects the same standard of design and execution I bring to every project.</p>
       </div>
-      <button class="projects-view-all" data-reveal onclick="window.open('https://oceandev.net/project','_blank')">View all work</button>
+      <button class="projects-view-all" data-reveal onclick="window.open('https://oceandev.net/project','_blank')">View all companies</button>
     </div>
 
     <div class="project-grid">
       <div class="project-card" data-reveal>
         <div class="project-card-inner" onclick="window.open('https://oceandev.net','_blank')">
           <div class="project-card-header">
-            <span class="project-tag">Agency</span>
+            <span class="project-tag">Owned · Agency</span>
             <div class="project-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </div>
@@ -1682,7 +1602,7 @@
       <div class="project-card" data-reveal>
         <div class="project-card-inner" onclick="window.open('https://getcampusbite.com','_blank')">
           <div class="project-card-header">
-            <span class="project-tag">Startup</span>
+            <span class="project-tag">Owned · Startup</span>
             <div class="project-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </div>
@@ -1697,7 +1617,7 @@
       <div class="project-card" data-reveal>
         <div class="project-card-inner" onclick="window.open('https://oceandev.net/project','_blank')">
           <div class="project-card-header">
-            <span class="project-tag">Client</span>
+            <span class="project-tag">Owned · Company</span>
             <div class="project-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </div>
