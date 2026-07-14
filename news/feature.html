@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -74,6 +74,15 @@
 </script>
 
 <style>
+  @font-face {
+    font-family: 'Alpha Lyrae';
+    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --bg: #FAFAF9;
     --text: #111111;
@@ -148,10 +157,10 @@
     text-transform: uppercase;
   }
 
-  .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+  .article-meta .dot { width: 3px; height: 3px; border-radius: 0; background: var(--muted); }
 
   h1.article-title {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 52px;
     line-height: 1.05;
     letter-spacing: -0.01em;
@@ -179,7 +188,7 @@
 
   .byline-avatar {
     width: 36px; height: 36px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--text);
     color: var(--bg);
     display: flex;
@@ -202,7 +211,7 @@
   .article-body p { margin-bottom: 24px; }
 
   .article-body h2 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 30px;
     font-weight: 400;
     line-height: 1.2;
@@ -225,7 +234,7 @@
   }
 
   .bigquote {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 32px;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -238,7 +247,7 @@
     margin: 32px 0;
     padding: 24px 26px;
     background: rgba(0,80,248,0.06);
-    border-radius: 14px;
+    border-radius: 0;
   }
   .strip .label {
     font-size: 12px;
@@ -253,7 +262,7 @@
     padding: 5px 12px;
     background: #fff;
     border: 1px solid rgba(0,80,248,0.2);
-    border-radius: 999px;
+    border-radius: 0;
     font-size: 13px;
     font-weight: 500;
     color: var(--text);
@@ -278,13 +287,13 @@
   .subscribe-cta {
     margin-top: 56px;
     padding: 36px;
-    border-radius: 16px;
+    border-radius: 0;
     background: #111111;
     text-align: center;
   }
 
   .subscribe-cta h3 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 26px;
     font-weight: 400;
     color: #fff;
@@ -308,7 +317,7 @@
     flex: 1;
     background: rgba(255,255,255,0.10);
     border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 9px;
+    border-radius: 0;
     padding: 13px 16px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
@@ -323,7 +332,7 @@
     background: #fff;
     color: #111;
     border: none;
-    border-radius: 9px;
+    border-radius: 0;
     padding: 13px 22px;
     font-size: 14px;
     font-weight: 600;

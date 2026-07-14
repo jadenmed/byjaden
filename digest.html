@@ -15,9 +15,18 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+  @font-face {
+    font-family: 'Alpha Lyrae';
+    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --bg: #FAFAF9;
     --text: #111111;
@@ -165,7 +174,7 @@
     gap: 8px;
     background: rgba(255,255,255,0.10);
     border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 999px;
+    border-radius: 0;
     padding: 7px 14px;
     font-size: 12px;
     font-weight: 400;
@@ -177,13 +186,13 @@
 
   .hero-pill-dot {
     width: 6px; height: 6px;
-    border-radius: 50%;
+    border-radius: 0;
     background: #4ade80;
     flex-shrink: 0;
   }
 
   .headline {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 64px;
     line-height: 1.06;
     letter-spacing: -0.01em;
@@ -219,7 +228,7 @@
     flex: 1;
     background: rgba(255,255,255,0.10);
     border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 9px;
+    border-radius: 0;
     padding: 15px 18px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
@@ -241,7 +250,7 @@
     background: #fff;
     color: #111;
     border: none;
-    border-radius: 9px;
+    border-radius: 0;
     padding: 15px 24px;
     font-size: 14px;
     font-weight: 600;
@@ -280,7 +289,7 @@
 
   .proof-avatar {
     width: 30px; height: 30px;
-    border-radius: 50%;
+    border-radius: 0;
     border: 2px solid rgba(255,255,255,0.25);
     background: rgba(255,255,255,0.12);
     display: flex;

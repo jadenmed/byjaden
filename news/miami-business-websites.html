@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -83,6 +83,15 @@
 </script>
 
 <style>
+  @font-face {
+    font-family: 'Alpha Lyrae';
+    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --bg: #FAFAF9;
     --text: #111111;
@@ -157,10 +166,10 @@
     text-transform: uppercase;
   }
 
-  .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+  .article-meta .dot { width: 3px; height: 3px; border-radius: 0; background: var(--muted); }
 
   h1.article-title {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 50px;
     line-height: 1.06;
     letter-spacing: -0.01em;
@@ -187,7 +196,7 @@
 
   .byline-avatar {
     width: 36px; height: 36px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--text);
     color: var(--bg);
     display: flex;
@@ -210,7 +219,7 @@
   .article-body p { margin-bottom: 24px; }
 
   .article-body h2 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 30px;
     font-weight: 400;
     line-height: 1.2;
@@ -230,13 +239,13 @@
     gap: 1px;
     background: var(--line);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 0;
     overflow: hidden;
     margin: 32px 0 8px;
   }
   .stats div { background: #fff; padding: 22px 16px; text-align: center; }
   .stats .n {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 32px;
     color: var(--accent);
     line-height: 1;
@@ -248,7 +257,7 @@
   .check {
     margin: 28px 0;
     background: #F4F4F2;
-    border-radius: 14px;
+    border-radius: 0;
     padding: 4px 24px;
   }
   .check ul { list-style: none; }
@@ -266,7 +275,7 @@
     width: 20px; height: 20px;
     background: var(--accent);
     color: #fff;
-    border-radius: 6px;
+    border-radius: 0;
     font-size: 11px;
     display: flex; align-items: center; justify-content: center;
   }
@@ -278,10 +287,10 @@
     padding: 28px 26px;
     background: #111111;
     color: #fff;
-    border-radius: 16px;
+    border-radius: 0;
   }
   .callout h3 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 22px;
     font-weight: 400;
     margin-bottom: 8px;
@@ -292,7 +301,7 @@
   /* FAQ */
   .faq { margin-top: 56px; }
   .faq h2 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 28px;
     font-weight: 400;
     margin-bottom: 8px;
@@ -305,13 +314,13 @@
   .subscribe-cta {
     margin-top: 56px;
     padding: 36px;
-    border-radius: 16px;
+    border-radius: 0;
     background: #111111;
     text-align: center;
   }
 
   .subscribe-cta h3 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 26px;
     font-weight: 400;
     color: #fff;
@@ -328,7 +337,7 @@
     display: inline-block;
     background: #fff;
     color: #111;
-    border-radius: 9px;
+    border-radius: 0;
     padding: 13px 26px;
     font-size: 14px;
     font-weight: 600;

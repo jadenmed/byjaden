@@ -15,9 +15,18 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+  @font-face {
+    font-family: 'Alpha Lyrae';
+    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --bg: #FAFAF9;
     --text: #111111;
@@ -88,7 +97,7 @@
   }
 
   h1.hero-title {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 52px;
     line-height: 1.08;
     letter-spacing: -0.01em;
@@ -124,7 +133,7 @@
   }
 
   .article-row-title {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 28px;
     font-weight: 400;
     line-height: 1.2;
@@ -137,13 +146,13 @@
   .subscribe-cta {
     margin-top: 56px;
     padding: 36px;
-    border-radius: 16px;
+    border-radius: 0;
     background: #111111;
     text-align: center;
   }
 
   .subscribe-cta h3 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
     font-size: 26px;
     font-weight: 400;
     color: #fff;
@@ -167,7 +176,7 @@
     flex: 1;
     background: rgba(255,255,255,0.10);
     border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 9px;
+    border-radius: 0;
     padding: 13px 16px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
@@ -182,7 +191,7 @@
     background: #fff;
     color: #111;
     border: none;
-    border-radius: 9px;
+    border-radius: 0;
     padding: 13px 22px;
     font-size: 14px;
     font-weight: 600;
