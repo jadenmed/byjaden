@@ -23,8 +23,17 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Alpha Lyrae';
+    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --bg: #FAFAF9;
     --text: #111111;
@@ -46,6 +55,52 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+
+  /* ============================================================
+     PAGE RULER — decorative left/right edge guides
+  ============================================================ */
+  .page-ruler {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  .page-ruler-left { left: 32px; }
+  .page-ruler-right { right: 32px; }
+
+  .page-ruler::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: rgba(17, 17, 17, 0.1);
+    transition: background 0.3s ease;
+  }
+
+  .page-ruler::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -4px;
+    width: 8px;
+    background-image: repeating-linear-gradient(to bottom, rgba(17, 17, 17, 0.1) 0, rgba(17, 17, 17, 0.1) 1px, transparent 1px, transparent 24px);
+    transition: background-image 0.3s ease;
+  }
+
+  body.ruler-on-dark .page-ruler::before { background: rgba(255, 255, 255, 0.16); }
+  body.ruler-on-dark .page-ruler::after {
+    background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 1px, transparent 1px, transparent 24px);
+  }
+
+  @media (max-width: 900px) {
+    .page-ruler { display: none; }
   }
 
   /* ============================================================
@@ -139,7 +194,7 @@
     background: rgba(255, 255, 255, 0.12);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 8px;
+    border-radius: 0;
     padding: 10px 22px;
     font-size: 14px;
     font-weight: 500;
@@ -303,7 +358,7 @@
     width: 100%;
   }
 
-  .hero-left { color: #fff; min-width: 0; max-width: 640px; text-align: center; margin: 0 auto; }
+  .hero-left { color: #fff; min-width: 0; max-width: 760px; text-align: center; margin: 0 auto; }
 
   .hero-pills {
     display: flex;
@@ -319,7 +374,7 @@
     gap: 8px;
     background: rgba(255, 255, 255, 0.10);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 999px;
+    border-radius: 0;
     padding: 7px 14px;
     font-size: 12px;
     font-weight: 400;
@@ -343,13 +398,14 @@
   .hero-pill-dot {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
+    border-radius: 0;
     background: #4ade80;
     flex-shrink: 0;
   }
 
   .headline {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 52px;
     line-height: 1.12;
     letter-spacing: -0.01em;
@@ -383,7 +439,7 @@
     background: #E7E7E5;
     color: #111;
     border: none;
-    border-radius: 8px;
+    border-radius: 0;
     padding: 12px 22px;
     font-size: 14px;
     font-weight: 500;
@@ -454,7 +510,8 @@
   }
 
   .about-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 44px;
     font-weight: 400;
     color: #1B2540;
@@ -486,7 +543,7 @@
     background: var(--pill-bg);
     color: var(--pill-text);
     border: none;
-    border-radius: 10px;
+    border-radius: 0;
     padding: 14px 26px;
     font-size: 14px;
     font-weight: 500;
@@ -514,7 +571,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: 10px;
+    border-radius: 0;
     background: var(--bg);
     border: 1px solid var(--line);
     color: var(--text);
@@ -535,7 +592,7 @@
   }
 
   .about-image {
-    border-radius: 12px;
+    border-radius: 0;
     overflow: hidden;
     aspect-ratio: 4 / 3;
     max-height: 480px;
@@ -570,7 +627,7 @@
     gap: 8px;
     background: rgba(17, 17, 17, 0.04);
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: 0;
     padding: 6px 14px;
     font-size: 13px;
     color: var(--muted);
@@ -580,13 +637,14 @@
   .projects-badge-dot {
     width: 7px;
     height: 7px;
-    border-radius: 2px;
+    border-radius: 0;
     background: var(--accent);
     flex-shrink: 0;
   }
 
   .projects-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 52px;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -610,7 +668,7 @@
     background: var(--pill-bg);
     color: var(--pill-text);
     border: none;
-    border-radius: 999px;
+    border-radius: 0;
     padding: 15px 26px;
     font-size: 14px;
     font-weight: 500;
@@ -638,7 +696,7 @@
     height: 100%;
     background: #fff;
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 0;
     padding: 20px 20px 0;
     box-sizing: border-box;
     display: flex;
@@ -668,12 +726,13 @@
     letter-spacing: 0.02em;
     color: var(--muted);
     background: rgba(17, 17, 17, 0.05);
-    border-radius: 999px;
+    border-radius: 0;
     padding: 5px 12px;
   }
 
   .project-title {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 24px;
     font-weight: 400;
     color: var(--text);
@@ -684,7 +743,7 @@
   .project-arrow {
     width: 34px;
     height: 34px;
-    border-radius: 50%;
+    border-radius: 0;
     border: 1px solid var(--line);
     display: flex;
     align-items: center;
@@ -711,7 +770,7 @@
   .project-media {
     width: 100%;
     height: 260px;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0;
     overflow: hidden;
     background: var(--line);
     flex-shrink: 0;
@@ -742,7 +801,8 @@
   }
 
   .timeline-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 56px;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -760,215 +820,120 @@
     padding-bottom: 6px;
   }
 
-  .timeline-grid {
+  .process-panel {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 32px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: #fff;
   }
 
-  .timeline-card {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 32px 32px 0;
+  .process-corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--muted);
+    z-index: 1;
+  }
+
+  .process-corner-tl { top: -4.5px; left: -4.5px; }
+  .process-corner-tr { top: -4.5px; right: -4.5px; }
+  .process-corner-bl { bottom: -4.5px; left: -4.5px; }
+  .process-corner-br { bottom: -4.5px; right: -4.5px; }
+
+  .process-list {
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
-    cursor: default;
-  }
-
-  .timeline-card:hover {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
-    border-color: #d0d0cc;
-  }
-
-  .timeline-card-top {
-    position: relative;
-    min-height: 48px;
-  }
-
-  .timeline-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--text);
-    position: relative;
-    z-index: 1;
-  }
-
-  .timeline-icon svg {
-    width: 100%;
+    border-right: 1px solid var(--line);
     height: 100%;
   }
 
-  .timeline-number {
-    position: absolute;
-    top: -20px;
-    right: -6px;
-    font-family: 'Inter', sans-serif;
-    font-size: 88px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #EFEEEA;
-    line-height: 1;
-    z-index: 0;
-    user-select: none;
-  }
-
-  .timeline-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--text);
-    margin-top: 24px;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .timeline-desc {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--muted);
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .timeline-media {
-    margin: 24px -32px 0;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
+  .process-item {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-  }
-
-  .timeline-media img {
-    width: auto;
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: top right;
-    display: block;
-  }
-
-  /* ============================================================
-     PRICING
-  ============================================================ */
-  .pricing { padding: 0 0 120px; }
-
-  .pricing-top-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 48px;
-    gap: 32px;
-  }
-
-  .pricing-heading {
-    font-family: 'Instrument Serif', serif;
-    font-size: 56px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.08;
-  }
-
-  .pricing-subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--muted);
-    max-width: 280px;
-    line-height: 1.6;
-    text-align: right;
-    padding-bottom: 6px;
-  }
-
-  .pricing-card {
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 40px;
-  }
-
-  .pricing-amount {
-    font-size: 40px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-    line-height: 1;
-  }
-
-  .pricing-terms { font-size: 16px; font-weight: 400; color: var(--muted); margin-bottom: 6px; }
-  .pricing-for { font-size: 16px; font-weight: 400; color: var(--muted); margin-bottom: 28px; }
-
-  .pricing-cta {
-    display: block;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    background: var(--pill-bg);
-    color: var(--pill-text);
+    text-align: left;
+    background: none;
     border: none;
-    border-radius: 8px;
-    padding: 16px 24px;
-    font-size: 15px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    margin-bottom: 8px;
-  }
-
-  .pricing-cta:hover { opacity: 0.85; transform: translateY(-1px); }
-
-  .pricing-items { margin-top: 28px; }
-
-  .pricing-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 16px 0;
     border-bottom: 1px solid var(--line);
-  }
-
-  .pricing-item:first-child { border-top: 1px solid var(--line); }
-
-  .pricing-item-check {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .pricing-item-check svg {
-    width: 16px;
-    height: 16px;
-    color: var(--text);
-  }
-
-  .pricing-item-title { font-size: 15px; font-weight: 500; color: var(--text); display: block; }
-  .pricing-item-desc { font-size: 14px; font-weight: 400; color: var(--muted); display: block; margin-top: 2px; }
-
-  .pricing-cta {
-    display: block;
-    width: 100%;
-    background: var(--pill-bg);
-    color: var(--pill-text);
-    border: none;
-    border-radius: 7px;
-    padding: 18px 24px;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
+    padding: 28px 40px;
     cursor: pointer;
-    box-shadow: 0 18px 36px -16px rgba(59, 130, 246, 0.45);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    font-family: inherit;
   }
 
-  .pricing-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+  .process-item:last-child { border-bottom: none; }
+
+  .process-item-head {
+    display: flex;
+    align-items: center;
+  }
+
+  .process-item-title {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    transition: color 0.2s ease;
+  }
+
+  .process-item.is-active .process-item-title {
+    color: var(--accent);
+  }
+
+  .process-item-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease, margin-top 0.4s ease;
+    margin-top: 0;
+  }
+
+  .process-item.is-active .process-item-body {
+    grid-template-rows: 1fr;
+    margin-top: 14px;
+  }
+
+  .process-item-body-inner { overflow: hidden; min-height: 0; }
+
+  .process-item-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-right: 8px;
+  }
+
+  .process-progress {
+    height: 6px;
+    background: var(--line);
+    overflow: hidden;
+  }
+
+  .process-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #003095 0%, #0050F8 55%, #5FBDF7 100%);
+  }
+
+  .process-media {
+    position: relative;
+    background: #F4F3F0;
+    height: 100%;
+  }
+
+  .process-media-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .process-media-img.is-active { opacity: 1; }
 
   /* ============================================================
      WHY MEDINA
@@ -982,14 +947,15 @@
     align-items: center;
   }
 
-  .why-image-wrap { border-radius: 12px; overflow: hidden; aspect-ratio: 1106 / 1006; }
+  .why-image-wrap { border-radius: 0; overflow: hidden; aspect-ratio: 1106 / 1006; }
   .why-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .why-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
-  .why-eyebrow::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+  .why-eyebrow::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 0; background: var(--accent); margin-right: 8px; vertical-align: middle; }
 
   .why-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -1005,7 +971,7 @@
     background: var(--pill-bg);
     color: var(--pill-text);
     border: none;
-    border-radius: 7px;
+    border-radius: 0;
     padding: 14px 28px;
     font-size: 14px;
     font-weight: 500;
@@ -1031,7 +997,8 @@
   }
 
   .blog-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -1064,7 +1031,7 @@
     display: block;
     padding: 28px;
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 0;
     text-decoration: none;
     color: var(--text);
     transition: border-color 0.2s ease, transform 0.2s ease;
@@ -1078,7 +1045,8 @@
   }
 
   .blog-card-title {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 24px;
     font-weight: 400;
     line-height: 1.2;
@@ -1093,7 +1061,8 @@
   .faq { padding: 0 0 120px; }
 
   .faq-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -1155,7 +1124,7 @@
 
   .book-call-box {
     background: #0D0D0D;
-    border-radius: 12px;
+    border-radius: 0;
     padding: 64px;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -1176,10 +1145,11 @@
   }
 
   .book-call-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
-  .book-call-eyebrow::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+  .book-call-eyebrow::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 0; background: var(--accent); margin-right: 8px; vertical-align: middle; }
 
   .book-call-heading {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-feature-settings: 'calt' 1;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -1199,7 +1169,7 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 7px;
+    border-radius: 0;
     padding: 14px 16px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
@@ -1235,7 +1205,7 @@
     background: #fff;
     color: #111111;
     border: none;
-    border-radius: 7px;
+    border-radius: 0;
     padding: 14px 24px;
     font-size: 15px;
     font-weight: 500;
@@ -1296,7 +1266,7 @@
     color: var(--text);
     text-decoration: none;
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: 0;
     padding: 7px 12px;
     width: fit-content;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -1325,7 +1295,7 @@
   .footer-newsletter-form {
     display: flex;
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
     background: #fff;
     margin-top: 4px;
@@ -1417,15 +1387,10 @@
     .timeline-top-row { flex-direction: column; align-items: flex-start; margin-bottom: 32px; gap: 12px; }
     .timeline-heading { font-size: 36px; }
     .timeline-subtitle { text-align: left; max-width: 100%; }
-    .timeline-grid { grid-template-columns: 1fr; }
-
-    .pricing { padding-bottom: 80px; }
-    .pricing-top-row { flex-direction: column; align-items: flex-start; margin-bottom: 32px; gap: 12px; }
-    .pricing-heading { font-size: 36px; }
-    .pricing-subtitle { text-align: left; max-width: 100%; }
-    .pricing-card { grid-template-columns: 1fr; padding: 28px 24px; gap: 0; }
-    .pricing-items { margin-top: 32px; }
-    .pricing-amount { font-size: 40px; }
+    .process-panel { grid-template-columns: 1fr; height: auto; margin: 0 20px; }
+    .process-list { border-right: none; border-bottom: 1px solid var(--line); height: auto; }
+    .process-item { padding: 20px 24px; }
+    .process-media { height: 280px; }
 
     .why-medina { padding-bottom: 80px; }
     .why-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -1479,6 +1444,9 @@
 </head>
 <body>
 
+<div class="page-ruler page-ruler-left" aria-hidden="true"></div>
+<div class="page-ruler page-ruler-right" aria-hidden="true"></div>
+
 <!-- STICKY NAV -->
 <div class="nav-wrapper" id="nav-wrapper">
   <nav>
@@ -1489,7 +1457,6 @@
         <a href="#about">About</a>
         <a href="#work">Work</a>
         <a href="#process">Process</a>
-        <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </div>
       <button class="nav-cta" onclick="window.location.href='#contact'">Let's Talk</button>
@@ -1508,7 +1475,6 @@
   <a href="#about">About</a>
   <a href="#work">Work</a>
   <a href="#process">Process</a>
-  <a href="#pricing">Pricing</a>
   <a href="#faq">FAQ</a>
   <button class="nav-cta" style="background:#0050F8;color:#fff;border-color:#0050F8;" onclick="window.location.href='#contact'">Let's Talk</button>
 </div>
@@ -1529,7 +1495,7 @@
               <span class="glitch-text" data-text="Official Framer Expert">Official Framer Expert</span>
             </div>
           </div>
-          <h1 class="headline">Jaden Medina,<br class="mobile-break">the website designer<br>behind winning brands.</h1>
+          <h1 class="headline">Jaden Medina, <br class="mobile-break">the website designer behind winning brands.</h1>
           <p class="hero-subtext">Jaden Medina is one of Miami's top web designers with a portfolio of stunning, high-converting websites. Whether you're based in the US, UK, or anywhere in the world, Jaden is ready to elevate your brand with a sleek, modern site. Let's start building yours today.</p>
           <div class="hero-buttons">
             <a href="#contact" class="hero-cta">Schedule A Call</a>
@@ -1637,90 +1603,73 @@
   <div class="wrap">
     <div class="timeline-top-row" data-reveal>
       <h2 class="timeline-heading">Simple process.<br>Real results.</h2>
-      <p class="timeline-subtitle">Three steps from first call to live site.</p>
     </div>
+  </div>
 
-    <div class="timeline-grid">
-      <div class="timeline-card" data-reveal>
-        <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6"/><path d="M20 20l-4.5-4.5"/></svg></div>
-          <span class="timeline-number">01</span>
-        </div>
-        <h3 class="timeline-title">Discovery &amp; Strategy</h3>
-        <p class="timeline-desc">Want a Framer website that turns visitors into loyal customers? Explore my portfolio to see how I've transformed ideas into sleek, high-performing websites. From interactive landing pages to full-scale brand experiences, my designs are built to meet your business goals and stand out in today's digital world.</p>
-        <div class="timeline-media"><img src="/assets/process-discovery.png" alt="Discovery and strategy process preview" /></div>
+  <div class="process-panel" data-reveal>
+    <span class="process-corner process-corner-tl" aria-hidden="true"></span>
+    <span class="process-corner process-corner-tr" aria-hidden="true"></span>
+    <span class="process-corner process-corner-bl" aria-hidden="true"></span>
+    <span class="process-corner process-corner-br" aria-hidden="true"></span>
+    <div class="process-list">
+        <button class="process-item is-active" type="button" data-step="0">
+          <div class="process-item-head">
+            <span class="process-item-title">Discovery &amp; Strategy</span>
+          </div>
+          <div class="process-item-body">
+            <div class="process-item-body-inner">
+              <p class="process-item-desc">Want a Framer website that turns visitors into loyal customers? Explore my portfolio to see how I've transformed ideas into sleek, high-performing websites built to meet your business goals.</p>
+              <div class="process-progress"><div class="process-progress-fill"></div></div>
+            </div>
+          </div>
+        </button>
+
+        <button class="process-item" type="button" data-step="1">
+          <div class="process-item-head">
+            <span class="process-item-title">Design &amp; Build</span>
+          </div>
+          <div class="process-item-body">
+            <div class="process-item-body-inner">
+              <p class="process-item-desc">Once you approve the proposal, I start building your site from the ground up. You'll get real-time access to leave feedback along the way, keeping the process fast and collaborative.</p>
+              <div class="process-progress"><div class="process-progress-fill"></div></div>
+            </div>
+          </div>
+        </button>
+
+        <button class="process-item" type="button" data-step="2">
+          <div class="process-item-head">
+            <span class="process-item-title">Launch &amp; Support</span>
+          </div>
+          <div class="process-item-body">
+            <div class="process-item-body-inner">
+              <p class="process-item-desc">Once your site is live, you're not on your own. You'll get a recorded Loom walkthrough covering everything you need, plus 30 days of complimentary email support as you settle in.</p>
+              <div class="process-progress"><div class="process-progress-fill"></div></div>
+            </div>
+          </div>
+        </button>
+
+        <button class="process-item" type="button" data-step="3">
+          <div class="process-item-head">
+            <span class="process-item-title">Grow &amp; Optimize</span>
+          </div>
+          <div class="process-item-body">
+            <div class="process-item-body-inner">
+              <p class="process-item-desc">Beyond launch, I keep an eye on performance and conversion. As your business evolves, I'm here to iterate on the site so it keeps working as hard as you do.</p>
+              <div class="process-progress"><div class="process-progress-fill"></div></div>
+            </div>
+          </div>
+        </button>
       </div>
 
-      <div class="timeline-card" data-reveal>
-        <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg></div>
-          <span class="timeline-number">02</span>
-        </div>
-        <h3 class="timeline-title">Design &amp; Build</h3>
-        <p class="timeline-desc">Once we align on the project scope and you approve the proposal, Jaden Medina will begin building your site in Framer. Throughout the process, you'll be able to leave feedback directly on the site using built-in commenting tools, keeping everything smooth, clear, and collaborative from start to launch.</p>
-        <div class="timeline-media"><img src="/assets/process-design.png" alt="Design and build process preview" /></div>
-      </div>
-
-      <div class="timeline-card" data-reveal>
-        <div class="timeline-card-top">
-          <div class="timeline-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5 21 7v10l-6-3.5"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div>
-          <span class="timeline-number">03</span>
-        </div>
-        <h3 class="timeline-title">Launch &amp; Support</h3>
-        <p class="timeline-desc">Once your site is live, you're not on your own. You'll get a recorded Loom walkthrough covering everything you need to manage your site, plus 30 days of complimentary email support to handle any questions as you settle in.</p>
-        <div class="timeline-media"><img src="/assets/launch.png" alt="Launch and support process preview" /></div>
-      </div>
+    <div class="process-media">
+      <img class="process-media-img is-active" data-step="0" src="/assets/process-discovery.png" alt="Discovery and strategy process preview" />
+      <img class="process-media-img" data-step="1" src="/assets/process-design.png" alt="Design and build process preview" />
+      <img class="process-media-img" data-step="2" src="/assets/launch.png" alt="Launch and support process preview" />
+      <img class="process-media-img" data-step="3" src="/assets/growth-optimize.png" alt="Grow and optimize process preview" />
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="wrap">
-    <div class="pricing-top-row" data-reveal>
-      <h2 class="pricing-heading">What's included.</h2>
-      <p class="pricing-subtitle">No add-ons, no surprises. Everything to go live.</p>
-    </div>
-
-    <div class="pricing-card" data-reveal>
-      <div class="pricing-amount">$5,000+</div>
-      <p class="pricing-terms">2 to 4 weeks &middot; 50% to start, 50% on delivery</p>
-      <p class="pricing-for">For brands ready to invest in a site that actually converts.</p>
-      <a href="https://oceandev.net" target="_blank" rel="noopener" class="pricing-cta">Work With Ocean Development</a>
-
-      <div class="pricing-items">
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,218.34,160.6,149.27a86.5,86.5,0,1,0-11.34,11.34l69.07,69.07a8,8,0,0,0,11.33-11.34ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></div>
-          <div><span class="pricing-item-title">Full Discovery &amp; Strategy</span><span class="pricing-item-desc">Audience and competitor research, content plan.</span></div>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,28A100,100,0,0,0,28,128c0,33.84,15.32,69.66,42,98.25A99.71,99.71,0,0,0,128,228a12,12,0,0,0,0-24,76,76,0,0,1-1.61-152c1.49,0,3,.05,4.45.13A100.32,100.32,0,0,0,228,128a8,8,0,0,1-8,8,12,12,0,0,0,0,24,32,32,0,0,0,32-32A100.11,100.11,0,0,0,128,28Zm32,116a12,12,0,1,1,12-12A12,12,0,0,1,160,144Zm-64,0a12,12,0,1,1,12-12A12,12,0,0,1,96,144Zm8-44a12,12,0,1,1,12-12A12,12,0,0,1,104,100Zm48,0a12,12,0,1,1,12-12A12,12,0,0,1,152,100Z"/></svg></div>
-          <div><span class="pricing-item-title">Custom Design</span><span class="pricing-item-desc">Every page, desktop and mobile, built from scratch.</span></div>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,1,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/></svg></div>
-          <div><span class="pricing-item-title">Full Development</span><span class="pricing-item-desc">Live build with working animations and interactions.</span></div>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5.09-9.13L62.71,131.55l84-90.06L136.16,93.85a8,8,0,0,0,5.09,9.13l51.94,19.47Z"/></svg></div>
-          <div><span class="pricing-item-title">SEO &amp; Performance</span><span class="pricing-item-desc">Fast load times, clean code, on-page SEO.</span></div>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V88H40V56ZM40,200V104H216v96Zm32-64a8,8,0,0,1,8-8h96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,136Zm0,32a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H80A8,8,0,0,1,72,168Z"/></svg></div>
-          <div><span class="pricing-item-title">Domain &amp; Hosting</span><span class="pricing-item-desc">Connected, configured, and ready to go.</span></div>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M223.45,40.06a8,8,0,0,0-7.51-7.51c-58.8-3.44-105.43,11.6-138.67,44.65A157.44,157.44,0,0,0,48,121.69c-15.42.6-30.66,6.71-44.32,18.18a8,8,0,0,0-1,11.6l28.79,33,0,0L48,201l16.45,16.46,0,0,33,28.79a8,8,0,0,0,11.6-1c11.47-13.66,17.58-28.9,18.18-44.32a157.44,157.44,0,0,0,44.49-29.27C204.85,145.49,219.89,98.86,223.45,40.06ZM62.51,90.13c25-25.21,57.55-38.78,96.66-40.46-1.94,42-15.59,73.83-40.69,98.93l-.18.18-29.5-29.5C88.83,118.24,89.16,116.91,89.16,115.5Z"/></svg></div>
-          <div><span class="pricing-item-title">Launch &amp; QA</span><span class="pricing-item-desc">Final testing, bug fixes, and deployment.</span></div>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-item-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></svg></div>
-          <div><span class="pricing-item-title">30-Day Support</span><span class="pricing-item-desc">Fixes and tweaks after launch, included.</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- WHY MEDINA -->
 <section class="why-medina">
@@ -1867,7 +1816,6 @@
               <a href="#about">About</a>
               <a href="#work">Work</a>
               <a href="#process">Process</a>
-              <a href="#pricing">Pricing</a>
             </div>
             <div class="footer-col-sub">
               <a href="#blog">Blog</a>
@@ -1939,6 +1887,55 @@
         document.body.style.overflow = '';
       });
     });
+
+    // Process steps — auto-advancing progress bars + media swap
+    const processItems = Array.from(document.querySelectorAll('.process-item'));
+    const processImgs = Array.from(document.querySelectorAll('.process-media-img'));
+    if (processItems.length) {
+      let processTimer = null;
+      const STEP_DURATION = 5000;
+
+      const activateProcess = (index) => {
+        processItems.forEach((el, i) => {
+          const bar = el.querySelector('.process-progress-fill');
+          el.classList.toggle('is-active', i === index);
+          if (bar) {
+            bar.style.transition = 'none';
+            bar.style.width = '0%';
+          }
+        });
+        processImgs.forEach((el, i) => el.classList.toggle('is-active', i === index));
+
+        clearTimeout(processTimer);
+        const activeBar = processItems[index].querySelector('.process-progress-fill');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (activeBar) {
+              activeBar.style.transition = `width ${STEP_DURATION}ms linear`;
+              activeBar.style.width = '100%';
+            }
+          });
+        });
+        processTimer = setTimeout(() => activateProcess((index + 1) % processItems.length), STEP_DURATION);
+      };
+
+      processItems.forEach((el, i) => {
+        el.addEventListener('click', () => activateProcess(i));
+      });
+
+      activateProcess(0);
+    }
+
+    // Page ruler contrast — lighten ticks while over the dark hero
+    const heroWrapperEl = document.querySelector('.hero-wrapper');
+    if (heroWrapperEl) {
+      const rulerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          document.body.classList.toggle('ruler-on-dark', entry.isIntersecting);
+        });
+      }, { threshold: 0.2 });
+      rulerObserver.observe(heroWrapperEl);
+    }
 
     // Scroll reveal
     const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
