@@ -6,6 +6,11 @@
       "destination": "/digest.html"
     },
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "discord.byjaden.com" }],
+      "destination": "/discord.html"
+    },
+    {
       "source": "/news",
       "destination": "/news/index.html"
     },
