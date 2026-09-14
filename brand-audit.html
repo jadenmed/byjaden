@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brand Redesign Intake | Jaden Medina</title>
+<meta name="description" content="Tell me about your brand and what's not working, so I can put together a redesign that actually fits." />
+<meta name="robots" content="noindex" />
+
+<link rel="icon" type="image/svg+xml" href="/assets/jadenmedinalogo.svg" />
+<link rel="apple-touch-icon" href="/assets/jadenmedinalogo.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Alpha Lyrae';
+    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #FAFAF9;
+    --text: #111111;
+    --muted: #8A8A88;
+    --line: #E7E6E3;
+    --accent: #0050F8;
+    --accent-dark: #0038B8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  a { color: inherit; }
+
+  /* progress bar */
+  .progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--line);
+    z-index: 30;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* top bar */
+  .topbar {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    z-index: 20;
+  }
+
+  .topbar-logo {
+    height: 22px;
+    width: auto;
+  }
+
+  .topbar-exit {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .topbar-exit:hover {
+    background: rgba(17,17,17,0.06);
+    color: var(--text);
+  }
+
+  /* step counter */
+  .step-counter {
+    position: fixed;
+    bottom: 28px;
+    left: 32px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    z-index: 20;
+  }
+  .step-counter strong { color: var(--text); font-weight: 600; }
+
+  #intake-form {
+    display: block;
+    height: 100%;
+  }
+
+  /* stage */
+  .stage {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .step {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(16px);
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .step.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .step.is-prev {
+    transform: translateY(-16px);
+  }
+
+  .step-inner {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .step-number {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-number svg { width: 16px; height: 16px; }
+
+  .step-question {
+    font-family: 'Alpha Lyrae', sans-serif;
+    font-weight: 500;
+    font-size: clamp(24px, 4vw, 38px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .step-hint {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .step-required {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* inputs */
+  .field-text,
+  .field-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--line);
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(18px, 2.6vw, 24px);
+    font-weight: 400;
+    color: var(--text);
+    padding: 10px 2px 14px;
+    outline: none;
+    transition: border-color 0.25s ease;
+  }
+
+  .field-text::placeholder,
+  .field-textarea::placeholder {
+    color: #C9C8C4;
+  }
+
+  .field-text:focus,
+  .field-textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .field-textarea {
+    resize: none;
+    min-height: 120px;
+    line-height: 1.5;
+  }
+
+  /* choice options */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 16px 20px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .option:hover {
+    border-color: var(--accent);
+  }
+
+  .option.is-selected {
+    border-color: var(--accent);
+    background: rgba(0, 80, 248, 0.05);
+  }
+
+  .option-letter {
+    width: 26px;
+    height: 26px;
+    flex: none;
+    border-radius: 6px;
+    border: 2px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+
+  .option.is-selected .option-letter {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* buttons */
+  .step-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, opacity 0.15s ease, background 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled {
+    background: #D9D8D4;
+    color: #A7A6A2;
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    padding: 14px 8px;
+  }
+  .btn-ghost:hover { color: var(--text); }
+
+  .btn svg { width: 15px; height: 15px; }
+
+  .enter-hint {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .enter-hint kbd {
+    font-family: inherit;
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 2px 7px;
+    font-size: 12px;
+  }
+
+  /* welcome + success screens */
+  .step-welcome .step-question,
+  .step-success .step-question {
+    font-size: clamp(30px, 5vw, 48px);
+  }
+
+  .step-welcome .step-hint,
+  .step-success .step-hint {
+    font-size: 17px;
+    max-width: 480px;
+  }
+
+  .step-success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .step-success-icon svg { width: 26px; height: 26px; color: #fff; }
+
+  .error-msg {
+    color: #C0392B;
+    font-size: 14px;
+    margin-top: 14px;
+    display: none;
+  }
+  .error-msg.is-visible { display: block; }
+
+  @media (max-width: 640px) {
+    .topbar { top: 16px; padding: 0 20px; }
+    .step { padding: 0 20px; }
+    .step-counter { left: 20px; bottom: 20px; }
+    .step-actions { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+<div class="topbar">
+  <img class="topbar-logo" src="/assets/byjaden.svg" alt="Jaden Medina" />
+  <a class="topbar-exit" href="/" aria-label="Exit">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </a>
+</div>
+
+<div class="step-counter" id="step-counter"></div>
+
+<form id="intake-form" action="https://formspree.io/f/meenrajq" method="POST">
+  <input type="hidden" name="_subject" value="New Brand Redesign Intake" />
+  <input type="hidden" name="form_type" value="brand-redesign-intake" />
+
+  <div class="stage">
+
+    <!-- WELCOME -->
+    <div class="step step-welcome is-active" data-step="0">
+      <div class="step-inner">
+        <div class="step-question">Let's figure out what your brand actually needs.</div>
+        <p class="step-hint">8 quick questions. Takes about 2 minutes. No wrong answers &mdash; just tell me where things stand.</p>
+        <div class="step-actions">
+          <button type="button" class="btn btn-primary btn-start">
+            Start
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span class="enter-hint">press <kbd>Enter ↵</kbd></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q1: business name + industry -->
+    <div class="step" data-step="1">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 1 of 8</div>
+        <div class="step-question">What's your business name, and what industry are you in?</div>
+        <input class="field-text" type="text" name="business_name_industry" placeholder="e.g. Salt & Vine Wine Bar — hospitality / food & beverage" required />
+        <div class="error-msg">Please fill this in before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+          <button type="button" class="btn btn-primary btn-next">
+            OK
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span class="enter-hint">press <kbd>Enter ↵</kbd></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: current website / instagram -->
+    <div class="step" data-step="2">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 2 of 8</div>
+        <div class="step-question">Link to your current website or Instagram?</div>
+        <p class="step-hint">So I can see the current brand before we talk.</p>
+        <input class="field-text" type="text" name="current_link" placeholder="https:// or @handle" required />
+        <div class="error-msg">Please fill this in before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+          <button type="button" class="btn btn-primary btn-next">
+            OK
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span class="enter-hint">press <kbd>Enter ↵</kbd></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: what's not working -->
+    <div class="step" data-step="3">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 3 of 8</div>
+        <div class="step-question">In your own words, what's not working about your current brand?</div>
+        <textarea class="field-textarea" name="whats_not_working" placeholder="Type your answer..." required></textarea>
+        <div class="error-msg">Please fill this in before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+          <button type="button" class="btn btn-primary btn-next">
+            OK
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span class="enter-hint">press <kbd>Shift + Enter ↵</kbd> for new line</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: goal for redesign -->
+    <div class="step" data-step="4">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 4 of 8</div>
+        <div class="step-question">What's the goal for the redesign?</div>
+        <p class="step-hint">e.g. new clients, rebrand for a pivot, looks outdated&hellip;</p>
+        <textarea class="field-textarea" name="redesign_goal" placeholder="Type your answer..." required></textarea>
+        <div class="error-msg">Please fill this in before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+          <button type="button" class="btn btn-primary btn-next">
+            OK
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span class="enter-hint">press <kbd>Shift + Enter ↵</kbd> for new line</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5: timeline -->
+    <div class="step" data-step="5">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 5 of 8</div>
+        <div class="step-question">Timeline: when would you want this live?</div>
+        <div class="options" data-field="timeline">
+          <button type="button" class="option" data-value="ASAP (within 2 weeks)"><span class="option-letter">A</span>ASAP &mdash; within 2 weeks</button>
+          <button type="button" class="option" data-value="Within a month"><span class="option-letter">B</span>Within a month</button>
+          <button type="button" class="option" data-value="1–3 months"><span class="option-letter">C</span>1&ndash;3 months</button>
+          <button type="button" class="option" data-value="No fixed timeline"><span class="option-letter">D</span>No fixed timeline, just exploring</button>
+        </div>
+        <input type="hidden" name="timeline" required />
+        <div class="error-msg">Please choose an option before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6: budget -->
+    <div class="step" data-step="6">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 6 of 8</div>
+        <div class="step-question">Budget range if this weren't discounted?</div>
+        <p class="step-hint">Helps me gauge seriousness &mdash; not a commitment.</p>
+        <div class="options" data-field="budget">
+          <button type="button" class="option" data-value="Under $2,500"><span class="option-letter">A</span>Under $2,500</button>
+          <button type="button" class="option" data-value="$2,500 – $5,000"><span class="option-letter">B</span>$2,500 &ndash; $5,000</button>
+          <button type="button" class="option" data-value="$5,000 – $10,000"><span class="option-letter">C</span>$5,000 &ndash; $10,000</button>
+          <button type="button" class="option" data-value="$10,000+"><span class="option-letter">D</span>$10,000+</button>
+        </div>
+        <input type="hidden" name="budget" required />
+        <div class="error-msg">Please choose an option before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7: case study opt-in -->
+    <div class="step" data-step="7">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 7 of 8</div>
+        <div class="step-question">Are you open to your before/after and results being used publicly as a case study?</div>
+        <div class="options" data-field="case_study_opt_in">
+          <button type="button" class="option" data-value="Yes"><span class="option-letter">A</span>Yes</button>
+          <button type="button" class="option" data-value="No"><span class="option-letter">B</span>No</button>
+          <button type="button" class="option" data-value="Maybe — let's discuss"><span class="option-letter">C</span>Maybe &mdash; let's discuss</button>
+        </div>
+        <input type="hidden" name="case_study_opt_in" required />
+        <div class="error-msg">Please choose an option before continuing.</div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8: anything else -->
+    <div class="step" data-step="8">
+      <div class="step-inner">
+        <div class="step-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Question 8 of 8</div>
+        <div class="step-question">Anything else I should know?</div>
+        <p class="step-hint">Optional &mdash; links, context, deadlines, whatever's useful.</p>
+        <textarea class="field-textarea" name="anything_else" placeholder="Type your answer... (optional)"></textarea>
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost btn-back">Back</button>
+          <button type="submit" class="btn btn-primary btn-submit">
+            Submit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span class="enter-hint">press <kbd>Enter ↵</kbd></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="step step-success" data-step="9">
+      <div class="step-inner">
+        <div class="step-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <div class="step-question">Got it. Thanks!</div>
+        <p class="step-hint">I'll take a look at your brand and get back to you within a day or two.</p>
+        <div class="step-actions">
+          <a href="/" class="btn btn-primary">Back to site</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<script>
+  (function () {
+    const form = document.getElementById('intake-form');
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const progressFill = document.getElementById('progress-fill');
+    const stepCounter = document.getElementById('step-counter');
+    const totalQuestions = 8;
+    let current = 0;
+
+    function renderStep() {
+      steps.forEach((step) => {
+        const n = parseInt(step.dataset.step, 10);
+        step.classList.remove('is-active', 'is-prev');
+        if (n === current) {
+          step.classList.add('is-active');
+        } else if (n < current) {
+          step.classList.add('is-prev');
+        }
+      });
+
+      const qNum = Math.min(Math.max(current, 1), totalQuestions);
+      const pct = current === 0 ? 0 : current > totalQuestions ? 100 : (qNum / totalQuestions) * 100;
+      progressFill.style.width = pct + '%';
+
+      if (current === 0 || current > totalQuestions) {
+        stepCounter.textContent = '';
+      } else {
+        stepCounter.innerHTML = '<strong>' + qNum + '</strong> / ' + totalQuestions;
+      }
+
+      const activeStep = steps.find((s) => parseInt(s.dataset.step, 10) === current);
+      if (activeStep) {
+        const focusable = activeStep.querySelector('.field-text, .field-textarea');
+        if (focusable) setTimeout(() => focusable.focus(), 350);
+      }
+    }
+
+    function currentStepEl() {
+      return steps.find((s) => parseInt(s.dataset.step, 10) === current);
+    }
+
+    function validateStep(stepEl) {
+      const required = stepEl.querySelector('.field-text[required], .field-textarea[required]');
+      const optionGroup = stepEl.querySelector('.options[data-field]');
+      const errorMsg = stepEl.querySelector('.error-msg');
+
+      if (required && !required.value.trim()) {
+        if (errorMsg) errorMsg.classList.add('is-visible');
+        required.focus();
+        return false;
+      }
+
+      if (optionGroup) {
+        const hiddenInput = stepEl.querySelector('input[type="hidden"][name="' + optionGroup.dataset.field + '"]');
+        if (!hiddenInput || !hiddenInput.value) {
+          if (errorMsg) errorMsg.classList.add('is-visible');
+          return false;
+        }
+      }
+
+      if (errorMsg) errorMsg.classList.remove('is-visible');
+      return true;
+    }
+
+    function goNext() {
+      const stepEl = currentStepEl();
+      if (!stepEl) return;
+      if (current >= 1 && current <= totalQuestions) {
+        if (!validateStep(stepEl)) return;
+      }
+      if (current < totalQuestions + 1) {
+        current += 1;
+        renderStep();
+      }
+    }
+
+    function goBack() {
+      if (current > 0) {
+        current -= 1;
+        renderStep();
+      }
+    }
+
+    document.querySelector('.btn-start').addEventListener('click', goNext);
+    document.querySelectorAll('.btn-next').forEach((btn) => btn.addEventListener('click', goNext));
+    document.querySelectorAll('.btn-back').forEach((btn) => btn.addEventListener('click', goBack));
+
+    // option choice handling
+    document.querySelectorAll('.options').forEach((group) => {
+      const field = group.dataset.field;
+      const hiddenInput = document.querySelector('input[type="hidden"][name="' + field + '"]');
+      group.querySelectorAll('.option').forEach((opt) => {
+        opt.addEventListener('click', () => {
+          group.querySelectorAll('.option').forEach((o) => o.classList.remove('is-selected'));
+          opt.classList.add('is-selected');
+          hiddenInput.value = opt.dataset.value;
+          setTimeout(goNext, 250);
+        });
+      });
+    });
+
+    // keyboard: Enter to advance (Shift+Enter for newline in textareas)
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const stepEl = currentStepEl();
+      if (!stepEl) return;
+      const active = document.activeElement;
+      const isTextarea = active && active.tagName === 'TEXTAREA';
+      if (isTextarea && !e.shiftKey && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        if (current === totalQuestions) {
+          form.requestSubmit();
+        } else {
+          goNext();
+        }
+        return;
+      }
+      if (isTextarea) return;
+      if (e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
+
+      e.preventDefault();
+      if (current === 0) {
+        goNext();
+      } else if (current === totalQuestions) {
+        form.requestSubmit();
+      } else if (current >= 1 && current < totalQuestions) {
+        goNext();
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const stepEl = currentStepEl();
+      if (stepEl && current >= 1 && current <= totalQuestions) {
+        if (!validateStep(stepEl)) return;
+      }
+
+      const submitBtn = form.querySelector('.btn-submit');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (response.ok) {
+          current = totalQuestions + 1;
+          renderStep();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Submit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+        }
+        alert("Something went wrong sending your answers. Please try again or email jaden@oceandev.net directly.");
+      }
+    });
+
+    renderStep();
+  })();
+</script>
+
+</body>
+</html>
