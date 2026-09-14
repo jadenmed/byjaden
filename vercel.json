@@ -17,6 +17,10 @@
     {
       "source": "/news/:slug",
       "destination": "/news/:slug.html"
+    },
+    {
+      "source": "/brand-audit",
+      "destination": "/brand-audit.html"
     }
   ]
 }
