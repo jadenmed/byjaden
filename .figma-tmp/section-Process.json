@@ -1,0 +1,760 @@
+{
+ "id": "3589:3034",
+ "name": "Process",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 2380,
+  "width": 1440,
+  "height": 632
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#f6f6f4",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3589:3070",
+   "name": "H2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 96,
+    "width": 800,
+    "height": 53
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 44,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Simple process. Real results."
+  },
+  {
+   "id": "3589:3071",
+   "name": "Step card 1",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 216,
+    "width": 312,
+    "height": 320
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ededea",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3072",
+   "name": "Step card 2",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 400,
+    "y": 216,
+    "width": 312,
+    "height": 320
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ededea",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3073",
+   "name": "Step card 3",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 728,
+    "y": 216,
+    "width": 312,
+    "height": 320
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ededea",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3074",
+   "name": "Step card 4",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 1056,
+    "y": 216,
+    "width": 312,
+    "height": 320
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3075",
+   "name": "Step 1 number",
+   "type": "TEXT",
+   "bounds": {
+    "x": 100,
+    "y": 244,
+    "width": 15,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "01"
+  },
+  {
+   "id": "3589:3076",
+   "name": "Step 1 title",
+   "type": "TEXT",
+   "bounds": {
+    "x": 100,
+    "y": 396,
+    "width": 256,
+    "height": 29
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 24,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Discovery & Strategy"
+  },
+  {
+   "id": "3589:3077",
+   "name": "Step 1 body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 100,
+    "y": 437,
+    "width": 256,
+    "height": 66
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#5a5a57",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 15,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 22,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "We map your goals, audience and positioning before a single pixel is designed."
+  },
+  {
+   "id": "3589:3078",
+   "name": "Step 2 number",
+   "type": "TEXT",
+   "bounds": {
+    "x": 428,
+    "y": 244,
+    "width": 15,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "02"
+  },
+  {
+   "id": "3589:3079",
+   "name": "Step 2 title",
+   "type": "TEXT",
+   "bounds": {
+    "x": 428,
+    "y": 396,
+    "width": 256,
+    "height": 29
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 24,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Design & Build"
+  },
+  {
+   "id": "3589:3080",
+   "name": "Step 2 body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 428,
+    "y": 437,
+    "width": 256,
+    "height": 44
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#5a5a57",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 15,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 22,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Custom design in Figma, then built in Framer, Shopify or WordPress."
+  },
+  {
+   "id": "3589:3081",
+   "name": "Step 3 number",
+   "type": "TEXT",
+   "bounds": {
+    "x": 756,
+    "y": 244,
+    "width": 15,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "03"
+  },
+  {
+   "id": "3589:3082",
+   "name": "Step 3 title",
+   "type": "TEXT",
+   "bounds": {
+    "x": 756,
+    "y": 396,
+    "width": 256,
+    "height": 29
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 24,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Launch & Support"
+  },
+  {
+   "id": "3589:3083",
+   "name": "Step 3 body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 756,
+    "y": 437,
+    "width": 256,
+    "height": 66
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#5a5a57",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 15,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 22,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "A Loom walkthrough at handoff, plus 30 days of email support after launch."
+  },
+  {
+   "id": "3589:3084",
+   "name": "Step 4 number",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1084,
+    "y": 244,
+    "width": 15,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "04"
+  },
+  {
+   "id": "3589:3085",
+   "name": "Step 4 title",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1084,
+    "y": 396,
+    "width": 256,
+    "height": 29
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 24,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Grow & Optimize"
+  },
+  {
+   "id": "3589:3086",
+   "name": "Step 4 body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1084,
+    "y": 437,
+    "width": 256,
+    "height": 66
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 0.8500000238418579
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 15,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 22,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Ongoing improvements that keep your site converting as your brand grows."
+  }
+ ]
+}

@@ -1,0 +1,495 @@
+{
+ "id": "3589:3037",
+ "name": "Blog",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 4348,
+  "width": 1440,
+  "height": 560
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#f6f6f4",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3589:3113",
+   "name": "H2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 80,
+    "width": 600,
+    "height": 53
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 44,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "From the blog."
+  },
+  {
+   "id": "3589:3114",
+   "name": "View all",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1218,
+    "y": 100,
+    "width": 123,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "VIEW ALL ARTICLES"
+  },
+  {
+   "id": "3589:3115",
+   "name": "Post image 1",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 176,
+    "width": 416,
+    "height": 240
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#e6e8ec",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3116",
+   "name": "Post image 2",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 512,
+    "y": 176,
+    "width": 416,
+    "height": 240
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#e6e8ec",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3117",
+   "name": "Post image 3",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 952,
+    "y": 176,
+    "width": 416,
+    "height": 240
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3118",
+   "name": "Post tag 1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 436,
+    "width": 159,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "THE BRIEF  /  ISSUE 01"
+  },
+  {
+   "id": "3589:3119",
+   "name": "Post title 1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 464,
+    "width": 175,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "The Brief, Issue 01"
+  },
+  {
+   "id": "3589:3120",
+   "name": "Post tag 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 512,
+    "y": 436,
+    "width": 51,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "FEATURE"
+  },
+  {
+   "id": "3589:3121",
+   "name": "Post title 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 512,
+    "y": 464,
+    "width": 151,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "Featured article"
+  },
+  {
+   "id": "3589:3122",
+   "name": "Post tag 3",
+   "type": "TEXT",
+   "bounds": {
+    "x": 952,
+    "y": 436,
+    "width": 123,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "OCEAN DEVELOPMENT"
+  },
+  {
+   "id": "3589:3123",
+   "name": "Post title 3",
+   "type": "TEXT",
+   "bounds": {
+    "x": 952,
+    "y": 464,
+    "width": 296,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "Websites for Miami businesses"
+  }
+ ]
+}

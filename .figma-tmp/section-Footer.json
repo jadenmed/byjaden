@@ -1,0 +1,1458 @@
+{
+ "id": "3589:3039",
+ "name": "Footer",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 5568,
+  "width": 1440,
+  "height": 1024
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#111111",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3589:3593",
+   "name": "Logo mark (footer wordmark)",
+   "type": "GROUP",
+   "bounds": {
+    "x": 72,
+    "y": 805,
+    "width": 165.29824829101562,
+    "height": 239.99945068359375
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true
+   },
+   "children": [
+    {
+     "id": "3589:3594",
+     "name": "Vector 774",
+     "type": "VECTOR",
+     "bounds": {
+      "x": 72.24714450538158,
+      "y": 950.0864868164062,
+      "width": 75.6156234741211,
+      "height": 94.91350555419922
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [],
+      "strokes": [
+       {
+        "type": "SOLID",
+        "color": "#0072ff",
+        "opacity": 1
+       }
+      ],
+      "strokeWeight": 235,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    },
+    {
+     "id": "3589:3595",
+     "name": "Vector 775",
+     "type": "VECTOR",
+     "bounds": {
+      "x": 72,
+      "y": 850.1306304931641,
+      "width": 120.58304595947266,
+      "height": 173.06802368164062
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [],
+      "strokes": [
+       {
+        "type": "SOLID",
+        "color": "#0072ff",
+        "opacity": 1
+       }
+      ],
+      "strokeWeight": 235,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    },
+    {
+     "id": "3589:3596",
+     "name": "Rectangle 240662718",
+     "type": "RECTANGLE",
+     "bounds": {
+      "x": 192.58379364013672,
+      "y": 804.9999999999964,
+      "width": 44.716209411621094,
+      "height": 45.22294616699219
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [],
+      "strokes": [
+       {
+        "type": "SOLID",
+        "color": "#0072ff",
+        "opacity": 1
+       }
+      ],
+      "strokeWeight": 235,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "3589:3803",
+   "name": "headline",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 96,
+    "width": 560,
+    "height": 100
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 46,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 50,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": -1.7999999523162842,
+     "unit": "PIXELS"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Websites for brands that refuse to settle."
+  },
+  {
+   "id": "3589:3804",
+   "name": "support",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 220,
+    "width": 520,
+    "height": 52
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 26,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Questions about a project, a timeline or the process? Reach out and I will reply within a day or two."
+  },
+  {
+   "id": "3589:3805",
+   "name": "Contact pill",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 296,
+    "width": 168,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3806",
+   "name": "Contact pill label",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 296,
+    "width": 168,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "CENTER",
+    "textAlignVertical": "CENTER",
+    "textAutoResize": "NONE"
+   },
+   "characters": "LET'S TALK  \u2192"
+  },
+  {
+   "id": "3589:3809",
+   "name": "mark 1",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 744,
+    "y": 101,
+    "width": 6,
+    "height": 6
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "rotation": 45,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3810",
+   "name": "eyebrow Navigate",
+   "type": "TEXT",
+   "bounds": {
+    "x": 760,
+    "y": 96,
+    "width": 53,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 11,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "NAVIGATE"
+  },
+  {
+   "id": "3589:3811",
+   "name": "links Navigate",
+   "type": "TEXT",
+   "bounds": {
+    "x": 744,
+    "y": 128,
+    "width": 110,
+    "height": 190
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 14,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 38,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "About\nWork\nProcess\nFAQ\nContact"
+  },
+  {
+   "id": "3589:3812",
+   "name": "mark 2",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 904,
+    "y": 101,
+    "width": 6,
+    "height": 6
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "rotation": 45,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3813",
+   "name": "eyebrow Companies",
+   "type": "TEXT",
+   "bounds": {
+    "x": 920,
+    "y": 96,
+    "width": 60,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 11,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "COMPANIES"
+  },
+  {
+   "id": "3589:3814",
+   "name": "links Companies",
+   "type": "TEXT",
+   "bounds": {
+    "x": 904,
+    "y": 128,
+    "width": 150,
+    "height": 114
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 14,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 38,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Ocean Development\nCampusBite\nMako"
+  },
+  {
+   "id": "3589:3815",
+   "name": "mark 3",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 1088,
+    "y": 101,
+    "width": 6,
+    "height": 6
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "rotation": 45,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3816",
+   "name": "eyebrow Social",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1104,
+    "y": 96,
+    "width": 40,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 11,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "SOCIAL"
+  },
+  {
+   "id": "3589:3817",
+   "name": "links Social",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1088,
+    "y": 128,
+    "width": 110,
+    "height": 114
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 14,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 38,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Instagram\nLinkedIn\nDiscord"
+  },
+  {
+   "id": "3589:3818",
+   "name": "mark 4",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 1248,
+    "y": 101,
+    "width": 6,
+    "height": 6
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "rotation": 45,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3819",
+   "name": "eyebrow Resources",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1264,
+    "y": 96,
+    "width": 60,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 11,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "RESOURCES"
+  },
+  {
+   "id": "3589:3820",
+   "name": "links Resources",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1248,
+    "y": 128,
+    "width": 120,
+    "height": 114
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 14,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 38,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Blog\nNewsletter\nThe Brief"
+  },
+  {
+   "id": "3589:3821",
+   "name": "newsletter-notice",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 424,
+    "width": 560,
+    "height": 184
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 0
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.1599999964237213
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3822",
+   "name": "notice-title",
+   "type": "TEXT",
+   "bounds": {
+    "x": 96,
+    "y": 448,
+    "width": 265,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "Subscribe to the newsletter"
+  },
+  {
+   "id": "3589:3823",
+   "name": "notice-body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 96,
+    "y": 482,
+    "width": 510,
+    "height": 30
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "New work, new templates and what I am learning while building Ocean Development. One email, now and then."
+  },
+  {
+   "id": "3589:3824",
+   "name": "Newsletter input",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 96,
+    "y": 534,
+    "width": 372,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 0
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.1599999964237213
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3825",
+   "name": "Newsletter placeholder",
+   "type": "TEXT",
+   "bounds": {
+    "x": 112,
+    "y": 534,
+    "width": 340,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.5
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 14,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "CENTER",
+    "textAutoResize": "NONE"
+   },
+   "characters": "Email address"
+  },
+  {
+   "id": "3589:3826",
+   "name": "Newsletter button",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 480,
+    "y": 534,
+    "width": 128,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3827",
+   "name": "Newsletter button label",
+   "type": "TEXT",
+   "bounds": {
+    "x": 480,
+    "y": 534,
+    "width": 128,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "CENTER",
+    "textAlignVertical": "CENTER",
+    "textAutoResize": "NONE"
+   },
+   "characters": "SUBSCRIBE  \u2192"
+  },
+  {
+   "id": "3589:3828",
+   "name": "contact label 1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 744,
+    "y": 552,
+    "width": 113,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 11,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "PROJECT INQUIRIES"
+  },
+  {
+   "id": "3589:3829",
+   "name": "email 1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 744,
+    "y": 576,
+    "width": 159,
+    "height": 19
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "jaden@oceandev.net"
+  },
+  {
+   "id": "3589:3830",
+   "name": "contact label 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 984,
+    "y": 552,
+    "width": 67,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 11,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "THE AGENCY"
+  },
+  {
+   "id": "3589:3831",
+   "name": "email 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 984,
+    "y": 576,
+    "width": 103,
+    "height": 19
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "oceandev.net"
+  },
+  {
+   "id": "3589:3832",
+   "name": "legal divider",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 682,
+    "width": 1296,
+    "height": 1
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.1599999964237213
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3833",
+   "name": "copyright",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 706,
+    "width": 240,
+    "height": 15
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.5600000023841858
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "\u00a9 2026 Jaden Medina. All rights reserved."
+  },
+  {
+   "id": "3589:3834",
+   "name": "back-to-top",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1268,
+    "y": 706,
+    "width": 100,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 0.7400000095367432
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "BACK TO TOP  \u2191"
+  },
+  {
+   "id": "3589:3835",
+   "name": "Giant wordmark",
+   "type": "TEXT",
+   "bounds": {
+    "x": 262,
+    "y": 736,
+    "width": 1075,
+    "height": 345
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#f6f6f4",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 285,
+    "fontFamily": "Inter",
+    "fontStyle": "Semi Bold",
+    "fontWeight": 600,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": -4,
+     "unit": "PIXELS"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "byjaden"
+  }
+ ]
+}

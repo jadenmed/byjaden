@@ -1,0 +1,854 @@
+{
+ "id": "3589:3038",
+ "name": "FAQ",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 4908,
+  "width": 1440,
+  "height": 660
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#f6f6f4",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3589:3124",
+   "name": "H2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 96,
+    "width": 380,
+    "height": 106
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 44,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Questions, answered."
+  },
+  {
+   "id": "3589:3125",
+   "name": "FAQ row 1",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 520,
+    "y": 96,
+    "width": 848,
+    "height": 64
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3126",
+   "name": "FAQ row 2",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 520,
+    "y": 172,
+    "width": 848,
+    "height": 64
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3127",
+   "name": "FAQ row 3",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 520,
+    "y": 248,
+    "width": 848,
+    "height": 64
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3128",
+   "name": "FAQ row 4",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 520,
+    "y": 324,
+    "width": 848,
+    "height": 64
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3129",
+   "name": "FAQ row 5",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 520,
+    "y": 400,
+    "width": 848,
+    "height": 64
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3130",
+   "name": "FAQ row 6",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 520,
+    "y": 476,
+    "width": 848,
+    "height": 64
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3131",
+   "name": "FAQ q1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 544,
+    "y": 120,
+    "width": 250,
+    "height": 17
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "CAN I MAKE CHANGES AFTER LAUNCH?"
+  },
+  {
+   "id": "3589:3132",
+   "name": "FAQ q2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 544,
+    "y": 196,
+    "width": 250,
+    "height": 17
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "HOW MANY REVISIONS ARE INCLUDED?"
+  },
+  {
+   "id": "3589:3133",
+   "name": "FAQ q3",
+   "type": "TEXT",
+   "bounds": {
+    "x": 544,
+    "y": 272,
+    "width": 172,
+    "height": 17
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "DO YOU WRITE THE COPY?"
+  },
+  {
+   "id": "3589:3134",
+   "name": "FAQ q4",
+   "type": "TEXT",
+   "bounds": {
+    "x": 544,
+    "y": 348,
+    "width": 196,
+    "height": 17
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "HOW DOES ONBOARDING WORK?"
+  },
+  {
+   "id": "3589:3135",
+   "name": "FAQ q5",
+   "type": "TEXT",
+   "bounds": {
+    "x": 544,
+    "y": 424,
+    "width": 305,
+    "height": 17
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "CAN YOU WORK WITH MY EXISTING PLATFORM?"
+  },
+  {
+   "id": "3589:3136",
+   "name": "FAQ q6",
+   "type": "TEXT",
+   "bounds": {
+    "x": 544,
+    "y": 500,
+    "width": 196,
+    "height": 17
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "IS THE TIMELINE FLEXIBLE?"
+  },
+  {
+   "id": "3589:3137",
+   "name": "FAQ plus icons",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1336,
+    "y": 118,
+    "width": 10,
+    "height": 21
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "+"
+  },
+  {
+   "id": "3589:3151",
+   "name": "FAQ plus 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1336,
+    "y": 194,
+    "width": 10,
+    "height": 21
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "+"
+  },
+  {
+   "id": "3589:3152",
+   "name": "FAQ plus 3",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1336,
+    "y": 270,
+    "width": 10,
+    "height": 21
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "+"
+  },
+  {
+   "id": "3589:3153",
+   "name": "FAQ plus 4",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1336,
+    "y": 346,
+    "width": 10,
+    "height": 21
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "+"
+  },
+  {
+   "id": "3589:3154",
+   "name": "FAQ plus 5",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1336,
+    "y": 422,
+    "width": 10,
+    "height": 21
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "+"
+  },
+  {
+   "id": "3589:3155",
+   "name": "FAQ plus 6",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1336,
+    "y": 498,
+    "width": 10,
+    "height": 21
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 16,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "+"
+  }
+ ]
+}

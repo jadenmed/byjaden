@@ -1,0 +1,417 @@
+{
+ "id": "3589:3035",
+ "name": "Why Jaden",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 3012,
+  "width": 1440,
+  "height": 700
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#f6f6f4",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3591:1480",
+   "name": "Frame 2087330462",
+   "type": "FRAME",
+   "bounds": {
+    "x": 72,
+    "y": 80,
+    "width": 576,
+    "height": 540
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#e6e8ec",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "clipsContent": true,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   },
+   "children": [
+    {
+     "id": "3591:1481",
+     "name": "byjadenpicture",
+     "type": "RECTANGLE",
+     "bounds": {
+      "x": 0,
+      "y": -5,
+      "width": 576,
+      "height": 615
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [
+       {
+        "type": "IMAGE",
+        "scaleMode": "CROP",
+        "imageHash": "0af692636a96b1a8ea05d1861dcd549c9b362dfc",
+        "imageTransform": [
+         [
+          1,
+          0,
+          0
+         ],
+         [
+          0,
+          0.6516754627227783,
+          0.18518517911434174
+         ]
+        ],
+        "opacity": 1
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    },
+    {
+     "id": "3591:1482",
+     "name": "IMG_5207 1",
+     "type": "RECTANGLE",
+     "bounds": {
+      "x": -228,
+      "y": -59,
+      "width": 913,
+      "height": 608
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [
+       {
+        "type": "IMAGE",
+        "scaleMode": "FILL",
+        "imageHash": "b92d6df28443b92c4ae3d0838756878a6c45683a",
+        "imageTransform": [
+         [
+          1,
+          0,
+          0
+         ],
+         [
+          0,
+          1,
+          0
+         ]
+        ],
+        "opacity": 1
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "3589:3088",
+   "name": "Eyebrow",
+   "type": "TEXT",
+   "bounds": {
+    "x": 740,
+    "y": 112,
+    "width": 65,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "WHY JADEN"
+  },
+  {
+   "id": "3589:3089",
+   "name": "H2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 740,
+    "y": 144,
+    "width": 600,
+    "height": 106
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 44,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "The person behind the agency."
+  },
+  {
+   "id": "3589:3090",
+   "name": "Body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 740,
+    "y": 272,
+    "width": 560,
+    "height": 126
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#4a4a48",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 17,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "I started Ocean Development as a teenager, and I still work directly with every client. No account managers and no handoffs between a sales team and a design team.\n\nYou get the person who designs and builds your site on the call, in the files and at launch."
+  },
+  {
+   "id": "3589:3091",
+   "name": "Tools",
+   "type": "TEXT",
+   "bounds": {
+    "x": 740,
+    "y": 440,
+    "width": 368,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "FIGMA        FRAMER        SHOPIFY        WORDPRESS"
+  },
+  {
+   "id": "3589:3092",
+   "name": "CTA",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 740,
+    "y": 490,
+    "width": 184,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3093",
+   "name": "CTA label",
+   "type": "TEXT",
+   "bounds": {
+    "x": 740,
+    "y": 490,
+    "width": 184,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 13,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "CENTER",
+    "textAlignVertical": "CENTER",
+    "textAutoResize": "NONE"
+   },
+   "characters": "START A PROJECT  \u2192"
+  }
+ ]
+}

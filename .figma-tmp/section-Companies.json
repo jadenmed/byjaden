@@ -1,0 +1,808 @@
+{
+ "id": "3589:3033",
+ "name": "Companies",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 1600,
+  "width": 1440,
+  "height": 780
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#f6f6f4",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3589:3058",
+   "name": "Eyebrow",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 96,
+    "width": 109,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "COMPANIES I OWN"
+  },
+  {
+   "id": "3589:3059",
+   "name": "H2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 128,
+    "width": 700,
+    "height": 53
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 44,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Brands I've built and own."
+  },
+  {
+   "id": "3589:3060",
+   "name": "View all",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1210,
+    "y": 150,
+    "width": 130,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "VIEW ALL COMPANIES"
+  },
+  {
+   "id": "3589:3061",
+   "name": "Card image / Ocean Development",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 232,
+    "width": 416,
+    "height": 400
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3567",
+   "name": "Frame 2087330460",
+   "type": "FRAME",
+   "bounds": {
+    "x": 512,
+    "y": 232,
+    "width": 416,
+    "height": 400
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "autoLayout": {
+     "direction": "VERTICAL",
+     "gap": 10,
+     "primaryAxisAlign": "MIN",
+     "counterAxisAlign": "MIN",
+     "primaryAxisSizing": "AUTO",
+     "counterAxisSizing": "FIXED",
+     "wrap": "NO_WRAP",
+     "counterAxisSpacing": 0
+    },
+    "clipsContent": false,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   },
+   "children": [
+    {
+     "id": "3589:3062",
+     "name": "Card image / CampusBite",
+     "type": "RECTANGLE",
+     "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 416,
+      "height": 400
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [
+       {
+        "type": "SOLID",
+        "color": "#e6e8ec",
+        "opacity": 1
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 8,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "3589:3063",
+   "name": "Card image / Mako",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 952,
+    "y": 232,
+    "width": 416,
+    "height": 400
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3064",
+   "name": "Name 1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 652,
+    "width": 194,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "Ocean Development"
+  },
+  {
+   "id": "3589:3065",
+   "name": "Tag 1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 684,
+    "width": 116,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "OWNED  /  AGENCY"
+  },
+  {
+   "id": "3589:3066",
+   "name": "Name 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 512,
+    "y": 652,
+    "width": 116,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "CampusBite"
+  },
+  {
+   "id": "3589:3067",
+   "name": "Tag 2",
+   "type": "TEXT",
+   "bounds": {
+    "x": 512,
+    "y": 684,
+    "width": 123,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "OWNED  /  STARTUP"
+  },
+  {
+   "id": "3589:3068",
+   "name": "Name 3",
+   "type": "TEXT",
+   "bounds": {
+    "x": 952,
+    "y": 652,
+    "width": 53,
+    "height": 24
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 20,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "Mako"
+  },
+  {
+   "id": "3589:3069",
+   "name": "Tag 3",
+   "type": "TEXT",
+   "bounds": {
+    "x": 952,
+    "y": 684,
+    "width": 123,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#7a7a76",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "OWNED  /  COMPANY"
+  },
+  {
+   "id": "3589:3563",
+   "name": "Logo",
+   "type": "VECTOR",
+   "bounds": {
+    "x": 640,
+    "y": 380,
+    "width": 160,
+    "height": 103
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#db5732",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3555",
+   "name": "Mako logo",
+   "type": "FRAME",
+   "bounds": {
+    "x": 1068,
+    "y": 343,
+    "width": 184,
+    "height": 177
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "clipsContent": true,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   },
+   "children": [
+    {
+     "id": "3589:3556",
+     "name": "Group",
+     "type": "GROUP",
+     "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 184,
+      "height": 176.9994354248047
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true
+     },
+     "children": [
+      {
+       "id": "3589:3557",
+       "name": "bubbles",
+       "type": "VECTOR",
+       "bounds": {
+        "x": 137.09803771972656,
+        "y": 0,
+        "width": 28.862743377685547,
+        "height": 32.51020812988281
+       },
+       "styles": {
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "visible": true,
+        "fills": [
+         {
+          "type": "SOLID",
+          "color": "#ffffff",
+          "opacity": 1
+         }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "cornerRadius": 0,
+        "constraints": {
+         "horizontal": "SCALE",
+         "vertical": "SCALE"
+        }
+       }
+      },
+      {
+       "id": "3589:3558",
+       "name": "Shark",
+       "type": "VECTOR",
+       "bounds": {
+        "x": 7.215685844421387,
+        "y": 7.224489688873291,
+        "width": 169.56863403320312,
+        "height": 126.4285659790039
+       },
+       "styles": {
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "visible": true,
+        "fills": [
+         {
+          "type": "SOLID",
+          "color": "#ffffff",
+          "opacity": 1
+         }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "cornerRadius": 0,
+        "constraints": {
+         "horizontal": "SCALE",
+         "vertical": "SCALE"
+        }
+       }
+      },
+      {
+       "id": "3589:3559",
+       "name": "usemako",
+       "type": "VECTOR",
+       "bounds": {
+        "x": 0,
+        "y": 148.10203552246094,
+        "width": 184,
+        "height": 28.897958755493164
+       },
+       "styles": {
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "visible": true,
+        "fills": [
+         {
+          "type": "SOLID",
+          "color": "#ffffff",
+          "opacity": 1
+         }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "cornerRadius": 0,
+        "constraints": {
+         "horizontal": "SCALE",
+         "vertical": "SCALE"
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3589:3560",
+   "name": "Ocean Development logogram",
+   "type": "FRAME",
+   "bounds": {
+    "x": 213,
+    "y": 365,
+    "width": 133,
+    "height": 133
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 4.457021236419678,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "clipsContent": false,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   },
+   "children": [
+    {
+     "id": "3589:3561",
+     "name": "Vector",
+     "type": "VECTOR",
+     "bounds": {
+      "x": 5.976471900939941,
+      "y": 6.045661926269531,
+      "width": 117.69902801513672,
+      "height": 120.90909576416016
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [
+       {
+        "type": "SOLID",
+        "color": "#ffffff",
+        "opacity": 1
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 6.9920806884765625,
+      "strokeAlign": "OUTSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "CENTER",
+       "vertical": "SCALE"
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

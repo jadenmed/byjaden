@@ -1,0 +1,599 @@
+{
+ "id": "3589:3031",
+ "name": "Hero",
+ "type": "FRAME",
+ "bounds": {
+  "x": 0,
+  "y": 0,
+  "width": 1440,
+  "height": 900
+ },
+ "styles": {
+  "opacity": 1,
+  "blendMode": "PASS_THROUGH",
+  "visible": true,
+  "fills": [
+   {
+    "type": "SOLID",
+    "color": "#f6f6f4",
+    "opacity": 1
+   }
+  ],
+  "strokes": [],
+  "strokeWeight": 1,
+  "strokeAlign": "INSIDE",
+  "cornerRadius": 0,
+  "clipsContent": true,
+  "constraints": {
+   "horizontal": "MIN",
+   "vertical": "MIN"
+  }
+ },
+ "children": [
+  {
+   "id": "3589:3040",
+   "name": "Nav bar",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 48,
+    "y": 32,
+    "width": 1344,
+    "height": 56
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [
+     {
+      "type": "SOLID",
+      "color": "#e3e3df",
+      "opacity": 1
+     }
+    ],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3041",
+   "name": "Logo",
+   "type": "TEXT",
+   "bounds": {
+    "x": 102,
+    "y": 49,
+    "width": 70,
+    "height": 22
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 18,
+    "fontFamily": "Inter",
+    "fontStyle": "Semi Bold",
+    "fontWeight": 600,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "byjaden"
+  },
+  {
+   "id": "3589:3042",
+   "name": "Nav links",
+   "type": "TEXT",
+   "bounds": {
+    "x": 800,
+    "y": 53,
+    "width": 419,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "ABOUT        WORK        PROCESS        FAQ        DISCORD"
+  },
+  {
+   "id": "3589:3043",
+   "name": "Nav CTA",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 1256,
+    "y": 40,
+    "width": 124,
+    "height": 40
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3044",
+   "name": "Nav CTA label",
+   "type": "TEXT",
+   "bounds": {
+    "x": 1256,
+    "y": 40,
+    "width": 124,
+    "height": 40
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#ffffff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "CENTER",
+    "textAlignVertical": "CENTER",
+    "textAutoResize": "NONE"
+   },
+   "characters": "LET'S TALK"
+  },
+  {
+   "id": "3589:3320",
+   "name": "Frame 2087330458",
+   "type": "FRAME",
+   "bounds": {
+    "x": 740,
+    "y": 150,
+    "width": 652,
+    "height": 690
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "clipsContent": true,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   },
+   "children": [
+    {
+     "id": "3589:3321",
+     "name": "image 401",
+     "type": "RECTANGLE",
+     "bounds": {
+      "x": -935,
+      "y": -14,
+      "width": 2151,
+      "height": 717
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [
+       {
+        "type": "IMAGE",
+        "scaleMode": "FILL",
+        "imageHash": "68338613b9d5745083e01dc15b371a9fdd850e30",
+        "imageTransform": [
+         [
+          1,
+          0,
+          0
+         ],
+         [
+          0,
+          1,
+          0
+         ]
+        ],
+        "opacity": 1
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "3589:3046",
+   "name": "Eyebrow",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 300,
+    "width": 109,
+    "height": 16
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#0072ff",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 12,
+    "fontFamily": "Roboto Mono",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "WIDTH_AND_HEIGHT"
+   },
+   "characters": "GETTING STARTED"
+  },
+  {
+   "id": "3589:3047",
+   "name": "H1",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 332,
+    "width": 620,
+    "height": 174
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 52,
+    "fontFamily": "Inter",
+    "fontStyle": "Medium",
+    "fontWeight": 500,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "value": 58,
+     "unit": "PIXELS"
+    },
+    "letterSpacing": {
+     "value": -1.5,
+     "unit": "PIXELS"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "Jaden Medina, the website designer behind winning brands."
+  },
+  {
+   "id": "3589:3048",
+   "name": "Hero body",
+   "type": "TEXT",
+   "bounds": {
+    "x": 72,
+    "y": 538,
+    "width": 520,
+    "height": 63
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#4a4a48",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "OUTSIDE",
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    },
+    "fontSize": 17,
+    "fontFamily": "Inter",
+    "fontStyle": "Regular",
+    "fontWeight": 400,
+    "textDecoration": "NONE",
+    "lineHeight": {
+     "unit": "AUTO"
+    },
+    "letterSpacing": {
+     "value": 0,
+     "unit": "PERCENT"
+    },
+    "textAlignHorizontal": "LEFT",
+    "textAlignVertical": "TOP",
+    "textAutoResize": "HEIGHT"
+   },
+   "characters": "I design and build websites for brands that want to be taken seriously. Based in Miami, working with founders and businesses around the world."
+  },
+  {
+   "id": "3589:3049",
+   "name": "Hero CTA",
+   "type": "RECTANGLE",
+   "bounds": {
+    "x": 72,
+    "y": 630,
+    "width": 168,
+    "height": 48
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true,
+    "fills": [
+     {
+      "type": "SOLID",
+      "color": "#111111",
+      "opacity": 1
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 8,
+    "constraints": {
+     "horizontal": "MIN",
+     "vertical": "MIN"
+    }
+   }
+  },
+  {
+   "id": "3589:3589",
+   "name": "Logo mark (nav)",
+   "type": "GROUP",
+   "bounds": {
+    "x": 72,
+    "y": 45,
+    "width": 20.701444625854492,
+    "height": 30.000776290893555
+   },
+   "styles": {
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "visible": true
+   },
+   "children": [
+    {
+     "id": "3589:3590",
+     "name": "Vector 774",
+     "type": "VECTOR",
+     "bounds": {
+      "x": 72.03092973679304,
+      "y": 63.13594436645508,
+      "width": 9.469464302062988,
+      "height": 11.864057540893555
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [],
+      "strokes": [
+       {
+        "type": "SOLID",
+        "color": "#111111",
+        "opacity": 1
+       }
+      ],
+      "strokeWeight": 235,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    },
+    {
+     "id": "3589:3591",
+     "name": "Vector 775",
+     "type": "VECTOR",
+     "bounds": {
+      "x": 72,
+      "y": 50.64154863357544,
+      "width": 15.100805282592773,
+      "height": 21.63326644897461
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [],
+      "strokes": [
+       {
+        "type": "SOLID",
+        "color": "#111111",
+        "opacity": 1
+       }
+      ],
+      "strokeWeight": 235,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    },
+    {
+     "id": "3589:3592",
+     "name": "Rectangle 240662718",
+     "type": "RECTANGLE",
+     "bounds": {
+      "x": 87.10011863708496,
+      "y": 45.00000000000182,
+      "width": 5.599882125854492,
+      "height": 5.652805805206299
+     },
+     "styles": {
+      "opacity": 1,
+      "blendMode": "PASS_THROUGH",
+      "visible": true,
+      "fills": [],
+      "strokes": [
+       {
+        "type": "SOLID",
+        "color": "#111111",
+        "opacity": 1
+       }
+      ],
+      "strokeWeight": 235,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "constraints": {
+       "horizontal": "MIN",
+       "vertical": "MIN"
+      }
+     }
+    }
+   ]
+  }
+ ]
+}
