@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why a great website is the best salesperson you will ever hire. — The Brief</title>
+<meta name="description" content="A great website does the first half of your sales conversation before anyone replies to an email. Issue 02 of The Brief, from Jaden Medina, founder of Ocean Development." />
+
+<link rel="icon" type="image/svg+xml" href="/assets/jadenmedinalogo.svg" />
+<link rel="apple-touch-icon" href="/assets/jadenmedinalogo.svg" />
+
+<meta property="og:title" content="Why a great website is the best salesperson you will ever hire." />
+<meta property="og:description" content="A great website does the first half of your sales conversation before anyone replies to an email. Issue 02 of The Brief." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://byjaden.com/news/second-issue" />
+<meta property="og:site_name" content="Jaden Medina" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Why a great website is the best salesperson you will ever hire." />
+<meta name="twitter:description" content="A great website does the first half of your sales conversation before anyone replies to an email. Issue 02 of The Brief." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f6f6f4;
+    --surface: #ffffff;
+    --ink: #111111;
+    --muted-1: #4a4a48;
+    --muted-2: #5a5a57;
+    --muted-3: #7a7a76;
+    --muted-4: #8a8a86;
+    --line: #e3e3df;
+    --accent: #0072ff;
+    --card-light: #ededea;
+    --card-img-bg: #e6e8ec;
+    --radius: 8px;
+    --nav-h: 56px;
+    --container: 1296px;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .eyebrow.on-dark { color: rgba(246,246,244,0.85); }
+
+  h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 500; color: var(--ink); letter-spacing: -0.5px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border-radius: var(--radius);
+    padding: 16px 28px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); opacity: 0.92; }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-light { background: var(--bg); color: var(--ink); }
+
+  .view-all {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  section { padding: 96px 0; }
+
+  /* ============ NAV ============ */
+  .nav-float-wrap {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .nav-float-wrap.nav-hidden { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+  .nav-float-wrap.nav-hidden .nav-card,
+  .nav-float-wrap.nav-hidden .mobile-menu { pointer-events: none; }
+  .nav-card {
+    pointer-events: auto;
+    width: 100%;
+    max-width: 1152px;
+    margin: 0 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px rgba(17,17,17,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-h);
+    padding: 0 20px;
+  }
+  .nav-logo { display: flex; align-items: center; height: 22px; }
+  .nav-logo img { height: 22px; width: auto; filter: invert(1); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { padding: 10px 20px; font-size: 12px; }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--ink); margin: 4px 0; }
+  .mobile-menu {
+    pointer-events: auto;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin: 8px 24px 0;
+    padding: 12px;
+    max-width: 1152px;
+  }
+  .mobile-menu a {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu.open { display: flex; }
+
+  /* ============ ARTICLE HERO ============ */
+  .article-hero { padding: 160px 0 0; background: var(--bg); }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    margin-bottom: 32px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .back-link:hover { opacity: 1; }
+  .article-h1 {
+    font-size: clamp(32px, 5vw, 60px);
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    margin: 16px 0 40px;
+    max-width: 920px;
+  }
+  .article-byline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 56px;
+  }
+  .byline-left { display: flex; align-items: center; gap: 14px; }
+  .byline-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .byline-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .byline-role { font-size: 14px; color: var(--muted-3); }
+  .byline-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+    white-space: nowrap;
+  }
+
+  /* ============ COVER IMAGE ============ */
+  .cover { padding: 0 0 96px; }
+  .cover-image-wrap {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1296 / 600;
+    background: var(--accent);
+    margin-bottom: 20px;
+  }
+  .cover-tag {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+  .cover-caption { font-size: 14px; color: var(--muted-3); max-width: 640px; }
+
+  /* ============ ARTICLE BODY ============ */
+  .article-body { padding-top: 0; }
+  .article-layout { display: grid; grid-template-columns: 240px 680px; gap: 148px; }
+
+  .article-rail { position: sticky; top: calc(var(--nav-h) + 48px); align-self: start; }
+  .rail-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+    margin-bottom: 20px;
+  }
+  .rail-nav { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+  .rail-nav a { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--muted-3); text-decoration: none; transition: color 0.2s ease; }
+  .rail-nav a:hover { color: var(--ink); }
+  .rail-nav a.active { color: var(--ink); font-weight: 500; }
+  .rail-mark { width: 6px; height: 6px; flex-shrink: 0; background: transparent; }
+  .rail-nav a.active .rail-mark { background: var(--accent); }
+  .rail-divider { height: 1px; background: var(--line); margin-bottom: 24px; }
+  .rail-share { display: flex; flex-direction: column; }
+  .rail-share a, .rail-share button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 4px 0;
+    cursor: pointer;
+  }
+
+  .article-text { font-size: 18px; }
+  .article-lead { font-size: 22px; line-height: 34px; letter-spacing: -0.3px; color: var(--ink); margin-bottom: 44px; }
+  .article-text h2 { font-size: 32px; line-height: 38px; letter-spacing: -0.8px; margin: 0 0 20px; scroll-margin-top: calc(var(--nav-h) + 40px); }
+  .article-text p { font-size: 18px; line-height: 30px; color: var(--muted-1); margin-bottom: 20px; }
+  .article-text p:last-of-type { margin-bottom: 0; }
+  .article-block { margin-bottom: 44px; }
+
+  .pull-quote { border-left: 3px solid var(--accent); padding-left: 24px; margin: 0 0 44px; }
+  .pull-quote p { font-size: 28px; line-height: 36px; letter-spacing: -0.5px; color: var(--ink); font-weight: 500; margin: 0; }
+
+  .inline-figure { margin: 0 0 44px; }
+  .figure-placeholder { position: relative; border-radius: var(--radius); aspect-ratio: 680 / 380; background: var(--card-img-bg); margin-bottom: 16px; overflow: hidden; }
+  .figure-tag {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+  }
+  .figure-caption { font-size: 14px; color: var(--muted-3); }
+
+  .article-list { list-style: none; margin: 0 0 44px; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .article-list li { display: flex; align-items: flex-start; gap: 16px; font-size: 18px; line-height: 1.3; color: var(--muted-1); }
+  .article-list .mark { width: 6px; height: 6px; background: var(--accent); flex-shrink: 0; margin-top: 8px; }
+
+  .author-card { display: flex; gap: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin-top: 8px; }
+  .author-card .avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .author-card h4 { font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .author-card p { font-size: 15px; line-height: 22px; color: var(--muted-1); margin-bottom: 12px; }
+  .author-card a { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--accent); text-decoration: none; }
+
+  /* ============ NEWSLETTER CTA ============ */
+  .newsletter-cta { padding-top: 0; }
+  .cta-card { background: var(--ink); border-radius: var(--radius); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .cta-copy .eyebrow { margin-bottom: 16px; }
+  .cta-copy h2 { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.15; letter-spacing: -1px; color: var(--bg); margin-bottom: 16px; max-width: 480px; }
+  .cta-copy p { font-size: 16px; line-height: 1.5; color: rgba(246,246,244,0.7); max-width: 480px; }
+  .cta-form { display: flex; flex-direction: column; gap: 12px; }
+  .cta-form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta-form input {
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid var(--muted-1);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+  }
+  .cta-form input::placeholder { color: rgba(246,246,244,0.55); }
+  .cta-form button {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 24px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .cta-fine { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted-4); }
+
+  /* ============ SECTION HEAD / BLOG ============ */
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -1px; max-width: 700px; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .blog-card { text-decoration: none; color: inherit; display: block; }
+  .blog-card-image { border-radius: var(--radius); aspect-ratio: 416/240; background: var(--card-img-bg); margin-bottom: 24px; transition: transform 0.3s ease; }
+  .blog-card:hover .blog-card-image { transform: translateY(-4px); }
+  .blog-card.accent .blog-card-image { background: var(--accent); }
+  .blog-card .tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .blog-card h3 { font-size: 20px; }
+
+  /* ============ FOOTER ============ */
+  .site-footer { background: var(--ink); color: var(--bg); padding: 96px 0 48px; overflow: hidden; position: relative; }
+  .footer-top { display: grid; grid-template-columns: 1.4fr 2fr; gap: 48px; margin-bottom: 56px; }
+  .footer-logo { height: 32px; width: auto; margin-bottom: 32px; }
+  .footer-brand h2 { font-size: clamp(28px, 3.6vw, 46px); letter-spacing: -1.5px; color: var(--bg); margin-bottom: 20px; max-width: 560px; }
+  .footer-brand p { font-size: 16px; line-height: 1.55; color: rgba(246,246,244,0.74); max-width: 480px; margin-bottom: 32px; }
+  .footer-columns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .footer-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(246,246,244,0.74);
+    margin-bottom: 16px;
+  }
+  .footer-col a { display: block; font-size: 14px; color: rgba(246,246,244,0.74); text-decoration: none; padding: 6px 0; transition: color 0.2s ease; }
+  .footer-col a:hover { color: var(--bg); }
+  .footer-newsletter { border: 1px solid rgba(246,246,244,0.16); border-radius: var(--radius); padding: 32px; max-width: 600px; margin-bottom: 56px; }
+  .footer-newsletter h3 { font-size: 20px; color: var(--bg); margin-bottom: 8px; }
+  .footer-newsletter p { font-size: 12px; color: rgba(246,246,244,0.74); line-height: 1.5; margin-bottom: 20px; max-width: 510px; }
+  .footer-newsletter form { display: flex; gap: 12px; flex-wrap: wrap; }
+  .footer-newsletter input {
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid rgba(246,246,244,0.16);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 14px;
+  }
+  .footer-newsletter input::placeholder { color: rgba(246,246,244,0.5); }
+  .footer-newsletter button {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    cursor: pointer;
+  }
+  .footer-contacts { display: flex; gap: 64px; flex-wrap: wrap; margin-bottom: 56px; }
+  .footer-contacts .footer-eyebrow { color: var(--accent); margin-bottom: 8px; }
+  .footer-contacts a { font-size: 16px; color: var(--bg); text-decoration: none; }
+  .footer-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(246,246,244,0.16);
+    position: relative;
+    z-index: 2;
+  }
+  .footer-legal span { font-size: 12px; color: rgba(246,246,244,0.56); }
+  .back-to-top { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: rgba(246,246,244,0.74); text-decoration: none; }
+  .footer-wordmark { display: block; width: 100%; max-width: 1265px; height: auto; margin-top: 32px; user-select: none; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .article-layout, .cta-card, .footer-top { grid-template-columns: 1fr; }
+    .article-rail { position: static; order: 2; margin-top: 48px; }
+    .article-text { order: 1; }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-columns { grid-template-columns: repeat(2, 1fr); }
+    section, .article-hero { padding: 64px 0; }
+    .article-hero { padding-top: 140px; }
+    .cover { padding-bottom: 64px; }
+  }
+  @media (max-width: 620px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .footer-contacts { gap: 32px; }
+    .article-byline { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="nav-float-wrap">
+    <div class="nav-card">
+      <a href="/" class="nav-logo"><img src="/assets/byjaden.svg" alt="byjaden" /></a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#work">Work</a>
+        <a href="/#process">Process</a>
+        <a href="/#faq">FAQ</a>
+        <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <a href="/#contact" class="btn btn-dark nav-cta">Let's Talk</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about">About</a>
+    <a href="/#work">Work</a>
+    <a href="/#process">Process</a>
+    <a href="/#faq">FAQ</a>
+    <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+    <a href="/#contact">Let's Talk</a>
+  </div>
+
+  <section class="article-hero">
+    <div class="wrap">
+      <a href="/news" class="back-link">&larr; All Articles</a>
+      <span class="eyebrow">The Brief &nbsp;/&nbsp; Issue 02</span>
+      <h1 class="article-h1">Why a great website is the best salesperson you will ever hire.</h1>
+      <div class="article-byline">
+        <div class="byline-left">
+          <div class="byline-avatar"></div>
+          <div>
+            <div class="byline-name">Jaden Medina</div>
+            <div class="byline-role">Founder, Ocean Development</div>
+          </div>
+        </div>
+        <span class="byline-meta">Oct 31, 2026 &nbsp;/&nbsp; 7 min read</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cover">
+    <div class="wrap">
+      <div class="cover-image-wrap">
+        <span class="cover-tag">Fig. 01 &nbsp;/&nbsp; Halftone Feature Image</span>
+      </div>
+      <p class="cover-caption">Every page you publish is a conversation with someone you have not met yet.</p>
+    </div>
+  </section>
+
+  <section class="article-body">
+    <div class="wrap article-layout">
+      <aside class="article-rail">
+        <span class="rail-label">On This Page</span>
+        <nav class="rail-nav">
+          <a href="#first-impression" class="active"><span class="rail-mark"></span>The first impression</a>
+          <a href="#clarity"><span class="rail-mark"></span>Clarity beats cleverness</a>
+          <a href="#speed"><span class="rail-mark"></span>Speed is part of the design</a>
+        </nav>
+        <div class="rail-divider"></div>
+        <span class="rail-label">Share</span>
+        <div class="rail-share">
+          <button type="button" id="copyLinkBtn">Copy link</button>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://byjaden.com/news/second-issue" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </aside>
+
+      <div class="article-text">
+        <p class="article-lead">Most people judge your business in under a minute, and they do it from your website. Before a call, a quote or a coffee, the page has already made your first sales pitch.</p>
+
+        <div class="article-block">
+          <h2 id="first-impression">The first impression is a sales call.</h2>
+          <p>Think about the last time you looked up a company before working with them. You did not read every page. You scanned, you formed a view, and you decided whether they felt credible. Your future clients are doing exactly the same thing.</p>
+          <p>That moment is where trust is won or lost, and it happens long before anyone replies to your email. A site that is clear, fast and confident does the first half of the sales conversation for you, every hour of every day.</p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Good design is not decoration. It is the shortest path between a stranger and a yes.</p>
+        </div>
+
+        <figure class="inline-figure">
+          <div class="figure-placeholder">
+            <span class="figure-tag">Fig. 02 &nbsp;/&nbsp; First Screen</span>
+          </div>
+          <figcaption class="figure-caption">A clear first screen: one promise, one action, one piece of proof.</figcaption>
+        </figure>
+
+        <div class="article-block">
+          <h2 id="clarity">Clarity beats cleverness.</h2>
+          <p>The sites that convert are rarely the most experimental ones. They tell a visitor what you do, who it is for and what to do next, in that order, within the first screen. Everything else is there to support those three answers.</p>
+        </div>
+
+        <ul class="article-list">
+          <li><span class="mark"></span>One clear promise above the fold, in plain language.</li>
+          <li><span class="mark"></span>One primary action, repeated and never buried.</li>
+          <li><span class="mark"></span>Proof next to every claim: real work, real names.</li>
+        </ul>
+
+        <div class="article-block">
+          <h2 id="speed">Speed is part of the design.</h2>
+          <p>A beautiful page that takes four seconds to load is a broken page. Treat performance as a design decision: fewer fonts, sized images and sections that earn their place. Visitors will never notice a fast site, but they will always notice a slow one.</p>
+        </div>
+
+        <div class="author-card">
+          <div class="avatar"></div>
+          <div>
+            <h4>Written by Jaden Medina</h4>
+            <p>Founder of Ocean Development, a Miami web design and development agency. I write The Brief about building brands that look as serious as they are.</p>
+            <a href="/news">More Articles &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-cta">
+    <div class="wrap">
+      <div class="cta-card">
+        <div class="cta-copy">
+          <span class="eyebrow">The Brief &nbsp;/&nbsp; Newsletter</span>
+          <h2>Get the next issue in your inbox.</h2>
+          <p>New work, new templates and what I am learning while building Ocean Development. One email, now and then.</p>
+        </div>
+        <form class="cta-form" action="https://formspree.io/f/meebloep" method="POST">
+          <div class="cta-form-row">
+            <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+            <button type="submit">Subscribe &rarr;</button>
+          </div>
+          <span class="cta-fine">No spam. Unsubscribe any time.</span>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog" id="blog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Keep reading.</h2>
+        <a href="/news" class="view-all">View All Articles</a>
+      </div>
+      <div class="blog-grid">
+        <a href="/news/first-issue" class="blog-card">
+          <div class="blog-card-image"></div>
+          <span class="tag">The Brief &nbsp;/&nbsp; Issue 01</span>
+          <h3>The Brief, Issue 01</h3>
+        </a>
+        <a href="/news/feature" class="blog-card">
+          <div class="blog-card-image"></div>
+          <span class="tag">Feature</span>
+          <h3>Featured article</h3>
+        </a>
+        <a href="/news/miami-business-websites" class="blog-card accent">
+          <div class="blog-card-image"></div>
+          <span class="tag">Ocean Development</span>
+          <h3>Websites for Miami businesses</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="/assets/byjaden-footer-logo.svg" class="footer-logo" alt="byjaden" />
+          <h2>Websites for brands that refuse to settle.</h2>
+          <p>Questions about a project, a timeline or the process? Reach out and I will reply within a day or two.</p>
+          <a href="/#contact" class="btn btn-light">Let's Talk &rarr;</a>
+        </div>
+        <div class="footer-columns">
+          <div class="footer-col">
+            <span class="footer-eyebrow">Navigate</span>
+            <a href="/#about">About</a>
+            <a href="/#work">Work</a>
+            <a href="/#process">Process</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Companies</span>
+            <a href="https://oceandev.net" target="_blank" rel="noopener">Ocean Development</a>
+            <a href="https://getcampusbite.com" target="_blank" rel="noopener">CampusBite</a>
+            <a href="https://usemako.com" target="_blank" rel="noopener">Mako</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Social</span>
+            <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/in/jaden-medina-bb9279311/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Resources</span>
+            <a href="/news">Blog</a>
+            <a href="#newsletter">Newsletter</a>
+            <a href="/news/first-issue">The Brief</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-newsletter" id="newsletter">
+        <h3>Subscribe to the newsletter</h3>
+        <p>New work, new templates and what I am learning while building Ocean Development. One email, now and then.</p>
+        <form action="https://formspree.io/f/meebloep" method="POST">
+          <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+          <button type="submit">Subscribe &rarr;</button>
+        </form>
+      </div>
+
+      <div class="footer-contacts">
+        <div>
+          <span class="footer-eyebrow">Project Inquiries</span>
+          <a href="mailto:jaden@oceandev.net">jaden@oceandev.net</a>
+        </div>
+        <div>
+          <span class="footer-eyebrow">The Agency</span>
+          <a href="https://oceandev.net" target="_blank" rel="noopener">oceandev.net</a>
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <span>&copy; 2026 Jaden Medina. All rights reserved.</span>
+        <a href="/#top" class="back-to-top">Back to Top &uarr;</a>
+      </div>
+
+      <img src="/assets/byjaden-footer-logo.svg" class="footer-wordmark" alt="" aria-hidden="true" />
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
+      });
+    }
+
+    // Hide floating nav once the footer scrolls into view
+    var navFloatWrap = document.querySelector('.nav-float-wrap');
+    var siteFooter = document.querySelector('.site-footer');
+    if (navFloatWrap && siteFooter && 'IntersectionObserver' in window) {
+      var footerObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          navFloatWrap.classList.toggle('nav-hidden', entry.isIntersecting);
+          if (entry.isIntersecting) mobileMenu && mobileMenu.classList.remove('open');
+        });
+      }, { rootMargin: '-24px 0px 0px 0px', threshold: 0 });
+      footerObserver.observe(siteFooter);
+    }
+
+    // "On this page" active state follows scroll position
+    var railLinks = Array.prototype.slice.call(document.querySelectorAll('.rail-nav a'));
+    var sections = railLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    if (railLinks.length && 'IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var index = sections.indexOf(entry.target);
+          if (index === -1) return;
+          railLinks.forEach(function (a) { a.classList.remove('active'); });
+          railLinks[index].classList.add('active');
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function (el) { if (el) sectionObserver.observe(el); });
+    }
+
+    // Copy link button
+    var copyBtn = document.getElementById('copyLinkBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+          var original = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function () { copyBtn.textContent = original; }, 1500);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
