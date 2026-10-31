@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -83,22 +83,23 @@
 </script>
 
 <style>
-  @font-face {
-    font-family: 'Alpha Lyrae';
-    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
-         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
   :root {
-    --bg: #FAFAF9;
-    --text: #111111;
-    --muted: #8A8A88;
-    --line: #E7E6E3;
-    --nav-h: 64px;
-    --accent: #0050F8;
+    --bg: #f6f6f4;
+    --surface: #ffffff;
+    --ink: #111111;
+    --muted-1: #4a4a48;
+    --muted-2: #5a5a57;
+    --muted-3: #7a7a76;
+    --muted-4: #8a8a86;
+    --line: #e3e3df;
+    --accent: #0072ff;
+    --card-light: #ededea;
+    --card-img-bg: #e6e8ec;
+    --radius: 8px;
+    --nav-h: 56px;
+    --container: 1296px;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -106,387 +107,781 @@
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  /* NAV */
-  .nav-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--line);
+  img { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
   }
 
-  nav {
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .eyebrow.on-dark { color: rgba(246,246,244,0.85); }
+
+  h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 500; color: var(--ink); letter-spacing: -0.5px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border-radius: var(--radius);
+    padding: 16px 28px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); opacity: 0.92; }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-light { background: var(--bg); color: var(--ink); }
+  .btn-accent { background: var(--accent); color: #fff; }
+
+  .view-all {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  section { padding: 96px 0; }
+
+  /* ============ NAV ============ */
+  .nav-float-wrap {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .nav-float-wrap.nav-hidden { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+  .nav-float-wrap.nav-hidden .nav-card,
+  .nav-float-wrap.nav-hidden .mobile-menu { pointer-events: none; }
+  .nav-card {
+    pointer-events: auto;
+    width: 100%;
+    max-width: 1152px;
+    margin: 0 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px rgba(17,17,17,0.06);
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: var(--nav-h);
-    padding: 0 75px;
-    max-width: 1440px;
-    margin: 0 auto;
+    padding: 0 20px;
   }
-
-  .logo { height: 22px; width: auto; display: block; }
-
-  .nav-back {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--muted);
+  .nav-logo { display: flex; align-items: center; height: 22px; }
+  .nav-logo img { height: 22px; width: auto; filter: invert(1); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    opacity: 0.85;
     transition: opacity 0.2s ease;
   }
-  .nav-back:hover { opacity: 0.6; }
-  .nav-back svg { width: 14px; height: 14px; }
-
-  /* ARTICLE */
-  main {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 64px 24px 40px;
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { padding: 10px 20px; font-size: 12px; }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--ink); margin: 4px 0; }
+  .mobile-menu {
+    pointer-events: auto;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin: 8px 24px 0;
+    padding: 12px;
+    max-width: 1152px;
   }
-
-  .article-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .mobile-menu a {
+    font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 20px;
-    letter-spacing: 0.02em;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
   }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu.open { display: flex; }
 
-  .article-meta .dot { width: 3px; height: 3px; border-radius: 0; background: var(--muted); }
-
-  h1.article-title {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 50px;
-    line-height: 1.06;
-    letter-spacing: -0.01em;
-    font-weight: 400;
-    margin-bottom: 20px;
+  /* ============ ARTICLE HERO ============ */
+  .article-hero { padding: 160px 0 0; background: var(--bg); }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    margin-bottom: 32px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
   }
-
-  p.article-dek {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--muted);
-    margin-bottom: 40px;
+  .back-link:hover { opacity: 1; }
+  .article-h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    margin: 16px 0 24px;
+    max-width: 920px;
   }
-
+  .article-dek { font-size: 19px; line-height: 1.5; color: var(--muted-1); max-width: 720px; margin-bottom: 40px; }
   .article-byline {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 20px 0;
-    border-top: 1px solid var(--line);
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
     border-bottom: 1px solid var(--line);
-    margin-bottom: 48px;
+    margin-bottom: 56px;
+  }
+  .byline-left { display: flex; align-items: center; gap: 14px; }
+  .byline-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .byline-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .byline-role { font-size: 14px; color: var(--muted-3); }
+  .byline-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+    white-space: nowrap;
   }
 
-  .byline-avatar {
-    width: 36px; height: 36px;
-    border-radius: 0;
-    background: var(--text);
-    color: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-
-  .byline-name { font-size: 14px; font-weight: 500; }
-  .byline-role { font-size: 13px; color: var(--muted); }
-
-  .article-body {
-    font-size: 17px;
-    line-height: 1.75;
-    color: #262625;
-  }
-
-  .article-body p { margin-bottom: 24px; }
-
-  .article-body h2 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 1.2;
-    margin: 44px 0 18px;
-  }
-
-  .article-body a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(0,80,248,0.3); }
-  .article-body a:hover { text-decoration-color: var(--accent); }
-
-  .article-body strong { font-weight: 600; color: var(--text); }
-  .article-body em { font-style: italic; color: var(--muted); }
-
-  /* STAT BAND */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 0;
+  /* ============ COVER IMAGE ============ */
+  .cover { padding: 0 0 96px; }
+  .cover-image-wrap {
+    border-radius: var(--radius);
     overflow: hidden;
-    margin: 32px 0 8px;
+    aspect-ratio: 1296 / 540;
+    background: var(--accent);
   }
-  .stats div { background: #fff; padding: 22px 16px; text-align: center; }
-  .stats .n {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 32px;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .stats .t { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.4; }
-  .stats-src { font-size: 12px; color: var(--muted); text-align: center; margin: 10px 0 24px; }
 
-  /* CHECKLIST */
-  .check {
-    margin: 28px 0;
-    background: #F4F4F2;
-    border-radius: 0;
-    padding: 4px 24px;
+  /* ============ ARTICLE BODY ============ */
+  .article-body-section { padding-top: 0; }
+  .article-layout { display: grid; grid-template-columns: 240px 680px; gap: 148px; }
+
+  .article-rail { position: sticky; top: calc(var(--nav-h) + 48px); align-self: start; }
+  .rail-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+    margin-bottom: 20px;
   }
-  .check ul { list-style: none; }
-  .check li {
-    padding: 14px 0 14px 34px;
-    position: relative;
-    border-bottom: 1px solid var(--line);
+  .rail-nav { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .rail-nav a { display: flex; align-items: center; gap: 12px; font-size: 14px; line-height: 1.3; color: var(--muted-3); text-decoration: none; transition: color 0.2s ease; }
+  .rail-nav a:hover { color: var(--ink); }
+  .rail-nav a.active { color: var(--ink); font-weight: 500; }
+  .rail-mark { width: 6px; height: 6px; flex-shrink: 0; background: transparent; }
+  .rail-nav a.active .rail-mark { background: var(--accent); }
+  .rail-divider { height: 1px; background: var(--line); margin-bottom: 24px; }
+  .rail-share { display: flex; flex-direction: column; }
+  .rail-share a, .rail-share button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
     font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 4px 0;
+    cursor: pointer;
   }
-  .check li:last-child { border-bottom: none; }
-  .check li::before {
+
+  .article-text { font-size: 18px; }
+  .article-text h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.7px; margin: 0 0 20px; scroll-margin-top: calc(var(--nav-h) + 40px); }
+  .article-text p { font-size: 18px; line-height: 30px; color: var(--muted-1); margin-bottom: 20px; }
+  .article-text p:last-of-type { margin-bottom: 0; }
+  .article-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,114,255,0.3); transition: border-color 0.2s ease; }
+  .article-text a:hover { border-color: var(--accent); }
+  .article-block { margin-bottom: 44px; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin: 0 0 12px; }
+  .stat-grid div { background: var(--surface); padding: 24px 18px; text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 500; letter-spacing: -1px; color: var(--accent); line-height: 1; margin-bottom: 10px; }
+  .stat-text { font-size: 14px; line-height: 1.4; color: var(--muted-1); }
+  .stat-source { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted-3); margin: 0 0 44px; }
+
+  .check-list { background: var(--card-light); border-radius: var(--radius); padding: 4px 24px; margin: 0 0 44px; }
+  .check-list ul { list-style: none; }
+  .check-list li { padding: 18px 0 18px 36px; position: relative; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 1.5; color: var(--muted-1); }
+  .check-list li:last-child { border-bottom: none; }
+  .check-list li::before {
     content: "\2715";
     position: absolute;
-    left: 0; top: 14px;
+    left: 0; top: 18px;
     width: 20px; height: 20px;
     background: var(--accent);
     color: #fff;
-    border-radius: 0;
+    border-radius: 4px;
     font-size: 11px;
     display: flex; align-items: center; justify-content: center;
   }
-  .check li b { font-weight: 600; }
+  .check-list li b { color: var(--ink); font-weight: 600; }
 
-  /* CALLOUT */
-  .callout {
-    margin: 40px 0;
-    padding: 28px 26px;
-    background: #111111;
-    color: #fff;
-    border-radius: 0;
-  }
-  .callout h3 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
-  .callout p { color: rgba(255,255,255,0.8); margin-bottom: 6px; }
-  .callout .meta { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 10px; }
+  .callout-box { background: var(--ink); border-radius: var(--radius); padding: 32px; margin: 0 0 44px; }
+  .callout-box h3 { font-size: 22px; color: var(--bg); margin-bottom: 10px; }
+  .callout-box p { font-size: 16px; line-height: 1.5; color: rgba(246,246,244,0.8); margin-bottom: 8px !important; }
+  .callout-source { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: rgba(246,246,244,0.5); }
 
-  /* FAQ */
-  .faq { margin-top: 56px; }
-  .faq h2 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 28px;
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
-  .faq-item { border-top: 1px solid var(--line); padding: 22px 0; }
-  .faq-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-  .faq-item p { font-size: 15px; color: #3a3a38; margin: 0; }
+  .author-card { display: flex; gap: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin-top: 8px; }
+  .author-card .avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .author-card h4 { font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .author-card p { font-size: 15px; line-height: 22px; color: var(--muted-1); margin-bottom: 12px; }
+  .author-card a { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--accent); text-decoration: none; }
 
-  /* CTA */
-  .subscribe-cta {
-    margin-top: 56px;
-    padding: 36px;
-    border-radius: 0;
-    background: #111111;
-    text-align: center;
+  /* ============ FAQ ============ */
+  .faq h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -1px; margin-bottom: 40px; }
+  .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
   }
-
-  .subscribe-cta h3 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 8px;
+  .faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 20px 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
   }
+  .faq-icon { font-family: var(--font-mono); font-size: 18px; color: var(--muted-3); flex-shrink: 0; transition: transform 0.25s ease; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-answer p { padding: 0 24px 20px; font-size: 15px; line-height: 1.55; color: var(--muted-1); font-family: var(--font-sans); }
 
-  .subscribe-cta p {
+  /* ============ CTA (Ocean Development) ============ */
+  .newsletter-cta { padding-top: 0; }
+  .cta-card { background: var(--ink); border-radius: var(--radius); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .cta-copy .eyebrow { margin-bottom: 16px; }
+  .cta-copy h2 { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.15; letter-spacing: -1px; color: var(--bg); margin-bottom: 16px; max-width: 480px; }
+  .cta-copy p { font-size: 16px; line-height: 1.5; color: rgba(246,246,244,0.7); max-width: 480px; }
+  .cta-action { display: flex; align-items: center; }
+
+  /* ============ SECTION HEAD / BLOG ============ */
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -1px; max-width: 700px; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .blog-card { text-decoration: none; color: inherit; display: block; }
+  .blog-card-image { border-radius: var(--radius); aspect-ratio: 416/240; background: var(--card-img-bg); margin-bottom: 24px; transition: transform 0.3s ease; }
+  .blog-card:hover .blog-card-image { transform: translateY(-4px); }
+  .blog-card.accent .blog-card-image { background: var(--accent); }
+  .blog-card .tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .blog-card h3 { font-size: 20px; }
+
+  /* ============ FOOTER ============ */
+  .site-footer { background: var(--ink); color: var(--bg); padding: 96px 0 48px; overflow: hidden; position: relative; }
+  .footer-top { display: grid; grid-template-columns: 1.4fr 2fr; gap: 48px; margin-bottom: 56px; }
+  .footer-logo { height: 32px; width: auto; margin-bottom: 32px; }
+  .footer-brand h2 { font-size: clamp(28px, 3.6vw, 46px); letter-spacing: -1.5px; color: var(--bg); margin-bottom: 20px; max-width: 560px; }
+  .footer-brand p { font-size: 16px; line-height: 1.55; color: rgba(246,246,244,0.74); max-width: 480px; margin-bottom: 32px; }
+  .footer-columns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .footer-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(246,246,244,0.74);
+    margin-bottom: 16px;
+  }
+  .footer-col a { display: block; font-size: 14px; color: rgba(246,246,244,0.74); text-decoration: none; padding: 6px 0; transition: color 0.2s ease; }
+  .footer-col a:hover { color: var(--bg); }
+  .footer-newsletter { border: 1px solid rgba(246,246,244,0.16); border-radius: var(--radius); padding: 32px; max-width: 600px; margin-bottom: 56px; }
+  .footer-newsletter h3 { font-size: 20px; color: var(--bg); margin-bottom: 8px; }
+  .footer-newsletter p { font-size: 12px; color: rgba(246,246,244,0.74); line-height: 1.5; margin-bottom: 20px; max-width: 510px; }
+  .footer-newsletter form { display: flex; gap: 12px; flex-wrap: wrap; }
+  .footer-newsletter input {
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid rgba(246,246,244,0.16);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--bg);
+    font-family: var(--font-sans);
     font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 24px;
   }
-
-  .cta-btn {
-    display: inline-block;
-    background: #fff;
-    color: #111;
-    border-radius: 0;
-    padding: 13px 26px;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-    text-decoration: none;
-    transition: background 0.2s ease;
+  .footer-newsletter input::placeholder { color: rgba(246,246,244,0.5); }
+  .footer-newsletter button {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    cursor: pointer;
   }
-  .cta-btn:hover { background: #f0f0f0; }
-
-  /* FOOTER */
-  footer {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
-    border-top: 1px solid var(--line);
-    text-align: center;
+  .footer-contacts { display: flex; gap: 64px; flex-wrap: wrap; margin-bottom: 56px; }
+  .footer-contacts .footer-eyebrow { color: var(--accent); margin-bottom: 8px; }
+  .footer-contacts a { font-size: 16px; color: var(--bg); text-decoration: none; }
+  .footer-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(246,246,244,0.16);
+    position: relative;
+    z-index: 2;
   }
-  footer p { font-size: 13px; color: var(--muted); }
-  footer a { color: var(--muted); }
+  .footer-legal span { font-size: 12px; color: rgba(246,246,244,0.56); }
+  .back-to-top { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: rgba(246,246,244,0.74); text-decoration: none; }
+  .footer-wordmark { display: block; width: 100%; max-width: 1265px; height: auto; margin-top: 32px; user-select: none; }
 
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    h1.article-title { font-size: 34px; }
-    .stats { grid-template-columns: 1fr; }
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .article-layout, .cta-card, .footer-top, .faq-layout { grid-template-columns: 1fr; }
+    .article-rail { position: static; order: 2; margin-top: 48px; }
+    .article-text { order: 1; }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-columns { grid-template-columns: repeat(2, 1fr); }
+    section, .article-hero { padding: 64px 0; }
+    .article-hero { padding-top: 140px; }
+    .cover { padding-bottom: 64px; }
+    .stat-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 620px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .footer-contacts { gap: 32px; }
+    .article-byline { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<div class="nav-wrapper">
-  <nav>
-    <a href="https://byjaden.com" aria-label="Back to byjaden.com">
-      <img class="logo" src="/assets/byjaden.svg" alt="byJaden logo" />
-    </a>
-    <a href="https://byjaden.com" class="nav-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
-      Back to byjaden.com
-    </a>
-  </nav>
-</div>
-
-<!-- ARTICLE -->
-<main>
-  <div class="article-meta">
-    <span>For Miami Business Owners</span>
-    <span class="dot"></span>
-    <span>Ocean Development</span>
-  </div>
-
-  <h1 class="article-title">Your website is quietly costing you customers.</h1>
-  <p class="article-dek">In Miami, people look you up before they ever call. If the site they land on is slow, dated, or hard to use on a phone, they are already texting your competitor. Here is why that happens, and what a real website should do about it.</p>
-
-  <div class="article-byline">
-    <div class="byline-avatar">JM</div>
-    <div>
-      <div class="byline-name">Jaden Tyler Medina</div>
-      <div class="byline-role">CEO &amp; Founder, Ocean Development</div>
+  <div class="nav-float-wrap">
+    <div class="nav-card">
+      <a href="/" class="nav-logo"><img src="/assets/byjaden.svg" alt="byjaden" /></a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#work">Work</a>
+        <a href="/#process">Process</a>
+        <a href="/#faq">FAQ</a>
+        <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <a href="/#contact" class="btn btn-dark nav-cta">Let's Talk</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span></button>
     </div>
   </div>
-
-  <div class="article-body">
-    <p>Every day in Miami, a customer decides whether to trust your business in about three seconds, and they do it on their phone before they walk through your door or pick up the phone. That first impression is no longer your storefront, your sign, or a referral. It is your website. And for a lot of local businesses, that first impression is working against them.</p>
-
-    <p>This is not about having a website that looks pretty. It is about having one that does a job: getting found, earning trust fast, and turning a searcher into a paying customer. If yours was built five years ago, patched together on a cheap template, or never really finished, it is likely doing the opposite.</p>
-
-    <h2>Your customers already looked you up</h2>
-    <p>Local search is now the front door of nearly every business decision. Almost everyone checks online before choosing a local business, and that search leads to action fast. The numbers are hard to argue with:</p>
-
-    <div class="stats">
-      <div><div class="n">76%</div><div class="t">of people who run a "near me" search visit a business within a day</div></div>
-      <div><div class="n">28%</div><div class="t">of local searches end in a purchase</div></div>
-      <div><div class="n">64%</div><div class="t">of Google searches now happen on a phone</div></div>
-    </div>
-    <p class="stats-src">Sources: Google / Think with Google, StatCounter 2025.</p>
-
-    <p>Read that again. Someone searching for what you sell is not window shopping. They are close to buying, they are usually on a phone, and they are choosing between you and whoever else shows up. If your site loads slowly or looks broken on mobile, you do not get a second chance. They just tap the next result.</p>
-
-    <h2>Signs your current site is losing you money</h2>
-    <p>You do not need a marketing degree to spot the problems. Pull your site up on your phone right now and look for these:</p>
-
-    <div class="check">
-      <ul>
-        <li><b>It is slow.</b> If it takes more than a couple of seconds to load, most visitors are already gone.</li>
-        <li><b>It fights you on mobile.</b> Pinching, zooming, and buttons you can barely tap send people straight to a competitor.</li>
-        <li><b>It looks dated.</b> An old design quietly tells customers your business is behind the times, fair or not.</li>
-        <li><b>There is no clear next step.</b> No obvious call, booking, or buy button means people leave without acting.</li>
-        <li><b>Nobody can find it on Google.</b> If you do not show up for local searches, you are invisible to ready-to-buy customers.</li>
-        <li><b>It only speaks one language.</b> In Miami, a site that ignores Spanish-speaking customers is leaving real money on the table.</li>
-      </ul>
-    </div>
-
-    <p>Any one of these is a leak. Together, they add up to customers you never knew you lost, because they never contacted you to begin with.</p>
-
-    <h2>What a Miami website actually needs now</h2>
-    <p>A modern site is not a brochure. It is a working tool, and a good one is built around a few non-negotiables:</p>
-    <p><strong>Mobile-first, always.</strong> Since most of your traffic is on a phone, the phone version is the real version. It has to be fast, clean, and effortless to tap through.</p>
-    <p><strong>Speed that keeps people.</strong> Every extra second of load time costs you visitors. Fast hosting and lean, well-built code are not a luxury, they are the baseline.</p>
-    <p><strong>Local SEO and schema built in.</strong> Structured data, clean page structure, and a tie-in to your Google Business Profile are what help you rank locally and land in the Map Pack, where the clicks are.</p>
-    <p><strong>Bilingual-ready.</strong> Miami is a bilingual market. A site that welcomes both English and Spanish speakers reaches customers your competitors are ignoring.</p>
-    <p><strong>A clear path to action.</strong> Call, book, buy, or message. One obvious next step on every page turns visitors into leads instead of bounces.</p>
-    <p><strong>Discoverable by AI, too.</strong> More people now ask AI assistants for recommendations. Clean structure and accurate information help you show up there as well, not just on Google.</p>
-
-    <h2>Why Miami is a different game</h2>
-    <p>Generic advice does not survive contact with this city. Miami is one of the most competitive small-business markets in the country: dense, fast-moving, and full of businesses fighting for the same customers. You are not only competing with the shop down the street, you are competing with tourists' phones, seasonal swings, and a huge bilingual audience that expects to be spoken to directly.</p>
-    <p>That competition cuts both ways. Because so many local businesses still run outdated or half-built sites, a genuinely good website is one of the fastest ways to pull ahead. The bar is low and the reward is high. The owners who move first take the customers everyone else is letting slip away.</p>
-
-    <div class="callout">
-      <h3>The gap is the opportunity</h3>
-      <p>More than half of local businesses still have not invested seriously in their online presence. That is not a warning. That is an opening.</p>
-      <p class="meta">Industry research, aggregated (BrightLocal, Forbes).</p>
-    </div>
-
-    <h2>Who builds it matters</h2>
-    <p>This is where <a href="https://oceandev.net">Ocean Development</a> comes in. We are a Miami web design and development studio that builds custom, mobile-first websites made to perform, not just to look good in a portfolio. We design in Figma and build on Framer, Shopify, and WordPress, choosing the right tool for your business instead of forcing everything through one template.</p>
-    <p>The studio is led by <strong>Jaden Tyler Medina</strong>, CEO and founder, alongside <strong>Micah Brown</strong>, our COO and lead developer. Between us we have shipped more than a hundred websites across a dozen industries, from combat sports and coffee to lending, real estate, and e-commerce. That range means we have already seen what converts in a market like this, and we build it in from the start.</p>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about">About</a>
+    <a href="/#work">Work</a>
+    <a href="/#process">Process</a>
+    <a href="/#faq">FAQ</a>
+    <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+    <a href="/#contact">Let's Talk</a>
   </div>
 
-  <section class="faq" aria-label="Questions Miami owners ask us">
-    <h2>Questions Miami owners ask us</h2>
-
-    <div class="faq-item">
-      <h3>How much does a business website cost in Miami?</h3>
-      <p>It depends on scope. A clean, mobile-first site for a local business costs far less than a custom e-commerce store or a multi-location build. We scope every project and give you a fixed quote up front, so there are no surprises later.</p>
-    </div>
-    <div class="faq-item">
-      <h3>I already have an Instagram. Do I still need a website?</h3>
-      <p>Yes. Social profiles are rented land you do not own, and they rarely appear when someone searches your business or category on Google. Your website is the one place you control, where customers can find you, trust you, and take action.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Will a new website actually show up on Google?</h3>
-      <p>Built right, with clean structure, fast load times, local SEO, and schema markup, it gives you the foundation to rank for local searches and appear in the Google Map Pack. That structure is exactly what we build in from day one.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How long does it take?</h3>
-      <p>Most local business sites ship in a few weeks, depending on scope and how quickly you get us your content. Larger custom or e-commerce builds take longer. Either way, you get a clear timeline before we start.</p>
+  <section class="article-hero">
+    <div class="wrap">
+      <a href="/news" class="back-link">&larr; All Articles</a>
+      <span class="eyebrow">For Miami Business Owners &nbsp;/&nbsp; Ocean Development</span>
+      <h1 class="article-h1">Your website is quietly costing you customers.</h1>
+      <p class="article-dek">In Miami, people look you up before they ever call. If the site they land on is slow, dated, or hard to use on a phone, they are already texting your competitor. Here is why that happens, and what a real website should do about it.</p>
+      <div class="article-byline">
+        <div class="byline-left">
+          <div class="byline-avatar"></div>
+          <div>
+            <div class="byline-name">Jaden Tyler Medina</div>
+            <div class="byline-role">CEO &amp; Founder, Ocean Development</div>
+          </div>
+        </div>
+        <span class="byline-meta">7 Min Read</span>
+      </div>
     </div>
   </section>
 
-  <div class="subscribe-cta">
-    <h3>Stop losing customers to a slow website</h3>
-    <p>If your site is costing you business, the fix is closer than you think.</p>
-    <a class="cta-btn" href="https://oceandev.net">Start your project with Ocean Development</a>
-  </div>
-</main>
+  <section class="cover">
+    <div class="wrap">
+      <div class="cover-image-wrap"></div>
+    </div>
+  </section>
 
-<footer>
-  <p>Ocean Development &middot; Miami web design &amp; development &middot; <a href="https://oceandev.net">oceandev.net</a></p>
-</footer>
+  <section class="article-body-section">
+    <div class="wrap article-layout">
+      <aside class="article-rail">
+        <span class="rail-label">On This Page</span>
+        <nav class="rail-nav">
+          <a href="#already-looked-you-up" class="active"><span class="rail-mark"></span>They already looked you up</a>
+          <a href="#signs-of-trouble"><span class="rail-mark"></span>Signs you're losing money</a>
+          <a href="#what-it-needs"><span class="rail-mark"></span>What a site needs now</a>
+          <a href="#different-game"><span class="rail-mark"></span>Why Miami is different</a>
+          <a href="#who-builds-it"><span class="rail-mark"></span>Who builds it matters</a>
+        </nav>
+        <div class="rail-divider"></div>
+        <span class="rail-label">Share</span>
+        <div class="rail-share">
+          <button type="button" id="copyLinkBtn">Copy link</button>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://byjaden.com/news/miami-business-websites" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </aside>
 
+      <div class="article-text">
+        <div class="article-block">
+          <p>Every day in Miami, a customer decides whether to trust your business in about three seconds, and they do it on their phone before they walk through your door or pick up the phone. That first impression is no longer your storefront, your sign, or a referral. It is your website. And for a lot of local businesses, that first impression is working against them.</p>
+          <p>This is not about having a website that looks pretty. It is about having one that does a job: getting found, earning trust fast, and turning a searcher into a paying customer. If yours was built five years ago, patched together on a cheap template, or never really finished, it is likely doing the opposite.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="already-looked-you-up">Your Customers Already Looked You Up</h2>
+          <p>Local search is now the front door of nearly every business decision. Almost everyone checks online before choosing a local business, and that search leads to action fast. The numbers are hard to argue with:</p>
+        </div>
+
+        <div class="stat-grid">
+          <div><div class="stat-num">76%</div><div class="stat-text">of people who run a "near me" search visit a business within a day</div></div>
+          <div><div class="stat-num">28%</div><div class="stat-text">of local searches end in a purchase</div></div>
+          <div><div class="stat-num">64%</div><div class="stat-text">of Google searches now happen on a phone</div></div>
+        </div>
+        <p class="stat-source">Sources: Google / Think with Google, StatCounter 2025</p>
+
+        <div class="article-block">
+          <p>Read that again. Someone searching for what you sell is not window shopping. They are close to buying, they are usually on a phone, and they are choosing between you and whoever else shows up. If your site loads slowly or looks broken on mobile, you do not get a second chance. They just tap the next result.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="signs-of-trouble">Signs Your Current Site Is Losing You Money</h2>
+          <p>You do not need a marketing degree to spot the problems. Pull your site up on your phone right now and look for these:</p>
+        </div>
+
+        <div class="check-list">
+          <ul>
+            <li><b>It is slow.</b> If it takes more than a couple of seconds to load, most visitors are already gone.</li>
+            <li><b>It fights you on mobile.</b> Pinching, zooming, and buttons you can barely tap send people straight to a competitor.</li>
+            <li><b>It looks dated.</b> An old design quietly tells customers your business is behind the times, fair or not.</li>
+            <li><b>There is no clear next step.</b> No obvious call, booking, or buy button means people leave without acting.</li>
+            <li><b>Nobody can find it on Google.</b> If you do not show up for local searches, you are invisible to ready-to-buy customers.</li>
+            <li><b>It only speaks one language.</b> In Miami, a site that ignores Spanish-speaking customers is leaving real money on the table.</li>
+          </ul>
+        </div>
+
+        <div class="article-block">
+          <p>Any one of these is a leak. Together, they add up to customers you never knew you lost, because they never contacted you to begin with.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="what-it-needs">What a Miami Website Actually Needs Now</h2>
+          <p>A modern site is not a brochure. It is a working tool, and a good one is built around a few non-negotiables:</p>
+          <p><strong>Mobile-first, always.</strong> Since most of your traffic is on a phone, the phone version is the real version. It has to be fast, clean, and effortless to tap through.</p>
+          <p><strong>Speed that keeps people.</strong> Every extra second of load time costs you visitors. Fast hosting and lean, well-built code are not a luxury, they are the baseline.</p>
+          <p><strong>Local SEO and schema built in.</strong> Structured data, clean page structure, and a tie-in to your Google Business Profile are what help you rank locally and land in the Map Pack, where the clicks are.</p>
+          <p><strong>Bilingual-ready.</strong> Miami is a bilingual market. A site that welcomes both English and Spanish speakers reaches customers your competitors are ignoring.</p>
+          <p><strong>A clear path to action.</strong> Call, book, buy, or message. One obvious next step on every page turns visitors into leads instead of bounces.</p>
+          <p><strong>Discoverable by AI, too.</strong> More people now ask AI assistants for recommendations. Clean structure and accurate information help you show up there as well, not just on Google.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="different-game">Why Miami Is a Different Game</h2>
+          <p>Generic advice does not survive contact with this city. Miami is one of the most competitive small-business markets in the country: dense, fast-moving, and full of businesses fighting for the same customers. You are not only competing with the shop down the street, you are competing with tourists' phones, seasonal swings, and a huge bilingual audience that expects to be spoken to directly.</p>
+          <p>That competition cuts both ways. Because so many local businesses still run outdated or half-built sites, a genuinely good website is one of the fastest ways to pull ahead. The bar is low and the reward is high. The owners who move first take the customers everyone else is letting slip away.</p>
+        </div>
+
+        <div class="callout-box">
+          <h3>The gap is the opportunity</h3>
+          <p>More than half of local businesses still have not invested seriously in their online presence. That is not a warning. That is an opening.</p>
+          <span class="callout-source">Industry research, aggregated (BrightLocal, Forbes)</span>
+        </div>
+
+        <div class="article-block">
+          <h2 id="who-builds-it">Who Builds It Matters</h2>
+          <p>This is where <a href="https://oceandev.net" target="_blank" rel="noopener">Ocean Development</a> comes in. We are a Miami web design and development studio that builds custom, mobile-first websites made to perform, not just to look good in a portfolio. We design in Figma and build on Framer, Shopify, and WordPress, choosing the right tool for your business instead of forcing everything through one template.</p>
+          <p>The studio is led by <strong>Jaden Tyler Medina</strong>, CEO and founder, alongside <strong>Micah Brown</strong>, our COO and lead developer. Between us we have shipped more than a hundred websites across a dozen industries, from combat sports and coffee to lending, real estate, and e-commerce. That range means we have already seen what converts in a market like this, and we build it in from the start.</p>
+        </div>
+
+        <div class="author-card">
+          <div class="avatar"></div>
+          <div>
+            <h4>Written by Jaden Medina</h4>
+            <p>Founder &amp; CEO of Ocean Development, a Miami web design and development agency. I write The Brief about building brands that look as serious as they are.</p>
+            <a href="/news">More Articles &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-label="Questions Miami owners ask us">
+    <div class="wrap faq-layout">
+      <h2>Questions Miami owners ask us.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">How much does a business website cost in Miami?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>It depends on scope. A clean, mobile-first site for a local business costs far less than a custom e-commerce store or a multi-location build. We scope every project and give you a fixed quote up front, so there are no surprises later.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">I already have an Instagram. Do I still need a website?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Yes. Social profiles are rented land you do not own, and they rarely appear when someone searches your business or category on Google. Your website is the one place you control, where customers can find you, trust you, and take action.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Will a new website actually show up on Google?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Built right, with clean structure, fast load times, local SEO, and schema markup, it gives you the foundation to rank for local searches and appear in the Google Map Pack. That structure is exactly what we build in from day one.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How long does it take?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Most local business sites ship in a few weeks, depending on scope and how quickly you get us your content. Larger custom or e-commerce builds take longer. Either way, you get a clear timeline before we start.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-cta">
+    <div class="wrap">
+      <div class="cta-card">
+        <div class="cta-copy">
+          <span class="eyebrow">Ocean Development</span>
+          <h2>Stop losing customers to a slow website.</h2>
+          <p>If your site is costing you business, the fix is closer than you think.</p>
+        </div>
+        <div class="cta-action">
+          <a class="btn btn-accent" href="https://oceandev.net" target="_blank" rel="noopener">Start your project with Ocean Development &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog" id="blog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Keep reading.</h2>
+        <a href="/news" class="view-all">View All Articles</a>
+      </div>
+      <div class="blog-grid">
+        <a href="/news/3-million-case-study" class="blog-card">
+          <div class="blog-card-image"></div>
+          <span class="tag">Case Study</span>
+          <h3>How a team led by an 18-year-old generated $3M</h3>
+        </a>
+        <a href="/news/feature" class="blog-card">
+          <div class="blog-card-image"></div>
+          <span class="tag">Feature</span>
+          <h3>Jaden Tyler Medina, on his own terms</h3>
+        </a>
+        <a href="/news/first-issue" class="blog-card accent">
+          <div class="blog-card-image"></div>
+          <span class="tag">The Brief &nbsp;/&nbsp; Issue 01</span>
+          <h3>The Brief, Issue 01</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="/assets/byjaden-footer-logo.svg" class="footer-logo" alt="byjaden" />
+          <h2>Websites for brands that refuse to settle.</h2>
+          <p>Questions about a project, a timeline or the process? Reach out and I will reply within a day or two.</p>
+          <a href="/#contact" class="btn btn-light">Let's Talk &rarr;</a>
+        </div>
+        <div class="footer-columns">
+          <div class="footer-col">
+            <span class="footer-eyebrow">Navigate</span>
+            <a href="/#about">About</a>
+            <a href="/#work">Work</a>
+            <a href="/#process">Process</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Companies</span>
+            <a href="https://oceandev.net" target="_blank" rel="noopener">Ocean Development</a>
+            <a href="https://getcampusbite.com" target="_blank" rel="noopener">CampusBite</a>
+            <a href="https://usemako.com" target="_blank" rel="noopener">Mako</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Social</span>
+            <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/in/jaden-medina-bb9279311/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Resources</span>
+            <a href="/news">Blog</a>
+            <a href="#newsletter">Newsletter</a>
+            <a href="/news/first-issue">The Brief</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-newsletter" id="newsletter">
+        <h3>Subscribe to the newsletter</h3>
+        <p>New work, new templates and what I am learning while building Ocean Development. One email, now and then.</p>
+        <form action="https://formspree.io/f/meebloep" method="POST">
+          <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+          <button type="submit">Subscribe &rarr;</button>
+        </form>
+      </div>
+
+      <div class="footer-contacts">
+        <div>
+          <span class="footer-eyebrow">Project Inquiries</span>
+          <a href="mailto:jaden@oceandev.net">jaden@oceandev.net</a>
+        </div>
+        <div>
+          <span class="footer-eyebrow">The Agency</span>
+          <a href="https://oceandev.net" target="_blank" rel="noopener">oceandev.net</a>
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <span>&copy; 2026 Jaden Medina. All rights reserved.</span>
+        <a href="/#top" class="back-to-top">Back to Top &uarr;</a>
+      </div>
+
+      <img src="/assets/byjaden-footer-logo.svg" class="footer-wordmark" alt="" aria-hidden="true" />
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
+      });
+    }
+
+    // Hide floating nav once the footer scrolls into view
+    var navFloatWrap = document.querySelector('.nav-float-wrap');
+    var siteFooter = document.querySelector('.site-footer');
+    if (navFloatWrap && siteFooter && 'IntersectionObserver' in window) {
+      var footerObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          navFloatWrap.classList.toggle('nav-hidden', entry.isIntersecting);
+          if (entry.isIntersecting) mobileMenu && mobileMenu.classList.remove('open');
+        });
+      }, { rootMargin: '-24px 0px 0px 0px', threshold: 0 });
+      footerObserver.observe(siteFooter);
+    }
+
+    // "On this page" active state follows scroll position
+    var railLinks = Array.prototype.slice.call(document.querySelectorAll('.rail-nav a'));
+    var sections = railLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    if (railLinks.length && 'IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var index = sections.indexOf(entry.target);
+          if (index === -1) return;
+          railLinks.forEach(function (a) { a.classList.remove('active'); });
+          railLinks[index].classList.add('active');
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function (el) { if (el) sectionObserver.observe(el); });
+    }
+
+    // Copy link button
+    var copyBtn = document.getElementById('copyLinkBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+          var original = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function () { copyBtn.textContent = original; }, 1500);
+        });
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var question = item.querySelector('.faq-question');
+      var answer = item.querySelector('.faq-answer');
+      question.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (other) {
+          other.classList.remove('open');
+          other.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

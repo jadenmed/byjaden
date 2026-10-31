@@ -26,7 +26,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -101,22 +101,23 @@
 </script>
 
 <style>
-  @font-face {
-    font-family: 'Alpha Lyrae';
-    src: url('/assets/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
-         url('/assets/fonts/AlphaLyrae-Medium.woff') format('woff');
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
   :root {
-    --bg: #FAFAF9;
-    --text: #111111;
-    --muted: #8A8A88;
-    --line: #E7E6E3;
-    --nav-h: 64px;
-    --accent: #0050F8;
+    --bg: #f6f6f4;
+    --surface: #ffffff;
+    --ink: #111111;
+    --muted-1: #4a4a48;
+    --muted-2: #5a5a57;
+    --muted-3: #7a7a76;
+    --muted-4: #8a8a86;
+    --line: #e3e3df;
+    --accent: #0072ff;
+    --card-light: #ededea;
+    --card-img-bg: #e6e8ec;
+    --radius: 8px;
+    --nav-h: 56px;
+    --container: 1296px;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,356 +125,796 @@
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  /* NAV */
-  .nav-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--line);
+  img { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
   }
 
-  nav {
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .eyebrow.on-dark { color: rgba(246,246,244,0.85); }
+
+  h1, h2, h3, h4 { font-family: var(--font-sans); font-weight: 500; color: var(--ink); letter-spacing: -0.5px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border-radius: var(--radius);
+    padding: 16px 28px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); opacity: 0.92; }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-light { background: var(--bg); color: var(--ink); }
+
+  .view-all {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  section { padding: 96px 0; }
+
+  /* ============ NAV ============ */
+  .nav-float-wrap {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .nav-float-wrap.nav-hidden { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+  .nav-float-wrap.nav-hidden .nav-card,
+  .nav-float-wrap.nav-hidden .mobile-menu { pointer-events: none; }
+  .nav-card {
+    pointer-events: auto;
+    width: 100%;
+    max-width: 1152px;
+    margin: 0 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px rgba(17,17,17,0.06);
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: var(--nav-h);
-    padding: 0 75px;
-    max-width: 1440px;
-    margin: 0 auto;
+    padding: 0 20px;
   }
-
-  .logo { height: 22px; width: auto; display: block; }
-
-  .nav-back {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--muted);
+  .nav-logo { display: flex; align-items: center; height: 22px; }
+  .nav-logo img { height: 22px; width: auto; filter: invert(1); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    opacity: 0.85;
     transition: opacity 0.2s ease;
   }
-  .nav-back:hover { opacity: 0.6; }
-  .nav-back svg { width: 14px; height: 14px; }
-
-  /* ARTICLE */
-  main {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 64px 24px 40px;
-  }
-
-  .article-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 20px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  .article-meta .dot { width: 3px; height: 3px; border-radius: 0; background: var(--muted); }
-
-  h1.article-title {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 56px;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    font-weight: 400;
-    margin-bottom: 20px;
-  }
-
-  p.article-dek {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--muted);
-    margin-bottom: 40px;
-  }
-
-  /* At-a-glance stat grid */
-  .glance {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { padding: 10px 20px; font-size: 12px; }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--ink); margin: 4px 0; }
+  .mobile-menu {
+    pointer-events: auto;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 0;
-    overflow: hidden;
-    margin-bottom: 48px;
+    border-radius: var(--radius);
+    margin: 8px 24px 0;
+    padding: 12px;
+    max-width: 1152px;
   }
-  .glance div {
-    padding: 18px 22px;
+  .mobile-menu a {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 8px;
     border-bottom: 1px solid var(--line);
   }
-  .glance div:nth-child(odd) { border-right: 1px solid var(--line); }
-  .glance div:nth-last-child(-n+2) { border-bottom: none; }
-  .glance dt {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 5px;
-  }
-  .glance dd {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 20px;
-    color: var(--text);
-  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu.open { display: flex; }
 
-  .article-body {
-    font-size: 17px;
-    line-height: 1.75;
-    color: #262625;
-  }
-
-  .article-body p { margin-bottom: 24px; }
-
-  .article-body h2 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 1.2;
-    margin: 44px 0 18px;
-  }
-
-  .article-body h2 .num {
-    display: block;
-    font-family: 'Inter', sans-serif;
+  /* ============ ARTICLE HERO ============ */
+  .article-hero { padding: 160px 0 0; background: var(--bg); }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    margin-bottom: 32px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .back-link:hover { opacity: 1; }
+  .article-h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    margin: 16px 0 24px;
+    max-width: 920px;
+  }
+  .article-dek { font-size: 19px; line-height: 1.5; color: var(--muted-1); max-width: 720px; margin-bottom: 40px; }
+  .article-byline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 56px;
+  }
+  .byline-left { display: flex; align-items: center; gap: 14px; }
+  .byline-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .byline-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .byline-role { font-size: 14px; color: var(--muted-3); }
+  .byline-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+    white-space: nowrap;
+  }
+
+  /* ============ COVER IMAGE ============ */
+  .cover { padding: 0 0 96px; }
+  .cover-image-wrap {
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1296 / 540;
+    background: var(--accent);
+  }
+
+  /* ============ ARTICLE BODY ============ */
+  .article-body-section { padding-top: 0; }
+  .article-layout { display: grid; grid-template-columns: 240px 680px; gap: 148px; }
+
+  .article-rail { position: sticky; top: calc(var(--nav-h) + 48px); align-self: start; }
+  .rail-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--muted-3);
+    margin-bottom: 20px;
+  }
+  .rail-nav { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .rail-nav a { display: flex; align-items: center; gap: 12px; font-size: 14px; line-height: 1.3; color: var(--muted-3); text-decoration: none; transition: color 0.2s ease; }
+  .rail-nav a:hover { color: var(--ink); }
+  .rail-nav a.active { color: var(--ink); font-weight: 500; }
+  .rail-mark { width: 6px; height: 6px; flex-shrink: 0; background: transparent; }
+  .rail-nav a.active .rail-mark { background: var(--accent); }
+  .rail-divider { height: 1px; background: var(--line); margin-bottom: 24px; }
+  .rail-share { display: flex; flex-direction: column; }
+  .rail-share a, .rail-share button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 4px 0;
+    cursor: pointer;
+  }
+
+  .article-text { font-size: 18px; }
+  .article-text h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.7px; margin: 0 0 20px; scroll-margin-top: calc(var(--nav-h) + 40px); }
+  .article-text p { font-size: 18px; line-height: 30px; color: var(--muted-1); margin-bottom: 20px; }
+  .article-text p:last-of-type { margin-bottom: 0; }
+  .article-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,114,255,0.3); transition: border-color 0.2s ease; }
+  .article-text a:hover { border-color: var(--accent); }
+  .article-block { margin-bottom: 44px; }
+
+  .section-num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--accent);
     margin-bottom: 10px;
   }
 
-  .article-body a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(0,80,248,0.3); }
-  .article-body a:hover { text-decoration-color: var(--accent); }
+  .glance-grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin: 0 0 44px; }
+  .glance-grid div { padding: 18px 22px; border-bottom: 1px solid var(--line); }
+  .glance-grid div:nth-child(odd) { border-right: 1px solid var(--line); }
+  .glance-grid div:nth-last-child(-n+2) { border-bottom: none; }
+  .glance-label { display: block; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted-3); margin-bottom: 5px; }
+  .glance-value { font-size: 17px; font-weight: 500; color: var(--ink); }
 
-  .article-body strong { font-weight: 600; color: var(--text); }
-  .article-body em { font-style: italic; color: var(--muted); }
+  .pull-quote { border-left: 3px solid var(--accent); padding-left: 24px; margin: 0 0 44px; }
+  .pull-quote p { font-size: 26px; line-height: 34px; letter-spacing: -0.4px; color: var(--ink); font-weight: 500; margin: 0; }
 
-  .article-body blockquote {
-    border-left: 2px solid var(--accent);
-    padding-left: 20px;
-    margin: 32px 0;
-    font-size: 19px;
-    font-style: italic;
-    color: #3a3a38;
+  .author-card { display: flex; gap: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin-top: 8px; }
+  .author-card .avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .author-card h4 { font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .author-card p { font-size: 15px; line-height: 22px; color: var(--muted-1); margin-bottom: 12px; }
+  .author-card a { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--accent); text-decoration: none; }
+
+  /* ============ FAQ ============ */
+  .faq h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -1px; margin-bottom: 40px; }
+  .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
   }
-
-  /* FAQ */
-  .faq { margin-top: 56px; }
-  .faq h2 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 28px;
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
-  .faq-item { border-top: 1px solid var(--line); padding: 22px 0; }
-  .faq-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-  .faq-item p { font-size: 15px; color: #3a3a38; margin: 0; }
-
-  /* CTA */
-  .subscribe-cta {
-    margin-top: 56px;
-    padding: 36px;
-    border-radius: 0;
-    background: #111111;
-    text-align: center;
-  }
-
-  .subscribe-cta h3 {
-    font-family: 'Alpha Lyrae', sans-serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-
-  .subscribe-cta p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 24px;
-  }
-
-  .signup-form {
+  .faq-question {
+    width: 100%;
     display: flex;
-    gap: 10px;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  .signup-input {
-    flex: 1;
-    background: rgba(255,255,255,0.10);
-    border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 0;
-    padding: 13px 16px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #fff;
-    outline: none;
-    min-width: 0;
-  }
-  .signup-input::placeholder { color: rgba(255,255,255,0.40); }
-  .signup-input:focus { border-color: rgba(255,255,255,0.45); }
-
-  .signup-btn {
-    background: #fff;
-    color: #111;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: none;
     border: none;
-    border-radius: 0;
-    padding: 13px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    text-align: left;
+    padding: 20px 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .faq-icon { font-family: var(--font-mono); font-size: 18px; color: var(--muted-3); flex-shrink: 0; transition: transform 0.25s ease; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-answer p { padding: 0 24px 20px; font-size: 15px; line-height: 1.55; color: var(--muted-1); font-family: var(--font-sans); }
+
+  /* ============ NEWSLETTER CTA ============ */
+  .newsletter-cta { padding-top: 0; }
+  .cta-card { background: var(--ink); border-radius: var(--radius); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .cta-copy .eyebrow { margin-bottom: 16px; }
+  .cta-copy h2 { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.15; letter-spacing: -1px; color: var(--bg); margin-bottom: 16px; max-width: 480px; }
+  .cta-copy p { font-size: 16px; line-height: 1.5; color: rgba(246,246,244,0.7); max-width: 480px; }
+  .cta-form { display: flex; flex-direction: column; gap: 12px; }
+  .cta-form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta-form input {
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid var(--muted-1);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+  }
+  .cta-form input::placeholder { color: rgba(246,246,244,0.55); }
+  .cta-form button {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 24px;
     cursor: pointer;
     white-space: nowrap;
-    transition: background 0.2s ease;
   }
-  .signup-btn:hover { background: #f0f0f0; }
+  .cta-fine { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted-4); }
 
-  /* FOOTER */
-  footer {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
-    border-top: 1px solid var(--line);
-    text-align: center;
+  /* ============ SECTION HEAD / BLOG ============ */
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -1px; max-width: 700px; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .blog-card { text-decoration: none; color: inherit; display: block; }
+  .blog-card-image { border-radius: var(--radius); aspect-ratio: 416/240; background: var(--card-img-bg); margin-bottom: 24px; transition: transform 0.3s ease; }
+  .blog-card:hover .blog-card-image { transform: translateY(-4px); }
+  .blog-card.accent .blog-card-image { background: var(--accent); }
+  .blog-card .tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    margin-bottom: 12px;
   }
-  footer p { font-size: 13px; color: var(--muted); }
-  footer a { color: var(--muted); }
+  .blog-card h3 { font-size: 20px; }
 
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    h1.article-title { font-size: 38px; }
-    .signup-form { flex-direction: column; }
-    .glance { grid-template-columns: 1fr; }
-    .glance div:nth-child(odd) { border-right: none; }
-    .glance div { border-bottom: 1px solid var(--line); }
-    .glance div:last-child { border-bottom: none; }
+  /* ============ FOOTER ============ */
+  .site-footer { background: var(--ink); color: var(--bg); padding: 96px 0 48px; overflow: hidden; position: relative; }
+  .footer-top { display: grid; grid-template-columns: 1.4fr 2fr; gap: 48px; margin-bottom: 56px; }
+  .footer-logo { height: 32px; width: auto; margin-bottom: 32px; }
+  .footer-brand h2 { font-size: clamp(28px, 3.6vw, 46px); letter-spacing: -1.5px; color: var(--bg); margin-bottom: 20px; max-width: 560px; }
+  .footer-brand p { font-size: 16px; line-height: 1.55; color: rgba(246,246,244,0.74); max-width: 480px; margin-bottom: 32px; }
+  .footer-columns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .footer-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(246,246,244,0.74);
+    margin-bottom: 16px;
+  }
+  .footer-col a { display: block; font-size: 14px; color: rgba(246,246,244,0.74); text-decoration: none; padding: 6px 0; transition: color 0.2s ease; }
+  .footer-col a:hover { color: var(--bg); }
+  .footer-newsletter { border: 1px solid rgba(246,246,244,0.16); border-radius: var(--radius); padding: 32px; max-width: 600px; margin-bottom: 56px; }
+  .footer-newsletter h3 { font-size: 20px; color: var(--bg); margin-bottom: 8px; }
+  .footer-newsletter p { font-size: 12px; color: rgba(246,246,244,0.74); line-height: 1.5; margin-bottom: 20px; max-width: 510px; }
+  .footer-newsletter form { display: flex; gap: 12px; flex-wrap: wrap; }
+  .footer-newsletter input {
+    flex: 1;
+    min-width: 180px;
+    background: transparent;
+    border: 1px solid rgba(246,246,244,0.16);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 14px;
+  }
+  .footer-newsletter input::placeholder { color: rgba(246,246,244,0.5); }
+  .footer-newsletter button {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    cursor: pointer;
+  }
+  .footer-contacts { display: flex; gap: 64px; flex-wrap: wrap; margin-bottom: 56px; }
+  .footer-contacts .footer-eyebrow { color: var(--accent); margin-bottom: 8px; }
+  .footer-contacts a { font-size: 16px; color: var(--bg); text-decoration: none; }
+  .footer-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(246,246,244,0.16);
+    position: relative;
+    z-index: 2;
+  }
+  .footer-legal span { font-size: 12px; color: rgba(246,246,244,0.56); }
+  .back-to-top { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: rgba(246,246,244,0.74); text-decoration: none; }
+  .footer-wordmark { display: block; width: 100%; max-width: 1265px; height: auto; margin-top: 32px; user-select: none; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .article-layout, .cta-card, .footer-top, .faq-layout { grid-template-columns: 1fr; }
+    .article-rail { position: static; order: 2; margin-top: 48px; }
+    .article-text { order: 1; }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-columns { grid-template-columns: repeat(2, 1fr); }
+    section, .article-hero { padding: 64px 0; }
+    .article-hero { padding-top: 140px; }
+    .cover { padding-bottom: 64px; }
+  }
+  @media (max-width: 620px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .footer-contacts { gap: 32px; }
+    .article-byline { flex-direction: column; align-items: flex-start; }
+    .glance-grid { grid-template-columns: 1fr; }
+    .glance-grid div:nth-child(odd) { border-right: none; }
+    .glance-grid div { border-bottom: 1px solid var(--line); }
+    .glance-grid div:last-child { border-bottom: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<div class="nav-wrapper">
-  <nav>
-    <a href="https://byjaden.com" aria-label="Back to byjaden.com">
-      <img class="logo" src="/assets/byjaden.svg" alt="byJaden logo" />
-    </a>
-    <a href="https://byjaden.com" class="nav-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
-      Back to byjaden.com
-    </a>
-  </nav>
-</div>
-
-<!-- ARTICLE -->
-<main>
-  <div class="article-meta">
-    <span>Founder Profile</span>
-    <span class="dot"></span>
-    <span>Ocean Development</span>
+  <div class="nav-float-wrap">
+    <div class="nav-card">
+      <a href="/" class="nav-logo"><img src="/assets/byjaden.svg" alt="byjaden" /></a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#work">Work</a>
+        <a href="/#process">Process</a>
+        <a href="/#faq">FAQ</a>
+        <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <a href="/#contact" class="btn btn-dark nav-cta">Let's Talk</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about">About</a>
+    <a href="/#work">Work</a>
+    <a href="/#process">Process</a>
+    <a href="/#faq">FAQ</a>
+    <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+    <a href="/#contact">Let's Talk</a>
   </div>
 
-  <h1 class="article-title">Jaden Tyler Medina</h1>
-  <p class="article-dek">CEO and founder of Ocean Development, the Miami web design and development studio he built and now leads at eighteen.</p>
-
-  <div class="glance">
-    <div><dt>Full Name</dt><dd>Jaden Tyler Medina</dd></div>
-    <div><dt>Title</dt><dd>CEO &amp; Founder</dd></div>
-    <div><dt>Company</dt><dd>Ocean Development</dd></div>
-    <div><dt>Location</dt><dd>Miami, Florida</dd></div>
-    <div><dt>Current Age</dt><dd>18</dd></div>
-    <div><dt>Discipline</dt><dd>Design &amp; Development</dd></div>
-    <div><dt>Core Stack</dt><dd>Figma &middot; Framer &middot; Shopify</dd></div>
-    <div><dt>Websites Shipped</dt><dd>100+</dd></div>
-  </div>
-
-  <div class="article-body">
-    <p><strong>Jaden Tyler Medina</strong> is a Miami-based entrepreneur and the CEO and founder of <a href="https://oceandev.net">Ocean Development</a>, a web design and development agency he built from nothing and now runs as a serious studio for serious brands. He is eighteen, he taught himself the craft, and he has already turned it into a track record most designers spend a decade chasing.</p>
-
-    <p>If you search his name you will find a long list of people who share it. There is only one Jaden Tyler Medina building Ocean Development in Miami, and this is the record of what he has done.</p>
-
-    <h2><span class="num">01 / The Origin</span>Built before he was old enough to be taken seriously</h2>
-    <p>Most founders can point to a degree, a first job, or an investor who opened a door. Jaden Tyler Medina has none of that in his story, and that is precisely the point. He built Ocean Development young, with no formal training and no outside funding, and he learned the work by doing the work: opening the software, taking the small jobs, and figuring out what a client actually needed rather than what was easy to build.</p>
-    <p>That early constraint became his advantage. Because nobody handed him a playbook, he wrote his own. Still only eighteen, he is already delivering websites for companies far larger than a first-time founder is expected to reach, and he is doing it without the safety net most people rely on. The self-taught path is often romanticized after the fact. In his case it is simply the accurate description of how the company was built.</p>
-
-    <blockquote>He did not wait for permission to be good. He got good, and the permission followed.</blockquote>
-
-    <h2><span class="num">02 / The Company</span>Ocean Development</h2>
-    <p>Ocean Development is a Miami web design and development agency with a simple promise: a website should do a job, not just sit there looking modern. Under Jaden's direction the studio builds on the tools that let it move fast without cutting corners, designing in Figma and shipping on Framer, Shopify, and WordPress depending on what the brand needs to be and do.</p>
-    <p>The portfolio now runs past one hundred websites, spanning combat sports and coffee, lending and property management, e-commerce labels and service businesses. That range matters more than it looks. A designer who has only ever built for one kind of client learns one kind of solution. Jaden has shipped across a dozen industries, which means he has seen what converts, what confuses, and what quietly loses a company money, and he brings that pattern recognition to every new project.</p>
-    <p>The through-line across all of it is control. Ocean Development builds custom, it builds to spec, and it builds things the client can actually run once the studio hands them over. In a market crowded with template shops and set-and-forget agencies, that operator's mindset is what keeps the work booked.</p>
-
-    <h2><span class="num">03 / The Partnership</span>Micah Brown</h2>
-    <p>Jaden does not run Ocean Development alone. His business partner is <strong>Micah Brown</strong>, the company's Chief Operating Officer and lead developer. Where Jaden owns the vision and the client relationships, Micah owns the build and the operational machinery that keeps a growing studio from tripping over itself. It is the kind of founder-and-operator pairing that lets a small team punch far above its headcount, and it is a large part of why the work ships on time and holds up after launch.</p>
-
-    <h2><span class="num">04 / The Point of View</span>Why his opinion carries weight</h2>
-    <p>Ask Jaden about design and you will not get a lecture about trends. You will get an argument about strategy. His core belief is that design is not decoration, it is a business decision wearing a nicer outfit, and that a homepage is really a sales conversation that happens to be visual. That framing is unusual for someone his age and it is why his read on a brand tends to land with clients twice his experience level.</p>
-    <p>His authority is not borrowed from a title or a certificate. It is earned the hard way, one shipped project at a time, in front of paying clients who keep coming back. When you have personally built more than a hundred live websites by the age of eighteen, you develop instincts that cannot be faked and cannot be taught in a course. That is the quiet credibility underneath everything he says about the work: he has already done the thing he is talking about, many times over, and the results are public.</p>
-
-    <blockquote>Design is a business decision wearing a nicer outfit.</blockquote>
-
-    <h2><span class="num">05 / Beyond The Agency</span>The wider world of Jaden Tyler Medina</h2>
-    <p>Ocean Development is the center of gravity, but it is not the whole orbit. Under his personal brand, published as <strong>bymedina</strong> and <a href="https://byjaden.com">byjaden</a>, Jaden shares the thinking behind the work: how he sees design, how he builds a company young, and how he approaches craft as strategy rather than style. It is where the operator steps out from behind the client work and speaks for himself.</p>
-    <p>He also builds products, not just projects. His Framer template line, including releases like Clout, Amplify, and Orbis AI, packages the studio's design standard into something other builders can pick up and run with. And through his newsletter, The Brief, he writes for a growing audience of founders and creators who want the same clarity he brings to a client engagement. Taken together, the agency, the products, and the personal brand form one coherent body of work under one name.</p>
-
-    <p>Jaden Tyler Medina is still early. That is the most interesting part. The record so far, a company built and led at eighteen, a hundred-plus websites, a real partnership, and a point of view people actually listen to, is not a finish line. It is a foundation.</p>
-  </div>
-
-  <section class="faq" aria-label="Frequently asked questions about Jaden Tyler Medina">
-    <h2>Questions about Jaden Tyler Medina</h2>
-
-    <div class="faq-item">
-      <h3>Who is Jaden Tyler Medina?</h3>
-      <p>Jaden Tyler Medina is an 18-year-old Miami-based entrepreneur and the CEO and founder of Ocean Development, a web design and development agency he built and scaled into a studio trusted by brands across a range of industries.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What is Ocean Development?</h3>
-      <p>Ocean Development is a Miami web design and development agency founded by Jaden Tyler Medina. It builds custom websites and digital brands on Figma, Framer, Shopify, and WordPress, and has shipped more than one hundred websites.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Where is Jaden Tyler Medina based?</h3>
-      <p>Jaden Tyler Medina lives and works in Miami, Florida, where Ocean Development is based.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Who is Micah Brown at Ocean Development?</h3>
-      <p>Micah Brown is the Chief Operating Officer and lead developer at Ocean Development, and Jaden Tyler Medina's business partner. He leads the build and operations side of the studio.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What makes Jaden Tyler Medina's approach different?</h3>
-      <p>He treats design as a business decision rather than decoration. His authority comes from a large volume of shipped, live client work rather than from credentials, which is why his perspective on brand and web strategy is taken seriously by clients well beyond his years.</p>
+  <section class="article-hero">
+    <div class="wrap">
+      <a href="/news" class="back-link">&larr; All Articles</a>
+      <span class="eyebrow">Founder Profile &nbsp;/&nbsp; Ocean Development</span>
+      <h1 class="article-h1">Jaden Tyler Medina</h1>
+      <p class="article-dek">CEO and founder of Ocean Development, the Miami web design and development studio he built and now leads at eighteen.</p>
+      <div class="article-byline">
+        <div class="byline-left">
+          <div class="byline-avatar"></div>
+          <div>
+            <div class="byline-name">Jaden Tyler Medina</div>
+            <div class="byline-role">CEO &amp; Founder, Ocean Development</div>
+          </div>
+        </div>
+        <span class="byline-meta">7 Min Read</span>
+      </div>
     </div>
   </section>
 
-  <div class="subscribe-cta">
-    <h3>Get The Brief</h3>
-    <p>Free, weekly, no spam ever.</p>
-    <form class="signup-form" action="https://formspree.io/f/meebloep" method="POST">
-      <input class="signup-input" type="email" name="email" placeholder="Your email address" required autocomplete="email" />
-      <button type="submit" class="signup-btn">Subscribe</button>
-    </form>
-  </div>
-</main>
+  <section class="cover">
+    <div class="wrap">
+      <div class="cover-image-wrap"></div>
+    </div>
+  </section>
 
-<footer>
-  <p>&copy; 2026 Jaden Tyler Medina &middot; <a href="https://byjaden.com">byjaden.com</a></p>
-</footer>
+  <section class="article-body-section">
+    <div class="wrap article-layout">
+      <aside class="article-rail">
+        <span class="rail-label">On This Page</span>
+        <nav class="rail-nav">
+          <a href="#the-origin" class="active"><span class="rail-mark"></span>The origin</a>
+          <a href="#the-company"><span class="rail-mark"></span>The company</a>
+          <a href="#the-partnership"><span class="rail-mark"></span>The partnership</a>
+          <a href="#the-point-of-view"><span class="rail-mark"></span>The point of view</a>
+          <a href="#beyond-the-agency"><span class="rail-mark"></span>Beyond the agency</a>
+        </nav>
+        <div class="rail-divider"></div>
+        <span class="rail-label">Share</span>
+        <div class="rail-share">
+          <button type="button" id="copyLinkBtn">Copy link</button>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://byjaden.com/news/jaden-medina" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </aside>
 
+      <div class="article-text">
+        <div class="glance-grid">
+          <div><span class="glance-label">Full Name</span><span class="glance-value">Jaden Tyler Medina</span></div>
+          <div><span class="glance-label">Title</span><span class="glance-value">CEO &amp; Founder</span></div>
+          <div><span class="glance-label">Company</span><span class="glance-value">Ocean Development</span></div>
+          <div><span class="glance-label">Location</span><span class="glance-value">Miami, Florida</span></div>
+          <div><span class="glance-label">Current Age</span><span class="glance-value">18</span></div>
+          <div><span class="glance-label">Discipline</span><span class="glance-value">Design &amp; Development</span></div>
+          <div><span class="glance-label">Core Stack</span><span class="glance-value">Figma &middot; Framer &middot; Shopify</span></div>
+          <div><span class="glance-label">Websites Shipped</span><span class="glance-value">100+</span></div>
+        </div>
+
+        <div class="article-block">
+          <p><strong>Jaden Tyler Medina</strong> is a Miami-based entrepreneur and the CEO and founder of <a href="https://oceandev.net" target="_blank" rel="noopener">Ocean Development</a>, a web design and development agency he built from nothing and now runs as a serious studio for serious brands. He is eighteen, he taught himself the craft, and he has already turned it into a track record most designers spend a decade chasing.</p>
+          <p>If you search his name you will find a long list of people who share it. There is only one Jaden Tyler Medina building Ocean Development in Miami, and this is the record of what he has done.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="the-origin"><span class="section-num">01 / The Origin</span>Built Before He Was Old Enough to Be Taken Seriously</h2>
+          <p>Most founders can point to a degree, a first job, or an investor who opened a door. Jaden Tyler Medina has none of that in his story, and that is precisely the point. He built Ocean Development young, with no formal training and no outside funding, and he learned the work by doing the work: opening the software, taking the small jobs, and figuring out what a client actually needed rather than what was easy to build.</p>
+          <p>That early constraint became his advantage. Because nobody handed him a playbook, he wrote his own. Still only eighteen, he is already delivering websites for companies far larger than a first-time founder is expected to reach, and he is doing it without the safety net most people rely on. The self-taught path is often romanticized after the fact. In his case it is simply the accurate description of how the company was built.</p>
+        </div>
+
+        <div class="pull-quote">
+          <p>He did not wait for permission to be good. He got good, and the permission followed.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="the-company"><span class="section-num">02 / The Company</span>Ocean Development</h2>
+          <p>Ocean Development is a Miami web design and development agency with a simple promise: a website should do a job, not just sit there looking modern. Under Jaden's direction the studio builds on the tools that let it move fast without cutting corners, designing in Figma and shipping on Framer, Shopify, and WordPress depending on what the brand needs to be and do.</p>
+          <p>The portfolio now runs past one hundred websites, spanning combat sports and coffee, lending and property management, e-commerce labels and service businesses. That range matters more than it looks. A designer who has only ever built for one kind of client learns one kind of solution. Jaden has shipped across a dozen industries, which means he has seen what converts, what confuses, and what quietly loses a company money, and he brings that pattern recognition to every new project.</p>
+          <p>The through-line across all of it is control. Ocean Development builds custom, it builds to spec, and it builds things the client can actually run once the studio hands them over. In a market crowded with template shops and set-and-forget agencies, that operator's mindset is what keeps the work booked.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="the-partnership"><span class="section-num">03 / The Partnership</span>Micah Brown</h2>
+          <p>Jaden does not run Ocean Development alone. His business partner is <strong>Micah Brown</strong>, the company's Chief Operating Officer and lead developer. Where Jaden owns the vision and the client relationships, Micah owns the build and the operational machinery that keeps a growing studio from tripping over itself. It is the kind of founder-and-operator pairing that lets a small team punch far above its headcount, and it is a large part of why the work ships on time and holds up after launch.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="the-point-of-view"><span class="section-num">04 / The Point of View</span>Why His Opinion Carries Weight</h2>
+          <p>Ask Jaden about design and you will not get a lecture about trends. You will get an argument about strategy. His core belief is that design is not decoration, it is a business decision wearing a nicer outfit, and that a homepage is really a sales conversation that happens to be visual. That framing is unusual for someone his age and it is why his read on a brand tends to land with clients twice his experience level.</p>
+          <p>His authority is not borrowed from a title or a certificate. It is earned the hard way, one shipped project at a time, in front of paying clients who keep coming back. When you have personally built more than a hundred live websites by the age of eighteen, you develop instincts that cannot be faked and cannot be taught in a course. That is the quiet credibility underneath everything he says about the work: he has already done the thing he is talking about, many times over, and the results are public.</p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Design is a business decision wearing a nicer outfit.</p>
+        </div>
+
+        <div class="article-block">
+          <h2 id="beyond-the-agency"><span class="section-num">05 / Beyond The Agency</span>The Wider World of Jaden Tyler Medina</h2>
+          <p>Ocean Development is the center of gravity, but it is not the whole orbit. Under his personal brand, published as <strong>bymedina</strong> and <a href="https://byjaden.com">byjaden</a>, Jaden shares the thinking behind the work: how he sees design, how he builds a company young, and how he approaches craft as strategy rather than style. It is where the operator steps out from behind the client work and speaks for himself.</p>
+          <p>He also builds products, not just projects. His Framer template line, including releases like Clout, Amplify, and Orbis AI, packages the studio's design standard into something other builders can pick up and run with. And through his newsletter, The Brief, he writes for a growing audience of founders and creators who want the same clarity he brings to a client engagement. Taken together, the agency, the products, and the personal brand form one coherent body of work under one name.</p>
+          <p>Jaden Tyler Medina is still early. That is the most interesting part. The record so far, a company built and led at eighteen, a hundred-plus websites, a real partnership, and a point of view people actually listen to, is not a finish line. It is a foundation.</p>
+        </div>
+
+        <div class="author-card">
+          <div class="avatar"></div>
+          <div>
+            <h4>Written by Jaden Medina</h4>
+            <p>Founder &amp; CEO of Ocean Development, a Miami web design and development agency. I write The Brief about building brands that look as serious as they are.</p>
+            <a href="/news">More Articles &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-label="Frequently asked questions about Jaden Tyler Medina">
+    <div class="wrap faq-layout">
+      <h2>Questions about Jaden Tyler Medina.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">Who is Jaden Tyler Medina?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Jaden Tyler Medina is an 18-year-old Miami-based entrepreneur and the CEO and founder of Ocean Development, a web design and development agency he built and scaled into a studio trusted by brands across a range of industries.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What is Ocean Development?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Ocean Development is a Miami web design and development agency founded by Jaden Tyler Medina. It builds custom websites and digital brands on Figma, Framer, Shopify, and WordPress, and has shipped more than one hundred websites.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Where is Jaden Tyler Medina based?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Jaden Tyler Medina lives and works in Miami, Florida, where Ocean Development is based.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Who is Micah Brown at Ocean Development?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>Micah Brown is the Chief Operating Officer and lead developer at Ocean Development, and Jaden Tyler Medina's business partner. He leads the build and operations side of the studio.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What makes Jaden Tyler Medina's approach different?<span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>He treats design as a business decision rather than decoration. His authority comes from a large volume of shipped, live client work rather than from credentials, which is why his perspective on brand and web strategy is taken seriously by clients well beyond his years.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-cta">
+    <div class="wrap">
+      <div class="cta-card">
+        <div class="cta-copy">
+          <span class="eyebrow">The Brief &nbsp;/&nbsp; Newsletter</span>
+          <h2>Get The Brief in your inbox.</h2>
+          <p>Free, weekly, no spam ever. New work, new case studies and what I am learning while building Ocean Development.</p>
+        </div>
+        <form class="cta-form" action="https://formspree.io/f/meebloep" method="POST">
+          <div class="cta-form-row">
+            <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+            <button type="submit">Subscribe &rarr;</button>
+          </div>
+          <span class="cta-fine">No spam. Unsubscribe any time.</span>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog" id="blog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Keep reading.</h2>
+        <a href="/news" class="view-all">View All Articles</a>
+      </div>
+      <div class="blog-grid">
+        <a href="/news/3x-founder-case-study" class="blog-card">
+          <div class="blog-card-image"></div>
+          <span class="tag">Case Study</span>
+          <h3>Jaden Medina: A 3x Founder at 18</h3>
+        </a>
+        <a href="/news/jaden-medina-founder-ocean-development" class="blog-card">
+          <div class="blog-card-image"></div>
+          <span class="tag">Founder Story</span>
+          <h3>The 18-Year-Old Founder Behind Ocean Development</h3>
+        </a>
+        <a href="/news/micah-brown-ocean-development" class="blog-card accent">
+          <div class="blog-card-image"></div>
+          <span class="tag">Team</span>
+          <h3>Micah Brown: Co-Founder Behind the Growth</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="/assets/byjaden-footer-logo.svg" class="footer-logo" alt="byjaden" />
+          <h2>Websites for brands that refuse to settle.</h2>
+          <p>Questions about a project, a timeline or the process? Reach out and I will reply within a day or two.</p>
+          <a href="/#contact" class="btn btn-light">Let's Talk &rarr;</a>
+        </div>
+        <div class="footer-columns">
+          <div class="footer-col">
+            <span class="footer-eyebrow">Navigate</span>
+            <a href="/#about">About</a>
+            <a href="/#work">Work</a>
+            <a href="/#process">Process</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Companies</span>
+            <a href="https://oceandev.net" target="_blank" rel="noopener">Ocean Development</a>
+            <a href="https://getcampusbite.com" target="_blank" rel="noopener">CampusBite</a>
+            <a href="https://usemako.com" target="_blank" rel="noopener">Mako</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Social</span>
+            <a href="https://instagram.com/jadenbiz" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/in/jaden-medina-bb9279311/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://discord.gg/wxn2Jq8CR" target="_blank" rel="noopener">Discord</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-eyebrow">Resources</span>
+            <a href="/news">Blog</a>
+            <a href="#newsletter">Newsletter</a>
+            <a href="/news/first-issue">The Brief</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-newsletter" id="newsletter">
+        <h3>Subscribe to the newsletter</h3>
+        <p>New work, new templates and what I am learning while building Ocean Development. One email, now and then.</p>
+        <form action="https://formspree.io/f/meebloep" method="POST">
+          <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+          <button type="submit">Subscribe &rarr;</button>
+        </form>
+      </div>
+
+      <div class="footer-contacts">
+        <div>
+          <span class="footer-eyebrow">Project Inquiries</span>
+          <a href="mailto:jaden@oceandev.net">jaden@oceandev.net</a>
+        </div>
+        <div>
+          <span class="footer-eyebrow">The Agency</span>
+          <a href="https://oceandev.net" target="_blank" rel="noopener">oceandev.net</a>
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <span>&copy; 2026 Jaden Medina. All rights reserved.</span>
+        <a href="/#top" class="back-to-top">Back to Top &uarr;</a>
+      </div>
+
+      <img src="/assets/byjaden-footer-logo.svg" class="footer-wordmark" alt="" aria-hidden="true" />
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
+      });
+    }
+
+    // Hide floating nav once the footer scrolls into view
+    var navFloatWrap = document.querySelector('.nav-float-wrap');
+    var siteFooter = document.querySelector('.site-footer');
+    if (navFloatWrap && siteFooter && 'IntersectionObserver' in window) {
+      var footerObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          navFloatWrap.classList.toggle('nav-hidden', entry.isIntersecting);
+          if (entry.isIntersecting) mobileMenu && mobileMenu.classList.remove('open');
+        });
+      }, { rootMargin: '-24px 0px 0px 0px', threshold: 0 });
+      footerObserver.observe(siteFooter);
+    }
+
+    // "On this page" active state follows scroll position
+    var railLinks = Array.prototype.slice.call(document.querySelectorAll('.rail-nav a'));
+    var sections = railLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    if (railLinks.length && 'IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var index = sections.indexOf(entry.target);
+          if (index === -1) return;
+          railLinks.forEach(function (a) { a.classList.remove('active'); });
+          railLinks[index].classList.add('active');
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function (el) { if (el) sectionObserver.observe(el); });
+    }
+
+    // Copy link button
+    var copyBtn = document.getElementById('copyLinkBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+          var original = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function () { copyBtn.textContent = original; }, 1500);
+        });
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var question = item.querySelector('.faq-question');
+      var answer = item.querySelector('.faq-answer');
+      question.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (other) {
+          other.classList.remove('open');
+          other.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
